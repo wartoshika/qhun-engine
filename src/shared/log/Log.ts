@@ -7,7 +7,7 @@ import { LogLevel } from './LogLevel';
 export class Log {
 
     // the current loglevel
-    private static logLevel: LogLevel = LogLevel.Info;
+    private static logLevel: LogLevel = LogLevel.Debug;
 
     /**
      * sets the log level for the application environment

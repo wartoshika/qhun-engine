@@ -6,8 +6,12 @@ import * as express from 'express';
 import * as path from 'path';
 
 import { Log } from 'shared/log';
+import { Singleton } from 'shared/helper';
 
-export class Webserver {
+/**
+ * the buildin webserver to serve the client
+ */
+export class Webserver extends Singleton {
 
     private app: any;
     private httpServer: http.Server;
@@ -18,6 +22,8 @@ export class Webserver {
         app: express.Application = express()
     ) {
 
+        super();
+
         // setup server
         this.httpServer = http.createServer(app);
 
@@ -27,6 +33,9 @@ export class Webserver {
 
         // handle http calls
         app.get('/*', this.serveApplication.bind(this));
+
+        // bind singleton
+        Webserver.bindInstance(this);
     }
 
     /**
@@ -52,6 +61,8 @@ export class Webserver {
 
     /**
      * gets the current express application
+     *
+     * @return the passed through app at constructing time or a newly created app if no parameter was given during constructing
      */
     public getApplication(): express.Application {
 
