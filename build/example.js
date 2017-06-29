@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 12);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -85,9 +85,9 @@ var AssetType;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__log_LogLevel__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__log_LogLevel__ = __webpack_require__(4);
 /* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__log_Log__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__log_Log__ = __webpack_require__(15);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_1__log_Log__["a"]; });
 
 
@@ -98,7 +98,7 @@ var AssetType;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_client_asset_AssetLoader__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_client_asset_AssetLoader__ = __webpack_require__(6);
 
 /**
  * a basic class for implementing the getter and setter function
@@ -152,6 +152,16 @@ AbstractAsset.assetLoader = __WEBPACK_IMPORTED_MODULE_0_client_asset_AssetLoader
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__decorator_logMethodCall__ = __webpack_require__(14);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__decorator_logMethodCall__["a"]; });
+
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LogLevel; });
 /**
  * a basic loglevel categorisation
@@ -166,15 +176,37 @@ var LogLevel;
 
 
 /***/ }),
-/* 4 */
+/* 5 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__asset_Image__ = __webpack_require__(16);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_0__asset_Image__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__asset_Sprite__ = __webpack_require__(21);
+/* unused harmony namespace reexport */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__asset_Sound__ = __webpack_require__(22);
+/* unused harmony namespace reexport */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__asset_AssetType__ = __webpack_require__(0);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_3__asset_AssetType__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__asset_AssetLoader__ = __webpack_require__(6);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_4__asset_AssetLoader__["a"]; });
+
+
+
+
+
+
+
+/***/ }),
+/* 6 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_client_asset_AssetType__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_shared_helper__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_shared_storage__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_shared_helper__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_shared_storage__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_shared_log__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_client_network__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_client_network__ = __webpack_require__(19);
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -328,24 +360,209 @@ class AssetLoader extends __WEBPACK_IMPORTED_MODULE_1_shared_helper__["a" /* Sin
 
 
 /***/ }),
-/* 5 */
+/* 7 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__storage_RamStorage__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helper_Singleton__ = __webpack_require__(17);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__helper_Singleton__["a"]; });
+
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__storage_RamStorage__ = __webpack_require__(18);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__storage_RamStorage__["a"]; });
 
 
 
 /***/ }),
-/* 6 */
+/* 9 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_shared_helper__ = __webpack_require__(7);
+
+/**
+ * the basic renderer class that all renderers should extend
+ */
+class BasicRenderer extends __WEBPACK_IMPORTED_MODULE_0_shared_helper__["a" /* Singleton */] {
+    constructor() {
+        super(...arguments);
+        this.entities = [];
+    }
+    /**
+     * get all renderable entities
+     */
+    getRenderableEntities() {
+        let renderableEntities = [];
+        this.entities.forEach(entity => {
+            if (entity.isVisible())
+                renderableEntities.push(entity);
+        });
+        // just return the currently visible entities
+        return renderableEntities;
+    }
+    /**
+     * add an entity to the current game scene
+     */
+    addEntity(entity) {
+        this.entities.push(entity);
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = BasicRenderer;
+
+
+
+/***/ }),
+/* 10 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/**
+ * simple math helper class
+ */
+class Helper {
+    /**
+     * calculates a random degree
+     */
+    static randomDegree() {
+        return Math.floor(Math.random() * 359) + 1;
+    }
+    /**
+     * transforms a degree number to radian number
+     *
+     * @param degree the given degree
+     */
+    static degreeToRadian(degree) {
+        return degree * Math.PI / 180;
+    }
+    /**
+     * transforms a radian number to degree
+     *
+     * @param radian the radian value
+     */
+    static radianToDegree(radian) {
+        return radian * (180 / Math.PI);
+    }
+    /**
+     * rounds to a given precision
+     *
+     * @param number the number to round
+     * @param precision the precision
+     */
+    static roundToPrecision(number, precision = 2) {
+        return +number.toFixed(precision);
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Helper;
+
+
+
+/***/ }),
+/* 11 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/**
+ * a basic holder of x and y values as one datatype
+ */
+class Dimension {
+    /**
+     *
+     * @param x the x coordinate
+     * @param y the y coordinate
+     */
+    constructor(x = 0, y = 0) {
+        this.x = x;
+        this.y = y;
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Dimension;
+
+
+
+/***/ }),
+/* 12 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_shared_decorator__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_client_Client__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_client_render__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_client_environment__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_client_asset__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_shared_decorator__ = __webpack_require__(3);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+class MyAwesomeGame extends __WEBPACK_IMPORTED_MODULE_0_client_Client__["a" /* Client */] {
+    constructor() {
+        super({
+            gameDimension: __WEBPACK_IMPORTED_MODULE_2_client_environment__["a" /* Viewport */].getWindowDimension(),
+            rederer: __WEBPACK_IMPORTED_MODULE_1_client_render__["a" /* CanvasRenderer */]
+        });
+    }
+    /**
+     * preload function that allows to load sprites and do some heavy
+     * stuff before the game actually starts
+     */
+    preload() {
+        __WEBPACK_IMPORTED_MODULE_3_client_asset__["c" /* Image */].register({
+            name: 'SuperDuperImage',
+            path: 'asset/image/test.png'
+        });
+    }
+    /**
+     * a function that is called if the preload phase is completed
+     * you now have access to the registered assets
+     */
+    loaded() {
+        // add the player to the game
+    }
+    /**
+     * update function handles the interaction with the player eg. the keybord
+     * input and changing the players direction or speed.
+     * this method is called during game loop BEFORE rendering!
+     *
+     * @warning dont do heavy stuff in here because this meight cause performance issues
+     */
+    update() {
+        console.log("update");
+    }
+}
+__decorate([
+    __WEBPACK_IMPORTED_MODULE_4_shared_decorator__["a" /* logMethodCall */],
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], MyAwesomeGame.prototype, "loaded", null);
+// start the game
+new MyAwesomeGame();
+
+
+/***/ }),
+/* 13 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_shared_decorator__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_shared_log__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_client_asset__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_client_asset__ = __webpack_require__(5);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -417,7 +634,7 @@ class Client {
         window.requestAnimationFrame(this.gameLoop.bind(this));
     }
 }
-/* harmony export (immutable) */ __webpack_exports__["Client"] = Client;
+/* harmony export (immutable) */ __webpack_exports__["a"] = Client;
 
 __decorate([
     __WEBPACK_IMPORTED_MODULE_0_shared_decorator__["a" /* logMethodCall */],
@@ -434,17 +651,7 @@ __decorate([
 
 
 /***/ }),
-/* 7 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__decorator_logMethodCall__ = __webpack_require__(8);
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__decorator_logMethodCall__["a"]; });
-
-
-
-/***/ }),
-/* 8 */
+/* 14 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -471,11 +678,11 @@ function logMethodCall(target, key, descriptor) {
 
 
 /***/ }),
-/* 9 */
+/* 15 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__LogLevel__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__LogLevel__ = __webpack_require__(4);
 
 /**
  * a log wrapper to allow log levels and a more complex
@@ -567,29 +774,7 @@ Log.logLevel = __WEBPACK_IMPORTED_MODULE_0__LogLevel__["a" /* LogLevel */].Debug
 
 
 /***/ }),
-/* 10 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__asset_Image__ = __webpack_require__(11);
-/* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__asset_Sprite__ = __webpack_require__(17);
-/* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__asset_Sound__ = __webpack_require__(18);
-/* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__asset_AssetType__ = __webpack_require__(0);
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_3__asset_AssetType__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__asset_AssetLoader__ = __webpack_require__(4);
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_4__asset_AssetLoader__["a"]; });
-
-
-
-
-
-
-
-/***/ }),
-/* 11 */
+/* 16 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -638,26 +823,16 @@ class Image extends __WEBPACK_IMPORTED_MODULE_1_client_asset_AbstractAsset__["a"
         });
     }
 }
-/* unused harmony export Image */
+/* harmony export (immutable) */ __webpack_exports__["a"] = Image;
 
 
 
 /***/ }),
-/* 12 */
+/* 17 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helper_Singleton__ = __webpack_require__(13);
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__helper_Singleton__["a"]; });
-
-
-
-/***/ }),
-/* 13 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_shared_storage__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_shared_storage__ = __webpack_require__(8);
 
 /**
  * a class to handle the singleton paradigmen
@@ -690,7 +865,7 @@ class Singleton {
 
 
 /***/ }),
-/* 14 */
+/* 18 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -753,17 +928,17 @@ RamStorage.cache = {};
 
 
 /***/ }),
-/* 15 */
+/* 19 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__network_Request__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__network_Request__ = __webpack_require__(20);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__network_Request__["a"]; });
 
 
 
 /***/ }),
-/* 16 */
+/* 20 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -809,7 +984,7 @@ class Request {
 
 
 /***/ }),
-/* 17 */
+/* 21 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -843,7 +1018,7 @@ class Sprite extends __WEBPACK_IMPORTED_MODULE_1_client_asset_AbstractAsset__["a
 
 
 /***/ }),
-/* 18 */
+/* 22 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -872,6 +1047,224 @@ class Sound extends __WEBPACK_IMPORTED_MODULE_1_client_asset_AbstractAsset__["a"
 
 
 
+/***/ }),
+/* 23 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__render_CanvasRenderer__ = __webpack_require__(24);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__render_CanvasRenderer__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__render_BasicRenderer__ = __webpack_require__(9);
+/* unused harmony namespace reexport */
+
+
+
+
+/***/ }),
+/* 24 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_shared_log__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_client_render_BasicRenderer__ = __webpack_require__(9);
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+
+
+/**
+ * a game renderer based on the html canvas element
+ */
+class CanvasRenderer extends __WEBPACK_IMPORTED_MODULE_1_client_render_BasicRenderer__["a" /* BasicRenderer */] {
+    constructor() {
+        super();
+        // some logging
+        __WEBPACK_IMPORTED_MODULE_0_shared_log__["a" /* Log */].info("Using", this, "as Renderer");
+    }
+    /**
+     * set up the game environment to a given dimension
+     */
+    setup(gameDimension) {
+        // save the dimension and create the canvas
+        this.gameDimension = gameDimension;
+        this.createCanvas();
+        // get the 2d context
+        this.ctx = this.canvas.getContext('2d');
+    }
+    /**
+     * creates the canvas element and append it to the given parentNode
+     */
+    createCanvas() {
+        // create the canvas
+        this.canvas = document.createElement('canvas');
+        document.body.appendChild(this.canvas);
+        // apply the game dimension
+        this.canvas.setAttribute('width', `${this.gameDimension.x}px`);
+        this.canvas.setAttribute('height', `${this.gameDimension.y}px`);
+        this.canvas.setAttribute('style', 'display:block;position:absolute;');
+    }
+    /**
+     * the method where all the magic takes place. called in gameloop
+     * to render all entities and other stuff
+     */
+    render() {
+        return __awaiter(this, void 0, void 0, function* () {
+            // get all entities that shoule be visible by the client
+            // @todo: only render entitites that are visible by the camera
+            let visibleEntities = this.getRenderableEntities();
+            // render the entity at its center point
+            visibleEntities.forEach(entity => {
+                // get the image asset that should be rendered
+                let image = entity.getImage();
+                // draw the entity
+                let img = image.getData().then(r => {
+                    this.ctx.drawImage(r, entity.getPosition().x, entity.getPosition().y);
+                });
+            });
+        });
+    }
+    /**
+     * a function that allowes the transform an image asset to a renderable context
+     * object.
+    */
+    imageToRenderObject(image) {
+        let canvas = document.createElement('camvas');
+        canvas.dr;
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = CanvasRenderer;
+
+
+
+/***/ }),
+/* 25 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__environment_Viewport__ = __webpack_require__(26);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__environment_Viewport__["a"]; });
+
+
+
+/***/ }),
+/* 26 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_shared_math__ = __webpack_require__(27);
+
+/**
+ * a class to handle the window viewport things like
+ * getting the player's screen width and height
+ */
+class Viewport {
+    /**
+     * getting the current window dimension
+     */
+    static getWindowDimension() {
+        return new __WEBPACK_IMPORTED_MODULE_0_shared_math__["a" /* Dimension */](window.innerWidth, window.innerHeight);
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Viewport;
+
+
+
+/***/ }),
+/* 27 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__math_Helper__ = __webpack_require__(10);
+/* unused harmony namespace reexport */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__math_Vector2D__ = __webpack_require__(28);
+/* unused harmony namespace reexport */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__math_Dimension__ = __webpack_require__(11);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_2__math_Dimension__["a"]; });
+
+
+
+
+
+/***/ }),
+/* 28 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_shared_math_Helper__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_shared_math_Dimension__ = __webpack_require__(11);
+
+
+/**
+ * represents a 2D vector with x and y coordinates.
+ */
+class Vector2D extends __WEBPACK_IMPORTED_MODULE_1_shared_math_Dimension__["a" /* Dimension */] {
+    /**
+     *
+     * @param x the x coordinate
+     * @param y the y coordinate
+     */
+    constructor(x = 0, y = 0) {
+        super(x, y);
+    }
+    /**
+     * adds another vector
+     *
+     * @param vector the other vector
+     */
+    add(vector) {
+        return new Vector2D(this.x + vector.x, this.y + vector.y);
+    }
+    /**
+     * substract another vector
+     *
+     * @param vector the other vector
+     */
+    substract(vector) {
+        return new Vector2D(this.x - vector.x, this.y - vector.y);
+    }
+    /**
+     * divide another vector
+     *
+     * @param vector the other vector
+     */
+    divide(vector) {
+        return new Vector2D(this.x / vector.x, this.y / vector.y);
+    }
+    /**
+     * multiply two vectors
+     *
+     * @param vector the other vector
+     */
+    multiply(vector) {
+        return new Vector2D(this.x * vector.x, this.y * vector.y);
+    }
+    /**
+     * rounds the vector to a given precision
+     */
+    round(precision = 2) {
+        return new Vector2D(__WEBPACK_IMPORTED_MODULE_0_shared_math_Helper__["a" /* Helper */].roundToPrecision(this.x, precision), __WEBPACK_IMPORTED_MODULE_0_shared_math_Helper__["a" /* Helper */].roundToPrecision(this.y, precision));
+    }
+    /**
+     * calculates the distance of two vector points
+     *
+     * @param otherVector the other vector calculate to
+     * @return the distance in pixel
+     */
+    distanceToVector(otherVector) {
+        return Math.sqrt(Math.pow((this.x - otherVector.x), 2)
+            +
+                Math.pow((this.y - otherVector.y), 2));
+    }
+}
+/* unused harmony export Vector2D */
+
+
+
 /***/ })
 /******/ ]);
-//# sourceMappingURL=client.js.map
+//# sourceMappingURL=example.js.map

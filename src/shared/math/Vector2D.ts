@@ -1,10 +1,10 @@
 import { Helper } from 'shared/math/Helper';
+import { Dimension } from 'shared/math/Dimension';
 
 /**
  * represents a 2D vector with x and y coordinates.
- * this class is immutable
  */
-export class Vector2D {
+export class Vector2D extends Dimension {
 
     /**
      *
@@ -12,10 +12,10 @@ export class Vector2D {
      * @param y the y coordinate
      */
     constructor(
-        public x: number = 0,
-        public y: number = 0
+        x: number = 0,
+        y: number = 0
     ) {
-
+        super(x, y);
     }
 
     /**

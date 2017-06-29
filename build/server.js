@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -68,9 +68,9 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__log_LogLevel__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__log_LogLevel__ = __webpack_require__(1);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_0__log_LogLevel__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__log_Log__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__log_Log__ = __webpack_require__(9);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_1__log_Log__["a"]; });
 
 
@@ -78,16 +78,6 @@
 
 /***/ }),
 /* 1 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helper_Singleton__ = __webpack_require__(11);
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__helper_Singleton__["a"]; });
-
-
-
-/***/ }),
-/* 2 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -105,16 +95,14 @@ var LogLevel;
 
 
 /***/ }),
-/* 3 */
+/* 2 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_server_web__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_server_network__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_server_web__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_server_network__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_shared_log__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_shared_helper__ = __webpack_require__(1);
-
 
 
 
@@ -122,9 +110,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
  * the game server main class. loads all important things
  * and also provides a buildin webserver to serve the app
  */
-class Server extends __WEBPACK_IMPORTED_MODULE_3_shared_helper__["a" /* Singleton */] {
+class Server {
     constructor(serverConfig) {
-        super();
         this.serverConfig = serverConfig;
         // set the log level
         __WEBPACK_IMPORTED_MODULE_2_shared_log__["a" /* Log */].setLogLevel(serverConfig.logLevel);
@@ -132,8 +119,6 @@ class Server extends __WEBPACK_IMPORTED_MODULE_3_shared_helper__["a" /* Singleto
         this.webserver = new __WEBPACK_IMPORTED_MODULE_0_server_web__["a" /* Webserver */](serverConfig.webAdress, serverConfig.webPort);
         // start network
         this.network = new __WEBPACK_IMPORTED_MODULE_1_server_network__["a" /* NetworkServer */](this.webserver.getApplication());
-        // bind singleton
-        Server.bindInstance(this);
     }
 }
 /* harmony export (immutable) */ __webpack_exports__["Server"] = Server;
@@ -147,31 +132,29 @@ new Server({
 
 
 /***/ }),
-/* 4 */
+/* 3 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__web_Webserver__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__web_Webserver__ = __webpack_require__(4);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__web_Webserver__["a"]; });
 
 
 
 /***/ }),
-/* 5 */
+/* 4 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_http__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_http__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_http___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_http__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_express__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_express__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_express__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_path__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_path__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_path___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_path__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_shared_log__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_shared_helper__ = __webpack_require__(1);
 // need the index file in the build directory
-__webpack_require__(6);
-
+__webpack_require__(5);
 
 
 
@@ -179,9 +162,8 @@ __webpack_require__(6);
 /**
  * the buildin webserver to serve the client
  */
-class Webserver extends __WEBPACK_IMPORTED_MODULE_4_shared_helper__["a" /* Singleton */] {
+class Webserver {
     constructor(listenAdress = "127.0.0.1", port = 3000, app = __WEBPACK_IMPORTED_MODULE_1_express__()) {
-        super();
         // setup server
         this.httpServer = __WEBPACK_IMPORTED_MODULE_0_http__["createServer"](app);
         // start listening
@@ -189,8 +171,6 @@ class Webserver extends __WEBPACK_IMPORTED_MODULE_4_shared_helper__["a" /* Singl
         __WEBPACK_IMPORTED_MODULE_3_shared_log__["a" /* Log */].info("Listening at ", `${listenAdress}:${port}`);
         // handle http calls
         app.get('/*', this.serveApplication.bind(this));
-        // bind singleton
-        Webserver.bindInstance(this);
     }
     /**
      * handles incomming file calls
@@ -222,35 +202,35 @@ class Webserver extends __WEBPACK_IMPORTED_MODULE_4_shared_helper__["a" /* Singl
 
 
 /***/ }),
-/* 6 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "build/index.html";
 
 /***/ }),
-/* 7 */
+/* 6 */
 /***/ (function(module, exports) {
 
 module.exports = require("http");
 
 /***/ }),
-/* 8 */
+/* 7 */
 /***/ (function(module, exports) {
 
 module.exports = require("express");
 
 /***/ }),
-/* 9 */
+/* 8 */
 /***/ (function(module, exports) {
 
 module.exports = require("path");
 
 /***/ }),
-/* 10 */
+/* 9 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__LogLevel__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__LogLevel__ = __webpack_require__(1);
 
 /**
  * a log wrapper to allow log levels and a more complex
@@ -342,70 +322,37 @@ Log.logLevel = __WEBPACK_IMPORTED_MODULE_0__LogLevel__["a" /* LogLevel */].Debug
 
 
 /***/ }),
-/* 11 */
+/* 10 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/**
- * a class to handle the singleton paradigmen
- */
-class Singleton {
-    /**
-     * get the singleton instance
-     */
-    static getInstance() {
-        return this._instance;
-    }
-    /**
-     * bind the instance to access the singleton
-     *
-     * @param instance the instance to bind
-     */
-    static bindInstance(instance) {
-        this._instance = instance;
-    }
-}
-/* harmony export (immutable) */ __webpack_exports__["a"] = Singleton;
-
-
-
-/***/ }),
-/* 12 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__network_NetworkServer__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__network_NetworkServer__ = __webpack_require__(11);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__network_NetworkServer__["a"]; });
 
 
 
 /***/ }),
-/* 13 */
+/* 11 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_socket_io__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_socket_io__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_socket_io___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_socket_io__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_shared_log__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_shared_helper__ = __webpack_require__(1);
-
 
 
 /**
  * the network base to use a client-server based structure
  * with websocket as transport protocol
  */
-class NetworkServer extends __WEBPACK_IMPORTED_MODULE_2_shared_helper__["a" /* Singleton */] {
+class NetworkServer {
     /**
      *
      * @param application the application to bind the websocket
      */
     constructor(application) {
-        super();
         this.application = application;
         this.bindWebsocketToApplication();
-        // bind singleton
-        NetworkServer.bindInstance(this);
     }
     /**
      * binds a websocket to the applications router
@@ -440,7 +387,7 @@ class NetworkServer extends __WEBPACK_IMPORTED_MODULE_2_shared_helper__["a" /* S
 
 
 /***/ }),
-/* 14 */
+/* 12 */
 /***/ (function(module, exports) {
 
 module.exports = require("socket.io");

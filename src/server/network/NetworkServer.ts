@@ -2,13 +2,12 @@ import * as express from 'express';
 import * as socketio from 'socket.io';
 
 import { Log } from 'shared/log';
-import { Singleton } from 'shared/helper';
 
 /**
  * the network base to use a client-server based structure
  * with websocket as transport protocol
  */
-export class NetworkServer extends Singleton {
+export class NetworkServer {
 
     /**
      * the servers socket
@@ -23,11 +22,8 @@ export class NetworkServer extends Singleton {
         private application: express.Application
     ) {
 
-        super();
-        this.bindWebsocketToApplication();
 
-        // bind singleton
-        NetworkServer.bindInstance(this);
+        this.bindWebsocketToApplication();
     }
 
     /**

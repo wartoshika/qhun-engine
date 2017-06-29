@@ -48,4 +48,21 @@ export class RamStorage {
 
         return RamStorage.get(path) !== undefined;
     }
+
+    /**
+     * the path to one or many objects in the storage
+     *
+     * @param path the path to the object. dots can be used to structure
+     */
+    public static amount(path: string): number {
+
+        let counter = 0;
+        Object.keys(RamStorage.cache).forEach(key => {
+
+            // if the path is present, update counter
+            if (key.indexOf(path) === 0) counter++;
+        });
+
+        return counter;
+    }
 }
