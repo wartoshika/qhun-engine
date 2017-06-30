@@ -1,4 +1,4 @@
-import { OptionalRendering } from 'shared/entity';
+import { RenderableEntity } from 'client/entity';
 import { Singleton } from 'shared/helper';
 import { Image } from 'client/asset';
 import { Game } from 'Game';
@@ -8,7 +8,7 @@ import { Game } from 'Game';
  */
 export abstract class BasicRenderer extends Singleton {
 
-    private entities: OptionalRendering[] = [];
+    private entities: RenderableEntity[] = [];
 
     /**
      * holds the game instance
@@ -18,9 +18,9 @@ export abstract class BasicRenderer extends Singleton {
     /**
      * get all renderable entities
      */
-    protected getRenderableEntities(): OptionalRendering[] {
+    protected getRenderableEntities(): RenderableEntity[] {
 
-        let renderableEntities: OptionalRendering[] = [];
+        let renderableEntities: RenderableEntity[] = [];
         this.entities.forEach(entity => {
 
             // only visible entities and entities that have an image
@@ -35,7 +35,7 @@ export abstract class BasicRenderer extends Singleton {
     /**
      * add an entity to the current game scene
      */
-    public addEntity(entity: OptionalRendering): void {
+    public addEntity(entity: RenderableEntity): void {
 
         this.entities.push(entity);
     }

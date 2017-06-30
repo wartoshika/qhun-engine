@@ -1,5 +1,5 @@
 import { Dimension } from 'shared/math';
-import { OptionalRendering } from 'shared/entity';
+import { RenderableEntity } from 'client/entity';
 import { AssetLoader } from 'client/asset';
 import { Game } from 'Game';
 
@@ -32,5 +32,5 @@ export interface Renderer {
     /**
      * add one or many entities to the current game scene
      */
-    addEntity(entity: OptionalRendering): void;
+    addEntity(entity: RenderableEntity): void;
 }

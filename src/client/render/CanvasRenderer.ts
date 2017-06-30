@@ -1,7 +1,6 @@
 import { Renderer } from 'client/render/Renderer';
 import { Dimension } from 'shared/math';
 import { Log } from 'shared/log';
-import { OptionalRendering } from 'shared/entity';
 import { Image, AssetLoader, AssetType } from 'client/asset';
 import { BasicRenderer } from 'client/render/BasicRenderer';
 

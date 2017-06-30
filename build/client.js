@@ -204,42 +204,12 @@ var LogLevel;
 class Entity {
     constructor(position = new __WEBPACK_IMPORTED_MODULE_0_shared_math__["a" /* Vector2D */](0, 0)) {
         this.position = position;
-        /**
-         * the visibility flag
-         */
-        this.visible = true;
     }
     /**
      * get the current position of the entity (center point)
      */
     getPosition() {
         return this.position;
-    }
-    /**
-     * get the image asset that displays the current entity
-     */
-    getImage() {
-        return this.currentTemplate;
-    }
-    /**
-     * set the new image for this entity
-     *
-     * @param image the current image that should represent this entity during rendering
-     */
-    setImage(image) {
-        this.currentTemplate = image;
-    }
-    /**
-     * is the entity visible? if not, the renderer will not render this entity
-     */
-    isVisible() {
-        return this.visible;
-    }
-    /**
-     * sets the visibility of the entity
-     */
-    setVisible(visible) {
-        this.visible = visible;
     }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = Entity;
@@ -552,7 +522,7 @@ class Client {
     constructor(clientConfig) {
         this.clientConfig = clientConfig;
         // print package and version info
-        console.info("%c -= Qhun-Engine v1.0.0 =- [http://engine.qhun.de]", "background: green; font-color: white;");
+        console.info("%c -= Qhun-Engine v1.0.0 =- [ http://engine.qhun.de ]", "background: green; font-color: white;");
         // step by step setup of the game
         this.bindLoadEvent();
     }
@@ -763,7 +733,7 @@ Log.logLevel = __WEBPACK_IMPORTED_MODULE_0__LogLevel__["a" /* LogLevel */].Debug
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_shared_helper__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_shared_entity__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_client_entity__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_client_camera__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_client_scene__ = __webpack_require__(25);
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
@@ -797,7 +767,7 @@ class Game extends __WEBPACK_IMPORTED_MODULE_0_shared_helper__["b" /* Singleton 
         // iterate through all things
         things.forEach(thing => {
             // check the type of the thing
-            if (thing instanceof __WEBPACK_IMPORTED_MODULE_1_shared_entity__["a" /* Entity */]) {
+            if (thing instanceof __WEBPACK_IMPORTED_MODULE_1_client_entity__["a" /* Entity */]) {
                 this.addEntity(thing);
             }
             else if (thing instanceof __WEBPACK_IMPORTED_MODULE_2_client_camera__["a" /* Camera */]) {
@@ -1557,6 +1527,101 @@ class File {
     }
 }
 /* unused harmony export File */
+
+
+
+/***/ }),
+/* 34 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entity_Entity__ = __webpack_require__(35);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__entity_Entity__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__entity_CollidableEntity__ = __webpack_require__(36);
+/* unused harmony namespace reexport */
+
+
+
+
+/***/ }),
+/* 35 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_shared_entity__ = __webpack_require__(19);
+
+/**
+ * the base class for all game entities
+ */
+class Entity extends __WEBPACK_IMPORTED_MODULE_0_shared_entity__["a" /* Entity */] {
+    constructor() {
+        super(...arguments);
+        /**
+         * the visibility flag
+         */
+        this.visible = true;
+    }
+    /**
+     * get the image asset that displays the current entity
+     */
+    getImage() {
+        return this.currentTemplate;
+    }
+    /**
+     * set the new image for this entity
+     *
+     * @param image the current image that should represent this entity during rendering
+     */
+    setImage(image) {
+        this.currentTemplate = image;
+    }
+    /**
+     * is the entity visible? if not, the renderer will not render this entity
+     */
+    isVisible() {
+        return this.visible;
+    }
+    /**
+     * sets the visibility of the entity
+     */
+    setVisible(visible) {
+        this.visible = visible;
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Entity;
+
+
+
+/***/ }),
+/* 36 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_client_entity_Entity__ = __webpack_require__(35);
+
+/**
+ * the client class for a collidable entity
+ */
+class CollidableEntity extends __WEBPACK_IMPORTED_MODULE_0_client_entity_Entity__["a" /* Entity */] {
+    constructor(entityWidth, entityHeight, position) {
+        super(position);
+        this.entityWidth = entityWidth;
+        this.entityHeight = entityHeight;
+    }
+    /**
+     * get the width of the entity
+     */
+    getWidth() {
+        return this.entityWidth;
+    }
+    /**
+     * get the height of the entity
+     */
+    getHeight() {
+        return this.entityHeight;
+    }
+}
+/* unused harmony export CollidableEntity */
 
 
 

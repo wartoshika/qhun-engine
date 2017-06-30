@@ -1,6 +1,6 @@
 import { Singleton } from 'shared/helper';
 import { Renderer } from 'client/render';
-import { Entity } from 'shared/entity';
+import { Entity } from 'client/entity';
 import { Camera } from 'client/camera';
 import { Scene } from 'client/scene';
 

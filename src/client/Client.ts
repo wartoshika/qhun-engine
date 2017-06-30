@@ -26,7 +26,7 @@ export abstract class Client {
     ) {
 
         // print package and version info
-        console.info("%c -= Qhun-Engine v1.0.0 =- [http://engine.qhun.de]", "background: green; font-color: white;");
+        console.info("%c -= Qhun-Engine v1.0.0 =- [ http://engine.qhun.de ]", "background: green; font-color: white;");
 
         // step by step setup of the game
         this.bindLoadEvent();

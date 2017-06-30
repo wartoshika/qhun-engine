@@ -1,4 +1,4 @@
-import { CollidableEntity } from 'shared/entity';
+import { CollidableEntity } from 'client/entity';
 import { Vector2D } from 'shared/math';
 import { CollisionType } from 'shared/collision';
 
@@ -30,7 +30,7 @@ export class Player extends CollidableEntity {
 
     public getImage(): string {
 
-        return "Sprite";
+        return "Sprite[red2]";
     }
 
 }

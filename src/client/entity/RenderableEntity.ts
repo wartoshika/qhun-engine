@@ -1,7 +1,7 @@
 import { Image } from 'client/asset';
 import { Vector2D } from 'shared/math';
 
-export interface OptionalRendering {
+export interface RenderableEntity {
 
     /**
      * get the image asset that displays the current entity
