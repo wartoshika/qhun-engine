@@ -1,6 +1,7 @@
 import { ClientConfig } from './ClientConfig';
 import { logMethodCall } from 'shared/decorator';
 import { Log } from 'shared/log';
+import { Game } from 'client/Game';
 
 import { AssetLoader, AssetType } from 'client/asset';
 import { Renderer } from 'client/render';
@@ -9,11 +10,6 @@ import { Renderer } from 'client/render';
  * the initiation class of the game client
  */
 export abstract class Client {
-
-    /**
-     * holder of the preload promises
-     */
-    private preloadPromiseStack: Array<Promise<any>> = [];
 
     /**
      * the renderer instance
@@ -62,7 +58,10 @@ export abstract class Client {
             Log.info("Registered", assetLoader.getAssetAmount(AssetType.Json), "JSON Objects");
 
             // all assets loaded, continue startup
-            this.loaded();
+            let game = new Game(
+                this.renderer
+            );
+            this.loaded(game);
 
             // init the game loop
             this.gameLoop();
@@ -97,7 +96,7 @@ export abstract class Client {
      * a function that is called if the preload phase is completed
      * you now have access to the registered assets
      */
-    public abstract loaded(): void;
+    public abstract loaded(game: Game): void;
 
     /**
      * update function handles the interaction with the player eg. the keybord

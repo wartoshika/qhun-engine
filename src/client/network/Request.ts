@@ -6,9 +6,9 @@ export class Request {
      *
      * @param path the url
      */
-    public static async getBinary(path: string): Promise<Blob> {
+    public static async getBinary(path: string): Promise<string> {
 
-        return new Promise<Blob>(resolve => {
+        return new Promise<string>(resolve => {
 
             // create xhr instance and set properties
             let xhr = new XMLHttpRequest();
@@ -22,7 +22,7 @@ export class Request {
                 let reader = new FileReader();
                 reader.onloadend = () => {
 
-                    resolve(<Blob>reader.result);
+                    resolve(reader.result);
                 }
                 reader.readAsDataURL(xhr.response);
             };

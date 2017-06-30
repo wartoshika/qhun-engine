@@ -31,18 +31,4 @@ export class Image extends AbstractAsset {
         Image.getAssetLoader().registerAsset(Image, ...images);
     }
 
-    /**
-     * get the current image as bitmap image to draw this on the renderer
-     */
-    public async getData(): Promise<HTMLImageElement> {
-
-        return new Promise<HTMLImageElement>(resolve => {
-
-            let img = document.createElement('img');
-            img.src = super.getData();
-
-            resolve(img);
-        });
-
-    }
 }

@@ -2,7 +2,7 @@ import { Renderer } from 'client/render/Renderer';
 import { Dimension } from 'shared/math';
 import { Log } from 'shared/log';
 import { OptionalRendering } from 'shared/entity';
-import { Image } from 'client/asset':
+import { Image } from 'client/asset';
 import { BasicRenderer } from 'client/render/BasicRenderer';
 
 /**
@@ -30,6 +30,9 @@ export class CanvasRenderer extends BasicRenderer implements Renderer {
 
         // some logging
         Log.info("Using", this, "as Renderer");
+
+        // bind the instance
+        CanvasRenderer.bindInstance(this);
     }
 
     /**
@@ -64,7 +67,11 @@ export class CanvasRenderer extends BasicRenderer implements Renderer {
      * the method where all the magic takes place. called in gameloop
      * to render all entities and other stuff
      */
-    public async render(): Promise<void> {
+    public render(): void {
+
+        // clear the current canvas
+        this.ctx.fillStyle = '#ffffff';
+        this.ctx.fillRect(0, 0, this.gameDimension.x, this.gameDimension.y);
 
         // get all entities that shoule be visible by the client
         // @todo: only render entitites that are visible by the camera
@@ -77,25 +84,13 @@ export class CanvasRenderer extends BasicRenderer implements Renderer {
             let image = entity.getImage();
 
             // draw the entity
-            let img = image.getData().then(r => {
-                this.ctx.drawImage(
-                    r,
-                    entity.getPosition().x,
-                    entity.getPosition().y
-                )
-            });
+            this.ctx.drawImage(
+                image.getData(),
+                entity.getPosition().x,
+                entity.getPosition().y
+            );
         });
 
-    }
-
-    /**
-     * a function that allowes the transform an image asset to a renderable context
-     * object.
-    */
-    public imageToRenderObject(image: Image): ImageBitmap {
-
-        let canvas = <HTMLCanvasElement>document.createElement('camvas');
-        canvas.dr
     }
 
 }

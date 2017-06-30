@@ -4,10 +4,6 @@ import { RamStorage } from 'shared/storage';
  * a class to handle the singleton paradigmen
  */
 export abstract class Singleton {
-
-    // the instance storage
-    private static _instance: any;
-
     /**
      * generates a storage name for the instance storing
      *
@@ -33,5 +29,16 @@ export abstract class Singleton {
 
         // get the instance
         return RamStorage.get<T>(this.generateStorageName());
+    }
+
+    /**
+     * bind the instance to the singleton storage
+     *
+     * @param instance the instance that should be bound
+     */
+    protected static bindInstance(instance: any): void {
+
+        // save the instance
+        RamStorage.add(this.generateStorageName(), instance);
     }
 }

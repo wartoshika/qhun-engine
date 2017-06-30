@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 12);
+/******/ 	return __webpack_require__(__webpack_require__.s = 11);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -87,7 +87,7 @@ var AssetType;
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__log_LogLevel__ = __webpack_require__(4);
 /* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__log_Log__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__log_Log__ = __webpack_require__(14);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_1__log_Log__["a"]; });
 
 
@@ -152,7 +152,7 @@ AbstractAsset.assetLoader = __WEBPACK_IMPORTED_MODULE_0_client_asset_AssetLoader
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__decorator_logMethodCall__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__decorator_logMethodCall__ = __webpack_require__(13);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__decorator_logMethodCall__["a"]; });
 
 
@@ -180,11 +180,11 @@ var LogLevel;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__asset_Image__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__asset_Image__ = __webpack_require__(15);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_0__asset_Image__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__asset_Sprite__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__asset_Sprite__ = __webpack_require__(20);
 /* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__asset_Sound__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__asset_Sound__ = __webpack_require__(21);
 /* unused harmony namespace reexport */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__asset_AssetType__ = __webpack_require__(0);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_3__asset_AssetType__["a"]; });
@@ -206,7 +206,7 @@ var LogLevel;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_shared_helper__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_shared_storage__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_shared_log__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_client_network__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_client_network__ = __webpack_require__(18);
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -223,7 +223,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 /**
  * a class that can handle asset loading such as images and audio
  */
-class AssetLoader extends __WEBPACK_IMPORTED_MODULE_1_shared_helper__["a" /* Singleton */] {
+class AssetLoader extends __WEBPACK_IMPORTED_MODULE_1_shared_helper__["b" /* Singleton */] {
     constructor() {
         super(...arguments);
         /**
@@ -324,7 +324,10 @@ class AssetLoader extends __WEBPACK_IMPORTED_MODULE_1_shared_helper__["a" /* Sin
     loadImage(path) {
         return __awaiter(this, void 0, void 0, function* () {
             // make an xhr call to the file
-            return __WEBPACK_IMPORTED_MODULE_4_client_network__["a" /* Request */].getBinary(path);
+            return __WEBPACK_IMPORTED_MODULE_4_client_network__["a" /* Request */].getBinary(path).then((image) => {
+                // create the image bitmap for the blob
+                return createImageBitmap(__WEBPACK_IMPORTED_MODULE_1_shared_helper__["a" /* Binary */].dataUriToBlob(image));
+            });
         });
     }
     /**
@@ -364,8 +367,11 @@ class AssetLoader extends __WEBPACK_IMPORTED_MODULE_1_shared_helper__["a" /* Sin
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helper_Singleton__ = __webpack_require__(17);
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__helper_Singleton__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helper_Singleton__ = __webpack_require__(16);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_0__helper_Singleton__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helper_Binary__ = __webpack_require__(29);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_1__helper_Binary__["a"]; });
+
 
 
 
@@ -374,51 +380,13 @@ class AssetLoader extends __WEBPACK_IMPORTED_MODULE_1_shared_helper__["a" /* Sin
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__storage_RamStorage__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__storage_RamStorage__ = __webpack_require__(17);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__storage_RamStorage__["a"]; });
 
 
 
 /***/ }),
 /* 9 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_shared_helper__ = __webpack_require__(7);
-
-/**
- * the basic renderer class that all renderers should extend
- */
-class BasicRenderer extends __WEBPACK_IMPORTED_MODULE_0_shared_helper__["a" /* Singleton */] {
-    constructor() {
-        super(...arguments);
-        this.entities = [];
-    }
-    /**
-     * get all renderable entities
-     */
-    getRenderableEntities() {
-        let renderableEntities = [];
-        this.entities.forEach(entity => {
-            if (entity.isVisible())
-                renderableEntities.push(entity);
-        });
-        // just return the currently visible entities
-        return renderableEntities;
-    }
-    /**
-     * add an entity to the current game scene
-     */
-    addEntity(entity) {
-        this.entities.push(entity);
-    }
-}
-/* harmony export (immutable) */ __webpack_exports__["a"] = BasicRenderer;
-
-
-
-/***/ }),
-/* 10 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -463,7 +431,7 @@ class Helper {
 
 
 /***/ }),
-/* 11 */
+/* 10 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -486,16 +454,19 @@ class Dimension {
 
 
 /***/ }),
-/* 12 */
+/* 11 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_client_Client__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_client_render__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_client_Client__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_client_render__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_client_environment__ = __webpack_require__(25);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_client_asset__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_shared_decorator__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_client_Game__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_client_asset__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_shared_decorator__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_example_entity_Player__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_client_scene__ = __webpack_require__(40);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -505,6 +476,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
+
+
 
 
 
@@ -522,7 +496,7 @@ class MyAwesomeGame extends __WEBPACK_IMPORTED_MODULE_0_client_Client__["a" /* C
      * stuff before the game actually starts
      */
     preload() {
-        __WEBPACK_IMPORTED_MODULE_3_client_asset__["c" /* Image */].register({
+        __WEBPACK_IMPORTED_MODULE_4_client_asset__["c" /* Image */].register({
             name: 'SuperDuperImage',
             path: 'asset/image/test.png'
         });
@@ -531,8 +505,13 @@ class MyAwesomeGame extends __WEBPACK_IMPORTED_MODULE_0_client_Client__["a" /* C
      * a function that is called if the preload phase is completed
      * you now have access to the registered assets
      */
-    loaded() {
+    loaded(game) {
         // add the player to the game
+        let player = new __WEBPACK_IMPORTED_MODULE_6_example_entity_Player__["a" /* Player */]();
+        game.add(player, new __WEBPACK_IMPORTED_MODULE_7_client_scene__["a" /* LoadingScreenScene */]());
+        window.setTimeout(() => {
+            player.setVisible(false);
+        }, 1000);
     }
     /**
      * update function handles the interaction with the player eg. the keybord
@@ -546,9 +525,9 @@ class MyAwesomeGame extends __WEBPACK_IMPORTED_MODULE_0_client_Client__["a" /* C
     }
 }
 __decorate([
-    __WEBPACK_IMPORTED_MODULE_4_shared_decorator__["a" /* logMethodCall */],
+    __WEBPACK_IMPORTED_MODULE_5_shared_decorator__["a" /* logMethodCall */],
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3_client_Game__["a" /* Game */]]),
     __metadata("design:returntype", void 0)
 ], MyAwesomeGame.prototype, "loaded", null);
 // start the game
@@ -556,13 +535,14 @@ new MyAwesomeGame();
 
 
 /***/ }),
-/* 13 */
+/* 12 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_shared_decorator__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_shared_log__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_client_asset__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_client_Game__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_client_asset__ = __webpack_require__(5);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -575,16 +555,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 /**
  * the initiation class of the game client
  */
 class Client {
     constructor(clientConfig) {
         this.clientConfig = clientConfig;
-        /**
-         * holder of the preload promises
-         */
-        this.preloadPromiseStack = [];
         // step by step setup of the game
         this.bindLoadEvent();
     }
@@ -606,14 +583,15 @@ class Client {
         // start the preload phase
         this.preload();
         // get all promised from the preload phase and await them
-        let assetLoader = __WEBPACK_IMPORTED_MODULE_2_client_asset__["a" /* AssetLoader */].getInstance();
+        let assetLoader = __WEBPACK_IMPORTED_MODULE_3_client_asset__["a" /* AssetLoader */].getInstance();
         Promise.all(assetLoader.getUnresolvedPromised()).then(() => {
             // log the information about the registration process of assets
-            __WEBPACK_IMPORTED_MODULE_1_shared_log__["a" /* Log */].info("Registered", assetLoader.getAssetAmount(__WEBPACK_IMPORTED_MODULE_2_client_asset__["b" /* AssetType */].Image), "Images");
-            __WEBPACK_IMPORTED_MODULE_1_shared_log__["a" /* Log */].info("Registered", assetLoader.getAssetAmount(__WEBPACK_IMPORTED_MODULE_2_client_asset__["b" /* AssetType */].Audio), "Sounds");
-            __WEBPACK_IMPORTED_MODULE_1_shared_log__["a" /* Log */].info("Registered", assetLoader.getAssetAmount(__WEBPACK_IMPORTED_MODULE_2_client_asset__["b" /* AssetType */].Json), "JSON Objects");
+            __WEBPACK_IMPORTED_MODULE_1_shared_log__["a" /* Log */].info("Registered", assetLoader.getAssetAmount(__WEBPACK_IMPORTED_MODULE_3_client_asset__["b" /* AssetType */].Image), "Images");
+            __WEBPACK_IMPORTED_MODULE_1_shared_log__["a" /* Log */].info("Registered", assetLoader.getAssetAmount(__WEBPACK_IMPORTED_MODULE_3_client_asset__["b" /* AssetType */].Audio), "Sounds");
+            __WEBPACK_IMPORTED_MODULE_1_shared_log__["a" /* Log */].info("Registered", assetLoader.getAssetAmount(__WEBPACK_IMPORTED_MODULE_3_client_asset__["b" /* AssetType */].Json), "JSON Objects");
             // all assets loaded, continue startup
-            this.loaded();
+            let game = new __WEBPACK_IMPORTED_MODULE_2_client_Game__["a" /* Game */](this.renderer);
+            this.loaded(game);
             // init the game loop
             this.gameLoop();
         });
@@ -651,7 +629,7 @@ __decorate([
 
 
 /***/ }),
-/* 14 */
+/* 13 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -678,7 +656,7 @@ function logMethodCall(target, key, descriptor) {
 
 
 /***/ }),
-/* 15 */
+/* 14 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -774,20 +752,12 @@ Log.logLevel = __WEBPACK_IMPORTED_MODULE_0__LogLevel__["a" /* LogLevel */].Debug
 
 
 /***/ }),
-/* 16 */
+/* 15 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_client_asset_AssetType__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_client_asset_AbstractAsset__ = __webpack_require__(2);
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 
 
 /**
@@ -809,26 +779,13 @@ class Image extends __WEBPACK_IMPORTED_MODULE_1_client_asset_AbstractAsset__["a"
         // resiger all given images
         Image.getAssetLoader().registerAsset(Image, ...images);
     }
-    /**
-     * get the current image as bitmap image to draw this on the renderer
-     */
-    getData() {
-        const _super = name => super[name];
-        return __awaiter(this, void 0, void 0, function* () {
-            return new Promise(resolve => {
-                let img = document.createElement('img');
-                img.src = _super("getData").call(this);
-                resolve(img);
-            });
-        });
-    }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = Image;
 
 
 
 /***/ }),
-/* 17 */
+/* 16 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -859,13 +816,22 @@ class Singleton {
         // get the instance
         return __WEBPACK_IMPORTED_MODULE_0_shared_storage__["a" /* RamStorage */].get(this.generateStorageName());
     }
+    /**
+     * bind the instance to the singleton storage
+     *
+     * @param instance the instance that should be bound
+     */
+    static bindInstance(instance) {
+        // save the instance
+        __WEBPACK_IMPORTED_MODULE_0_shared_storage__["a" /* RamStorage */].add(this.generateStorageName(), instance);
+    }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = Singleton;
 
 
 
 /***/ }),
-/* 18 */
+/* 17 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -928,17 +894,17 @@ RamStorage.cache = {};
 
 
 /***/ }),
-/* 19 */
+/* 18 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__network_Request__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__network_Request__ = __webpack_require__(19);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__network_Request__["a"]; });
 
 
 
 /***/ }),
-/* 20 */
+/* 19 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -984,7 +950,7 @@ class Request {
 
 
 /***/ }),
-/* 21 */
+/* 20 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1018,7 +984,7 @@ class Sprite extends __WEBPACK_IMPORTED_MODULE_1_client_asset_AbstractAsset__["a
 
 
 /***/ }),
-/* 22 */
+/* 21 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1048,33 +1014,25 @@ class Sound extends __WEBPACK_IMPORTED_MODULE_1_client_asset_AbstractAsset__["a"
 
 
 /***/ }),
-/* 23 */
+/* 22 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__render_CanvasRenderer__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__render_CanvasRenderer__ = __webpack_require__(23);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__render_CanvasRenderer__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__render_BasicRenderer__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__render_BasicRenderer__ = __webpack_require__(24);
 /* unused harmony namespace reexport */
 
 
 
 
 /***/ }),
-/* 24 */
+/* 23 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_shared_log__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_client_render_BasicRenderer__ = __webpack_require__(9);
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_client_render_BasicRenderer__ = __webpack_require__(24);
 
 
 /**
@@ -1085,6 +1043,8 @@ class CanvasRenderer extends __WEBPACK_IMPORTED_MODULE_1_client_render_BasicRend
         super();
         // some logging
         __WEBPACK_IMPORTED_MODULE_0_shared_log__["a" /* Log */].info("Using", this, "as Renderer");
+        // bind the instance
+        CanvasRenderer.bindInstance(this);
     }
     /**
      * set up the game environment to a given dimension
@@ -1113,31 +1073,61 @@ class CanvasRenderer extends __WEBPACK_IMPORTED_MODULE_1_client_render_BasicRend
      * to render all entities and other stuff
      */
     render() {
-        return __awaiter(this, void 0, void 0, function* () {
-            // get all entities that shoule be visible by the client
-            // @todo: only render entitites that are visible by the camera
-            let visibleEntities = this.getRenderableEntities();
-            // render the entity at its center point
-            visibleEntities.forEach(entity => {
-                // get the image asset that should be rendered
-                let image = entity.getImage();
-                // draw the entity
-                let img = image.getData().then(r => {
-                    this.ctx.drawImage(r, entity.getPosition().x, entity.getPosition().y);
-                });
-            });
+        // clear the current canvas
+        this.ctx.fillStyle = '#ffffff';
+        this.ctx.fillRect(0, 0, this.gameDimension.x, this.gameDimension.y);
+        // get all entities that shoule be visible by the client
+        // @todo: only render entitites that are visible by the camera
+        let visibleEntities = this.getRenderableEntities();
+        // render the entity at its center point
+        visibleEntities.forEach(entity => {
+            // get the image asset that should be rendered
+            let image = entity.getImage();
+            // draw the entity
+            this.ctx.drawImage(image.getData(), entity.getPosition().x, entity.getPosition().y);
         });
-    }
-    /**
-     * a function that allowes the transform an image asset to a renderable context
-     * object.
-    */
-    imageToRenderObject(image) {
-        let canvas = document.createElement('camvas');
-        canvas.dr;
     }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = CanvasRenderer;
+
+
+
+/***/ }),
+/* 24 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_shared_helper__ = __webpack_require__(7);
+
+/**
+ * the basic renderer class that all renderers should extend
+ */
+class BasicRenderer extends __WEBPACK_IMPORTED_MODULE_0_shared_helper__["b" /* Singleton */] {
+    constructor() {
+        super(...arguments);
+        this.entities = [];
+    }
+    /**
+     * get all renderable entities
+     */
+    getRenderableEntities() {
+        let renderableEntities = [];
+        this.entities.forEach(entity => {
+            // only visible entities
+            if (entity.isVisible())
+                renderableEntities.push(entity);
+        });
+        // just return the currently visible entities
+        return renderableEntities;
+    }
+    /**
+     * add an entity to the current game scene
+     */
+    addEntity(entity) {
+        this.entities.push(entity);
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = BasicRenderer;
 
 
 
@@ -1179,11 +1169,11 @@ class Viewport {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__math_Helper__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__math_Helper__ = __webpack_require__(9);
 /* unused harmony namespace reexport */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__math_Vector2D__ = __webpack_require__(28);
-/* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__math_Dimension__ = __webpack_require__(11);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_1__math_Vector2D__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__math_Dimension__ = __webpack_require__(10);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_2__math_Dimension__["a"]; });
 
 
@@ -1195,8 +1185,8 @@ class Viewport {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_shared_math_Helper__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_shared_math_Dimension__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_shared_math_Helper__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_shared_math_Dimension__ = __webpack_require__(10);
 
 
 /**
@@ -1261,7 +1251,372 @@ class Vector2D extends __WEBPACK_IMPORTED_MODULE_1_shared_math_Dimension__["a" /
                 Math.pow((this.y - otherVector.y), 2));
     }
 }
-/* unused harmony export Vector2D */
+/* harmony export (immutable) */ __webpack_exports__["a"] = Vector2D;
+
+
+
+/***/ }),
+/* 29 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/**
+ * a helper class for binary content
+ */
+class Binary {
+    /**
+     * converts a data uri to a blob
+     *
+     * @param dataUri the data uri from the object
+     */
+    static dataUriToBlob(dataUri) {
+        // @see https://stackoverflow.com/questions/12168909/blob-from-dataurl
+        // convert base64 to raw binary data held in a string
+        // doesn't handle URLEncoded DataURIs - see SO answer #6850276 for code that does this
+        let byteString = atob(dataUri.split(',')[1]);
+        // separate out the mime component
+        let mimeString = dataUri.split(',')[0].split(':')[1].split(';')[0];
+        // write the bytes of the string to an ArrayBuffer
+        let ab = new ArrayBuffer(byteString.length);
+        // create a view into the buffer
+        let ia = new Uint8Array(ab);
+        // set the bytes of the buffer to the correct values
+        for (let i = 0; i < byteString.length; i++) {
+            ia[i] = byteString.charCodeAt(i);
+        }
+        // write the ArrayBuffer to a blob, and you're done
+        let blob = new Blob([ab], { type: mimeString });
+        return blob;
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Binary;
+
+
+
+/***/ }),
+/* 30 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_shared_math__ = __webpack_require__(27);
+
+/**
+ * the base class for all game entities
+ */
+class Entity {
+    constructor(position = new __WEBPACK_IMPORTED_MODULE_0_shared_math__["b" /* Vector2D */](0, 0)) {
+        this.position = position;
+        /**
+         * the visibility flag
+         */
+        this.visible = true;
+    }
+    /**
+     * get the current position of the entity (center point)
+     */
+    getPosition() {
+        return this.position;
+    }
+    /**
+     * get the image asset that displays the current entity
+     */
+    getImage() {
+        return this.currentTemplate;
+    }
+    /**
+     * set the new image for this entity
+     *
+     * @param image the current image that should represent this entity during rendering
+     */
+    setImage(image) {
+        this.currentTemplate = image;
+    }
+    /**
+     * is the entity visible? if not, the renderer will not render this entity
+     */
+    isVisible() {
+        return this.visible;
+    }
+    /**
+     * sets the visibility of the entity
+     */
+    setVisible(visible) {
+        this.visible = visible;
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Entity;
+
+
+
+/***/ }),
+/* 31 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_shared_entity__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_shared_math__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_shared_collision__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_client_asset__ = __webpack_require__(5);
+
+
+
+
+/**
+ * the player entity
+ */
+class Player extends __WEBPACK_IMPORTED_MODULE_0_shared_entity__["a" /* CollidableEntity */] {
+    constructor() {
+        super(20, 20, new __WEBPACK_IMPORTED_MODULE_1_shared_math__["b" /* Vector2D */](10, 10));
+    }
+    /**
+     * get the entities collision type
+     */
+    getCollisionType() {
+        return __WEBPACK_IMPORTED_MODULE_2_shared_collision__["a" /* CollisionType */].Circle;
+    }
+    /**
+     * an event handler that will fire if another entity collided with this instance
+     */
+    onCollision(otherEntity) {
+        console.log(this, "collided with", otherEntity);
+    }
+    /**
+     * get the image asset that displays the current entity
+     */
+    getImage() {
+        return __WEBPACK_IMPORTED_MODULE_3_client_asset__["a" /* AssetLoader */].getInstance().getAsset('SuperDuperImage', __WEBPACK_IMPORTED_MODULE_3_client_asset__["b" /* AssetType */].Image);
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Player;
+
+
+
+/***/ }),
+/* 32 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entity_Entity__ = __webpack_require__(30);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_0__entity_Entity__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__entity_CollidableEntity__ = __webpack_require__(33);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_1__entity_CollidableEntity__["a"]; });
+
+
+
+
+/***/ }),
+/* 33 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_shared_entity_Entity__ = __webpack_require__(30);
+
+/**
+ * an entity that can collide with other collidable entities
+ */
+class CollidableEntity extends __WEBPACK_IMPORTED_MODULE_0_shared_entity_Entity__["a" /* Entity */] {
+    constructor(entityWidth, entityHeight, position) {
+        super(position);
+        this.entityWidth = entityWidth;
+        this.entityHeight = entityHeight;
+    }
+    /**
+     * get the width of the entity
+     */
+    getWidth() {
+        return this.entityWidth;
+    }
+    /**
+     * get the height of the entity
+     */
+    getHeight() {
+        return this.entityHeight;
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = CollidableEntity;
+
+
+
+/***/ }),
+/* 34 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__collision_CollisionType__ = __webpack_require__(35);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__collision_CollisionType__["a"]; });
+
+
+
+/***/ }),
+/* 35 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CollisionType; });
+/**
+ * an enumeration for all available collision types
+ */
+var CollisionType;
+(function (CollisionType) {
+    CollisionType[CollisionType["Circle"] = 0] = "Circle";
+    CollisionType[CollisionType["Rectangle"] = 1] = "Rectangle";
+    CollisionType[CollisionType["RotatedRectangle"] = 2] = "RotatedRectangle";
+})(CollisionType || (CollisionType = {}));
+
+
+/***/ }),
+/* 36 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_shared_helper__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_shared_entity__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_client_camera__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_client_scene__ = __webpack_require__(40);
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+
+
+
+
+/**
+ * a class that handles adding of entities, cameras, physics ...
+ */
+class Game extends __WEBPACK_IMPORTED_MODULE_0_shared_helper__["b" /* Singleton */] {
+    constructor(renderer) {
+        super();
+        this.renderer = renderer;
+        // bind singleton
+        Game.bindInstance(this);
+    }
+    /**
+     * add a thing to the game
+     *
+     * @param things the things to add
+     */
+    add(...things) {
+        // iterate through all things
+        things.forEach(thing => {
+            // check the type of the thing
+            if (thing instanceof __WEBPACK_IMPORTED_MODULE_1_shared_entity__["b" /* Entity */]) {
+                this.addEntity(thing);
+            }
+            else if (thing instanceof __WEBPACK_IMPORTED_MODULE_2_client_camera__["a" /* Camera */]) {
+                this.addCamera(thing);
+            }
+            else if (thing instanceof __WEBPACK_IMPORTED_MODULE_3_client_scene__["b" /* Scene */]) {
+                this.addScene(thing);
+            }
+        });
+    }
+    /**
+     * add one entity to the game
+     *
+     * @param entity the entity to add
+     */
+    addEntity(entity) {
+        this.renderer.addEntity(entity);
+    }
+    /**
+     * add one camera to the game
+     *
+     * @param camera the camera to add
+     */
+    addCamera(camera) {
+        console.log("add camera", camera);
+    }
+    /**
+     * add one scene to the game
+     *
+     * @param scene the scene to add
+     * @param autostart should the scene start?
+     */
+    addScene(scene, autostart = false) {
+        console.log("add scene", scene);
+        if (autostart) {
+            // load the scene
+            this.loadScene(scene);
+        }
+    }
+    /**
+     * load a new scene
+     *
+     * @param scene the scene to load
+     */
+    loadScene(scene) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log("load scene", scene);
+        });
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Game;
+
+
+
+/***/ }),
+/* 37 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__camera_Camera__ = __webpack_require__(38);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__camera_Camera__["a"]; });
+
+
+
+/***/ }),
+/* 38 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Camera {
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Camera;
+
+
+
+/***/ }),
+/* 39 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Scene {
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Scene;
+
+
+
+/***/ }),
+/* 40 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__scene_Scene__ = __webpack_require__(39);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_0__scene_Scene__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__scene_LoadingScreenScene__ = __webpack_require__(41);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_1__scene_LoadingScreenScene__["a"]; });
+
+
+
+
+/***/ }),
+/* 41 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_client_scene_Scene__ = __webpack_require__(39);
+
+/**
+ * a basic loading screen scene
+ */
+class LoadingScreenScene extends __WEBPACK_IMPORTED_MODULE_0_client_scene_Scene__["a" /* Scene */] {
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = LoadingScreenScene;
 
 
 

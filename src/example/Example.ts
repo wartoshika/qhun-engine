@@ -1,9 +1,13 @@
 import { Client } from 'client/Client';
 import { CanvasRenderer } from 'client/render';
 import { Viewport } from 'client/environment';
+import { Game } from 'client/Game';
 
 import { Image, Sprite, AssetLoader } from 'client/asset';
 import { logMethodCall } from 'shared/decorator';
+
+import { Player } from 'example/entity/Player';
+import { LoadingScreenScene } from 'client/scene';
 
 class MyAwesomeGame extends Client {
 
@@ -26,8 +30,6 @@ class MyAwesomeGame extends Client {
             name: 'SuperDuperImage',
             path: 'asset/image/test.png'
         });
-
-
     }
 
     /**
@@ -35,9 +37,15 @@ class MyAwesomeGame extends Client {
      * you now have access to the registered assets
      */
     @logMethodCall
-    public loaded(): void {
+    public loaded(game: Game): void {
 
         // add the player to the game
+        let player = new Player();
+        game.add(player, new LoadingScreenScene());
+
+        window.setTimeout(() => {
+            player.setVisible(false);
+        }, 1000);
     }
 
     /**

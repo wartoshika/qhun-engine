@@ -17,6 +17,7 @@ export abstract class BasicRenderer extends Singleton {
         let renderableEntities: OptionalRendering[] = [];
         this.entities.forEach(entity => {
 
+            // only visible entities
             if (entity.isVisible()) renderableEntities.push(entity);
         });
 
@@ -31,10 +32,4 @@ export abstract class BasicRenderer extends Singleton {
 
         this.entities.push(entity);
     }
-
-    /**
-     * a function that allowes the transform an image asset to a renderable context
-     * object.
-    */
-    public abstract imageToRenderObject(image: Image): any;
 }

@@ -21,6 +21,11 @@ export interface OptionalRendering {
     isVisible(): boolean;
 
     /**
+     * sets the visibility of the entity
+     */
+    setVisible(visible: boolean): void;
+
+    /**
      * get the position from the entity (top, left)
      */
     getPosition(): Vector2D;

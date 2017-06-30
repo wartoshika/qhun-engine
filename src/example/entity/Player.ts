@@ -10,7 +10,7 @@ export class Player extends CollidableEntity {
 
     constructor() {
 
-        super(20, 20, new Vector2D(1, 10));
+        super(20, 20, new Vector2D(10, 10));
     }
 
     /**
@@ -27,14 +27,6 @@ export class Player extends CollidableEntity {
     public onCollision(otherEntity: CollidableEntity): void {
 
         console.log(this, "collided with", otherEntity);
-    }
-
-    /**
-     * is the entity visible? if not, the renderer will not render this entity
-     */
-    public isVisible(): boolean {
-
-        return true;
     }
 
     /**

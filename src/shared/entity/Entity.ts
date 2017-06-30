@@ -11,6 +11,11 @@ export abstract class Entity implements OptionalRendering {
      */
     private currentTemplate: Image;
 
+    /**
+     * the visibility flag
+     */
+    protected visible: boolean = true;
+
     constructor(
         private position: Vector2D = new Vector2D(0, 0)
     ) { }
@@ -44,5 +49,16 @@ export abstract class Entity implements OptionalRendering {
     /**
      * is the entity visible? if not, the renderer will not render this entity
      */
-    public abstract isVisible(): boolean;
+    public isVisible(): boolean {
+
+        return this.visible;
+    }
+
+    /**
+     * sets the visibility of the entity
+     */
+    public setVisible(visible: boolean): void {
+
+        this.visible = visible;
+    }
 }

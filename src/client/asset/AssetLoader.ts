@@ -1,7 +1,7 @@
 import { AssetType } from 'client/asset/AssetType';
 import { Asset, InlineAsset } from 'client/asset/Asset';
 import { AbstractAsset } from 'client/asset/AbstractAsset';
-import { Singleton } from 'shared/helper';
+import { Singleton, Binary } from 'shared/helper';
 import { RamStorage } from 'shared/storage';
 import { Log } from 'shared/log';
 import { Request } from 'client/network';
@@ -127,10 +127,14 @@ export class AssetLoader extends Singleton {
      *
      * @param path the path to the image
      */
-    private async loadImage(path: string): Promise<any> {
+    private async loadImage(path: string): Promise<ImageBitmap> {
 
         // make an xhr call to the file
-        return Request.getBinary(path);
+        return Request.getBinary(path).then((image) => {
+
+            // create the image bitmap for the blob
+            return createImageBitmap(Binary.dataUriToBlob(image));
+        });
     }
 
     /**
