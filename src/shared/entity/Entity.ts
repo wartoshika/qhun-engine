@@ -9,7 +9,7 @@ export abstract class Entity implements OptionalRendering {
     /**
      * the image that is rendered during game loop to display the entitiy
      */
-    private currentTemplate: Image;
+    private currentTemplate: string;
 
     /**
      * the visibility flag
@@ -31,7 +31,7 @@ export abstract class Entity implements OptionalRendering {
     /**
      * get the image asset that displays the current entity
      */
-    public getImage(): Image {
+    public getImage(): string {
 
         return this.currentTemplate;
     }
@@ -41,7 +41,7 @@ export abstract class Entity implements OptionalRendering {
      *
      * @param image the current image that should represent this entity during rendering
      */
-    public setImage(image: Image): void {
+    public setImage(image: string): void {
 
         this.currentTemplate = image;
     }

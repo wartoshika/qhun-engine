@@ -66,3 +66,5 @@ export class RamStorage {
         return counter;
     }
 }
+
+(<any>window).storage = RamStorage;

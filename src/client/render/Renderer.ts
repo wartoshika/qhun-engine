@@ -1,5 +1,7 @@
 import { Dimension } from 'shared/math';
 import { OptionalRendering } from 'shared/entity';
+import { AssetLoader } from 'client/asset';
+import { Game } from 'Game';
 
 /**
  * a basic renderer interface to have future space for eg webgl
@@ -31,5 +33,4 @@ export interface Renderer {
      * add one or many entities to the current game scene
      */
     addEntity(entity: OptionalRendering): void;
-
 }

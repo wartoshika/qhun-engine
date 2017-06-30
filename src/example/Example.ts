@@ -11,6 +11,8 @@ import { LoadingScreenScene } from 'client/scene';
 
 class MyAwesomeGame extends Client {
 
+    private player: Player;
+
     constructor() {
 
         super({
@@ -30,6 +32,11 @@ class MyAwesomeGame extends Client {
             name: 'SuperDuperImage',
             path: 'asset/image/test.png'
         });
+
+        Sprite.register({
+            name: 'Sprite',
+            path: 'asset/image/sprite.png'
+        });
     }
 
     /**
@@ -40,12 +47,9 @@ class MyAwesomeGame extends Client {
     public loaded(game: Game): void {
 
         // add the player to the game
-        let player = new Player();
-        game.add(player, new LoadingScreenScene());
-
-        window.setTimeout(() => {
-            player.setVisible(false);
-        }, 1000);
+        this.player = new Player();
+        game.add(this.player);
+        game.loadScene(new LoadingScreenScene());
     }
 
     /**
@@ -57,7 +61,8 @@ class MyAwesomeGame extends Client {
      */
     public update(): void {
 
-        console.log("update");
+
+
     }
 }
 

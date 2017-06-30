@@ -11,6 +11,11 @@ declare type Thing = Entity | Camera | Scene;
  */
 export class Game extends Singleton {
 
+    /**
+     * the holder of the currently visible scene
+     */
+    protected currentScene: Scene;
+
     constructor(
         private renderer: Renderer
     ) {
@@ -72,12 +77,19 @@ export class Game extends Singleton {
      */
     public addScene(scene: Scene, autostart: boolean = false): void {
 
-        console.log("add scene", scene);
         if (autostart) {
 
             // load the scene
             this.loadScene(scene);
         }
+    }
+
+    /**
+     * get the currently visible scene
+     */
+    public getCurrentScene(): Scene {
+
+        return this.currentScene;
     }
 
     /**
@@ -87,6 +99,20 @@ export class Game extends Singleton {
      */
     public async loadScene(scene: Scene): Promise<void> {
 
-        console.log("load scene", scene);
+        let promise = new Promise<void>(r => r());
+
+        // destruct the current scene
+        if (this.currentScene) {
+
+            promise = this.currentScene.destroy(this);
+        }
+
+        // await the destructing
+        return promise.then(() => {
+
+            // set the new scene
+            this.currentScene = scene;
+            this.currentScene.create(this);
+        });
     }
 }

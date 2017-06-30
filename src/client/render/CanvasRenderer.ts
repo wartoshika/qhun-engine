@@ -2,8 +2,10 @@ import { Renderer } from 'client/render/Renderer';
 import { Dimension } from 'shared/math';
 import { Log } from 'shared/log';
 import { OptionalRendering } from 'shared/entity';
-import { Image } from 'client/asset';
+import { Image, AssetLoader, AssetType } from 'client/asset';
 import { BasicRenderer } from 'client/render/BasicRenderer';
+
+import { RamStorage } from 'shared/storage';
 
 /**
  * a game renderer based on the html canvas element
@@ -21,6 +23,11 @@ export class CanvasRenderer extends BasicRenderer implements Renderer {
     private ctx: CanvasRenderingContext2D;
 
     /**
+     * the asset loader instance
+     */
+    private assetLoader: AssetLoader;
+
+    /**
      * the game height and width holder
      */
     private gameDimension: Dimension;
@@ -30,6 +37,9 @@ export class CanvasRenderer extends BasicRenderer implements Renderer {
 
         // some logging
         Log.info("Using", this, "as Renderer");
+
+        // get the asset loader
+        this.assetLoader = AssetLoader.getInstance<AssetLoader>();
 
         // bind the instance
         CanvasRenderer.bindInstance(this);
@@ -80,12 +90,14 @@ export class CanvasRenderer extends BasicRenderer implements Renderer {
         // render the entity at its center point
         visibleEntities.forEach(entity => {
 
-            // get the image asset that should be rendered
-            let image = entity.getImage();
-
             // draw the entity
             this.ctx.drawImage(
-                image.getData(),
+
+                // get the image of the entity
+                this.assetLoader.getAsset<Image>(
+                    entity.getImage(), AssetType.Image
+                ).getData(),
+
                 entity.getPosition().x,
                 entity.getPosition().y
             );

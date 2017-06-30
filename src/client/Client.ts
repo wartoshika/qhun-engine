@@ -16,9 +16,17 @@ export abstract class Client {
      */
     private renderer: Renderer;
 
+    /**
+     * the game instance
+     */
+    private gameInstance: Game;
+
     constructor(
         private clientConfig: ClientConfig
     ) {
+
+        // print package and version info
+        console.info("%c -= Qhun-Engine v1.0.0 =- [http://engine.qhun.de]", "background: green; font-color: white;");
 
         // step by step setup of the game
         this.bindLoadEvent();
@@ -41,6 +49,9 @@ export abstract class Client {
     @logMethodCall
     private internalSetup(): void {
 
+        // get all promised from the preload phase and await them
+        let assetLoader = AssetLoader.getInstance<AssetLoader>();
+
         // setup renderer
         this.renderer = new this.clientConfig.rederer();
         this.renderer.setup(this.clientConfig.gameDimension);
@@ -48,8 +59,7 @@ export abstract class Client {
         // start the preload phase
         this.preload();
 
-        // get all promised from the preload phase and await them
-        let assetLoader = AssetLoader.getInstance<AssetLoader>();
+        // await the asset loading
         Promise.all(assetLoader.getUnresolvedPromised()).then(() => {
 
             // log the information about the registration process of assets
@@ -58,10 +68,8 @@ export abstract class Client {
             Log.info("Registered", assetLoader.getAssetAmount(AssetType.Json), "JSON Objects");
 
             // all assets loaded, continue startup
-            let game = new Game(
-                this.renderer
-            );
-            this.loaded(game);
+            this.gameInstance = new Game(this.renderer);
+            this.loaded(this.gameInstance);
 
             // init the game loop
             this.gameLoop();
@@ -76,6 +84,10 @@ export abstract class Client {
 
         // call update method
         this.update();
+
+        // call the scene update
+        let scene = this.gameInstance.getCurrentScene();
+        if (scene) scene.update(this.gameInstance);
 
         // render the game
         if (typeof this.renderer.preRender === 'function') this.renderer.preRender();

@@ -6,14 +6,14 @@ export interface OptionalRendering {
     /**
      * get the image asset that displays the current entity
      */
-    getImage(): Image;
+    getImage(): string;
 
     /**
      * set the new image for this entity
      *
      * @param image the current image that should represent this entity during rendering
      */
-    setImage(image: Image): void;
+    setImage(image: string): void;
 
     /**
      * is the entity visible? if not, the renderer will not render this entity

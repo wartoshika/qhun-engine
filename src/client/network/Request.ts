@@ -31,4 +31,28 @@ export class Request {
             xhr.send();
         });
     }
+
+    /**
+     * make an asynchronus get request to the given url
+     *
+     * @param path the url
+     */
+    public static async get(path: string): Promise<string> {
+
+        return new Promise<string>(resolve => {
+
+            // create xhr instance and set properties
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET', path);
+
+            // register finish event
+            xhr.onload = () => {
+
+                resolve(xhr.response);
+            };
+
+            // send the request
+            xhr.send();
+        });
+    }
 }

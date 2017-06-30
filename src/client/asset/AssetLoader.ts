@@ -12,9 +12,9 @@ import { Request } from 'client/network';
 export class AssetLoader extends Singleton {
 
     /**
-     * the holder of all unresolved asset loads
+     * the holder of all asset loads
      */
-    private unresolvedPromiseStack: Promise<AbstractAsset>[] = [];
+    private assetLoaderPromiseStack: Promise<AbstractAsset>[] = [];
 
     /**
      * register one or many assets to adress then later in the game
@@ -24,7 +24,10 @@ export class AssetLoader extends Singleton {
      * @param assetClass the class of the asset
      * @param assets the asset to register
      */
-    public registerAsset(assetClass: new () => AbstractAsset, ...assets: InlineAsset[]): void {
+    public async registerAsset(assetClass: new () => AbstractAsset, ...assets: InlineAsset[]): Promise<AbstractAsset[]> {
+
+        let outerPromise: Promise<AbstractAsset>[] = [];
+        let resourceStack: AbstractAsset[] = [];
 
         // iterate through all given assets
         assets.forEach(asset => {
@@ -37,7 +40,7 @@ export class AssetLoader extends Singleton {
             }
 
             // add a promise to await its loading
-            this.unresolvedPromiseStack.push(new Promise<AbstractAsset>(resolve => {
+            outerPromise.push(new Promise<AbstractAsset>(resolve => {
 
                 // construct an instance of the asset
                 let instance = new assetClass();
@@ -47,11 +50,21 @@ export class AssetLoader extends Singleton {
                 // fill the instance
                 this.loadAsset(instance).then(resource => {
 
+                    // store the asset
                     RamStorage.add(this.getAssetStorageName(asset.name, asset.assetType), resource);
+                    resourceStack.push(resource);
+
+                    // resolve the promise
                     resolve(resource);
                 });
             }));
         });
+
+        // stack all loading promises to the asset loading process
+        this.assetLoaderPromiseStack.push(...outerPromise);
+
+        // return the promise
+        return Promise.all(outerPromise).then(() => { return resourceStack; });
     }
 
     /**
@@ -74,10 +87,12 @@ export class AssetLoader extends Singleton {
         }
 
         // load the resource
-        let resource = await callback(instance.getPath());
-        instance.setData(resource);
+        return callback(instance.getPath()).then(resource => {
 
-        return instance;
+            // set the resource data to the asset instance
+            instance.setData(resource);
+            return instance;
+        });
     }
 
     /**
@@ -106,7 +121,19 @@ export class AssetLoader extends Singleton {
      */
     public getUnresolvedPromised(): Promise<AbstractAsset>[] {
 
-        return this.unresolvedPromiseStack;
+        return this.assetLoaderPromiseStack;
+    }
+
+    /**
+     * add promises to the asset loader. this can be used to delay the game
+     * startup until all assets are loaded.
+     *
+     * @param promises the promises to add
+     */
+    public addAssetLoaderPromise(...promises: Promise<any>[]): Promise<any>[] {
+
+        this.assetLoaderPromiseStack.push(...promises);
+        return promises;
     }
 
     /**
@@ -128,6 +155,15 @@ export class AssetLoader extends Singleton {
      * @param path the path to the image
      */
     private async loadImage(path: string): Promise<ImageBitmap> {
+
+        // if the path is a data uri, return this instantly
+        if (path.indexOf('data:image/') === 0) {
+
+            return new Promise<ImageBitmap>(resolve => {
+
+                resolve(createImageBitmap(Binary.dataUriToBlob(path)));
+            });
+        }
 
         // make an xhr call to the file
         return Request.getBinary(path).then((image) => {
