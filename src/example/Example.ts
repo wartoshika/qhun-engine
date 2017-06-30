@@ -8,6 +8,8 @@ import { logMethodCall } from 'shared/decorator';
 
 import { Player } from 'example/entity/Player';
 import { LoadingScreenScene } from 'client/scene';
+import { Input } from 'client/input';
+import { Vector2D } from 'shared/math';
 
 class MyAwesomeGame extends Client {
 
@@ -28,14 +30,9 @@ class MyAwesomeGame extends Client {
      */
     public preload(): void {
 
-        Image.register({
-            name: 'SuperDuperImage',
-            path: 'asset/image/test.png'
-        });
-
         Sprite.register({
-            name: 'Sprite',
-            path: 'asset/image/sprite.png'
+            name: 'player',
+            path: 'asset/image/player.png'
         });
     }
 
@@ -50,6 +47,9 @@ class MyAwesomeGame extends Client {
         this.player = new Player();
         game.add(this.player);
         game.loadScene(new LoadingScreenScene());
+
+        // play idle animation
+        this.player.playAnimation('idle', true);
     }
 
     /**
@@ -59,10 +59,34 @@ class MyAwesomeGame extends Client {
      *
      * @warning dont do heavy stuff in here because this meight cause performance issues
      */
-    public update(): void {
+    public update(game: Game, input: Input): void {
 
+        let keys = input.getArrowKeys();
 
+        // move the player
+        if (keys.down) {
 
+            this.player.setPosition(this.player.getPosition().add(
+                new Vector2D(0, 5)
+            ));
+        } else if (keys.up) {
+
+            this.player.setPosition(this.player.getPosition().add(
+                new Vector2D(0, -5)
+            ));
+        }
+
+        if (keys.left) {
+
+            this.player.setPosition(this.player.getPosition().add(
+                new Vector2D(-5, 0)
+            ));
+        } else if (keys.right) {
+
+            this.player.setPosition(this.player.getPosition().add(
+                new Vector2D(5, 0)
+            ));
+        }
     }
 }
 

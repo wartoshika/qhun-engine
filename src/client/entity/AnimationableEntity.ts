@@ -1,0 +1,22 @@
+import { InlineAnimation } from 'client/entity/Animation';
+
+/**
+ * an interface for entities that can be animated
+ */
+export interface AnimationableEntity {
+
+    /**
+     * add one or many animations to the entity
+     */
+    addAnimation(...animations: InlineAnimation[]): void;
+
+    /**
+     * play the given animation
+     */
+    playAnimation(name: string, loop: boolean): void;
+
+    /**
+     * stops the currently playing animation
+     */
+    stopAnimation(): void;
+}

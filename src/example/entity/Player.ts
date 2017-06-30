@@ -10,6 +10,32 @@ export class Player extends CollidableEntity {
     constructor() {
 
         super(20, 20, new Vector2D(10, 10));
+
+        // add the animations for the player
+        this.addAnimation({
+            name: 'idle',
+            sprite: 'player',
+            states: [
+                {
+                    image: 'red_eyes_open', duration: 2500
+                },
+                {
+                    image: 'red_eyes_closed', duration: 250
+                },
+                {
+                    image: 'red_eyes_open', duration: 250
+                },
+                {
+                    image: 'red_eyes_closed', duration: 250
+                }
+            ]
+        }, {
+                name: 'jump',
+                sprite: 'player',
+                states: [
+                    { image: 'red_mouth_open', duration: -1 }
+                ]
+            });
     }
 
     /**
@@ -26,11 +52,6 @@ export class Player extends CollidableEntity {
     public onCollision(otherEntity: CollidableEntity): void {
 
         console.log(this, "collided with", otherEntity);
-    }
-
-    public getImage(): string {
-
-        return "Sprite[red2]";
     }
 
 }

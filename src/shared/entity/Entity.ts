@@ -16,4 +16,14 @@ export abstract class Entity {
 
         return this.position;
     }
+
+    /**
+     * set the entities new position
+     *
+     * @param position the new position
+     */
+    public setPosition(position: Vector2D): void {
+
+        this.position = position;
+    }
 }

@@ -104,15 +104,12 @@ export class Game extends Singleton {
         // destruct the current scene
         if (this.currentScene) {
 
-            promise = this.currentScene.destroy(this);
+            // wait for complete destruction
+            await this.currentScene.destroy(this);
         }
 
-        // await the destructing
-        return promise.then(() => {
-
-            // set the new scene
-            this.currentScene = scene;
-            this.currentScene.create(this);
-        });
+        // set the new scene
+        this.currentScene = scene;
+        this.currentScene.create(this);
     }
 }

@@ -5,6 +5,7 @@ import { Game } from 'client/Game';
 
 import { AssetLoader, AssetType } from 'client/asset';
 import { Renderer } from 'client/render';
+import { Input } from 'client/input';
 
 /**
  * the initiation class of the game client
@@ -20,6 +21,11 @@ export abstract class Client {
      * the game instance
      */
     private gameInstance: Game;
+
+    /**
+     * the input instance
+     */
+    private inputInstance: Input;
 
     constructor(
         private clientConfig: ClientConfig
@@ -69,6 +75,9 @@ export abstract class Client {
 
             // all assets loaded, continue startup
             this.gameInstance = new Game(this.renderer);
+            this.inputInstance = new Input();
+
+            // fire loaded event
             this.loaded(this.gameInstance);
 
             // init the game loop
@@ -83,7 +92,7 @@ export abstract class Client {
     private gameLoop(): void {
 
         // call update method
-        this.update();
+        this.update(this.gameInstance, this.inputInstance);
 
         // call the scene update
         let scene = this.gameInstance.getCurrentScene();
@@ -117,5 +126,5 @@ export abstract class Client {
      *
      * @warning dont do heavy stuff in here because this meight cause performance issues
      */
-    public abstract update(): void;
+    public abstract update(game: Game, input: Input): void;
 }
