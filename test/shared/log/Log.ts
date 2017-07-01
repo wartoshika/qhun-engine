@@ -16,9 +16,4 @@ describe('shared/log/Log.ts', () => {
         Log.setLogLevel(LogLevel.Debug);
         expect(Log.getLogLevel()).to.eq(LogLevel.Debug);
     });
-
-    it('debug() should log at debug level', () => {
-
-
-    });
 });

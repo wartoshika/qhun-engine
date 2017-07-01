@@ -9,6 +9,7 @@
 let sizeof = require('object-sizeof');
 
 import { Helper } from '../math';
+import { File, FileSizeType } from '../helper/File';
 
 /**
  * holds objects in the ram of the operating unit
@@ -39,6 +40,14 @@ export class RamStorage {
     public static remove(path: string): void {
 
         delete RamStorage.cache[path];
+    }
+
+    /**
+     * reset the complete storage!
+     */
+    public static clear(): void {
+
+        this.cache = {};
     }
 
     /**
@@ -80,11 +89,11 @@ export class RamStorage {
 
     /**
      * calculates the used memory for the selected objects in the storage.
-     * unit is in MB
+     * unit is in MB or the given type
      *
      * @param path the path to the object. dots can be used to structure
      */
-    public static getSize(path: string = ""): number {
+    public static getSize(path: string = "", type: FileSizeType = FileSizeType.Byte): number {
 
         let byteCounter = 0;
         Object.keys(RamStorage.cache).forEach(key => {
@@ -93,8 +102,7 @@ export class RamStorage {
             if (key.indexOf(path) === 0) byteCounter += sizeof(RamStorage.cache[key]);
         });
 
-        return Helper.roundToPrecision(byteCounter / 1024 / 1024, 2);
+        let mb = File.byteToSize(byteCounter, type);
+        return Helper.roundToPrecision(mb, 2);
     }
 }
-
-(<any>window).storage = RamStorage;

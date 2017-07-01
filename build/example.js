@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 22);
+/******/ 	return __webpack_require__(__webpack_require__.s = 23);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -70,7 +70,7 @@
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__log_LogLevel__ = __webpack_require__(8);
 /* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__log_Log__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__log_Log__ = __webpack_require__(26);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_1__log_Log__["a"]; });
 /**
  * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
@@ -89,7 +89,7 @@
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__math_Helper__ = __webpack_require__(10);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_0__math_Helper__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__math_Vector2D__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__math_Vector2D__ = __webpack_require__(36);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_1__math_Vector2D__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__math_Dimension__ = __webpack_require__(11);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_2__math_Dimension__["a"]; });
@@ -132,11 +132,11 @@ var AssetType;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helper_Singleton__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helper_Singleton__ = __webpack_require__(27);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_0__helper_Singleton__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helper_Binary__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helper_Binary__ = __webpack_require__(37);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_1__helper_Binary__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helper_File__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helper_File__ = __webpack_require__(12);
 /* unused harmony namespace reexport */
 /**
  * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
@@ -154,7 +154,7 @@ var AssetType;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__storage_RamStorage__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__storage_RamStorage__ = __webpack_require__(28);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__storage_RamStorage__["a"]; });
 /**
  * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
@@ -170,7 +170,7 @@ var AssetType;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__asset_Image__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__asset_Image__ = __webpack_require__(19);
 /* unused harmony namespace reexport */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__asset_Sprite__ = __webpack_require__(46);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_1__asset_Sprite__["a"]; });
@@ -178,7 +178,7 @@ var AssetType;
 /* unused harmony namespace reexport */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__asset_AssetType__ = __webpack_require__(2);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_3__asset_AssetType__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__asset_AssetLoader__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__asset_AssetLoader__ = __webpack_require__(20);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_4__asset_AssetLoader__["a"]; });
 /**
  * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
@@ -198,7 +198,7 @@ var AssetType;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__AssetLoader__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__AssetLoader__ = __webpack_require__(20);
 /**
  * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
  *
@@ -258,7 +258,7 @@ AbstractAsset.assetLoader = __WEBPACK_IMPORTED_MODULE_0__AssetLoader__["a" /* As
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__decorator_logMethodCall__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__decorator_logMethodCall__ = __webpack_require__(25);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__decorator_logMethodCall__["a"]; });
 /**
  * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
@@ -299,9 +299,9 @@ var LogLevel;
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__shared_helper__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__entity__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__entity__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__camera__ = __webpack_require__(42);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__scene__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__scene__ = __webpack_require__(17);
 /**
  * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
  *
@@ -492,11 +492,57 @@ class Dimension {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entity_Entity__ = __webpack_require__(13);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return FileSizeType; });
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+var FileSizeType;
+(function (FileSizeType) {
+    FileSizeType[FileSizeType["Byte"] = 0] = "Byte";
+    FileSizeType[FileSizeType["Kilobyte"] = 1] = "Kilobyte";
+    FileSizeType[FileSizeType["Megabyte"] = 2] = "Megabyte";
+    FileSizeType[FileSizeType["Gigabyte"] = 3] = "Gigabyte";
+    FileSizeType[FileSizeType["Terrabyte"] = 4] = "Terrabyte";
+})(FileSizeType || (FileSizeType = {}));
+/**
+ * a helper class for file and path things
+ */
+class File {
+    /**
+     * get the file extension of a path
+     *
+     * @param path the path to the file
+     */
+    static getFileExtension(path) {
+        return path.split('.').pop();
+    }
+    /**
+     * converts a byle number to a given superset
+     *
+     * @param bytes the base byte number
+     * @param type the wanted type
+     */
+    static byteToSize(bytes, type) {
+        return bytes / Math.pow(1024, type);
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = File;
+
+
+
+/***/ }),
+/* 13 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entity_Entity__ = __webpack_require__(14);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_0__entity_Entity__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__entity_CollidableEntity__ = __webpack_require__(41);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_1__entity_CollidableEntity__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__entity_AnimationEntity__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__entity_AnimationEntity__ = __webpack_require__(15);
 /* unused harmony namespace reexport */
 /**
  * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
@@ -510,11 +556,11 @@ class Dimension {
 
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__AnimationEntity__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__AnimationEntity__ = __webpack_require__(15);
 /**
  * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
  *
@@ -532,7 +578,7 @@ class Entity extends __WEBPACK_IMPORTED_MODULE_0__AnimationEntity__["a" /* Anima
 
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -634,7 +680,7 @@ class AnimationEntity extends __WEBPACK_IMPORTED_MODULE_0__shared_entity__["a" /
 
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -673,11 +719,11 @@ class Entity {
 
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__scene_Scene__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__scene_Scene__ = __webpack_require__(18);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_0__scene_Scene__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__scene_LoadingScreenScene__ = __webpack_require__(44);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_1__scene_LoadingScreenScene__["a"]; });
@@ -692,7 +738,7 @@ class Entity {
 
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -712,7 +758,7 @@ class Scene {
 
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -761,7 +807,7 @@ class Image extends __WEBPACK_IMPORTED_MODULE_1__AbstractAsset__["a" /* Abstract
 
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -769,7 +815,7 @@ class Image extends __WEBPACK_IMPORTED_MODULE_1__AbstractAsset__["a" /* Abstract
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_helper__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_storage__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_log__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__network__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__network__ = __webpack_require__(21);
 /**
  * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
  *
@@ -961,7 +1007,7 @@ class AssetLoader extends __WEBPACK_IMPORTED_MODULE_1__shared_helper__["b" /* Si
 
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -977,7 +1023,7 @@ class AssetLoader extends __WEBPACK_IMPORTED_MODULE_1__shared_helper__["b" /* Si
 
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1022,19 +1068,19 @@ class BasicRenderer extends __WEBPACK_IMPORTED_MODULE_0__shared_helper__["b" /* 
 
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__client_Client__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__client_Client__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__client_render__ = __webpack_require__(50);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__client_environment__ = __webpack_require__(52);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__client_Game__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__client_asset__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_decorator__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__entity_Player__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__client_scene__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__client_scene__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__shared_math__ = __webpack_require__(1);
 /**
  * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
@@ -1124,7 +1170,7 @@ new MyAwesomeGame();
 
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1250,7 +1296,7 @@ __decorate([
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1283,7 +1329,7 @@ function logMethodCall(target, key, descriptor) {
 
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1391,7 +1437,7 @@ Log.logLevel = __WEBPACK_IMPORTED_MODULE_0__LogLevel__["a" /* LogLevel */].Debug
 
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1443,11 +1489,12 @@ class Singleton {
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__math__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helper_File__ = __webpack_require__(12);
 /**
  * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
  *
@@ -1455,7 +1502,8 @@ class Singleton {
  * https://opensource.org/licenses/MIT
  */
 // the dependency to get the memory footprint ob stored objects
-let sizeof = __webpack_require__(28);
+let sizeof = __webpack_require__(29);
+
 
 /**
  * holds objects in the ram of the operating unit
@@ -1477,6 +1525,12 @@ class RamStorage {
      */
     static remove(path) {
         delete RamStorage.cache[path];
+    }
+    /**
+     * reset the complete storage!
+     */
+    static clear() {
+        this.cache = {};
     }
     /**
      * get an element from the cache
@@ -1510,29 +1564,29 @@ class RamStorage {
     }
     /**
      * calculates the used memory for the selected objects in the storage.
-     * unit is in MB
+     * unit is in MB or the given type
      *
      * @param path the path to the object. dots can be used to structure
      */
-    static getSize(path = "") {
+    static getSize(path = "", type = __WEBPACK_IMPORTED_MODULE_1__helper_File__["b" /* FileSizeType */].Byte) {
         let byteCounter = 0;
         Object.keys(RamStorage.cache).forEach(key => {
             // if the path is present, update counter
             if (key.indexOf(path) === 0)
                 byteCounter += sizeof(RamStorage.cache[key]);
         });
-        return __WEBPACK_IMPORTED_MODULE_0__math__["b" /* Helper */].roundToPrecision(byteCounter / 1024 / 1024, 2);
+        let mb = __WEBPACK_IMPORTED_MODULE_1__helper_File__["a" /* File */].byteToSize(byteCounter, type);
+        return __WEBPACK_IMPORTED_MODULE_0__math__["b" /* Helper */].roundToPrecision(mb, 2);
     }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = RamStorage;
 
 // the private cache object
 RamStorage.cache = {};
-window.storage = RamStorage;
 
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1540,8 +1594,8 @@ window.storage = RamStorage;
 
 
 
-var ECMA_SIZES  = __webpack_require__(29);
-var Buffer = __webpack_require__(30).Buffer;
+var ECMA_SIZES  = __webpack_require__(30);
+var Buffer = __webpack_require__(31).Buffer;
 
 /**
  * Main module's entry point
@@ -1590,7 +1644,7 @@ module.exports = sizeof;
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports) {
 
 /**
@@ -1606,7 +1660,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1620,9 +1674,9 @@ module.exports = {
 
 
 
-var base64 = __webpack_require__(32)
-var ieee754 = __webpack_require__(33)
-var isArray = __webpack_require__(34)
+var base64 = __webpack_require__(33)
+var ieee754 = __webpack_require__(34)
+var isArray = __webpack_require__(35)
 
 exports.Buffer = Buffer
 exports.SlowBuffer = SlowBuffer
@@ -3400,10 +3454,10 @@ function isnan (val) {
   return val !== val // eslint-disable-line no-self-compare
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(31)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32)))
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports) {
 
 var g;
@@ -3430,7 +3484,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3551,7 +3605,7 @@ function fromByteArray (uint8) {
 
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports) {
 
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
@@ -3641,7 +3695,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports) {
 
 var toString = {}.toString;
@@ -3652,7 +3706,7 @@ module.exports = Array.isArray || function (arr) {
 
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3733,7 +3787,7 @@ class Vector2D extends __WEBPACK_IMPORTED_MODULE_1__Dimension__["a" /* Dimension
 
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3777,39 +3831,11 @@ class Binary {
 
 
 /***/ }),
-/* 37 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-/**
- * a helper class for file and path things
- */
-class File {
-    /**
-     * get the file extension of a path
-     *
-     * @param path the path to the file
-     */
-    static getFileExtension(path) {
-        return path.split('').pop();
-    }
-}
-/* unused harmony export File */
-
-
-
-/***/ }),
 /* 38 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entity_Entity__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entity_Entity__ = __webpack_require__(16);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__entity_Entity__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__entity_CollidableEntity__ = __webpack_require__(39);
 /* unused harmony namespace reexport */
@@ -3828,7 +3854,7 @@ class File {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entity_Entity__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entity_Entity__ = __webpack_require__(16);
 /**
  * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
  *
@@ -3943,7 +3969,7 @@ class Animation {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Entity__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Entity__ = __webpack_require__(14);
 /**
  * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
  *
@@ -4015,7 +4041,7 @@ class Camera {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__scene_Scene__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__scene_Scene__ = __webpack_require__(18);
 /**
  * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
  *
@@ -4148,9 +4174,9 @@ class Request {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__AssetType__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Image__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Image__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__AbstractAsset__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__network__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__network__ = __webpack_require__(21);
 /**
  * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
  *
@@ -4410,7 +4436,7 @@ class Input extends __WEBPACK_IMPORTED_MODULE_0__shared_helper__["b" /* Singleto
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__render_CanvasRenderer__ = __webpack_require__(51);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__render_CanvasRenderer__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__render_BasicRenderer__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__render_BasicRenderer__ = __webpack_require__(22);
 /* unused harmony namespace reexport */
 /**
  * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
@@ -4429,7 +4455,7 @@ class Input extends __WEBPACK_IMPORTED_MODULE_0__shared_helper__["b" /* Singleto
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__shared_log__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__asset__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__render_BasicRenderer__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__render_BasicRenderer__ = __webpack_require__(22);
 /**
  * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
  *
@@ -4548,7 +4574,7 @@ class Viewport {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__client_entity__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__client_entity__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_math__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_collision__ = __webpack_require__(55);
 /**
