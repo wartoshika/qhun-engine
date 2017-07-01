@@ -9,6 +9,7 @@ import { ClientConfig } from './ClientConfig';
 import { logMethodCall } from 'shared/decorator';
 import { Log } from 'shared/log';
 import { Game } from 'client/Game';
+import { RamStorage } from 'shared/storage';
 
 import { AssetLoader, AssetType } from 'client/asset';
 import { Renderer } from 'client/render';
@@ -86,11 +87,26 @@ export abstract class Client {
 
             // fire loaded event
             this.loaded(this.gameInstance);
+            this.printMemoryFootprint();
 
             // init the game loop
             this.gameLoop();
-
         });
+    }
+
+    /**
+     * logs the current memory footprint to the console
+     */
+    private printMemoryFootprint(): void {
+
+        let assets = RamStorage.getSize("assetloader");
+        let misc = RamStorage.getSize("singleton");
+        let overall = assets + misc;
+
+        // print current memory footprint
+        Log.info("Memory footprint:", overall, "MB");
+        Log.info("Assets: ", assets, "MB");
+        Log.info("Misc: ", misc, "MB");
     }
 
     /**

@@ -5,6 +5,11 @@
  * https://opensource.org/licenses/MIT
  */
 
+// the dependency to get the memory footprint ob stored objects
+let sizeof = require('object-sizeof');
+
+import { Helper } from 'shared/math';
+
 /**
  * holds objects in the ram of the operating unit
  */
@@ -71,6 +76,24 @@ export class RamStorage {
         });
 
         return counter;
+    }
+
+    /**
+     * calculates the used memory for the selected objects in the storage.
+     * unit is in MB
+     *
+     * @param path the path to the object. dots can be used to structure
+     */
+    public static getSize(path: string = ""): number {
+
+        let byteCounter = 0;
+        Object.keys(RamStorage.cache).forEach(key => {
+
+            // if the path is present, update counter
+            if (key.indexOf(path) === 0) byteCounter += sizeof(RamStorage.cache[key]);
+        });
+
+        return Helper.roundToPrecision(byteCounter / 1024 / 1024, 2);
     }
 }
 
