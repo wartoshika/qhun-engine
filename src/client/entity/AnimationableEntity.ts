@@ -5,7 +5,7 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { InlineAnimation } from 'client/entity/Animation';
+import { InlineAnimation } from './Animation';
 
 /**
  * an interface for entities that can be animated

@@ -5,7 +5,7 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { Vector2D } from 'shared/math';
+import { Vector2D } from '../math';
 
 /**
  * the base class for all game entities

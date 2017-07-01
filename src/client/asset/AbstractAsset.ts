@@ -5,9 +5,9 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { Asset } from 'client/asset/Asset';
-import { AssetType } from 'client/asset/AssetType';
-import { AssetLoader } from 'client/asset/AssetLoader';
+import { Asset } from './Asset';
+import { AssetType } from './AssetType';
+import { AssetLoader } from './AssetLoader';
 
 /**
  * a basic class for implementing the getter and setter function

@@ -112,9 +112,9 @@ var LogLevel;
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_server_web__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_server_network__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_shared_log__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__web__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__network__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_log__ = __webpack_require__(0);
 /**
  * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
  *
@@ -132,11 +132,11 @@ class Server {
     constructor(serverConfig) {
         this.serverConfig = serverConfig;
         // set the log level
-        __WEBPACK_IMPORTED_MODULE_2_shared_log__["a" /* Log */].setLogLevel(serverConfig.logLevel);
+        __WEBPACK_IMPORTED_MODULE_2__shared_log__["a" /* Log */].setLogLevel(serverConfig.logLevel);
         // start the webserver
-        this.webserver = new __WEBPACK_IMPORTED_MODULE_0_server_web__["a" /* Webserver */](serverConfig.webAdress, serverConfig.webPort);
+        this.webserver = new __WEBPACK_IMPORTED_MODULE_0__web__["a" /* Webserver */](serverConfig.webAdress, serverConfig.webPort);
         // start network
-        this.network = new __WEBPACK_IMPORTED_MODULE_1_server_network__["a" /* NetworkServer */](this.webserver.getApplication());
+        this.network = new __WEBPACK_IMPORTED_MODULE_1__network__["a" /* NetworkServer */](this.webserver.getApplication());
     }
 }
 /* harmony export (immutable) */ __webpack_exports__["Server"] = Server;
@@ -145,7 +145,7 @@ class Server {
 new Server({
     webAdress: '127.0.0.1',
     webPort: 3000,
-    logLevel: __WEBPACK_IMPORTED_MODULE_2_shared_log__["b" /* LogLevel */].Debug
+    logLevel: __WEBPACK_IMPORTED_MODULE_2__shared_log__["b" /* LogLevel */].Debug
 });
 
 
@@ -176,7 +176,7 @@ new Server({
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_express__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_path__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_path___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_path__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_shared_log__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_log__ = __webpack_require__(0);
 /**
  * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
  *
@@ -198,7 +198,7 @@ class Webserver {
         this.httpServer = __WEBPACK_IMPORTED_MODULE_0_http__["createServer"](app);
         // start listening
         this.httpServer.listen(port, listenAdress);
-        __WEBPACK_IMPORTED_MODULE_3_shared_log__["a" /* Log */].info("Listening at ", `${listenAdress}:${port}`);
+        __WEBPACK_IMPORTED_MODULE_3__shared_log__["a" /* Log */].info("Listening at ", `${listenAdress}:${port}`);
         // handle http calls
         app.get('/*', this.serveApplication.bind(this));
     }
@@ -380,7 +380,7 @@ Log.logLevel = __WEBPACK_IMPORTED_MODULE_0__LogLevel__["a" /* LogLevel */].Debug
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_socket_io__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_socket_io___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_socket_io__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_shared_log__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_log__ = __webpack_require__(0);
 /**
  * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
  *
@@ -408,7 +408,7 @@ class NetworkServer {
     bindWebsocketToApplication() {
         // init websocket and bind to application
         this.socket = __WEBPACK_IMPORTED_MODULE_0_socket_io__(this.application);
-        __WEBPACK_IMPORTED_MODULE_1_shared_log__["a" /* Log */].info("Websocket started");
+        __WEBPACK_IMPORTED_MODULE_1__shared_log__["a" /* Log */].info("Websocket started");
     }
     /**
      * binds a callback function to an event of socketio

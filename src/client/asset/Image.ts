@@ -5,9 +5,9 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { AssetType } from 'client/asset/AssetType';
-import { InlineAsset } from 'client/asset/Asset';
-import { AbstractAsset } from 'client/asset/AbstractAsset';
+import { AssetType } from './AssetType';
+import { InlineAsset } from './Asset';
+import { AbstractAsset } from './AbstractAsset';
 
 /**
  * the image class handles exactly one image

@@ -5,7 +5,7 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { Log } from 'shared/log';
+import { Log } from '../log';
 
 /**
  * a decorator for logging method calls to debug console

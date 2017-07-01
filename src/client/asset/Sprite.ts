@@ -5,12 +5,12 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { AssetType } from 'client/asset/AssetType';
-import { InlineAsset } from 'client/asset/Asset';
-import { Image } from 'client/asset/Image';
-import { AbstractAsset } from 'client/asset/AbstractAsset';
-import { Request } from 'client/network';
-import { File } from 'shared/helper';
+import { AssetType } from './AssetType';
+import { InlineAsset } from './Asset';
+import { Image } from './Image';
+import { AbstractAsset } from './AbstractAsset';
+import { Request } from '../network';
+import { File } from '../../shared/helper';
 
 const SPRITE_MAP_DELIMITER = ',';
 

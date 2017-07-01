@@ -5,11 +5,11 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { Entity } from 'shared/entity';
-import { AnimationableEntity } from 'client/entity/AnimationableEntity';
-import { Animation, InlineAnimation } from 'client/entity/Animation';
-import { Log } from 'shared/log';
-import { RenderableEntity } from 'client/entity/RenderableEntity';
+import { Entity } from '../../shared/entity';
+import { AnimationableEntity } from './AnimationableEntity';
+import { Animation, InlineAnimation } from './Animation';
+import { Log } from '../../shared/log';
+import { RenderableEntity } from './RenderableEntity';
 
 /**
  * a base class for animations on entities

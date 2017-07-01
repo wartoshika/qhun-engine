@@ -5,7 +5,7 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { Singleton } from 'shared/helper';
+import { Singleton } from '../../shared/helper';
 
 export interface InputArrowKeys {
 

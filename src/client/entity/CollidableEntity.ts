@@ -5,10 +5,10 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { Entity } from 'client/entity/Entity';
-import { CanCollide } from 'client/entity/CanCollide';
-import { Vector2D } from 'shared/math';
-import { CollisionType } from 'shared/collision';
+import { Entity } from './Entity';
+import { CanCollide } from './CanCollide';
+import { Vector2D } from '../../shared/math';
+import { CollisionType } from '../../shared/collision';
 
 /**
  * the client class for a collidable entity

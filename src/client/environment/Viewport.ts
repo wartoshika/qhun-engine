@@ -5,7 +5,7 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { Dimension } from 'shared/math';
+import { Dimension } from '../../shared/math';
 
 /**
  * a class to handle the window viewport things like

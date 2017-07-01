@@ -5,7 +5,7 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { LogLevel } from 'shared/log';
+import { LogLevel } from '../shared/log';
 
 /**
  * provides a basic interface for the server config

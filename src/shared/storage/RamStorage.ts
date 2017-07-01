@@ -8,7 +8,7 @@
 // the dependency to get the memory footprint ob stored objects
 let sizeof = require('object-sizeof');
 
-import { Helper } from 'shared/math';
+import { Helper } from '../math';
 
 /**
  * holds objects in the ram of the operating unit

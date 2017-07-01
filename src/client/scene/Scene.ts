@@ -5,7 +5,7 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { Game } from 'Game';
+import { Game } from '../Game';
 
 /**
  * a basic scene

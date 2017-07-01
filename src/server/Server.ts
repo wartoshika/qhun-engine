@@ -5,10 +5,10 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { Webserver } from 'server/web';
-import { NetworkServer } from 'server/network';
-import { ServerConfig } from 'ServerConfig';
-import { LogLevel, Log } from 'shared/log';
+import { Webserver } from './web';
+import { NetworkServer } from './network';
+import { ServerConfig } from './ServerConfig';
+import { LogLevel, Log } from '../shared/log';
 
 /**
  * the game server main class. loads all important things

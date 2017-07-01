@@ -5,11 +5,11 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { Singleton } from 'shared/helper';
-import { Renderer } from 'client/render';
-import { Entity } from 'client/entity';
-import { Camera } from 'client/camera';
-import { Scene } from 'client/scene';
+import { Singleton } from '../shared/helper';
+import { Renderer } from './render';
+import { Entity } from './entity';
+import { Camera } from './camera';
+import { Scene } from './scene';
 
 declare type Thing = Entity | Camera | Scene;
 

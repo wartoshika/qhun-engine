@@ -12,7 +12,7 @@ import * as http from 'http';
 import * as express from 'express';
 import * as path from 'path';
 
-import { Log } from 'shared/log';
+import { Log } from '../../shared/log';
 
 /**
  * the buildin webserver to serve the client

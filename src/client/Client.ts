@@ -6,14 +6,14 @@
  */
 
 import { ClientConfig } from './ClientConfig';
-import { logMethodCall } from 'shared/decorator';
-import { Log } from 'shared/log';
-import { Game } from 'client/Game';
-import { RamStorage } from 'shared/storage';
+import { logMethodCall } from '../shared/decorator';
+import { Log } from '../shared/log';
+import { Game } from './Game';
+import { RamStorage } from '../shared/storage';
 
-import { AssetLoader, AssetType } from 'client/asset';
-import { Renderer } from 'client/render';
-import { Input } from 'client/input';
+import { AssetLoader, AssetType } from './asset';
+import { Renderer } from './render';
+import { Input } from './input';
 
 /**
  * the initiation class of the game client

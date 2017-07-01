@@ -5,8 +5,8 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { Scene } from 'client/scene/Scene';
-import { Game } from 'Game';
+import { Scene } from '../scene/Scene';
+import { Game } from '../Game';
 
 /**
  * a basic loading screen scene

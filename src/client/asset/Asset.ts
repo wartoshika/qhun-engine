@@ -5,7 +5,7 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { AssetType } from 'client/asset/AssetType';
+import { AssetType } from './AssetType';
 
 export interface Asset {
 

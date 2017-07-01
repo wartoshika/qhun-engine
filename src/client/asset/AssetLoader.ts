@@ -5,13 +5,13 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { AssetType } from 'client/asset/AssetType';
-import { Asset, InlineAsset } from 'client/asset/Asset';
-import { AbstractAsset } from 'client/asset/AbstractAsset';
-import { Singleton, Binary } from 'shared/helper';
-import { RamStorage } from 'shared/storage';
-import { Log } from 'shared/log';
-import { Request } from 'client/network';
+import { AssetType } from './AssetType';
+import { Asset, InlineAsset } from './Asset';
+import { AbstractAsset } from './AbstractAsset';
+import { Singleton, Binary } from '../../shared/helper';
+import { RamStorage } from '../../shared/storage';
+import { Log } from '../../shared/log';
+import { Request } from '../network';
 
 /**
  * a class that can handle asset loading such as images and audio

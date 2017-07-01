@@ -8,7 +8,7 @@
 import * as express from 'express';
 import * as socketio from 'socket.io';
 
-import { Log } from 'shared/log';
+import { Log } from '../../shared/log';
 
 /**
  * the network base to use a client-server based structure

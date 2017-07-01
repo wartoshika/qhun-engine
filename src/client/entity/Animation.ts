@@ -5,10 +5,10 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { Sprite } from 'client/asset';
-import { Singleton } from 'shared/helper';
-import { Log } from 'shared/log';
-import { AnimationEntity } from 'client/entity/AnimationEntity';
+import { Sprite } from '../asset';
+import { Singleton } from '../../shared/helper';
+import { Log } from '../../shared/log';
+import { AnimationEntity } from './AnimationEntity';
 
 /**
  * a type for inline object animations

@@ -5,13 +5,13 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { Renderer } from 'client/render/Renderer';
-import { Dimension } from 'shared/math';
-import { Log } from 'shared/log';
-import { Image, AssetLoader, AssetType } from 'client/asset';
-import { BasicRenderer } from 'client/render/BasicRenderer';
+import { Renderer } from '../render/Renderer';
+import { Dimension } from '../../shared/math';
+import { Log } from '../../shared/log';
+import { Image, AssetLoader, AssetType } from '../asset';
+import { BasicRenderer } from '../render/BasicRenderer';
 
-import { RamStorage } from 'shared/storage';
+import { RamStorage } from '../../shared/storage';
 
 /**
  * a game renderer based on the html canvas element

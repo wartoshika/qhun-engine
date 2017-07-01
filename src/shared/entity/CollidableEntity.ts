@@ -5,10 +5,10 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { Entity } from 'shared/entity/Entity';
-import { CanCollide } from 'shared/entity/CanCollide';
-import { CollisionType } from 'shared/collision';
-import { Vector2D } from 'shared/math';
+import { Entity } from '../entity/Entity';
+import { CanCollide } from '../entity/CanCollide';
+import { CollisionType } from '../collision';
+import { Vector2D } from '../math';
 
 /**
  * an entity that can collide with other collidable entities

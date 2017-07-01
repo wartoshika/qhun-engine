@@ -5,10 +5,10 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { Dimension } from 'shared/math';
-import { RenderableEntity } from 'client/entity';
-import { AssetLoader } from 'client/asset';
-import { Game } from 'Game';
+import { Dimension } from '../../shared/math';
+import { RenderableEntity } from '../entity';
+import { AssetLoader } from '../asset';
+import { Game } from '../Game';
 
 /**
  * a basic renderer interface to have future space for eg webgl

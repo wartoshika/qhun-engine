@@ -5,18 +5,18 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { Client } from 'client/Client';
-import { CanvasRenderer } from 'client/render';
-import { Viewport } from 'client/environment';
-import { Game } from 'client/Game';
+import { Client } from '../client/Client';
+import { CanvasRenderer } from '../client/render';
+import { Viewport } from '../client/environment';
+import { Game } from '../client/Game';
 
-import { Image, Sprite, AssetLoader } from 'client/asset';
-import { logMethodCall } from 'shared/decorator';
+import { Image, Sprite, AssetLoader } from '../client/asset';
+import { logMethodCall } from '../shared/decorator';
 
-import { Player } from 'example/entity/Player';
-import { LoadingScreenScene } from 'client/scene';
-import { Input } from 'client/input';
-import { Vector2D } from 'shared/math';
+import { Player } from './entity/Player';
+import { LoadingScreenScene } from '../client/scene';
+import { Input } from '../client/input';
+import { Vector2D } from '../shared/math';
 
 class MyAwesomeGame extends Client {
 

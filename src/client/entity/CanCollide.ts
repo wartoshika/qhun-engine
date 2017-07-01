@@ -5,8 +5,8 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { CollisionType } from 'shared/collision';
-import { CollidableEntity } from 'client/entity/CollidableEntity';
+import { CollisionType } from '../../shared/collision';
+import { CollidableEntity } from './CollidableEntity';
 
 /**
  * an interface that mark an entity as collidable with other

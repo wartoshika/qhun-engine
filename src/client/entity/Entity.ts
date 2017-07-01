@@ -5,9 +5,7 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { Vector2D } from 'shared/math';
-import { AnimationEntity } from 'client/entity/AnimationEntity';
-import { RenderableEntity } from 'client/entity/RenderableEntity';
+import { AnimationEntity } from './AnimationEntity';
 
 /**
  * the base class for all game entities

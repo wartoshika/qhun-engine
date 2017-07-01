@@ -198,7 +198,7 @@ var AssetType;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_client_asset_AssetLoader__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__AssetLoader__ = __webpack_require__(19);
 /**
  * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
  *
@@ -250,7 +250,7 @@ class AbstractAsset {
 /**
  * holder of the asset loader
  */
-AbstractAsset.assetLoader = __WEBPACK_IMPORTED_MODULE_0_client_asset_AssetLoader__["a" /* AssetLoader */].getInstance();
+AbstractAsset.assetLoader = __WEBPACK_IMPORTED_MODULE_0__AssetLoader__["a" /* AssetLoader */].getInstance();
 
 
 /***/ }),
@@ -298,10 +298,10 @@ var LogLevel;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_shared_helper__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_client_entity__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_client_camera__ = __webpack_require__(42);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_client_scene__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__shared_helper__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__entity__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__camera__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__scene__ = __webpack_require__(16);
 /**
  * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
  *
@@ -323,7 +323,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 /**
  * a class that handles adding of entities, cameras, physics ...
  */
-class Game extends __WEBPACK_IMPORTED_MODULE_0_shared_helper__["b" /* Singleton */] {
+class Game extends __WEBPACK_IMPORTED_MODULE_0__shared_helper__["b" /* Singleton */] {
     constructor(renderer) {
         super();
         this.renderer = renderer;
@@ -339,13 +339,13 @@ class Game extends __WEBPACK_IMPORTED_MODULE_0_shared_helper__["b" /* Singleton 
         // iterate through all things
         things.forEach(thing => {
             // check the type of the thing
-            if (thing instanceof __WEBPACK_IMPORTED_MODULE_1_client_entity__["b" /* Entity */]) {
+            if (thing instanceof __WEBPACK_IMPORTED_MODULE_1__entity__["b" /* Entity */]) {
                 this.addEntity(thing);
             }
-            else if (thing instanceof __WEBPACK_IMPORTED_MODULE_2_client_camera__["a" /* Camera */]) {
+            else if (thing instanceof __WEBPACK_IMPORTED_MODULE_2__camera__["a" /* Camera */]) {
                 this.addCamera(thing);
             }
-            else if (thing instanceof __WEBPACK_IMPORTED_MODULE_3_client_scene__["b" /* Scene */]) {
+            else if (thing instanceof __WEBPACK_IMPORTED_MODULE_3__scene__["b" /* Scene */]) {
                 this.addScene(thing);
             }
         });
@@ -514,7 +514,7 @@ class Dimension {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_client_entity_AnimationEntity__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__AnimationEntity__ = __webpack_require__(14);
 /**
  * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
  *
@@ -525,7 +525,7 @@ class Dimension {
 /**
  * the base class for all game entities
  */
-class Entity extends __WEBPACK_IMPORTED_MODULE_0_client_entity_AnimationEntity__["a" /* AnimationEntity */] {
+class Entity extends __WEBPACK_IMPORTED_MODULE_0__AnimationEntity__["a" /* AnimationEntity */] {
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = Entity;
 
@@ -536,9 +536,9 @@ class Entity extends __WEBPACK_IMPORTED_MODULE_0_client_entity_AnimationEntity__
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_shared_entity__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_client_entity_Animation__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_shared_log__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__shared_entity__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Animation__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_log__ = __webpack_require__(0);
 /**
  * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
  *
@@ -551,7 +551,7 @@ class Entity extends __WEBPACK_IMPORTED_MODULE_0_client_entity_AnimationEntity__
 /**
  * a base class for animations on entities
  */
-class AnimationEntity extends __WEBPACK_IMPORTED_MODULE_0_shared_entity__["a" /* Entity */] {
+class AnimationEntity extends __WEBPACK_IMPORTED_MODULE_0__shared_entity__["a" /* Entity */] {
     constructor() {
         super(...arguments);
         /**
@@ -581,11 +581,11 @@ class AnimationEntity extends __WEBPACK_IMPORTED_MODULE_0_shared_entity__["a" /*
         let animation = this.animationStack.find(a => a.name === name);
         // check if the animation is valid
         if (!animation) {
-            __WEBPACK_IMPORTED_MODULE_2_shared_log__["a" /* Log */].warning("Animation", name, "was not added to", this.constructor.name, ". Ignoring this animation.");
+            __WEBPACK_IMPORTED_MODULE_2__shared_log__["a" /* Log */].warning("Animation", name, "was not added to", this.constructor.name, ". Ignoring this animation.");
             return;
         }
         // play!
-        this.currentAnimation = new __WEBPACK_IMPORTED_MODULE_1_client_entity_Animation__["a" /* Animation */](animation, this, loop);
+        this.currentAnimation = new __WEBPACK_IMPORTED_MODULE_1__Animation__["a" /* Animation */](animation, this, loop);
         this.currentAnimation.play();
     }
     /**
@@ -595,7 +595,7 @@ class AnimationEntity extends __WEBPACK_IMPORTED_MODULE_0_shared_entity__["a" /*
         // currently playing an animation?
         if (!this.currentAnimation) {
             // log a warning
-            __WEBPACK_IMPORTED_MODULE_2_shared_log__["a" /* Log */].warning("trying to stop an animation on", this.constructor.name, "but there is no active animation");
+            __WEBPACK_IMPORTED_MODULE_2__shared_log__["a" /* Log */].warning("trying to stop an animation on", this.constructor.name, "but there is no active animation");
             return;
         }
         // stops the animation
@@ -638,7 +638,7 @@ class AnimationEntity extends __WEBPACK_IMPORTED_MODULE_0_shared_entity__["a" /*
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_shared_math__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__math__ = __webpack_require__(1);
 /**
  * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
  *
@@ -650,7 +650,7 @@ class AnimationEntity extends __WEBPACK_IMPORTED_MODULE_0_shared_entity__["a" /*
  * the base class for all game entities
  */
 class Entity {
-    constructor(position = new __WEBPACK_IMPORTED_MODULE_0_shared_math__["c" /* Vector2D */](0, 0)) {
+    constructor(position = new __WEBPACK_IMPORTED_MODULE_0__math__["c" /* Vector2D */](0, 0)) {
         this.position = position;
     }
     /**
@@ -716,8 +716,8 @@ class Scene {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_client_asset_AssetType__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_client_asset_AbstractAsset__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__AssetType__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__AbstractAsset__ = __webpack_require__(6);
 /**
  * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
  *
@@ -737,9 +737,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 /**
  * the image class handles exactly one image
  */
-class Image extends __WEBPACK_IMPORTED_MODULE_1_client_asset_AbstractAsset__["a" /* AbstractAsset */] {
+class Image extends __WEBPACK_IMPORTED_MODULE_1__AbstractAsset__["a" /* AbstractAsset */] {
     constructor(name, path, data) {
-        super(name, path, __WEBPACK_IMPORTED_MODULE_0_client_asset_AssetType__["a" /* AssetType */].Image, data);
+        super(name, path, __WEBPACK_IMPORTED_MODULE_0__AssetType__["a" /* AssetType */].Image, data);
     }
     /**
      * register an image asset
@@ -750,7 +750,7 @@ class Image extends __WEBPACK_IMPORTED_MODULE_1_client_asset_AbstractAsset__["a"
     static register(...images) {
         return __awaiter(this, void 0, void 0, function* () {
             // add the asset type
-            images.forEach(image => image.assetType = __WEBPACK_IMPORTED_MODULE_0_client_asset_AssetType__["a" /* AssetType */].Image);
+            images.forEach(image => image.assetType = __WEBPACK_IMPORTED_MODULE_0__AssetType__["a" /* AssetType */].Image);
             // resiger all given images
             return Image.getAssetLoader().registerAsset(Image, ...images);
         });
@@ -765,11 +765,11 @@ class Image extends __WEBPACK_IMPORTED_MODULE_1_client_asset_AbstractAsset__["a"
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_client_asset_AssetType__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_shared_helper__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_shared_storage__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_shared_log__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_client_network__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__AssetType__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_helper__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_storage__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_log__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__network__ = __webpack_require__(20);
 /**
  * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
  *
@@ -792,7 +792,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 /**
  * a class that can handle asset loading such as images and audio
  */
-class AssetLoader extends __WEBPACK_IMPORTED_MODULE_1_shared_helper__["b" /* Singleton */] {
+class AssetLoader extends __WEBPACK_IMPORTED_MODULE_1__shared_helper__["b" /* Singleton */] {
     constructor() {
         super(...arguments);
         /**
@@ -815,9 +815,9 @@ class AssetLoader extends __WEBPACK_IMPORTED_MODULE_1_shared_helper__["b" /* Sin
             // iterate through all given assets
             assets.forEach(asset => {
                 // check if the asset exists
-                if (__WEBPACK_IMPORTED_MODULE_2_shared_storage__["a" /* RamStorage */].has(this.getAssetStorageName(asset.name, asset.assetType))) {
+                if (__WEBPACK_IMPORTED_MODULE_2__shared_storage__["a" /* RamStorage */].has(this.getAssetStorageName(asset.name, asset.assetType))) {
                     // log a warning that an asset has a double register
-                    __WEBPACK_IMPORTED_MODULE_3_shared_log__["a" /* Log */].warning("The given asset with the name", asset.name, "is allready registered.");
+                    __WEBPACK_IMPORTED_MODULE_3__shared_log__["a" /* Log */].warning("The given asset with the name", asset.name, "is allready registered.");
                 }
                 // add a promise to await its loading
                 outerPromise.push(new Promise(resolve => {
@@ -828,7 +828,7 @@ class AssetLoader extends __WEBPACK_IMPORTED_MODULE_1_shared_helper__["b" /* Sin
                     // fill the instance
                     this.loadAsset(instance).then(resource => {
                         // store the asset
-                        __WEBPACK_IMPORTED_MODULE_2_shared_storage__["a" /* RamStorage */].add(this.getAssetStorageName(asset.name, asset.assetType), resource);
+                        __WEBPACK_IMPORTED_MODULE_2__shared_storage__["a" /* RamStorage */].add(this.getAssetStorageName(asset.name, asset.assetType), resource);
                         resourceStack.push(resource);
                         // resolve the promise
                         resolve(resource);
@@ -850,7 +850,7 @@ class AssetLoader extends __WEBPACK_IMPORTED_MODULE_1_shared_helper__["b" /* Sin
         return __awaiter(this, void 0, void 0, function* () {
             let callback;
             switch (instance.getAssetType()) {
-                case __WEBPACK_IMPORTED_MODULE_0_client_asset_AssetType__["a" /* AssetType */].Image:
+                case __WEBPACK_IMPORTED_MODULE_0__AssetType__["a" /* AssetType */].Image:
                     callback = this.loadImage.bind(this);
                     break;
                 default:
@@ -871,7 +871,7 @@ class AssetLoader extends __WEBPACK_IMPORTED_MODULE_1_shared_helper__["b" /* Sin
      */
     getAsset(name, type) {
         // ask the ram storage for the asset
-        return __WEBPACK_IMPORTED_MODULE_2_shared_storage__["a" /* RamStorage */].get(this.getAssetStorageName(name, type));
+        return __WEBPACK_IMPORTED_MODULE_2__shared_storage__["a" /* RamStorage */].get(this.getAssetStorageName(name, type));
     }
     /**
      * get the amount of currently registered assets of the given type
@@ -879,7 +879,7 @@ class AssetLoader extends __WEBPACK_IMPORTED_MODULE_1_shared_helper__["b" /* Sin
      * @param type the asset type
      */
     getAssetAmount(type) {
-        return __WEBPACK_IMPORTED_MODULE_2_shared_storage__["a" /* RamStorage */].amount(this.getAssetStorageName('', type));
+        return __WEBPACK_IMPORTED_MODULE_2__shared_storage__["a" /* RamStorage */].amount(this.getAssetStorageName('', type));
     }
     /**
      * get all unresolved assets from the register process
@@ -918,13 +918,13 @@ class AssetLoader extends __WEBPACK_IMPORTED_MODULE_1_shared_helper__["b" /* Sin
             // if the path is a data uri, return this instantly
             if (path.indexOf('data:image/') === 0) {
                 return new Promise(resolve => {
-                    resolve(createImageBitmap(__WEBPACK_IMPORTED_MODULE_1_shared_helper__["a" /* Binary */].dataUriToBlob(path)));
+                    resolve(createImageBitmap(__WEBPACK_IMPORTED_MODULE_1__shared_helper__["a" /* Binary */].dataUriToBlob(path)));
                 });
             }
             // make an xhr call to the file
-            return __WEBPACK_IMPORTED_MODULE_4_client_network__["a" /* Request */].getBinary(path).then((image) => {
+            return __WEBPACK_IMPORTED_MODULE_4__network__["a" /* Request */].getBinary(path).then((image) => {
                 // create the image bitmap for the blob
-                return createImageBitmap(__WEBPACK_IMPORTED_MODULE_1_shared_helper__["a" /* Binary */].dataUriToBlob(image));
+                return createImageBitmap(__WEBPACK_IMPORTED_MODULE_1__shared_helper__["a" /* Binary */].dataUriToBlob(image));
             });
         });
     }
@@ -981,7 +981,7 @@ class AssetLoader extends __WEBPACK_IMPORTED_MODULE_1_shared_helper__["b" /* Sin
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_shared_helper__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__shared_helper__ = __webpack_require__(3);
 /**
  * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
  *
@@ -992,7 +992,7 @@ class AssetLoader extends __WEBPACK_IMPORTED_MODULE_1_shared_helper__["b" /* Sin
 /**
  * the basic renderer class that all renderers should extend
  */
-class BasicRenderer extends __WEBPACK_IMPORTED_MODULE_0_shared_helper__["b" /* Singleton */] {
+class BasicRenderer extends __WEBPACK_IMPORTED_MODULE_0__shared_helper__["b" /* Singleton */] {
     constructor() {
         super(...arguments);
         this.entities = [];
@@ -1027,15 +1027,15 @@ class BasicRenderer extends __WEBPACK_IMPORTED_MODULE_0_shared_helper__["b" /* S
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_client_Client__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_client_render__ = __webpack_require__(50);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_client_environment__ = __webpack_require__(52);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_client_Game__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_client_asset__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_shared_decorator__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_example_entity_Player__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_client_scene__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_shared_math__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__client_Client__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__client_render__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__client_environment__ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__client_Game__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__client_asset__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_decorator__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__entity_Player__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__client_scene__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__shared_math__ = __webpack_require__(1);
 /**
  * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
  *
@@ -1060,11 +1060,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-class MyAwesomeGame extends __WEBPACK_IMPORTED_MODULE_0_client_Client__["a" /* Client */] {
+class MyAwesomeGame extends __WEBPACK_IMPORTED_MODULE_0__client_Client__["a" /* Client */] {
     constructor() {
         super({
-            gameDimension: __WEBPACK_IMPORTED_MODULE_2_client_environment__["a" /* Viewport */].getWindowDimension(),
-            rederer: __WEBPACK_IMPORTED_MODULE_1_client_render__["a" /* CanvasRenderer */]
+            gameDimension: __WEBPACK_IMPORTED_MODULE_2__client_environment__["a" /* Viewport */].getWindowDimension(),
+            rederer: __WEBPACK_IMPORTED_MODULE_1__client_render__["a" /* CanvasRenderer */]
         });
     }
     /**
@@ -1072,7 +1072,7 @@ class MyAwesomeGame extends __WEBPACK_IMPORTED_MODULE_0_client_Client__["a" /* C
      * stuff before the game actually starts
      */
     preload() {
-        __WEBPACK_IMPORTED_MODULE_4_client_asset__["c" /* Sprite */].register({
+        __WEBPACK_IMPORTED_MODULE_4__client_asset__["c" /* Sprite */].register({
             name: 'player',
             path: 'asset/image/player.png'
         });
@@ -1083,9 +1083,9 @@ class MyAwesomeGame extends __WEBPACK_IMPORTED_MODULE_0_client_Client__["a" /* C
      */
     loaded(game) {
         // add the player to the game
-        this.player = new __WEBPACK_IMPORTED_MODULE_6_example_entity_Player__["a" /* Player */]();
+        this.player = new __WEBPACK_IMPORTED_MODULE_6__entity_Player__["a" /* Player */]();
         game.add(this.player);
-        game.loadScene(new __WEBPACK_IMPORTED_MODULE_7_client_scene__["a" /* LoadingScreenScene */]());
+        game.loadScene(new __WEBPACK_IMPORTED_MODULE_7__client_scene__["a" /* LoadingScreenScene */]());
         // play idle animation
         this.player.playAnimation('idle', true);
     }
@@ -1100,23 +1100,23 @@ class MyAwesomeGame extends __WEBPACK_IMPORTED_MODULE_0_client_Client__["a" /* C
         let keys = input.getArrowKeys();
         // move the player
         if (keys.down) {
-            this.player.setPosition(this.player.getPosition().add(new __WEBPACK_IMPORTED_MODULE_8_shared_math__["c" /* Vector2D */](0, 5)));
+            this.player.setPosition(this.player.getPosition().add(new __WEBPACK_IMPORTED_MODULE_8__shared_math__["c" /* Vector2D */](0, 5)));
         }
         else if (keys.up) {
-            this.player.setPosition(this.player.getPosition().add(new __WEBPACK_IMPORTED_MODULE_8_shared_math__["c" /* Vector2D */](0, -5)));
+            this.player.setPosition(this.player.getPosition().add(new __WEBPACK_IMPORTED_MODULE_8__shared_math__["c" /* Vector2D */](0, -5)));
         }
         if (keys.left) {
-            this.player.setPosition(this.player.getPosition().add(new __WEBPACK_IMPORTED_MODULE_8_shared_math__["c" /* Vector2D */](-5, 0)));
+            this.player.setPosition(this.player.getPosition().add(new __WEBPACK_IMPORTED_MODULE_8__shared_math__["c" /* Vector2D */](-5, 0)));
         }
         else if (keys.right) {
-            this.player.setPosition(this.player.getPosition().add(new __WEBPACK_IMPORTED_MODULE_8_shared_math__["c" /* Vector2D */](5, 0)));
+            this.player.setPosition(this.player.getPosition().add(new __WEBPACK_IMPORTED_MODULE_8__shared_math__["c" /* Vector2D */](5, 0)));
         }
     }
 }
 __decorate([
-    __WEBPACK_IMPORTED_MODULE_5_shared_decorator__["a" /* logMethodCall */],
+    __WEBPACK_IMPORTED_MODULE_5__shared_decorator__["a" /* logMethodCall */],
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3_client_Game__["a" /* Game */]]),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__client_Game__["a" /* Game */]]),
     __metadata("design:returntype", void 0)
 ], MyAwesomeGame.prototype, "loaded", null);
 // start the game
@@ -1128,12 +1128,12 @@ new MyAwesomeGame();
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_shared_decorator__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_shared_log__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_client_Game__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_shared_storage__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_client_asset__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_client_input__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__shared_decorator__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_log__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Game__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_storage__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__asset__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__input__ = __webpack_require__(48);
 /**
  * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
  *
@@ -1179,7 +1179,7 @@ class Client {
      */
     internalSetup() {
         // get all promised from the preload phase and await them
-        let assetLoader = __WEBPACK_IMPORTED_MODULE_4_client_asset__["a" /* AssetLoader */].getInstance();
+        let assetLoader = __WEBPACK_IMPORTED_MODULE_4__asset__["a" /* AssetLoader */].getInstance();
         // setup renderer
         this.renderer = new this.clientConfig.rederer();
         this.renderer.setup(this.clientConfig.gameDimension);
@@ -1188,12 +1188,12 @@ class Client {
         // await the asset loading
         Promise.all(assetLoader.getUnresolvedPromised()).then(() => {
             // log the information about the registration process of assets
-            __WEBPACK_IMPORTED_MODULE_1_shared_log__["a" /* Log */].info("Registered", assetLoader.getAssetAmount(__WEBPACK_IMPORTED_MODULE_4_client_asset__["b" /* AssetType */].Image), "Images");
-            __WEBPACK_IMPORTED_MODULE_1_shared_log__["a" /* Log */].info("Registered", assetLoader.getAssetAmount(__WEBPACK_IMPORTED_MODULE_4_client_asset__["b" /* AssetType */].Audio), "Sounds");
-            __WEBPACK_IMPORTED_MODULE_1_shared_log__["a" /* Log */].info("Registered", assetLoader.getAssetAmount(__WEBPACK_IMPORTED_MODULE_4_client_asset__["b" /* AssetType */].Json), "JSON Objects");
+            __WEBPACK_IMPORTED_MODULE_1__shared_log__["a" /* Log */].info("Registered", assetLoader.getAssetAmount(__WEBPACK_IMPORTED_MODULE_4__asset__["b" /* AssetType */].Image), "Images");
+            __WEBPACK_IMPORTED_MODULE_1__shared_log__["a" /* Log */].info("Registered", assetLoader.getAssetAmount(__WEBPACK_IMPORTED_MODULE_4__asset__["b" /* AssetType */].Audio), "Sounds");
+            __WEBPACK_IMPORTED_MODULE_1__shared_log__["a" /* Log */].info("Registered", assetLoader.getAssetAmount(__WEBPACK_IMPORTED_MODULE_4__asset__["b" /* AssetType */].Json), "JSON Objects");
             // all assets loaded, continue startup
-            this.gameInstance = new __WEBPACK_IMPORTED_MODULE_2_client_Game__["a" /* Game */](this.renderer);
-            this.inputInstance = new __WEBPACK_IMPORTED_MODULE_5_client_input__["a" /* Input */]();
+            this.gameInstance = new __WEBPACK_IMPORTED_MODULE_2__Game__["a" /* Game */](this.renderer);
+            this.inputInstance = new __WEBPACK_IMPORTED_MODULE_5__input__["a" /* Input */]();
             // fire loaded event
             this.loaded(this.gameInstance);
             this.printMemoryFootprint();
@@ -1205,13 +1205,13 @@ class Client {
      * logs the current memory footprint to the console
      */
     printMemoryFootprint() {
-        let assets = __WEBPACK_IMPORTED_MODULE_3_shared_storage__["a" /* RamStorage */].getSize("assetloader");
-        let misc = __WEBPACK_IMPORTED_MODULE_3_shared_storage__["a" /* RamStorage */].getSize("singleton");
+        let assets = __WEBPACK_IMPORTED_MODULE_3__shared_storage__["a" /* RamStorage */].getSize("assetloader");
+        let misc = __WEBPACK_IMPORTED_MODULE_3__shared_storage__["a" /* RamStorage */].getSize("singleton");
         let overall = assets + misc;
         // print current memory footprint
-        __WEBPACK_IMPORTED_MODULE_1_shared_log__["a" /* Log */].info("Memory footprint:", overall, "MB");
-        __WEBPACK_IMPORTED_MODULE_1_shared_log__["a" /* Log */].info("Assets: ", assets, "MB");
-        __WEBPACK_IMPORTED_MODULE_1_shared_log__["a" /* Log */].info("Misc: ", misc, "MB");
+        __WEBPACK_IMPORTED_MODULE_1__shared_log__["a" /* Log */].info("Memory footprint:", overall, "MB");
+        __WEBPACK_IMPORTED_MODULE_1__shared_log__["a" /* Log */].info("Assets: ", assets, "MB");
+        __WEBPACK_IMPORTED_MODULE_1__shared_log__["a" /* Log */].info("Misc: ", misc, "MB");
     }
     /**
      * the game loop where all things come together
@@ -1236,13 +1236,13 @@ class Client {
 /* harmony export (immutable) */ __webpack_exports__["a"] = Client;
 
 __decorate([
-    __WEBPACK_IMPORTED_MODULE_0_shared_decorator__["a" /* logMethodCall */],
+    __WEBPACK_IMPORTED_MODULE_0__shared_decorator__["a" /* logMethodCall */],
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], Client.prototype, "bindLoadEvent", null);
 __decorate([
-    __WEBPACK_IMPORTED_MODULE_0_shared_decorator__["a" /* logMethodCall */],
+    __WEBPACK_IMPORTED_MODULE_0__shared_decorator__["a" /* logMethodCall */],
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
@@ -1255,7 +1255,7 @@ __decorate([
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = logMethodCall;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_shared_log__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__log__ = __webpack_require__(0);
 /**
  * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
  *
@@ -1274,7 +1274,7 @@ function logMethodCall(target, key, descriptor) {
     return {
         value: function (...args) {
             // log the call
-            __WEBPACK_IMPORTED_MODULE_0_shared_log__["a" /* Log */].debug("@logMethodCall", `${target.constructor.name}:${key}()`);
+            __WEBPACK_IMPORTED_MODULE_0__log__["a" /* Log */].debug("@logMethodCall", `${target.constructor.name}:${key}()`);
             // original method call
             return descriptor.value.apply(this, args);
         }
@@ -1389,7 +1389,7 @@ Log.logLevel = __WEBPACK_IMPORTED_MODULE_0__LogLevel__["a" /* LogLevel */].Debug
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_shared_storage__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__storage__ = __webpack_require__(4);
 /**
  * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
  *
@@ -1414,13 +1414,13 @@ class Singleton {
      */
     static getInstance() {
         let instance = null;
-        if (!__WEBPACK_IMPORTED_MODULE_0_shared_storage__["a" /* RamStorage */].has(this.generateStorageName())) {
+        if (!__WEBPACK_IMPORTED_MODULE_0__storage__["a" /* RamStorage */].has(this.generateStorageName())) {
             // get the constructor and store an instance of the class at the ram storage
             let constructor = this;
-            __WEBPACK_IMPORTED_MODULE_0_shared_storage__["a" /* RamStorage */].add(this.generateStorageName(), new constructor());
+            __WEBPACK_IMPORTED_MODULE_0__storage__["a" /* RamStorage */].add(this.generateStorageName(), new constructor());
         }
         // get the instance
-        return __WEBPACK_IMPORTED_MODULE_0_shared_storage__["a" /* RamStorage */].get(this.generateStorageName());
+        return __WEBPACK_IMPORTED_MODULE_0__storage__["a" /* RamStorage */].get(this.generateStorageName());
     }
     /**
      * bind the instance to the singleton storage
@@ -1429,7 +1429,7 @@ class Singleton {
      */
     static bindInstance(instance) {
         // save the instance
-        __WEBPACK_IMPORTED_MODULE_0_shared_storage__["a" /* RamStorage */].add(this.generateStorageName(), instance);
+        __WEBPACK_IMPORTED_MODULE_0__storage__["a" /* RamStorage */].add(this.generateStorageName(), instance);
     }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = Singleton;
@@ -1441,7 +1441,7 @@ class Singleton {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_shared_math__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__math__ = __webpack_require__(1);
 /**
  * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
  *
@@ -1515,7 +1515,7 @@ class RamStorage {
             if (key.indexOf(path) === 0)
                 byteCounter += sizeof(RamStorage.cache[key]);
         });
-        return __WEBPACK_IMPORTED_MODULE_0_shared_math__["b" /* Helper */].roundToPrecision(byteCounter / 1024 / 1024, 2);
+        return __WEBPACK_IMPORTED_MODULE_0__math__["b" /* Helper */].roundToPrecision(byteCounter / 1024 / 1024, 2);
     }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = RamStorage;
@@ -3650,8 +3650,8 @@ module.exports = Array.isArray || function (arr) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_shared_math_Helper__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_shared_math_Dimension__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Helper__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Dimension__ = __webpack_require__(11);
 /**
  * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
  *
@@ -3663,7 +3663,7 @@ module.exports = Array.isArray || function (arr) {
 /**
  * represents a 2D vector with x and y coordinates.
  */
-class Vector2D extends __WEBPACK_IMPORTED_MODULE_1_shared_math_Dimension__["a" /* Dimension */] {
+class Vector2D extends __WEBPACK_IMPORTED_MODULE_1__Dimension__["a" /* Dimension */] {
     /**
      *
      * @param x the x coordinate
@@ -3708,7 +3708,7 @@ class Vector2D extends __WEBPACK_IMPORTED_MODULE_1_shared_math_Dimension__["a" /
      * rounds the vector to a given precision
      */
     round(precision = 2) {
-        return new Vector2D(__WEBPACK_IMPORTED_MODULE_0_shared_math_Helper__["a" /* Helper */].roundToPrecision(this.x, precision), __WEBPACK_IMPORTED_MODULE_0_shared_math_Helper__["a" /* Helper */].roundToPrecision(this.y, precision));
+        return new Vector2D(__WEBPACK_IMPORTED_MODULE_0__Helper__["a" /* Helper */].roundToPrecision(this.x, precision), __WEBPACK_IMPORTED_MODULE_0__Helper__["a" /* Helper */].roundToPrecision(this.y, precision));
     }
     /**
      * calculates the distance of two vector points
@@ -3822,7 +3822,7 @@ class File {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_shared_entity_Entity__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entity_Entity__ = __webpack_require__(15);
 /**
  * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
  *
@@ -3833,7 +3833,7 @@ class File {
 /**
  * an entity that can collide with other collidable entities
  */
-class CollidableEntity extends __WEBPACK_IMPORTED_MODULE_0_shared_entity_Entity__["a" /* Entity */] {
+class CollidableEntity extends __WEBPACK_IMPORTED_MODULE_0__entity_Entity__["a" /* Entity */] {
     constructor(entityWidth, entityHeight, position) {
         super(position);
         this.entityWidth = entityWidth;
@@ -3937,7 +3937,7 @@ class Animation {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_client_entity_Entity__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Entity__ = __webpack_require__(13);
 /**
  * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
  *
@@ -3948,7 +3948,7 @@ class Animation {
 /**
  * the client class for a collidable entity
  */
-class CollidableEntity extends __WEBPACK_IMPORTED_MODULE_0_client_entity_Entity__["a" /* Entity */] {
+class CollidableEntity extends __WEBPACK_IMPORTED_MODULE_0__Entity__["a" /* Entity */] {
     constructor(entityWidth, entityHeight, position) {
         super(position);
         this.entityWidth = entityWidth;
@@ -4009,7 +4009,7 @@ class Camera {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_client_scene_Scene__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__scene_Scene__ = __webpack_require__(17);
 /**
  * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
  *
@@ -4028,7 +4028,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 /**
  * a basic loading screen scene
  */
-class LoadingScreenScene extends __WEBPACK_IMPORTED_MODULE_0_client_scene_Scene__["a" /* Scene */] {
+class LoadingScreenScene extends __WEBPACK_IMPORTED_MODULE_0__scene_Scene__["a" /* Scene */] {
     /**
      * creates the scene. the new scene starts only if the promise is resolved.
      *
@@ -4141,10 +4141,10 @@ class Request {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_client_asset_AssetType__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_client_asset_Image__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_client_asset_AbstractAsset__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_client_network__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__AssetType__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Image__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__AbstractAsset__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__network__ = __webpack_require__(20);
 /**
  * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
  *
@@ -4179,9 +4179,9 @@ var SpriteMapInformation;
  * the sprite class is able to handle multiple images build into
  * one big sprite graphic file
  */
-class Sprite extends __WEBPACK_IMPORTED_MODULE_2_client_asset_AbstractAsset__["a" /* AbstractAsset */] {
+class Sprite extends __WEBPACK_IMPORTED_MODULE_2__AbstractAsset__["a" /* AbstractAsset */] {
     constructor(name, path, data, map) {
-        super(name, path, __WEBPACK_IMPORTED_MODULE_0_client_asset_AssetType__["a" /* AssetType */].Image, data);
+        super(name, path, __WEBPACK_IMPORTED_MODULE_0__AssetType__["a" /* AssetType */].Image, data);
         this.map = map;
     }
     /**
@@ -4199,9 +4199,9 @@ class Sprite extends __WEBPACK_IMPORTED_MODULE_2_client_asset_AbstractAsset__["a
             // load sprite maps and add asset type to the inline asset
             sprites.forEach(sprite => {
                 // set the asset type
-                sprite.assetType = __WEBPACK_IMPORTED_MODULE_0_client_asset_AssetType__["a" /* AssetType */].Image;
+                sprite.assetType = __WEBPACK_IMPORTED_MODULE_0__AssetType__["a" /* AssetType */].Image;
                 // get the sprite data file to split up the images
-                mapLoaderPromise.push(__WEBPACK_IMPORTED_MODULE_3_client_network__["a" /* Request */].get(sprite.path + '.sprite')
+                mapLoaderPromise.push(__WEBPACK_IMPORTED_MODULE_3__network__["a" /* Request */].get(sprite.path + '.sprite')
                     .then(map => spriteMap.push(map)));
             });
             // if the maps are loaded, start the regist
@@ -4255,7 +4255,7 @@ class Sprite extends __WEBPACK_IMPORTED_MODULE_2_client_asset_AbstractAsset__["a
                 // draw the image on the canvas
                 ctx.drawImage(sprite.getData(), -parseInt(info[SpriteMapInformation.OffsetLeft]), -parseInt(info[SpriteMapInformation.OffsetTop]));
                 // get the image as data uri to register the new image
-                itemRegisterPromiseStack.push(__WEBPACK_IMPORTED_MODULE_1_client_asset_Image__["a" /* Image */].register({
+                itemRegisterPromiseStack.push(__WEBPACK_IMPORTED_MODULE_1__Image__["a" /* Image */].register({
                     name: `${sprite.name}[${info[SpriteMapInformation.Name].trim()}]`,
                     path: canvas.toDataURL()
                 }));
@@ -4274,8 +4274,8 @@ class Sprite extends __WEBPACK_IMPORTED_MODULE_2_client_asset_AbstractAsset__["a
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_client_asset_AssetType__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_client_asset_AbstractAsset__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__AssetType__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__AbstractAsset__ = __webpack_require__(6);
 /**
  * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
  *
@@ -4284,9 +4284,9 @@ class Sprite extends __WEBPACK_IMPORTED_MODULE_2_client_asset_AbstractAsset__["a
  */
 
 
-class Sound extends __WEBPACK_IMPORTED_MODULE_1_client_asset_AbstractAsset__["a" /* AbstractAsset */] {
+class Sound extends __WEBPACK_IMPORTED_MODULE_1__AbstractAsset__["a" /* AbstractAsset */] {
     constructor(name, path, data) {
-        super(name, path, __WEBPACK_IMPORTED_MODULE_0_client_asset_AssetType__["a" /* AssetType */].Audio, data);
+        super(name, path, __WEBPACK_IMPORTED_MODULE_0__AssetType__["a" /* AssetType */].Audio, data);
     }
     /**
      * register an image asset
@@ -4296,7 +4296,7 @@ class Sound extends __WEBPACK_IMPORTED_MODULE_1_client_asset_AbstractAsset__["a"
      */
     static register(...sounds) {
         // add the asset type
-        sounds.forEach(sound => sound.assetType = __WEBPACK_IMPORTED_MODULE_0_client_asset_AssetType__["a" /* AssetType */].Audio);
+        sounds.forEach(sound => sound.assetType = __WEBPACK_IMPORTED_MODULE_0__AssetType__["a" /* AssetType */].Audio);
         // resiger all given sounds
         Sound.getAssetLoader().registerAsset(Sound, ...sounds);
     }
@@ -4326,7 +4326,7 @@ class Sound extends __WEBPACK_IMPORTED_MODULE_1_client_asset_AbstractAsset__["a"
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_shared_helper__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__shared_helper__ = __webpack_require__(3);
 /**
  * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
  *
@@ -4337,7 +4337,7 @@ class Sound extends __WEBPACK_IMPORTED_MODULE_1_client_asset_AbstractAsset__["a"
 /**
  * a basic class to get user input like keybord or mouse data
  */
-class Input extends __WEBPACK_IMPORTED_MODULE_0_shared_helper__["b" /* Singleton */] {
+class Input extends __WEBPACK_IMPORTED_MODULE_0__shared_helper__["b" /* Singleton */] {
     constructor() {
         super();
         /**
@@ -4421,9 +4421,9 @@ class Input extends __WEBPACK_IMPORTED_MODULE_0_shared_helper__["b" /* Singleton
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_shared_log__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_client_asset__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_client_render_BasicRenderer__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__shared_log__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__asset__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__render_BasicRenderer__ = __webpack_require__(21);
 /**
  * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
  *
@@ -4436,13 +4436,13 @@ class Input extends __WEBPACK_IMPORTED_MODULE_0_shared_helper__["b" /* Singleton
 /**
  * a game renderer based on the html canvas element
  */
-class CanvasRenderer extends __WEBPACK_IMPORTED_MODULE_2_client_render_BasicRenderer__["a" /* BasicRenderer */] {
+class CanvasRenderer extends __WEBPACK_IMPORTED_MODULE_2__render_BasicRenderer__["a" /* BasicRenderer */] {
     constructor() {
         super();
         // some logging
-        __WEBPACK_IMPORTED_MODULE_0_shared_log__["a" /* Log */].info("Using", this, "as Renderer");
+        __WEBPACK_IMPORTED_MODULE_0__shared_log__["a" /* Log */].info("Using", this, "as Renderer");
         // get the asset loader
-        this.assetLoader = __WEBPACK_IMPORTED_MODULE_1_client_asset__["a" /* AssetLoader */].getInstance();
+        this.assetLoader = __WEBPACK_IMPORTED_MODULE_1__asset__["a" /* AssetLoader */].getInstance();
         // bind the instance
         CanvasRenderer.bindInstance(this);
     }
@@ -4484,7 +4484,7 @@ class CanvasRenderer extends __WEBPACK_IMPORTED_MODULE_2_client_render_BasicRend
             // draw the entity
             this.ctx.drawImage(
             // get the image of the entity
-            this.assetLoader.getAsset(entity.getImage(), __WEBPACK_IMPORTED_MODULE_1_client_asset__["b" /* AssetType */].Image).getData(), entity.getPosition().x, entity.getPosition().y);
+            this.assetLoader.getAsset(entity.getImage(), __WEBPACK_IMPORTED_MODULE_1__asset__["b" /* AssetType */].Image).getData(), entity.getPosition().x, entity.getPosition().y);
         });
     }
 }
@@ -4513,7 +4513,7 @@ class CanvasRenderer extends __WEBPACK_IMPORTED_MODULE_2_client_render_BasicRend
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_shared_math__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__shared_math__ = __webpack_require__(1);
 /**
  * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
  *
@@ -4530,7 +4530,7 @@ class Viewport {
      * getting the current window dimension
      */
     static getWindowDimension() {
-        return new __WEBPACK_IMPORTED_MODULE_0_shared_math__["a" /* Dimension */](window.innerWidth, window.innerHeight);
+        return new __WEBPACK_IMPORTED_MODULE_0__shared_math__["a" /* Dimension */](window.innerWidth, window.innerHeight);
     }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = Viewport;
@@ -4542,9 +4542,9 @@ class Viewport {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_client_entity__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_shared_math__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_shared_collision__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__client_entity__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_math__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_collision__ = __webpack_require__(55);
 /**
  * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
  *
@@ -4557,9 +4557,9 @@ class Viewport {
 /**
  * the player entity
  */
-class Player extends __WEBPACK_IMPORTED_MODULE_0_client_entity__["a" /* CollidableEntity */] {
+class Player extends __WEBPACK_IMPORTED_MODULE_0__client_entity__["a" /* CollidableEntity */] {
     constructor() {
-        super(20, 20, new __WEBPACK_IMPORTED_MODULE_1_shared_math__["c" /* Vector2D */](10, 10));
+        super(20, 20, new __WEBPACK_IMPORTED_MODULE_1__shared_math__["c" /* Vector2D */](10, 10));
         // add the animations for the player
         this.addAnimation({
             name: 'idle',
@@ -4582,7 +4582,7 @@ class Player extends __WEBPACK_IMPORTED_MODULE_0_client_entity__["a" /* Collidab
      * get the entities collision type
      */
     getCollisionType() {
-        return __WEBPACK_IMPORTED_MODULE_2_shared_collision__["a" /* CollisionType */].Circle;
+        return __WEBPACK_IMPORTED_MODULE_2__shared_collision__["a" /* CollisionType */].Circle;
     }
     /**
      * an event handler that will fire if another entity collided with this instance

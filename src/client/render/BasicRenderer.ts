@@ -5,10 +5,10 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { RenderableEntity } from 'client/entity';
-import { Singleton } from 'shared/helper';
-import { Image } from 'client/asset';
-import { Game } from 'Game';
+import { RenderableEntity } from '../entity';
+import { Singleton } from '../../shared/helper';
+import { Image } from '../asset';
+import { Game } from '../Game';
 
 /**
  * the basic renderer class that all renderers should extend

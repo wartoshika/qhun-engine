@@ -5,9 +5,9 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { CollidableEntity } from 'client/entity';
-import { Vector2D } from 'shared/math';
-import { CollisionType } from 'shared/collision';
+import { CollidableEntity } from '../../client/entity';
+import { Vector2D } from '../../shared/math';
+import { CollisionType } from '../../shared/collision';
 
 /**
  * the player entity

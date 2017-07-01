@@ -5,8 +5,8 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { Renderer } from 'client/render';
-import { Dimension } from 'shared/math';
+import { Renderer } from './render';
+import { Dimension } from '../shared/math';
 
 /**
  * holds information about the possible client configuration

@@ -5,7 +5,7 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { CollidableEntity } from 'shared/entity';
+import { CollidableEntity } from '../entity';
 
 /**
  * calculates the collision between entities that both have a circle collision type

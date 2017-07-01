@@ -5,8 +5,8 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { Image } from 'client/asset';
-import { Vector2D } from 'shared/math';
+import { Image } from '../asset';
+import { Vector2D } from '../../shared/math';
 
 export interface RenderableEntity {
 

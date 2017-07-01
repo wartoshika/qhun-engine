@@ -5,7 +5,7 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { RamStorage } from 'shared/storage';
+import { RamStorage } from '../storage';
 
 /**
  * a class to handle the singleton paradigmen
