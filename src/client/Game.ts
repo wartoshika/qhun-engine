@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+
 import { Singleton } from 'shared/helper';
 import { Renderer } from 'client/render';
 import { Entity } from 'client/entity';

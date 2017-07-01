@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+
 import { AssetType } from 'client/asset/AssetType';
 import { InlineAsset } from 'client/asset/Asset';
 import { AbstractAsset } from 'client/asset/AbstractAsset';

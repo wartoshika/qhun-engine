@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+
 import { Entity } from 'shared/entity/Entity';
 import { CanCollide } from 'shared/entity/CanCollide';
 import { CollisionType } from 'shared/collision';

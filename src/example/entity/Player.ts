@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+
 import { CollidableEntity } from 'client/entity';
 import { Vector2D } from 'shared/math';
 import { CollisionType } from 'shared/collision';

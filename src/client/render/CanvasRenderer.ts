@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+
 import { Renderer } from 'client/render/Renderer';
 import { Dimension } from 'shared/math';
 import { Log } from 'shared/log';

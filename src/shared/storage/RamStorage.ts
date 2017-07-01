@@ -1,4 +1,11 @@
 /**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+
+/**
  * holds objects in the ram of the operating unit
  */
 export class RamStorage {
