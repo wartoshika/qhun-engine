@@ -1,0 +1,7 @@
+// Platzieren Sie Ihre Einstellungen in dieser Datei, um Standard- und Benutzereinstellungen zu überschreiben.
+{
+    "licenser.license": "MIT",
+    "licenser.author": "Oliver Warrings <dev@qhun.de>",
+    "licenser.projectName": "Qhun-Engine",
+    "licenser.useSingleLineStyle": false
+}

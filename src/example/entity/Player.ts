@@ -16,18 +16,10 @@ export class Player extends CollidableEntity {
             name: 'idle',
             sprite: 'player',
             states: [
-                {
-                    image: 'red_eyes_open', duration: 2500
-                },
-                {
-                    image: 'red_eyes_closed', duration: 250
-                },
-                {
-                    image: 'red_eyes_open', duration: 250
-                },
-                {
-                    image: 'red_eyes_closed', duration: 250
-                }
+                { image: 'red_eyes_open', duration: 2500 },
+                { image: 'red_eyes_closed', duration: 250 },
+                { image: 'red_eyes_open', duration: 250 },
+                { image: 'red_eyes_closed', duration: 250 }
             ]
         }, {
                 name: 'jump',
