@@ -21,8 +21,7 @@
       "**/*.d.ts"
     ],
     "reporter": [
-      "text-summary",
-      "html"
+      "lcovonly"
     ]
   },
   "author": "Oliver Warrings <dev@qhun.de>",

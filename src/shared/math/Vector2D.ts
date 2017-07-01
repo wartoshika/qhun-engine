@@ -5,8 +5,8 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { Helper } from 'shared/math/Helper';
-import { Dimension } from 'shared/math/Dimension';
+import { Helper } from './Helper';
+import { Dimension } from './Dimension';
 
 /**
  * represents a 2D vector with x and y coordinates.

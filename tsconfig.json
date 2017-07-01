@@ -7,6 +7,11 @@
         "experimentalDecorators": true,
         "noEmitOnError": true,
         "target": "es6",
+        "paths": {
+            "*": [
+                "*"
+            ]
+        },
         "types": [
             // add node as an option
             "node"
