@@ -66,6 +66,14 @@ export class Log {
     }
 
     /**
+     * get the current log level
+     */
+    public static getLogLevel(): LogLevel {
+
+        return Log.logLevel;
+    }
+
+    /**
      * logs as debug level
      *
      * @param params all params as vararg array

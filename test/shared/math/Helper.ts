@@ -5,7 +5,7 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { Helper } from '../../../shared/math/Helper';
+import { Helper } from '../../../src/shared/math/Helper';
 import { expect } from 'chai';
 import 'mocha';
 

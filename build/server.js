@@ -319,6 +319,12 @@ class Log {
         return callback;
     }
     /**
+     * get the current log level
+     */
+    static getLogLevel() {
+        return Log.logLevel;
+    }
+    /**
      * logs as debug level
      *
      * @param params all params as vararg array

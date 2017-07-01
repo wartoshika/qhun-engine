@@ -3,5 +3,6 @@
     "licenser.license": "MIT",
     "licenser.author": "Oliver Warrings <dev@qhun.de>",
     "licenser.projectName": "Qhun-Engine",
-    "licenser.useSingleLineStyle": false
+    "licenser.useSingleLineStyle": false,
+    "typescript.tsdk": "./node_modules/typescript/lib"
 }

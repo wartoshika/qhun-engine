@@ -1210,8 +1210,8 @@ class Client {
         let overall = assets + misc;
         // print current memory footprint
         __WEBPACK_IMPORTED_MODULE_1__shared_log__["a" /* Log */].info("Memory footprint:", overall, "MB");
-        __WEBPACK_IMPORTED_MODULE_1__shared_log__["a" /* Log */].info("Assets: ", assets, "MB");
-        __WEBPACK_IMPORTED_MODULE_1__shared_log__["a" /* Log */].info("Misc: ", misc, "MB");
+        __WEBPACK_IMPORTED_MODULE_1__shared_log__["a" /* Log */].info("\t- Assets:\t", assets, "MB");
+        __WEBPACK_IMPORTED_MODULE_1__shared_log__["a" /* Log */].info("\t- Misc:\t\t", misc, "MB");
     }
     /**
      * the game loop where all things come together
@@ -1344,6 +1344,12 @@ class Log {
                 break;
         }
         return callback;
+    }
+    /**
+     * get the current log level
+     */
+    static getLogLevel() {
+        return Log.logLevel;
     }
     /**
      * logs as debug level

@@ -4,9 +4,10 @@
   "description": "A framework to build web games based on canvas rendering",
   "main": "build/server.js",
   "scripts": {
-    "test": "ts-mocha --opts test/mocha.opts src/test/**/*.ts",
+    "test": "ts-mocha test/**/*.ts",
     "start": "node build/server.js",
-    "test:coverage": "nyc npm t"
+    "test:coverage": "nyc npm t",
+    "test:watch": "ts-mocha --watch-extensions ts --watch test/**/*.ts"
   },
   "nyc": {
     "include": [
@@ -21,7 +22,8 @@
       "**/*.d.ts"
     ],
     "reporter": [
-      "lcovonly"
+      "lcovonly",
+      "html"
     ]
   },
   "author": "Oliver Warrings <dev@qhun.de>",
@@ -39,6 +41,7 @@
     "copy-webpack-plugin": "^4.0.1",
     "express": "^4.15.3",
     "file-loader": "^0.11.2",
+    "install": "^0.10.1",
     "istanbul": "^0.4.5",
     "jasmine-ts": "^0.1.3",
     "json-loader": "^0.5.4",

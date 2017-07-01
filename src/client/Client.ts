@@ -105,8 +105,8 @@ export abstract class Client {
 
         // print current memory footprint
         Log.info("Memory footprint:", overall, "MB");
-        Log.info("Assets: ", assets, "MB");
-        Log.info("Misc: ", misc, "MB");
+        Log.info("\t- Assets:\t", assets, "MB");
+        Log.info("\t- Misc:\t\t", misc, "MB");
     }
 
     /**
