@@ -30,39 +30,44 @@ export class CanvasWorldRenderer {
         // get the filemap asset from the world object
         let tileMap = this.world.getTileMap();
 
-        // build up the map object
-        let mapLines = tileMap.getMap().split(String.fromCharCode(13));
-        let horizontalImageCount = mapLines.length - 1;
-        let verticalImage = mapLines[0].split(',');
-        let verticalImageCount = verticalImage.length - 1;
+        // loop through the different layers
+        for (let layer = 0; layer < tileMap.layerCount; layer++) {
 
-        // get the asset loader instance
-        let assetLoader = AssetLoader.getInstance<AssetLoader>();
-        let tileDimension = this.world.getTileMap().getDimension();
+            // build up the map object
+            let mapLines = tileMap.getMap()[layer].split(String.fromCharCode(13));
+            let horizontalImageCount = mapLines.length - 1;
+            let verticalImage = mapLines[0].split(',');
+            let verticalImageCount = verticalImage.length - 1;
 
-        // iterate through all tiles
-        for (let v = 0; v < verticalImageCount; v++) {
+            // get the asset loader instance
+            let assetLoader = AssetLoader.getInstance<AssetLoader>();
+            let tileDimension = this.world.getTileMap().getDimension();
 
-            // now every horizontal image in the line v
-            for (let h = 0; h < horizontalImageCount; h++) {
+            // iterate through all tiles
+            for (let v = 0; v < verticalImageCount; v++) {
 
-                // get the tile number from the map
-                let tileNumber = parseInt(mapLines[v].split(',')[h]);
+                // now every horizontal image in the line v
+                for (let h = 0; h < horizontalImageCount; h++) {
 
-                // get the asset
-                // @todo: local asset caching meight be a performance improvement
-                let tileImage = assetLoader.getAsset<Image>(
-                    `${this.world.getTileMap().getName()}[${tileNumber}]`,
-                    AssetType.Image
-                );
+                    // get the tile number from the map
+                    let tileNumber = parseInt(mapLines[v].split(',')[h]);
 
-                // draw the tile
-                this.ctx.drawImage(
-                    <ImageBitmap>tileImage.getData(),
-                    h * tileDimension.x,
-                    v * tileDimension.y
-                );
+                    // get the asset
+                    // @todo: local asset caching meight be a performance improvement
+                    let tileImage = assetLoader.getAsset<Image>(
+                        `${this.world.getTileMap().getName()}[${tileNumber}]`,
+                        AssetType.Image
+                    );
+
+                    // draw the tile
+                    this.ctx.drawImage(
+                        <ImageBitmap>tileImage.getData(),
+                        h * tileDimension.x,
+                        v * tileDimension.y
+                    );
+                }
             }
+
         }
 
     }

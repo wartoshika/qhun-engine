@@ -48,7 +48,8 @@ class MyAwesomeGame extends Client {
         TileMap.register({
             name: 'world1',
             path: 'asset/image/world1.png',
-            tileMapDimension: new Dimension(32, 32)
+            tileMapDimension: new Dimension(32, 32),
+            layerCount: 2
         });
     }
 

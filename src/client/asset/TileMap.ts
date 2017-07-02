@@ -18,6 +18,12 @@ interface InlineTileMapAsset extends InlineAsset {
      * the dimension of each tile
      */
     tileMapDimension: Dimension;
+
+    /**
+     * the amount of layers this tilemap has
+     * @default 1
+     */
+    layerCount?: number;
 }
 
 /**
@@ -29,8 +35,9 @@ export class TileMap extends AbstractAsset {
         name?: string,
         path?: string,
         data?: string,
-        public map?: string,
-        public dimension?: Dimension
+        public map?: string[],
+        public dimension?: Dimension,
+        public layerCount?: number
     ) {
 
         super(name, path, AssetType.TileMap, data);
@@ -39,7 +46,7 @@ export class TileMap extends AbstractAsset {
     /**
      * get the map of the filemap object
      */
-    public getMap(): string {
+    public getMap(): string[] {
 
         return this.map;
     }
@@ -63,19 +70,48 @@ export class TileMap extends AbstractAsset {
         // get the asset loader
         let assetLoader = TileMap.getAssetLoader();
         let mapLoaderPromise: Promise<any>[] = [];
-        let tileMapStack: string[] = [];
+        let tileMapStack: string[][] = [];
 
         // load sprite maps and add asset type to the inline asset
-        tilemaps.forEach(tilemap => {
+        tilemaps.forEach((tilemap, index) => {
+
+            // get the layer amount
+            tilemap.layerCount = tilemap.layerCount || 1;
 
             // set the asset type
             tilemap.assetType = AssetType.TileMap;
 
+            // array init
+            tileMapStack[index] = []
+
             // get the map csv data file to save the map information
-            mapLoaderPromise.push(
-                Request.get(tilemap.path + ".csv")
-                    .then(map => tileMapStack.push(map))
-            );
+            if (tilemap.layerCount === 1) {
+
+                // array init
+                tileMapStack[index][0] = "";
+
+                // just one layer, include it
+                mapLoaderPromise.push(
+                    Request.get(tilemap.path + ".csv")
+                        .then(map => tileMapStack[index][0] = map)
+
+                );
+            } else {
+
+                // multiLayer
+                for (let layer = 0; layer < tilemap.layerCount; layer++) {
+
+                    // array init
+                    tileMapStack[index][layer] = "";
+
+                    // just one layer, include it
+                    mapLoaderPromise.push(
+                        Request.get(`${tilemap.path}.${layer}.csv`)
+                            .then(map => tileMapStack[index][layer] = map)
+
+                    );
+                }
+            }
         });
 
         // if the maps are loaded, start the regist
@@ -99,12 +135,19 @@ export class TileMap extends AbstractAsset {
                         // add the map and the dimension
                         tilemap.map = tileMapStack[index];
                         tilemap.dimension = tilemaps[index].tileMapDimension;
+                        tilemap.layerCount = tilemaps[index].layerCount;
 
                         // register all sub images
                         tileMapTransformPromise.push(
                             TileMap.registerTileMapSubImages(tilemap)
                         );
                     });
+
+                    // register the fully transparent -1 tile
+                    tileMapTransformPromise.push(TileMap.registerUndefinedTile(
+                        tileMaps[0].getName(),
+                        tileMaps[0].getDimension()
+                    ));
 
                     // await the sprite transform
                     return Promise.all(tileMapTransformPromise).then(() => {
@@ -152,6 +195,9 @@ export class TileMap extends AbstractAsset {
             // now every horizontal image in the line v
             for (let h = 0; h < horizontalTileAmount; h++) {
 
+                // clear to get a transparent background
+                ctx.clearRect(0, 0, tileMap.dimension.x, tileMap.dimension.y);
+
                 // draw the image at the canvas
                 ctx.drawImage(
                     <ImageBitmap>tileMap.getData(),
@@ -169,5 +215,28 @@ export class TileMap extends AbstractAsset {
 
         // await the registration process
         return Promise.all(itemRegisterPromiseStack);
+    }
+
+    /**
+     * register a fully transparent file with index -1
+     */
+    private static async registerUndefinedTile(mapName: string, tileDimension: Dimension): Promise<Image[]> {
+
+        // create a transparent canvas context
+        let canvas = document.createElement('canvas');
+        let ctx = canvas.getContext('2d');
+
+        // set the canvas height and width
+        canvas.width = tileDimension.x;
+        canvas.height = tileDimension.y;
+
+        // clear the canvas complete
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // get this as data url and register the tile
+        return Image.register({
+            name: `${mapName}[-1]`,
+            path: canvas.toDataURL()
+        });
     }
 }

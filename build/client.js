@@ -4832,10 +4832,11 @@ var network_1 = __webpack_require__(7);
  */
 var TileMap = (function (_super) {
     __extends(TileMap, _super);
-    function TileMap(name, path, data, map, dimension) {
+    function TileMap(name, path, data, map, dimension, layerCount) {
         var _this = _super.call(this, name, path, AssetType_1.AssetType.TileMap, data) || this;
         _this.map = map;
         _this.dimension = dimension;
+        _this.layerCount = layerCount;
         return _this;
     }
     /**
@@ -4868,12 +4869,34 @@ var TileMap = (function (_super) {
                 mapLoaderPromise = [];
                 tileMapStack = [];
                 // load sprite maps and add asset type to the inline asset
-                tilemaps.forEach(function (tilemap) {
+                tilemaps.forEach(function (tilemap, index) {
+                    // get the layer amount
+                    tilemap.layerCount = tilemap.layerCount || 1;
                     // set the asset type
                     tilemap.assetType = AssetType_1.AssetType.TileMap;
+                    // array init
+                    tileMapStack[index] = [];
                     // get the map csv data file to save the map information
-                    mapLoaderPromise.push(network_1.Request.get(tilemap.path + ".csv")
-                        .then(function (map) { return tileMapStack.push(map); }));
+                    if (tilemap.layerCount === 1) {
+                        // array init
+                        tileMapStack[index][0] = "";
+                        // just one layer, include it
+                        mapLoaderPromise.push(network_1.Request.get(tilemap.path + ".csv")
+                            .then(function (map) { return tileMapStack[index][0] = map; }));
+                    }
+                    else {
+                        var _loop_1 = function (layer) {
+                            // array init
+                            tileMapStack[index][layer] = "";
+                            // just one layer, include it
+                            mapLoaderPromise.push(network_1.Request.get(tilemap.path + "." + layer + ".csv")
+                                .then(function (map) { return tileMapStack[index][layer] = map; }));
+                        };
+                        // multiLayer
+                        for (var layer = 0; layer < tilemap.layerCount; layer++) {
+                            _loop_1(layer);
+                        }
+                    }
                 });
                 // if the maps are loaded, start the regist
                 // previously the current map loader promises should be added to
@@ -4891,9 +4914,12 @@ var TileMap = (function (_super) {
                                     // add the map and the dimension
                                     tilemap.map = tileMapStack[index];
                                     tilemap.dimension = tilemaps[index].tileMapDimension;
+                                    tilemap.layerCount = tilemaps[index].layerCount;
                                     // register all sub images
                                     tileMapTransformPromise.push(TileMap.registerTileMapSubImages(tilemap));
                                 });
+                                // register the fully transparent -1 tile
+                                tileMapTransformPromise.push(TileMap.registerUndefinedTile(tileMaps[0].getName(), tileMaps[0].getDimension()));
                                 // await the sprite transform
                                 return Promise.all(tileMapTransformPromise).then(function () {
                                     // return all generated image assets
@@ -4929,6 +4955,8 @@ var TileMap = (function (_super) {
                 for (v = 0; v < verticalTileAmount; v++) {
                     // now every horizontal image in the line v
                     for (h = 0; h < horizontalTileAmount; h++) {
+                        // clear to get a transparent background
+                        ctx.clearRect(0, 0, tileMap.dimension.x, tileMap.dimension.y);
                         // draw the image at the canvas
                         ctx.drawImage(tileMap.getData(), -(h * tileMap.dimension.x), -(v * tileMap.dimension.y));
                         // get the image as data uri to register the new image
@@ -4940,6 +4968,28 @@ var TileMap = (function (_super) {
                 }
                 // await the registration process
                 return [2 /*return*/, Promise.all(itemRegisterPromiseStack)];
+            });
+        });
+    };
+    /**
+     * register a fully transparent file with index -1
+     */
+    TileMap.registerUndefinedTile = function (mapName, tileDimension) {
+        return __awaiter(this, void 0, void 0, function () {
+            var canvas, ctx;
+            return __generator(this, function (_a) {
+                canvas = document.createElement('canvas');
+                ctx = canvas.getContext('2d');
+                // set the canvas height and width
+                canvas.width = tileDimension.x;
+                canvas.height = tileDimension.y;
+                // clear the canvas complete
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                // get this as data url and register the tile
+                return [2 /*return*/, Image_1.Image.register({
+                        name: mapName + "[-1]",
+                        path: canvas.toDataURL()
+                    })];
             });
         });
     };
