@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 24);
+/******/ 	return __webpack_require__(__webpack_require__.s = 25);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -80,12 +80,36 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(__webpack_require__(11));
-__export(__webpack_require__(37));
+__export(__webpack_require__(38));
 __export(__webpack_require__(12));
 
 
 /***/ }),
 /* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(7));
+__export(__webpack_require__(50));
+__export(__webpack_require__(51));
+__export(__webpack_require__(2));
+__export(__webpack_require__(21));
+__export(__webpack_require__(52));
+
+
+/***/ }),
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -110,26 +134,6 @@ var AssetType;
 
 
 /***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(10));
-__export(__webpack_require__(27));
-
-
-/***/ }),
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -145,9 +149,8 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(10));
 __export(__webpack_require__(28));
-__export(__webpack_require__(38));
-__export(__webpack_require__(13));
 
 
 /***/ }),
@@ -166,12 +169,9 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(7));
-__export(__webpack_require__(48));
-__export(__webpack_require__(49));
-__export(__webpack_require__(1));
-__export(__webpack_require__(22));
-__export(__webpack_require__(50));
+__export(__webpack_require__(29));
+__export(__webpack_require__(39));
+__export(__webpack_require__(13));
 
 
 /***/ }),
@@ -187,7 +187,7 @@ __export(__webpack_require__(50));
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-var AssetLoader_1 = __webpack_require__(22);
+var AssetLoader_1 = __webpack_require__(21);
 /**
  * a basic class for implementing the getter and setter function
  * of the required asset interface
@@ -251,7 +251,7 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(29));
+__export(__webpack_require__(30));
 
 
 /***/ }),
@@ -312,7 +312,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var AssetType_1 = __webpack_require__(1);
+var AssetType_1 = __webpack_require__(2);
 var AbstractAsset_1 = __webpack_require__(5);
 /**
  * the image class handles exactly one image
@@ -364,7 +364,7 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(47));
+__export(__webpack_require__(49));
 
 
 /***/ }),
@@ -383,7 +383,7 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(26));
+__export(__webpack_require__(27));
 
 
 /***/ }),
@@ -616,12 +616,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var helper_1 = __webpack_require__(3);
+var helper_1 = __webpack_require__(4);
 var entity_1 = __webpack_require__(15);
-var scene_1 = __webpack_require__(19);
-var world_1 = __webpack_require__(21);
-var log_1 = __webpack_require__(2);
-var camera_1 = __webpack_require__(61);
+var scene_1 = __webpack_require__(44);
+var world_1 = __webpack_require__(20);
+var log_1 = __webpack_require__(3);
+var camera_1 = __webpack_require__(22);
 /**
  * a class that handles adding of entities, cameras, physics ...
  */
@@ -775,7 +775,7 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(__webpack_require__(16));
-__export(__webpack_require__(42));
+__export(__webpack_require__(43));
 __export(__webpack_require__(17));
 
 
@@ -839,9 +839,9 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var entity_1 = __webpack_require__(39);
-var Animation_1 = __webpack_require__(41);
-var log_1 = __webpack_require__(2);
+var entity_1 = __webpack_require__(40);
+var Animation_1 = __webpack_require__(42);
+var log_1 = __webpack_require__(3);
 /**
  * a base class for animations on entities
  */
@@ -881,8 +881,13 @@ var AnimationEntity = (function (_super) {
     AnimationEntity.prototype.playAnimation = function (name, loop) {
         if (loop === void 0) { loop = false; }
         // if there is allready a running animation, stop it
-        if (this.currentAnimation)
+        if (this.currentAnimation) {
+            // if the animation name is the same, ignore the call
+            if (this.currentAnimation.getName() === name)
+                return;
+            // stop and play the new animation
             this.currentAnimation.stopAndRestore();
+        }
         // get the animation player
         var animation = this.animationStack.find(function (a) { return a.name === name; });
         // check if the animation is valid
@@ -907,6 +912,16 @@ var AnimationEntity = (function (_super) {
         // stops the animation
         this.currentAnimation.stopAndRestore();
         this.currentAnimation = null;
+    };
+    /**
+     * check if any or a spefific animation is running
+     *
+     * @param name the name or nothing
+     */
+    AnimationEntity.prototype.isAnimationRunning = function (name) {
+        return (!name && !!this.currentAnimation)
+            ||
+                (name && this.currentAnimation && this.currentAnimation.getName() === name);
     };
     /**
      * get the image asset that displays the current entity
@@ -1006,12 +1021,16 @@ exports.Entity = Entity;
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(20));
-__export(__webpack_require__(43));
+/**
+ * a basic scene
+ */
+var Scene = (function () {
+    function Scene() {
+    }
+    return Scene;
+}());
+exports.Scene = Scene;
 
 
 /***/ }),
@@ -1026,39 +1045,15 @@ __export(__webpack_require__(43));
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * a basic scene
- */
-var Scene = (function () {
-    function Scene() {
-    }
-    return Scene;
-}());
-exports.Scene = Scene;
-
-
-/***/ }),
-/* 21 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(44));
+__export(__webpack_require__(46));
 
 
 /***/ }),
-/* 22 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1115,10 +1110,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var AssetType_1 = __webpack_require__(1);
-var helper_1 = __webpack_require__(3);
+var AssetType_1 = __webpack_require__(2);
+var helper_1 = __webpack_require__(4);
 var storage_1 = __webpack_require__(6);
-var log_1 = __webpack_require__(2);
+var log_1 = __webpack_require__(3);
 var network_1 = __webpack_require__(8);
 /**
  * a class that can handle asset loading such as images and audio
@@ -1324,6 +1319,25 @@ exports.AssetLoader = AssetLoader;
 
 
 /***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(53));
+
+
+/***/ }),
 /* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1346,7 +1360,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var helper_1 = __webpack_require__(3);
+var helper_1 = __webpack_require__(4);
 /**
  * the basic renderer class that all renderers should extend
  */
@@ -1421,6 +1435,174 @@ exports.BasicRenderer = BasicRenderer;
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
+Object.defineProperty(exports, "__esModule", { value: true });
+var asset_1 = __webpack_require__(1);
+var math_1 = __webpack_require__(0);
+/**
+ * a helper class to calculate the right offset and scale of objects
+ * when a camera is unsed to display the game
+ */
+var CameraOffsetCalculator = (function () {
+    function CameraOffsetCalculator() {
+    }
+    /**
+     * calculates the entity offset and scaleability of its image by using one
+     * camera object.
+     * the return array can be directiy used to draw the image
+     *
+     * @return the array for ctx.drawImage() or boolean === false if the entity is not within the canvas
+     */
+    CameraOffsetCalculator.imageScaleDrawEntity = function (entity, camera) {
+        // get the entity image scale from the camera
+        var scale = camera.getScale();
+        // get the original image as ImageBitmap
+        var entityImage = CameraOffsetCalculator.assetLoader.getAsset(entity.getImage(), asset_1.AssetType.Image).getData();
+        // calculate the scale
+        var newWidth = entityImage.width * scale * entity.getScale();
+        var newHeight = entityImage.width * scale * entity.getScale();
+        // calculate position
+        var newPosition = CameraOffsetCalculator.calculatePositionOffsetForCameraFollow(entity.getPosition(), camera);
+        // check if visible
+        if (!CameraOffsetCalculator.positionIsWithinCameraRange(newPosition, new math_1.Vector2D(newWidth, newHeight)))
+            return false;
+        return [
+            entityImage,
+            0,
+            0,
+            entityImage.width,
+            entityImage.height,
+            newPosition.x,
+            newPosition.y,
+            newWidth,
+            newHeight
+        ];
+    };
+    /**
+     * a helper function to draw a tile with camera and offset calculations
+     *
+     * @param originalPosition the position of the tile where it should originally be drawn
+     * @param tile the image to draw
+     * @param camera the active camera
+     *
+     * @return the array for ctx.drawImage() or boolean === false if the entity is not within the canvas
+     */
+    CameraOffsetCalculator.imageScaleDrawTile = function (originalPosition, tile, camera) {
+        // get the current camera scale
+        var scale = camera.getScale();
+        // get the tile image as BitmapImage
+        var tileImage = tile.getData();
+        // calculate the scale
+        var newWidth = tileImage.width * scale;
+        var newHeight = tileImage.height * scale;
+        // calculate position
+        // @todo: result is not 100% accurate... need further investigations
+        var newPosition = CameraOffsetCalculator.calculatePositionOffsetForCameraFollow(new math_1.Vector2D(originalPosition.x * scale, originalPosition.y * scale), camera);
+        // check if visible
+        if (!CameraOffsetCalculator.positionIsWithinCameraRange(newPosition, new math_1.Vector2D(newWidth, newHeight)))
+            return false;
+        return [
+            tileImage,
+            0,
+            0,
+            tileImage.width,
+            tileImage.height,
+            newPosition.x,
+            newPosition.y,
+            newWidth,
+            newHeight
+        ];
+    };
+    /**
+     * check if an object is visible by the camera
+     *
+     * @param position
+     * @param objectDimension
+     */
+    CameraOffsetCalculator.positionIsWithinCameraRange = function (position, objectDimension) {
+        // @todo: no check with window here, use the canvas object itself
+        var canvasDim = CameraOffsetCalculator.getCanvasDimension();
+        var canvasWidth = canvasDim.x;
+        var canvasHeight = canvasDim.y;
+        // add the two vectors
+        var maxOffsetVector = position.substract(objectDimension);
+        // check if visible
+        return canvasWidth >= maxOffsetVector.x && canvasHeight >= maxOffsetVector.y;
+    };
+    /**
+     * get the current canvas dimension
+     */
+    CameraOffsetCalculator.getCanvasDimension = function () {
+        var canvas = document.querySelector('canvas');
+        return new math_1.Vector2D(canvas.width, canvas.height);
+    };
+    /**
+     * calculates the position offset for camera following
+     */
+    CameraOffsetCalculator.calculatePositionOffsetForCameraFollow = function (originalPosition, camera) {
+        // first check if there is any following
+        var entity = camera.getFollowingEntity();
+        // if no following is active, return the original position
+        if (!entity)
+            return originalPosition;
+        // calculate the offset. the entity should be in the center of the screen
+        var canvasDim = CameraOffsetCalculator.getCanvasDimension();
+        // calculate the center position for the entity and shift the other
+        // vectors.
+        var tmpVector = originalPosition.substract(entity.getPosition()).add(canvasDim.divide(new math_1.Vector2D(2, 2)));
+        // now check if the camera has world bounds
+        var worldBounds = camera.getWorldBounds();
+        if (!worldBounds)
+            return tmpVector;
+        // check if the original vector is smaller than the shifted vector
+        // this will bound the left and top world bounds
+        if (originalPosition.x < tmpVector.x) {
+            // reset the x axis to fix the camera
+            tmpVector.x = originalPosition.x;
+        }
+        if (originalPosition.y < tmpVector.y) {
+            // reset the y axis to fix the camera
+            tmpVector.y = originalPosition.y;
+        }
+        // now the left and bottom bounds
+        // we need the world dimension to check if the camera reaches
+        // the end of the world in the visible area
+        var entityPosition = entity.getPosition();
+        var worldBoundCanvas = worldBounds.substract(canvasDim.half());
+        if (entityPosition.x > worldBoundCanvas.x) {
+            // get the original position and substract
+            // the distance from world bounds and canvas dim
+            tmpVector.x = originalPosition.x - (worldBounds.x - canvasDim.x);
+        }
+        if (entityPosition.y > worldBoundCanvas.y) {
+            // get the original position and substract
+            // the distance from world bounds and canvas dim
+            tmpVector.y = originalPosition.y - (worldBounds.y - canvasDim.y);
+        }
+        if (window.log === true) {
+            console.log(canvasDim, worldBoundCanvas);
+            window.log = false;
+        }
+        // return the corrected position vector
+        return tmpVector;
+    };
+    CameraOffsetCalculator.assetLoader = asset_1.AssetLoader.getInstance();
+    return CameraOffsetCalculator;
+}());
+exports.CameraOffsetCalculator = CameraOffsetCalculator;
+
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -1441,16 +1623,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var Client_1 = __webpack_require__(25);
-var render_1 = __webpack_require__(53);
-var environment_1 = __webpack_require__(56);
+var Client_1 = __webpack_require__(26);
+var render_1 = __webpack_require__(57);
+var environment_1 = __webpack_require__(60);
 var Game_1 = __webpack_require__(14);
-var asset_1 = __webpack_require__(4);
+var asset_1 = __webpack_require__(1);
 var decorator_1 = __webpack_require__(9);
-var Player_1 = __webpack_require__(58);
+var Link_1 = __webpack_require__(62);
 var math_1 = __webpack_require__(0);
-var world_1 = __webpack_require__(21);
-var camera_1 = __webpack_require__(61);
+var world_1 = __webpack_require__(20);
+var camera_1 = __webpack_require__(22);
 var MyAwesomeGame = (function (_super) {
     __extends(MyAwesomeGame, _super);
     function MyAwesomeGame() {
@@ -1466,8 +1648,8 @@ var MyAwesomeGame = (function (_super) {
      */
     MyAwesomeGame.prototype.preload = function () {
         asset_1.Sprite.register({
-            name: 'player',
-            path: 'asset/image/player.png'
+            name: 'link_run',
+            path: 'asset/image/link_run.png'
         });
         asset_1.TileMap.register({
             name: 'world1',
@@ -1482,9 +1664,9 @@ var MyAwesomeGame = (function (_super) {
      */
     MyAwesomeGame.prototype.loaded = function (game) {
         // create entities
-        this.player = new Player_1.Player();
+        this.player = new Link_1.Link();
         // create game objects
-        var camera = new camera_1.Camera(1.75);
+        var camera = new camera_1.Camera(1.5);
         var world = new world_1.World(game, 'world1');
         // add game objects
         game.add(this.player, world, camera);
@@ -1503,20 +1685,8 @@ var MyAwesomeGame = (function (_super) {
      * @warning dont do heavy stuff in here because this meight cause performance issues
      */
     MyAwesomeGame.prototype.update = function (game, input) {
-        var keys = input.getArrowKeys();
-        // move the player
-        if (keys.down) {
-            this.player.setPosition(this.player.getPosition().add(new math_1.Vector2D(0, 20)));
-        }
-        else if (keys.up) {
-            this.player.setPosition(this.player.getPosition().add(new math_1.Vector2D(0, -20)));
-        }
-        if (keys.left) {
-            this.player.setPosition(this.player.getPosition().add(new math_1.Vector2D(-20, 0)));
-        }
-        else if (keys.right) {
-            this.player.setPosition(this.player.getPosition().add(new math_1.Vector2D(20, 0)));
-        }
+        // handle movement for link
+        this.player.handleMovement(input.getArrowKeys());
     };
     __decorate([
         decorator_1.logMethodCall,
@@ -1531,7 +1701,7 @@ new MyAwesomeGame();
 
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1553,12 +1723,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var decorator_1 = __webpack_require__(9);
-var log_1 = __webpack_require__(2);
-var helper_1 = __webpack_require__(3);
+var log_1 = __webpack_require__(3);
+var helper_1 = __webpack_require__(4);
 var Game_1 = __webpack_require__(14);
 var storage_1 = __webpack_require__(6);
-var asset_1 = __webpack_require__(4);
-var input_1 = __webpack_require__(51);
+var asset_1 = __webpack_require__(1);
+var input_1 = __webpack_require__(55);
 /**
  * the initiation class of the game client
  */
@@ -1658,7 +1828,7 @@ exports.Client = Client;
 
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1670,7 +1840,7 @@ exports.Client = Client;
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-var log_1 = __webpack_require__(2);
+var log_1 = __webpack_require__(3);
 /**
  * a decorator for logging method calls to debug console
  *
@@ -1696,7 +1866,7 @@ exports.logMethodCall = logMethodCall;
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1827,7 +1997,7 @@ exports.Log = Log;
 
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1882,7 +2052,7 @@ exports.Singleton = Singleton;
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1895,7 +2065,7 @@ exports.Singleton = Singleton;
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 // the dependency to get the memory footprint ob stored objects
-var sizeof = __webpack_require__(30);
+var sizeof = __webpack_require__(31);
 var math_1 = __webpack_require__(0);
 var File_1 = __webpack_require__(13);
 /**
@@ -1986,7 +2156,7 @@ if (typeof window !== 'undefined' && window) {
 
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1994,8 +2164,8 @@ if (typeof window !== 'undefined' && window) {
 
 
 
-var ECMA_SIZES  = __webpack_require__(31);
-var Buffer = __webpack_require__(32).Buffer;
+var ECMA_SIZES  = __webpack_require__(32);
+var Buffer = __webpack_require__(33).Buffer;
 
 /**
  * Main module's entry point
@@ -2044,7 +2214,7 @@ module.exports = sizeof;
 
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports) {
 
 /**
@@ -2060,7 +2230,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2074,9 +2244,9 @@ module.exports = {
 
 
 
-var base64 = __webpack_require__(34)
-var ieee754 = __webpack_require__(35)
-var isArray = __webpack_require__(36)
+var base64 = __webpack_require__(35)
+var ieee754 = __webpack_require__(36)
+var isArray = __webpack_require__(37)
 
 exports.Buffer = Buffer
 exports.SlowBuffer = SlowBuffer
@@ -3854,10 +4024,10 @@ function isnan (val) {
   return val !== val // eslint-disable-line no-self-compare
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(34)))
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports) {
 
 var g;
@@ -3884,7 +4054,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4005,7 +4175,7 @@ function fromByteArray (uint8) {
 
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports) {
 
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
@@ -4095,7 +4265,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports) {
 
 var toString = {}.toString;
@@ -4106,7 +4276,7 @@ module.exports = Array.isArray || function (arr) {
 
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4219,7 +4389,7 @@ exports.Vector2D = Vector2D;
 
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4267,7 +4437,7 @@ exports.Binary = Binary;
 
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4283,11 +4453,11 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(__webpack_require__(18));
-__export(__webpack_require__(40));
+__export(__webpack_require__(41));
 
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4339,7 +4509,7 @@ exports.CollidableEntity = CollidableEntity;
 
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4379,6 +4549,12 @@ var Animation = (function () {
         this.nextAnimationFrame();
     };
     /**
+     * get the name of the animation
+     */
+    Animation.prototype.getName = function () {
+        return this.animation.name;
+    };
+    /**
      * displays the next animation frame
      */
     Animation.prototype.nextAnimationFrame = function () {
@@ -4410,7 +4586,9 @@ var Animation = (function () {
         // stop the animation
         window.clearTimeout(this.currentTimeoutHolder);
         // restores the image
-        this.entity.setImage(this.previousEntityImage);
+        // currently no restore
+        // @todo: should this be optional?
+        //this.entity.setImage(this.previousEntityImage);
     };
     return Animation;
 }());
@@ -4418,7 +4596,7 @@ exports.Animation = Animation;
 
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4486,7 +4664,27 @@ exports.CollidableEntity = CollidableEntity;
 
 
 /***/ }),
-/* 43 */
+/* 44 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(19));
+__export(__webpack_require__(45));
+
+
+/***/ }),
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4543,7 +4741,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var Scene_1 = __webpack_require__(20);
+var Scene_1 = __webpack_require__(19);
 /**
  * a basic loading screen scene
  */
@@ -4594,7 +4792,7 @@ exports.LoadingScreenScene = LoadingScreenScene;
 
 
 /***/ }),
-/* 44 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4606,9 +4804,9 @@ exports.LoadingScreenScene = LoadingScreenScene;
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-var physic_1 = __webpack_require__(45);
+var physic_1 = __webpack_require__(47);
 var math_1 = __webpack_require__(0);
-var asset_1 = __webpack_require__(4);
+var asset_1 = __webpack_require__(1);
 /**
  * a class to handle world spefific things
  */
@@ -4649,7 +4847,7 @@ exports.World = World;
 
 
 /***/ }),
-/* 45 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4664,11 +4862,11 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(46));
+__export(__webpack_require__(48));
 
 
 /***/ }),
-/* 46 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4692,7 +4890,7 @@ var GravityForce;
 
 
 /***/ }),
-/* 47 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4799,7 +4997,7 @@ exports.Request = Request;
 
 
 /***/ }),
-/* 48 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4856,7 +5054,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var AssetType_1 = __webpack_require__(1);
+var AssetType_1 = __webpack_require__(2);
 var Image_1 = __webpack_require__(7);
 var AbstractAsset_1 = __webpack_require__(5);
 var network_1 = __webpack_require__(8);
@@ -4975,7 +5173,7 @@ exports.Sprite = Sprite;
 
 
 /***/ }),
-/* 49 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4997,7 +5195,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var AssetType_1 = __webpack_require__(1);
+var AssetType_1 = __webpack_require__(2);
 var AbstractAsset_1 = __webpack_require__(5);
 var Sound = (function (_super) {
     __extends(Sound, _super);
@@ -5027,7 +5225,7 @@ exports.Sound = Sound;
 
 
 /***/ }),
-/* 50 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5085,7 +5283,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var AbstractAsset_1 = __webpack_require__(5);
-var AssetType_1 = __webpack_require__(1);
+var AssetType_1 = __webpack_require__(2);
 var Image_1 = __webpack_require__(7);
 var network_1 = __webpack_require__(8);
 var math_1 = __webpack_require__(0);
@@ -5247,7 +5445,131 @@ exports.TileMap = TileMap;
 
 
 /***/ }),
-/* 51 */
+/* 53 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+var CameraMode_1 = __webpack_require__(54);
+var math_1 = __webpack_require__(0);
+/**
+ * the view for the player into the game
+ */
+var Camera = (function () {
+    /**
+     *
+     * @param scale the scale of the world. 1 means that a tile of 32x32 will renderes on 32x32 pixel. scane 5 means that a tile of 32x32 will be rendered as (32*5)x(32*5) pixel...
+     * @param mode the camera mode
+     */
+    function Camera(scale, mode) {
+        if (scale === void 0) { scale = 1; }
+        if (mode === void 0) { mode = CameraMode_1.CameraMode.Orthogonal; }
+        this.scale = scale;
+        this.mode = mode;
+        /**
+         * the entitiy which the camera should follow
+         */
+        this.followingEntity = null;
+        /**
+         * the current camera world bounds
+         */
+        this.worldBounds = null;
+    }
+    /**
+     * get the camera mode
+     */
+    Camera.prototype.getMode = function () {
+        return this.mode;
+    };
+    /**
+     * get the current world scale modificator
+     */
+    Camera.prototype.getScale = function () {
+        return this.scale;
+    };
+    /**
+     * get the camera scale as vector
+     */
+    Camera.prototype.getScaneVector = function () {
+        return new math_1.Vector2D(this.scale, this.scale);
+    };
+    /**
+     * set the current world scale modificator
+     */
+    Camera.prototype.setScale = function (scale) {
+        this.scale = scale;
+    };
+    /**
+     * follows one entity
+     *
+     * @param entity the entity to follow
+     */
+    Camera.prototype.followEntity = function (entity) {
+        this.followingEntity = entity;
+    };
+    /**
+     * get the current entity the camera follows.
+     * can be undefined is the camera is not following an entity
+     */
+    Camera.prototype.getFollowingEntity = function () {
+        return this.followingEntity;
+    };
+    /**
+     * if the camera should be allways within the world, set the world
+     * bounds to the current active world
+     */
+    Camera.prototype.setWorldBounds = function (world) {
+        var dimension = world.getWorldDimension();
+        this.worldBounds = new math_1.Vector2D(dimension.x, dimension.y);
+    };
+    /**
+     * get the current world bounds.
+     *
+     * @warning return value can be null if no bounds are available!
+     */
+    Camera.prototype.getWorldBounds = function () {
+        var wb = this.worldBounds;
+        if (!wb)
+            return wb;
+        // add the current camera scale
+        return wb.multiply(new math_1.Vector2D(this.getScale(), this.getScale()));
+    };
+    return Camera;
+}());
+exports.Camera = Camera;
+
+
+/***/ }),
+/* 54 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * the currently supported camera modes
+ */
+var CameraMode;
+(function (CameraMode) {
+    CameraMode[CameraMode["Orthogonal"] = 0] = "Orthogonal";
+})(CameraMode = exports.CameraMode || (exports.CameraMode = {}));
+
+
+/***/ }),
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5262,11 +5584,11 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(52));
+__export(__webpack_require__(56));
 
 
 /***/ }),
-/* 52 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5288,7 +5610,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var helper_1 = __webpack_require__(3);
+var helper_1 = __webpack_require__(4);
 /**
  * a basic class to get user input like keybord or mouse data
  */
@@ -5355,7 +5677,7 @@ exports.Input = Input;
 
 
 /***/ }),
-/* 53 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5370,12 +5692,12 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(54));
+__export(__webpack_require__(58));
 __export(__webpack_require__(23));
 
 
 /***/ }),
-/* 54 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5397,10 +5719,10 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var asset_1 = __webpack_require__(4);
+var asset_1 = __webpack_require__(1);
 var BasicRenderer_1 = __webpack_require__(23);
-var CanvasWorldRenderer_1 = __webpack_require__(55);
-var CameraOffsetCalculator_1 = __webpack_require__(64);
+var CanvasWorldRenderer_1 = __webpack_require__(59);
+var CameraOffsetCalculator_1 = __webpack_require__(24);
 var FPS_OFFSET = 25;
 /**
  * a game renderer based on the html canvas element
@@ -5523,7 +5845,7 @@ exports.CanvasRenderer = CanvasRenderer;
 
 
 /***/ }),
-/* 55 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5535,8 +5857,8 @@ exports.CanvasRenderer = CanvasRenderer;
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-var asset_1 = __webpack_require__(4);
-var CameraOffsetCalculator_1 = __webpack_require__(64);
+var asset_1 = __webpack_require__(1);
+var CameraOffsetCalculator_1 = __webpack_require__(24);
 var math_1 = __webpack_require__(0);
 /**
  * the canvas world renderer implementation
@@ -5594,7 +5916,7 @@ exports.CanvasWorldRenderer = CanvasWorldRenderer;
 
 
 /***/ }),
-/* 56 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5609,11 +5931,11 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(57));
+__export(__webpack_require__(61));
 
 
 /***/ }),
-/* 57 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5645,7 +5967,7 @@ exports.Viewport = Viewport;
 
 
 /***/ }),
-/* 58 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5669,55 +5991,115 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var entity_1 = __webpack_require__(15);
 var math_1 = __webpack_require__(0);
-var collision_1 = __webpack_require__(59);
+var collision_1 = __webpack_require__(63);
 /**
  * the player entity
  */
-var Player = (function (_super) {
-    __extends(Player, _super);
-    function Player() {
+var Link = (function (_super) {
+    __extends(Link, _super);
+    function Link() {
         var _this = _super.call(this, 20, 20, new math_1.Vector2D(10, 10)) || this;
-        _this.scaleFactor = .5;
+        _this.scaleFactor = 2;
         // add the animations for the player
         _this.addAnimation({
-            name: 'idle',
-            sprite: 'player',
+            name: 'run_down',
+            sprite: 'link_run',
             states: [
-                { image: 'red_eyes_open', duration: 2500 },
-                { image: 'red_eyes_closed', duration: 250 },
-                { image: 'red_eyes_open', duration: 250 },
-                { image: 'red_eyes_closed', duration: 250 }
+                { image: 'link_run_down_1', duration: 100 },
+                { image: 'link_run_down_2', duration: 100 },
+                { image: 'link_run_down_3', duration: 100 },
+                { image: 'link_run_down_4', duration: 100 },
+                { image: 'link_run_down_5', duration: 100 },
+                { image: 'link_run_down_6', duration: 100 }
             ]
         }, {
-            name: 'jump',
-            sprite: 'player',
+            name: 'run_up',
+            sprite: 'link_run',
             states: [
-                { image: 'red_mouth_open', duration: -1 }
+                { image: 'link_run_up_1', duration: 100 },
+                { image: 'link_run_up_2', duration: 100 },
+                { image: 'link_run_up_3', duration: 100 },
+                { image: 'link_run_up_4', duration: 100 },
+                { image: 'link_run_up_5', duration: 100 },
+                { image: 'link_run_up_6', duration: 100 },
+            ]
+        }, {
+            name: 'run_right',
+            sprite: 'link_run',
+            states: [
+                { image: 'link_run_right_1', duration: 100 },
+                { image: 'link_run_right_2', duration: 100 },
+                { image: 'link_run_right_3', duration: 100 },
+                { image: 'link_run_right_4', duration: 100 },
+                { image: 'link_run_right_5', duration: 100 },
+                { image: 'link_run_right_6', duration: 100 },
+            ]
+        }, {
+            name: 'run_left',
+            sprite: 'link_run',
+            states: [
+                { image: 'link_run_left_1', duration: 100 },
+                { image: 'link_run_left_2', duration: 100 },
+                { image: 'link_run_left_3', duration: 100 },
+                { image: 'link_run_left_4', duration: 100 },
+                { image: 'link_run_left_5', duration: 100 },
+                { image: 'link_run_left_6', duration: 100 },
             ]
         });
         // play idle animation on constructing
-        _this.playAnimation('idle', true);
+        _this.playAnimation('run_down', true);
         return _this;
     }
     /**
      * get the entities collision type
      */
-    Player.prototype.getCollisionType = function () {
+    Link.prototype.getCollisionType = function () {
         return collision_1.CollisionType.Circle;
     };
     /**
      * an event handler that will fire if another entity collided with this instance
      */
-    Player.prototype.onCollision = function (otherEntity) {
+    Link.prototype.onCollision = function (otherEntity) {
         console.log(this, "collided with", otherEntity);
     };
-    return Player;
+    /**
+     * handles the movement and animation for link
+     *
+     * @param arrowKeys the current pressed keys
+     */
+    Link.prototype.handleMovement = function (arrowKeys) {
+        // move the player
+        if (arrowKeys.left) {
+            this.setPosition(this.position.add(new math_1.Vector2D(-5, 0)));
+            this.playAnimation('run_left', true);
+        }
+        else if (arrowKeys.right) {
+            this.setPosition(this.position.add(new math_1.Vector2D(5, 0)));
+            this.playAnimation('run_right', true);
+        }
+        if (arrowKeys.down) {
+            this.setPosition(this.position.add(new math_1.Vector2D(0, 5)));
+            this.playAnimation('run_down', true);
+        }
+        else if (arrowKeys.up) {
+            this.setPosition(this.position.add(new math_1.Vector2D(0, -5)));
+            this.playAnimation('run_up', true);
+        }
+        // idle without animation
+        if (!(arrowKeys.down || arrowKeys.left || arrowKeys.right || arrowKeys.up)
+            &&
+                this.isAnimationRunning()) {
+            // stop animation
+            this.stopAnimation();
+        }
+    };
+    return Link;
 }(entity_1.CollidableEntity));
-exports.Player = Player;
+exports.Link = Link;
 
 
 /***/ }),
-/* 59 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5732,11 +6114,11 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(60));
+__export(__webpack_require__(64));
 
 
 /***/ }),
-/* 60 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5757,317 +6139,6 @@ var CollisionType;
     CollisionType[CollisionType["Rectangle"] = 1] = "Rectangle";
     CollisionType[CollisionType["RotatedRectangle"] = 2] = "RotatedRectangle";
 })(CollisionType = exports.CollisionType || (exports.CollisionType = {}));
-
-
-/***/ }),
-/* 61 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(62));
-
-
-/***/ }),
-/* 62 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-var CameraMode_1 = __webpack_require__(63);
-var math_1 = __webpack_require__(0);
-/**
- * the view for the player into the game
- */
-var Camera = (function () {
-    /**
-     *
-     * @param scale the scale of the world. 1 means that a tile of 32x32 will renderes on 32x32 pixel. scane 5 means that a tile of 32x32 will be rendered as (32*5)x(32*5) pixel...
-     * @param mode the camera mode
-     */
-    function Camera(scale, mode) {
-        if (scale === void 0) { scale = 1; }
-        if (mode === void 0) { mode = CameraMode_1.CameraMode.Orthogonal; }
-        this.scale = scale;
-        this.mode = mode;
-        /**
-         * the entitiy which the camera should follow
-         */
-        this.followingEntity = null;
-        /**
-         * the current camera world bounds
-         */
-        this.worldBounds = null;
-    }
-    /**
-     * get the camera mode
-     */
-    Camera.prototype.getMode = function () {
-        return this.mode;
-    };
-    /**
-     * get the current world scale modificator
-     */
-    Camera.prototype.getScale = function () {
-        return this.scale;
-    };
-    /**
-     * get the camera scale as vector
-     */
-    Camera.prototype.getScaneVector = function () {
-        return new math_1.Vector2D(this.scale, this.scale);
-    };
-    /**
-     * set the current world scale modificator
-     */
-    Camera.prototype.setScale = function (scale) {
-        this.scale = scale;
-    };
-    /**
-     * follows one entity
-     *
-     * @param entity the entity to follow
-     */
-    Camera.prototype.followEntity = function (entity) {
-        this.followingEntity = entity;
-    };
-    /**
-     * get the current entity the camera follows.
-     * can be undefined is the camera is not following an entity
-     */
-    Camera.prototype.getFollowingEntity = function () {
-        return this.followingEntity;
-    };
-    /**
-     * if the camera should be allways within the world, set the world
-     * bounds to the current active world
-     */
-    Camera.prototype.setWorldBounds = function (world) {
-        var dimension = world.getWorldDimension();
-        this.worldBounds = new math_1.Vector2D(dimension.x, dimension.y);
-    };
-    /**
-     * get the current world bounds.
-     *
-     * @warning return value can be null if no bounds are available!
-     */
-    Camera.prototype.getWorldBounds = function () {
-        var wb = this.worldBounds;
-        if (!wb)
-            return wb;
-        // add the current camera scale
-        return wb.multiply(new math_1.Vector2D(this.getScale(), this.getScale()));
-    };
-    return Camera;
-}());
-exports.Camera = Camera;
-
-
-/***/ }),
-/* 63 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * the currently supported camera modes
- */
-var CameraMode;
-(function (CameraMode) {
-    CameraMode[CameraMode["Orthogonal"] = 0] = "Orthogonal";
-})(CameraMode = exports.CameraMode || (exports.CameraMode = {}));
-
-
-/***/ }),
-/* 64 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-var asset_1 = __webpack_require__(4);
-var math_1 = __webpack_require__(0);
-/**
- * a helper class to calculate the right offset and scale of objects
- * when a camera is unsed to display the game
- */
-var CameraOffsetCalculator = (function () {
-    function CameraOffsetCalculator() {
-    }
-    /**
-     * calculates the entity offset and scaleability of its image by using one
-     * camera object.
-     * the return array can be directiy used to draw the image
-     *
-     * @return the array for ctx.drawImage() or boolean === false if the entity is not within the canvas
-     */
-    CameraOffsetCalculator.imageScaleDrawEntity = function (entity, camera) {
-        // get the entity image scale from the camera
-        var scale = camera.getScale();
-        // get the original image as ImageBitmap
-        var entityImage = CameraOffsetCalculator.assetLoader.getAsset(entity.getImage(), asset_1.AssetType.Image).getData();
-        // calculate the scale
-        var newWidth = entityImage.width * scale * entity.getScale();
-        var newHeight = entityImage.width * scale * entity.getScale();
-        // calculate position
-        var newPosition = CameraOffsetCalculator.calculatePositionOffsetForCameraFollow(entity.getPosition(), camera);
-        // check if visible
-        if (!CameraOffsetCalculator.positionIsWithinCameraRange(newPosition, new math_1.Vector2D(newWidth, newHeight)))
-            return false;
-        return [
-            entityImage,
-            0,
-            0,
-            entityImage.width,
-            entityImage.height,
-            newPosition.x,
-            newPosition.y,
-            newWidth,
-            newHeight
-        ];
-    };
-    /**
-     * a helper function to draw a tile with camera and offset calculations
-     *
-     * @param originalPosition the position of the tile where it should originally be drawn
-     * @param tile the image to draw
-     * @param camera the active camera
-     *
-     * @return the array for ctx.drawImage() or boolean === false if the entity is not within the canvas
-     */
-    CameraOffsetCalculator.imageScaleDrawTile = function (originalPosition, tile, camera) {
-        // get the current camera scale
-        var scale = camera.getScale();
-        // get the tile image as BitmapImage
-        var tileImage = tile.getData();
-        // calculate the scale
-        var newWidth = tileImage.width * scale;
-        var newHeight = tileImage.height * scale;
-        // calculate position
-        // @todo: result is not 100% accurate... need further investigations
-        var newPosition = CameraOffsetCalculator.calculatePositionOffsetForCameraFollow(new math_1.Vector2D(originalPosition.x * scale, originalPosition.y * scale), camera);
-        // check if visible
-        if (!CameraOffsetCalculator.positionIsWithinCameraRange(newPosition, new math_1.Vector2D(newWidth, newHeight)))
-            return false;
-        return [
-            tileImage,
-            0,
-            0,
-            tileImage.width,
-            tileImage.height,
-            newPosition.x,
-            newPosition.y,
-            newWidth,
-            newHeight
-        ];
-    };
-    /**
-     * check if an object is visible by the camera
-     *
-     * @param position
-     * @param objectDimension
-     */
-    CameraOffsetCalculator.positionIsWithinCameraRange = function (position, objectDimension) {
-        // @todo: no check with window here, use the canvas object itself
-        var canvasDim = CameraOffsetCalculator.getCanvasDimension();
-        var canvasWidth = canvasDim.x;
-        var canvasHeight = canvasDim.y;
-        // add the two vectors
-        var maxOffsetVector = position.substract(objectDimension);
-        // check if visible
-        return canvasWidth >= maxOffsetVector.x && canvasHeight >= maxOffsetVector.y;
-    };
-    /**
-     * get the current canvas dimension
-     */
-    CameraOffsetCalculator.getCanvasDimension = function () {
-        var canvas = document.querySelector('canvas');
-        return new math_1.Vector2D(canvas.width, canvas.height);
-    };
-    /**
-     * calculates the position offset for camera following
-     */
-    CameraOffsetCalculator.calculatePositionOffsetForCameraFollow = function (originalPosition, camera) {
-        // first check if there is any following
-        var entity = camera.getFollowingEntity();
-        // if no following is active, return the original position
-        if (!entity)
-            return originalPosition;
-        // calculate the offset. the entity should be in the center of the screen
-        var canvasDim = CameraOffsetCalculator.getCanvasDimension();
-        // calculate the center position for the entity and shift the other
-        // vectors.
-        var tmpVector = originalPosition.substract(entity.getPosition()).add(canvasDim.divide(new math_1.Vector2D(2, 2)));
-        // now check if the camera has world bounds
-        var worldBounds = camera.getWorldBounds();
-        if (!worldBounds)
-            return tmpVector;
-        // check if the original vector is smaller than the shifted vector
-        // this will bound the left and top world bounds
-        if (originalPosition.x < tmpVector.x) {
-            // reset the x axis to fix the camera
-            tmpVector.x = originalPosition.x;
-        }
-        if (originalPosition.y < tmpVector.y) {
-            // reset the y axis to fix the camera
-            tmpVector.y = originalPosition.y;
-        }
-        // now the left and bottom bounds
-        // we need the world dimension to check if the camera reaches
-        // the end of the world in the visible area
-        var entityPosition = entity.getPosition();
-        var worldBoundCanvas = worldBounds.substract(canvasDim.half());
-        if (entityPosition.x > worldBoundCanvas.x) {
-            // get the original position and substract
-            // the distance from world bounds and canvas dim
-            tmpVector.x = originalPosition.x - (worldBounds.x - canvasDim.x);
-        }
-        if (entityPosition.y > worldBoundCanvas.y) {
-            // get the original position and substract
-            // the distance from world bounds and canvas dim
-            tmpVector.y = originalPosition.y - (worldBounds.y - canvasDim.y);
-        }
-        if (window.log === true) {
-            console.log(canvasDim, worldBoundCanvas);
-            window.log = false;
-        }
-        // return the corrected position vector
-        return tmpVector;
-    };
-    CameraOffsetCalculator.assetLoader = asset_1.AssetLoader.getInstance();
-    return CameraOffsetCalculator;
-}());
-exports.CameraOffsetCalculator = CameraOffsetCalculator;
 
 
 /***/ })

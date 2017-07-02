@@ -13,7 +13,7 @@ import { Game } from '../client/Game';
 import { Image, Sprite, TileMap, AssetLoader } from '../client/asset';
 import { logMethodCall } from '../shared/decorator';
 
-import { Player } from './entity/Player';
+import { Link } from './entity/Link';
 import { LoadingScreenScene } from '../client/scene';
 import { Input } from '../client/input';
 import { Vector2D, Dimension } from '../shared/math';
@@ -22,7 +22,7 @@ import { Camera } from '../client/camera';
 
 class MyAwesomeGame extends Client {
 
-    private player: Player;
+    private player: Link;
 
     constructor() {
 
@@ -41,8 +41,8 @@ class MyAwesomeGame extends Client {
     public preload(): void {
 
         Sprite.register({
-            name: 'player',
-            path: 'asset/image/player.png'
+            name: 'link_run',
+            path: 'asset/image/link_run.png'
         });
 
         TileMap.register({
@@ -61,10 +61,10 @@ class MyAwesomeGame extends Client {
     public loaded(game: Game): void {
 
         // create entities
-        this.player = new Player();
+        this.player = new Link();
 
         // create game objects
-        let camera = new Camera(1.75);
+        let camera = new Camera(1.5);
         let world = new World(
             game, 'world1'
         );
@@ -91,32 +91,8 @@ class MyAwesomeGame extends Client {
      */
     public update(game: Game, input: Input): void {
 
-        let keys = input.getArrowKeys();
-
-        // move the player
-        if (keys.down) {
-
-            this.player.setPosition(this.player.getPosition().add(
-                new Vector2D(0, 20)
-            ));
-        } else if (keys.up) {
-
-            this.player.setPosition(this.player.getPosition().add(
-                new Vector2D(0, -20)
-            ));
-        }
-
-        if (keys.left) {
-
-            this.player.setPosition(this.player.getPosition().add(
-                new Vector2D(-20, 0)
-            ));
-        } else if (keys.right) {
-
-            this.player.setPosition(this.player.getPosition().add(
-                new Vector2D(20, 0)
-            ));
-        }
+        // handle movement for link
+        this.player.handleMovement(input.getArrowKeys());
     }
 }
 

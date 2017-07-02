@@ -91,6 +91,14 @@ export class Animation {
     }
 
     /**
+     * get the name of the animation
+     */
+    public getName(): string {
+
+        return this.animation.name;
+    }
+
+    /**
      * displays the next animation frame
      */
     private nextAnimationFrame(): void {
@@ -132,6 +140,8 @@ export class Animation {
         window.clearTimeout(this.currentTimeoutHolder);
 
         // restores the image
-        this.entity.setImage(this.previousEntityImage);
+        // currently no restore
+        // @todo: should this be optional?
+        //this.entity.setImage(this.previousEntityImage);
     }
 }

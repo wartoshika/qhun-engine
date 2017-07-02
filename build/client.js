@@ -124,13 +124,34 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(9));
+__export(__webpack_require__(31));
+__export(__webpack_require__(10));
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
 __export(__webpack_require__(22));
 __export(__webpack_require__(32));
 __export(__webpack_require__(11));
 
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -191,25 +212,6 @@ exports.AbstractAsset = AbstractAsset;
 
 
 /***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(23));
-
-
-/***/ }),
 /* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -225,9 +227,7 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(9));
-__export(__webpack_require__(31));
-__export(__webpack_require__(10));
+__export(__webpack_require__(23));
 
 
 /***/ }),
@@ -289,7 +289,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var AssetType_1 = __webpack_require__(0);
-var AbstractAsset_1 = __webpack_require__(3);
+var AbstractAsset_1 = __webpack_require__(4);
 /**
  * the image class handles exactly one image
  */
@@ -617,8 +617,13 @@ var AnimationEntity = (function (_super) {
     AnimationEntity.prototype.playAnimation = function (name, loop) {
         if (loop === void 0) { loop = false; }
         // if there is allready a running animation, stop it
-        if (this.currentAnimation)
+        if (this.currentAnimation) {
+            // if the animation name is the same, ignore the call
+            if (this.currentAnimation.getName() === name)
+                return;
+            // stop and play the new animation
             this.currentAnimation.stopAndRestore();
+        }
         // get the animation player
         var animation = this.animationStack.find(function (a) { return a.name === name; });
         // check if the animation is valid
@@ -643,6 +648,16 @@ var AnimationEntity = (function (_super) {
         // stops the animation
         this.currentAnimation.stopAndRestore();
         this.currentAnimation = null;
+    };
+    /**
+     * check if any or a spefific animation is running
+     *
+     * @param name the name or nothing
+     */
+    AnimationEntity.prototype.isAnimationRunning = function (name) {
+        return (!name && !!this.currentAnimation)
+            ||
+                (name && this.currentAnimation && this.currentAnimation.getName() === name);
     };
     /**
      * get the image asset that displays the current entity
@@ -702,7 +717,7 @@ exports.AnimationEntity = AnimationEntity;
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-var math_1 = __webpack_require__(5);
+var math_1 = __webpack_require__(2);
 /**
  * the base class for all game entities
  */
@@ -837,8 +852,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var AssetType_1 = __webpack_require__(0);
-var helper_1 = __webpack_require__(2);
-var storage_1 = __webpack_require__(4);
+var helper_1 = __webpack_require__(3);
+var storage_1 = __webpack_require__(5);
 var log_1 = __webpack_require__(1);
 var network_1 = __webpack_require__(7);
 /**
@@ -1068,11 +1083,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var decorator_1 = __webpack_require__(19);
 var log_1 = __webpack_require__(1);
-var helper_1 = __webpack_require__(2);
+var helper_1 = __webpack_require__(3);
 var Game_1 = __webpack_require__(33);
-var storage_1 = __webpack_require__(4);
+var storage_1 = __webpack_require__(5);
 var asset_1 = __webpack_require__(16);
-var input_1 = __webpack_require__(49);
+var input_1 = __webpack_require__(52);
 /**
  * the initiation class of the game client
  */
@@ -1372,7 +1387,7 @@ exports.Log = Log;
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-var storage_1 = __webpack_require__(4);
+var storage_1 = __webpack_require__(5);
 /**
  * a class to handle the singleton paradigmen
  */
@@ -1429,7 +1444,7 @@ exports.Singleton = Singleton;
 Object.defineProperty(exports, "__esModule", { value: true });
 // the dependency to get the memory footprint ob stored objects
 var sizeof = __webpack_require__(24);
-var math_1 = __webpack_require__(5);
+var math_1 = __webpack_require__(2);
 var File_1 = __webpack_require__(11);
 /**
  * holds objects in the ram of the operating unit
@@ -3857,12 +3872,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var helper_1 = __webpack_require__(2);
+var helper_1 = __webpack_require__(3);
 var entity_1 = __webpack_require__(34);
 var scene_1 = __webpack_require__(39);
 var world_1 = __webpack_require__(41);
 var log_1 = __webpack_require__(1);
-var camera_1 = __webpack_require__(51);
+var camera_1 = __webpack_require__(49);
 /**
  * a class that handles adding of entities, cameras, physics ...
  */
@@ -4133,6 +4148,12 @@ var Animation = (function () {
         this.nextAnimationFrame();
     };
     /**
+     * get the name of the animation
+     */
+    Animation.prototype.getName = function () {
+        return this.animation.name;
+    };
+    /**
      * displays the next animation frame
      */
     Animation.prototype.nextAnimationFrame = function () {
@@ -4164,7 +4185,9 @@ var Animation = (function () {
         // stop the animation
         window.clearTimeout(this.currentTimeoutHolder);
         // restores the image
-        this.entity.setImage(this.previousEntityImage);
+        // currently no restore
+        // @todo: should this be optional?
+        //this.entity.setImage(this.previousEntityImage);
     };
     return Animation;
 }());
@@ -4400,7 +4423,7 @@ __export(__webpack_require__(42));
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 var physic_1 = __webpack_require__(43);
-var math_1 = __webpack_require__(5);
+var math_1 = __webpack_require__(2);
 var asset_1 = __webpack_require__(16);
 /**
  * a class to handle world spefific things
@@ -4651,7 +4674,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var AssetType_1 = __webpack_require__(0);
 var Image_1 = __webpack_require__(6);
-var AbstractAsset_1 = __webpack_require__(3);
+var AbstractAsset_1 = __webpack_require__(4);
 var network_1 = __webpack_require__(7);
 var SPRITE_MAP_DELIMITER = ',';
 /**
@@ -4791,7 +4814,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var AssetType_1 = __webpack_require__(0);
-var AbstractAsset_1 = __webpack_require__(3);
+var AbstractAsset_1 = __webpack_require__(4);
 var Sound = (function (_super) {
     __extends(Sound, _super);
     function Sound(name, path, data) {
@@ -4877,11 +4900,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var AbstractAsset_1 = __webpack_require__(3);
+var AbstractAsset_1 = __webpack_require__(4);
 var AssetType_1 = __webpack_require__(0);
 var Image_1 = __webpack_require__(6);
 var network_1 = __webpack_require__(7);
-var math_1 = __webpack_require__(5);
+var math_1 = __webpack_require__(2);
 /**
  * an asset class to load a tilemap as world
  */
@@ -5070,117 +5093,9 @@ __export(__webpack_require__(50));
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
-var helper_1 = __webpack_require__(2);
-/**
- * a basic class to get user input like keybord or mouse data
- */
-var Input = (function (_super) {
-    __extends(Input, _super);
-    function Input() {
-        var _this = _super.call(this) || this;
-        /**
-         * the currently pressed keys
-         */
-        _this.currentKeyInput = [];
-        // add events
-        _this.addEventListener();
-        // bind singleton
-        Input.bindInstance(_this);
-        return _this;
-    }
-    /**
-     * add window events to captcher user input
-     */
-    Input.prototype.addEventListener = function () {
-        window.addEventListener('keydown', this.onKeydown.bind(this));
-        window.addEventListener('keyup', this.onKeyUp.bind(this));
-    };
-    /**
-     * reset all keys
-     */
-    Input.prototype.restoreKeys = function () {
-        this.currentKeyInput = [];
-    };
-    /**
-     * fires on user key input
-     *
-     * @param event the event
-     */
-    Input.prototype.onKeydown = function (event) {
-        // add the key to the stack
-        if (this.currentKeyInput.indexOf(event.keyCode) === -1)
-            this.currentKeyInput.push(event.keyCode);
-    };
-    /**
-     * fires if the user stop pressing one key
-     *
-     * @param event the event
-     */
-    Input.prototype.onKeyUp = function (event) {
-        // removes the code from the key input
-        this.currentKeyInput.splice(this.currentKeyInput.indexOf(event.keyCode), 1);
-    };
-    /**
-     * get the current user input for arrow keys
-     */
-    Input.prototype.getArrowKeys = function () {
-        return {
-            down: this.currentKeyInput.indexOf(40) !== -1,
-            up: this.currentKeyInput.indexOf(38) !== -1,
-            left: this.currentKeyInput.indexOf(37) !== -1,
-            right: this.currentKeyInput.indexOf(39) !== -1
-        };
-    };
-    return Input;
-}(helper_1.Singleton));
-exports.Input = Input;
-
-
-/***/ }),
-/* 51 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(52));
-
-
-/***/ }),
-/* 52 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-var CameraMode_1 = __webpack_require__(53);
-var math_1 = __webpack_require__(5);
+var CameraMode_1 = __webpack_require__(51);
+var math_1 = __webpack_require__(2);
 /**
  * the view for the player into the game
  */
@@ -5269,7 +5184,7 @@ exports.Camera = Camera;
 
 
 /***/ }),
-/* 53 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5288,6 +5203,114 @@ var CameraMode;
 (function (CameraMode) {
     CameraMode[CameraMode["Orthogonal"] = 0] = "Orthogonal";
 })(CameraMode = exports.CameraMode || (exports.CameraMode = {}));
+
+
+/***/ }),
+/* 52 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(53));
+
+
+/***/ }),
+/* 53 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var helper_1 = __webpack_require__(3);
+/**
+ * a basic class to get user input like keybord or mouse data
+ */
+var Input = (function (_super) {
+    __extends(Input, _super);
+    function Input() {
+        var _this = _super.call(this) || this;
+        /**
+         * the currently pressed keys
+         */
+        _this.currentKeyInput = [];
+        // add events
+        _this.addEventListener();
+        // bind singleton
+        Input.bindInstance(_this);
+        return _this;
+    }
+    /**
+     * add window events to captcher user input
+     */
+    Input.prototype.addEventListener = function () {
+        window.addEventListener('keydown', this.onKeydown.bind(this));
+        window.addEventListener('keyup', this.onKeyUp.bind(this));
+    };
+    /**
+     * reset all keys
+     */
+    Input.prototype.restoreKeys = function () {
+        this.currentKeyInput = [];
+    };
+    /**
+     * fires on user key input
+     *
+     * @param event the event
+     */
+    Input.prototype.onKeydown = function (event) {
+        // add the key to the stack
+        if (this.currentKeyInput.indexOf(event.keyCode) === -1)
+            this.currentKeyInput.push(event.keyCode);
+    };
+    /**
+     * fires if the user stop pressing one key
+     *
+     * @param event the event
+     */
+    Input.prototype.onKeyUp = function (event) {
+        // removes the code from the key input
+        this.currentKeyInput.splice(this.currentKeyInput.indexOf(event.keyCode), 1);
+    };
+    /**
+     * get the current user input for arrow keys
+     */
+    Input.prototype.getArrowKeys = function () {
+        return {
+            down: this.currentKeyInput.indexOf(40) !== -1,
+            up: this.currentKeyInput.indexOf(38) !== -1,
+            left: this.currentKeyInput.indexOf(37) !== -1,
+            right: this.currentKeyInput.indexOf(39) !== -1
+        };
+    };
+    return Input;
+}(helper_1.Singleton));
+exports.Input = Input;
 
 
 /***/ })

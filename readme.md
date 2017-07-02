@@ -11,3 +11,8 @@ TODO
 - [o] controls
 - [] physics
 - [] animation states should have possible random values as callback function
+
+
+Known Bugs
+===========
+- when a camera scale is very low and the world map fits entierly on the screen, the camera does not work correctly.

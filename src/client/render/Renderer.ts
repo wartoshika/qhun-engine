@@ -30,7 +30,7 @@ export interface Renderer {
 
     /**
      * the method where all the magic takes place. called in gameloop
-     * to render all entities and other stuff
+     * to render all entities and other stuff.
      */
     render(): void;
 

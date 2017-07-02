@@ -56,8 +56,14 @@ export abstract class AnimationEntity extends Entity implements AnimationableEnt
     public playAnimation(name: string, loop: boolean = false): void {
 
         // if there is allready a running animation, stop it
-        if (this.currentAnimation)
+        if (this.currentAnimation) {
+
+            // if the animation name is the same, ignore the call
+            if (this.currentAnimation.getName() === name) return;
+
+            // stop and play the new animation
             this.currentAnimation.stopAndRestore();
+        }
 
         // get the animation player
         let animation = this.animationStack.find(a => a.name === name);
@@ -90,6 +96,18 @@ export abstract class AnimationEntity extends Entity implements AnimationableEnt
         // stops the animation
         this.currentAnimation.stopAndRestore();
         this.currentAnimation = null;
+    }
+
+    /**
+     * check if any or a spefific animation is running
+     *
+     * @param name the name or nothing
+     */
+    public isAnimationRunning(name?: string): boolean {
+
+        return (!name && !!this.currentAnimation)
+            ||
+            (name && this.currentAnimation && this.currentAnimation.getName() === name);
     }
 
     /**

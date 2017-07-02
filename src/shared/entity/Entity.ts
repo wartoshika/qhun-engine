@@ -13,7 +13,7 @@ import { Vector2D } from '../math';
 export abstract class Entity {
 
     constructor(
-        private position: Vector2D = new Vector2D(0, 0)
+        protected position: Vector2D = new Vector2D(0, 0)
     ) { }
 
     /**
