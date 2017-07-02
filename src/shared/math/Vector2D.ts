@@ -102,4 +102,28 @@ export class Vector2D<T extends number = number> extends Dimension {
             Math.pow((this.y - otherVector.y), 2)
         );
     }
+
+    /**
+     * get the current vector divided by 2
+     */
+    public half(): Vector2D {
+
+        return this.divide(new Vector2D(2, 2));
+    }
+
+    /**
+     * get the current vector multiply by 2
+     */
+    public double(): Vector2D {
+
+        return this.multiply(new Vector2D(2, 2));
+    }
+
+    /**
+     * Math.abs() on x and y
+     */
+    public abs(): Vector2D {
+
+        return new Vector2D(Math.abs(this.x), Math.abs(this.y));
+    }
 }

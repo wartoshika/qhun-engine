@@ -3728,6 +3728,24 @@ var Vector2D = (function (_super) {
             +
                 Math.pow((this.y - otherVector.y), 2));
     };
+    /**
+     * get the current vector divided by 2
+     */
+    Vector2D.prototype.half = function () {
+        return this.divide(new Vector2D(2, 2));
+    };
+    /**
+     * get the current vector multiply by 2
+     */
+    Vector2D.prototype.double = function () {
+        return this.multiply(new Vector2D(2, 2));
+    };
+    /**
+     * Math.abs() on x and y
+     */
+    Vector2D.prototype.abs = function () {
+        return new Vector2D(Math.abs(this.x), Math.abs(this.y));
+    };
     return Vector2D;
 }(Dimension_1.Dimension));
 exports.Vector2D = Vector2D;
@@ -4412,6 +4430,12 @@ var World = (function () {
     World.prototype.getTileMap = function () {
         return this.map;
     };
+    /**
+     * get the dimension of the world using the tilemap information
+     */
+    World.prototype.getWorldDimension = function () {
+        return this.map.getWorldDimension();
+    };
     return World;
 }());
 exports.World = World;
@@ -4857,6 +4881,7 @@ var AbstractAsset_1 = __webpack_require__(3);
 var AssetType_1 = __webpack_require__(0);
 var Image_1 = __webpack_require__(6);
 var network_1 = __webpack_require__(7);
+var math_1 = __webpack_require__(5);
 /**
  * an asset class to load a tilemap as world
  */
@@ -4880,6 +4905,16 @@ var TileMap = (function (_super) {
      */
     TileMap.prototype.getDimension = function () {
         return this.dimension;
+    };
+    /**
+     * get the amount of pixel for the complete world
+     */
+    TileMap.prototype.getWorldDimension = function () {
+        //@todo: asuming that each layer has the same height and width
+        var width = this.map[0].split(String.fromCharCode(13))[0].split(',').length;
+        var height = this.map[0].split(String.fromCharCode(13)).length - 1;
+        // multiply with the tile width and height
+        return new math_1.Dimension(width * this.dimension.x, height * this.dimension.y);
     };
     /**
      * register a tilemap asset
@@ -5145,6 +5180,7 @@ __export(__webpack_require__(52));
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 var CameraMode_1 = __webpack_require__(53);
+var math_1 = __webpack_require__(5);
 /**
  * the view for the player into the game
  */
@@ -5163,6 +5199,10 @@ var Camera = (function () {
          * the entitiy which the camera should follow
          */
         this.followingEntity = null;
+        /**
+         * the current camera world bounds
+         */
+        this.worldBounds = null;
     }
     /**
      * get the camera mode
@@ -5175,6 +5215,12 @@ var Camera = (function () {
      */
     Camera.prototype.getScale = function () {
         return this.scale;
+    };
+    /**
+     * get the camera scale as vector
+     */
+    Camera.prototype.getScaneVector = function () {
+        return new math_1.Vector2D(this.scale, this.scale);
     };
     /**
      * set the current world scale modificator
@@ -5196,6 +5242,26 @@ var Camera = (function () {
      */
     Camera.prototype.getFollowingEntity = function () {
         return this.followingEntity;
+    };
+    /**
+     * if the camera should be allways within the world, set the world
+     * bounds to the current active world
+     */
+    Camera.prototype.setWorldBounds = function (world) {
+        var dimension = world.getWorldDimension();
+        this.worldBounds = new math_1.Vector2D(dimension.x, dimension.y);
+    };
+    /**
+     * get the current world bounds.
+     *
+     * @warning return value can be null if no bounds are available!
+     */
+    Camera.prototype.getWorldBounds = function () {
+        var wb = this.worldBounds;
+        if (!wb)
+            return wb;
+        // add the current camera scale
+        return wb.multiply(new math_1.Vector2D(this.getScale(), this.getScale()));
     };
     return Camera;
 }());

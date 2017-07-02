@@ -64,7 +64,7 @@ class MyAwesomeGame extends Client {
         this.player = new Player();
 
         // create game objects
-        let camera = new Camera(2);
+        let camera = new Camera(1.75);
         let world = new World(
             game, 'world1'
         );
@@ -77,6 +77,9 @@ class MyAwesomeGame extends Client {
 
         // follow the player with the camera
         camera.followEntity(this.player);
+
+        // let the camera stick to the world
+        camera.setWorldBounds(world);
     }
 
     /**
@@ -94,24 +97,24 @@ class MyAwesomeGame extends Client {
         if (keys.down) {
 
             this.player.setPosition(this.player.getPosition().add(
-                new Vector2D(0, 5)
+                new Vector2D(0, 20)
             ));
         } else if (keys.up) {
 
             this.player.setPosition(this.player.getPosition().add(
-                new Vector2D(0, -5)
+                new Vector2D(0, -20)
             ));
         }
 
         if (keys.left) {
 
             this.player.setPosition(this.player.getPosition().add(
-                new Vector2D(-5, 0)
+                new Vector2D(-20, 0)
             ));
         } else if (keys.right) {
 
             this.player.setPosition(this.player.getPosition().add(
-                new Vector2D(5, 0)
+                new Vector2D(20, 0)
             ));
         }
     }

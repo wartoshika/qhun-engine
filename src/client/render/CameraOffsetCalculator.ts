@@ -81,7 +81,7 @@ export class CameraOffsetCalculator {
 
         // calculate the scale
         let newWidth = tileImage.width * scale;
-        let newHeight = tileImage.width * scale;
+        let newHeight = tileImage.height * scale;
 
         // calculate position
         // @todo: result is not 100% accurate... need further investigations
@@ -154,9 +154,57 @@ export class CameraOffsetCalculator {
         // calculate the offset. the entity should be in the center of the screen
         let canvasDim = CameraOffsetCalculator.getCanvasDimension();
 
-        // calculate!
-        return originalPosition.substract(entity.getPosition()).add(
+        // calculate the center position for the entity and shift the other
+        // vectors.
+        let tmpVector = originalPosition.substract(entity.getPosition()).add(
             canvasDim.divide(new Vector2D(2, 2))
         );
+
+        // now check if the camera has world bounds
+        let worldBounds = camera.getWorldBounds();
+        if (!worldBounds) return tmpVector;
+
+        // check if the original vector is smaller than the shifted vector
+        // this will bound the left and top world bounds
+        if (originalPosition.x < tmpVector.x) {
+
+            // reset the x axis to fix the camera
+            tmpVector.x = originalPosition.x;
+        }
+
+        if (originalPosition.y < tmpVector.y) {
+
+            // reset the y axis to fix the camera
+            tmpVector.y = originalPosition.y;
+        }
+
+        // now the left and bottom bounds
+        // we need the world dimension to check if the camera reaches
+        // the end of the world in the visible area
+        let entityPosition = entity.getPosition();
+        let worldBoundCanvas = worldBounds.substract(canvasDim.half());
+
+        if (entityPosition.x > worldBoundCanvas.x) {
+
+            // get the original position and substract
+            // the distance from world bounds and canvas dim
+            tmpVector.x = originalPosition.x - (worldBounds.x - canvasDim.x);
+        }
+
+        if (entityPosition.y > worldBoundCanvas.y) {
+
+            // get the original position and substract
+            // the distance from world bounds and canvas dim
+            tmpVector.y = originalPosition.y - (worldBounds.y - canvasDim.y);
+        }
+
+        if ((<any>window).log === true) {
+
+            console.log(canvasDim, worldBoundCanvas);
+            (<any>window).log = false;
+        }
+
+        // return the corrected position vector
+        return tmpVector;
     }
 }

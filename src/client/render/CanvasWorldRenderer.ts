@@ -40,8 +40,7 @@ export class CanvasWorldRenderer {
             // build up the map object
             let mapLines = tileMap.getMap()[layer].split(String.fromCharCode(13));
             let horizontalImageCount = mapLines.length - 1;
-            let verticalImage = mapLines[0].split(',');
-            let verticalImageCount = verticalImage.length - 1;
+            let verticalImageCount = mapLines.length - 1;
 
             // get the asset loader instance
             let assetLoader = AssetLoader.getInstance<AssetLoader>();

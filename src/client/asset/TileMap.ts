@@ -60,6 +60,22 @@ export class TileMap extends AbstractAsset {
     }
 
     /**
+     * get the amount of pixel for the complete world
+     */
+    public getWorldDimension(): Dimension {
+
+        //@todo: asuming that each layer has the same height and width
+        let width = this.map[0].split(String.fromCharCode(13))[0].split(',').length;
+        let height = this.map[0].split(String.fromCharCode(13)).length - 1;
+
+        // multiply with the tile width and height
+        return new Dimension(
+            width * this.dimension.x,
+            height * this.dimension.y
+        );
+    }
+
+    /**
      * register a tilemap asset
      *
      * @param name the unique name of the image

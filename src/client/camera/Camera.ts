@@ -7,6 +7,8 @@
 
 import { CameraMode } from './CameraMode';
 import { Entity } from '../../shared/entity';
+import { Vector2D } from '../../shared/math';
+import { World } from '../world';
 
 /**
  * the view for the player into the game
@@ -17,6 +19,11 @@ export class Camera {
      * the entitiy which the camera should follow
      */
     private followingEntity: Entity = null;
+
+    /**
+     * the current camera world bounds
+     */
+    private worldBounds: Vector2D = null;
 
     /**
      *
@@ -45,6 +52,14 @@ export class Camera {
     }
 
     /**
+     * get the camera scale as vector
+     */
+    public getScaneVector(): Vector2D {
+
+        return new Vector2D(this.scale, this.scale);
+    }
+
+    /**
      * set the current world scale modificator
      */
     public setScale(scale: number): void {
@@ -69,5 +84,32 @@ export class Camera {
     public getFollowingEntity(): Entity {
 
         return this.followingEntity;
+    }
+
+    /**
+     * if the camera should be allways within the world, set the world
+     * bounds to the current active world
+     */
+    public setWorldBounds(world: World): void {
+
+        let dimension = world.getWorldDimension();
+        this.worldBounds = new Vector2D(
+            dimension.x,
+            dimension.y
+        );
+    }
+
+    /**
+     * get the current world bounds.
+     *
+     * @warning return value can be null if no bounds are available!
+     */
+    public getWorldBounds(): Vector2D {
+
+        let wb = this.worldBounds;
+        if (!wb) return wb;
+
+        // add the current camera scale
+        return wb.multiply(new Vector2D(this.getScale(), this.getScale()));
     }
 }

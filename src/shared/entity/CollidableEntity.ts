@@ -48,4 +48,5 @@ export abstract class CollidableEntity extends Entity implements CanCollide {
 
         return this.entityHeight;
     }
+
 }

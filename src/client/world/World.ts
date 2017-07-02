@@ -55,4 +55,12 @@ export class World {
 
         return this.map;
     }
+
+    /**
+     * get the dimension of the world using the tilemap information
+     */
+    public getWorldDimension(): Dimension {
+
+        return this.map.getWorldDimension();
+    }
 }

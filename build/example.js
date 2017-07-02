@@ -1484,7 +1484,7 @@ var MyAwesomeGame = (function (_super) {
         // create entities
         this.player = new Player_1.Player();
         // create game objects
-        var camera = new camera_1.Camera(2);
+        var camera = new camera_1.Camera(1.75);
         var world = new world_1.World(game, 'world1');
         // add game objects
         game.add(this.player, world, camera);
@@ -1492,6 +1492,8 @@ var MyAwesomeGame = (function (_super) {
         game.loadWorld('world1');
         // follow the player with the camera
         camera.followEntity(this.player);
+        // let the camera stick to the world
+        camera.setWorldBounds(world);
     };
     /**
      * update function handles the interaction with the player eg. the keybord
@@ -1504,16 +1506,16 @@ var MyAwesomeGame = (function (_super) {
         var keys = input.getArrowKeys();
         // move the player
         if (keys.down) {
-            this.player.setPosition(this.player.getPosition().add(new math_1.Vector2D(0, 5)));
+            this.player.setPosition(this.player.getPosition().add(new math_1.Vector2D(0, 20)));
         }
         else if (keys.up) {
-            this.player.setPosition(this.player.getPosition().add(new math_1.Vector2D(0, -5)));
+            this.player.setPosition(this.player.getPosition().add(new math_1.Vector2D(0, -20)));
         }
         if (keys.left) {
-            this.player.setPosition(this.player.getPosition().add(new math_1.Vector2D(-5, 0)));
+            this.player.setPosition(this.player.getPosition().add(new math_1.Vector2D(-20, 0)));
         }
         else if (keys.right) {
-            this.player.setPosition(this.player.getPosition().add(new math_1.Vector2D(5, 0)));
+            this.player.setPosition(this.player.getPosition().add(new math_1.Vector2D(20, 0)));
         }
     };
     __decorate([
@@ -4193,6 +4195,24 @@ var Vector2D = (function (_super) {
             +
                 Math.pow((this.y - otherVector.y), 2));
     };
+    /**
+     * get the current vector divided by 2
+     */
+    Vector2D.prototype.half = function () {
+        return this.divide(new Vector2D(2, 2));
+    };
+    /**
+     * get the current vector multiply by 2
+     */
+    Vector2D.prototype.double = function () {
+        return this.multiply(new Vector2D(2, 2));
+    };
+    /**
+     * Math.abs() on x and y
+     */
+    Vector2D.prototype.abs = function () {
+        return new Vector2D(Math.abs(this.x), Math.abs(this.y));
+    };
     return Vector2D;
 }(Dimension_1.Dimension));
 exports.Vector2D = Vector2D;
@@ -4616,6 +4636,12 @@ var World = (function () {
      */
     World.prototype.getTileMap = function () {
         return this.map;
+    };
+    /**
+     * get the dimension of the world using the tilemap information
+     */
+    World.prototype.getWorldDimension = function () {
+        return this.map.getWorldDimension();
     };
     return World;
 }());
@@ -5062,6 +5088,7 @@ var AbstractAsset_1 = __webpack_require__(5);
 var AssetType_1 = __webpack_require__(1);
 var Image_1 = __webpack_require__(7);
 var network_1 = __webpack_require__(8);
+var math_1 = __webpack_require__(0);
 /**
  * an asset class to load a tilemap as world
  */
@@ -5085,6 +5112,16 @@ var TileMap = (function (_super) {
      */
     TileMap.prototype.getDimension = function () {
         return this.dimension;
+    };
+    /**
+     * get the amount of pixel for the complete world
+     */
+    TileMap.prototype.getWorldDimension = function () {
+        //@todo: asuming that each layer has the same height and width
+        var width = this.map[0].split(String.fromCharCode(13))[0].split(',').length;
+        var height = this.map[0].split(String.fromCharCode(13)).length - 1;
+        // multiply with the tile width and height
+        return new math_1.Dimension(width * this.dimension.x, height * this.dimension.y);
     };
     /**
      * register a tilemap asset
@@ -5524,8 +5561,7 @@ var CanvasWorldRenderer = (function () {
             // build up the map object
             var mapLines = tileMap.getMap()[layer].split(String.fromCharCode(13));
             var horizontalImageCount = mapLines.length - 1;
-            var verticalImage = mapLines[0].split(',');
-            var verticalImageCount = verticalImage.length - 1;
+            var verticalImageCount = mapLines.length - 1;
             // get the asset loader instance
             var assetLoader = asset_1.AssetLoader.getInstance();
             var tileDimension = this.world.getTileMap().getDimension();
@@ -5756,6 +5792,7 @@ __export(__webpack_require__(62));
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 var CameraMode_1 = __webpack_require__(63);
+var math_1 = __webpack_require__(0);
 /**
  * the view for the player into the game
  */
@@ -5774,6 +5811,10 @@ var Camera = (function () {
          * the entitiy which the camera should follow
          */
         this.followingEntity = null;
+        /**
+         * the current camera world bounds
+         */
+        this.worldBounds = null;
     }
     /**
      * get the camera mode
@@ -5786,6 +5827,12 @@ var Camera = (function () {
      */
     Camera.prototype.getScale = function () {
         return this.scale;
+    };
+    /**
+     * get the camera scale as vector
+     */
+    Camera.prototype.getScaneVector = function () {
+        return new math_1.Vector2D(this.scale, this.scale);
     };
     /**
      * set the current world scale modificator
@@ -5807,6 +5854,26 @@ var Camera = (function () {
      */
     Camera.prototype.getFollowingEntity = function () {
         return this.followingEntity;
+    };
+    /**
+     * if the camera should be allways within the world, set the world
+     * bounds to the current active world
+     */
+    Camera.prototype.setWorldBounds = function (world) {
+        var dimension = world.getWorldDimension();
+        this.worldBounds = new math_1.Vector2D(dimension.x, dimension.y);
+    };
+    /**
+     * get the current world bounds.
+     *
+     * @warning return value can be null if no bounds are available!
+     */
+    Camera.prototype.getWorldBounds = function () {
+        var wb = this.worldBounds;
+        if (!wb)
+            return wb;
+        // add the current camera scale
+        return wb.multiply(new math_1.Vector2D(this.getScale(), this.getScale()));
     };
     return Camera;
 }());
@@ -5905,7 +5972,7 @@ var CameraOffsetCalculator = (function () {
         var tileImage = tile.getData();
         // calculate the scale
         var newWidth = tileImage.width * scale;
-        var newHeight = tileImage.width * scale;
+        var newHeight = tileImage.height * scale;
         // calculate position
         // @todo: result is not 100% accurate... need further investigations
         var newPosition = CameraOffsetCalculator.calculatePositionOffsetForCameraFollow(new math_1.Vector2D(originalPosition.x * scale, originalPosition.y * scale), camera);
@@ -5958,8 +6025,44 @@ var CameraOffsetCalculator = (function () {
             return originalPosition;
         // calculate the offset. the entity should be in the center of the screen
         var canvasDim = CameraOffsetCalculator.getCanvasDimension();
-        // calculate!
-        return originalPosition.substract(entity.getPosition()).add(canvasDim.divide(new math_1.Vector2D(2, 2)));
+        // calculate the center position for the entity and shift the other
+        // vectors.
+        var tmpVector = originalPosition.substract(entity.getPosition()).add(canvasDim.divide(new math_1.Vector2D(2, 2)));
+        // now check if the camera has world bounds
+        var worldBounds = camera.getWorldBounds();
+        if (!worldBounds)
+            return tmpVector;
+        // check if the original vector is smaller than the shifted vector
+        // this will bound the left and top world bounds
+        if (originalPosition.x < tmpVector.x) {
+            // reset the x axis to fix the camera
+            tmpVector.x = originalPosition.x;
+        }
+        if (originalPosition.y < tmpVector.y) {
+            // reset the y axis to fix the camera
+            tmpVector.y = originalPosition.y;
+        }
+        // now the left and bottom bounds
+        // we need the world dimension to check if the camera reaches
+        // the end of the world in the visible area
+        var entityPosition = entity.getPosition();
+        var worldBoundCanvas = worldBounds.substract(canvasDim.half());
+        if (entityPosition.x > worldBoundCanvas.x) {
+            // get the original position and substract
+            // the distance from world bounds and canvas dim
+            tmpVector.x = originalPosition.x - (worldBounds.x - canvasDim.x);
+        }
+        if (entityPosition.y > worldBoundCanvas.y) {
+            // get the original position and substract
+            // the distance from world bounds and canvas dim
+            tmpVector.y = originalPosition.y - (worldBounds.y - canvasDim.y);
+        }
+        if (window.log === true) {
+            console.log(canvasDim, worldBoundCanvas);
+            window.log = false;
+        }
+        // return the corrected position vector
+        return tmpVector;
     };
     CameraOffsetCalculator.assetLoader = asset_1.AssetLoader.getInstance();
     return CameraOffsetCalculator;
