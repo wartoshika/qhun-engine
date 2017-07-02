@@ -4,5 +4,6 @@ TODO
 - [x] sprite images incl. converter for sprite to sub images
 - [x] split shared/entity into client/entity and server/entity
 - [x] entity animations (currently a basic form)
+- [o] controls
 - [] physics
-- [] controls
+- [] animation states should have possible random values as callback function

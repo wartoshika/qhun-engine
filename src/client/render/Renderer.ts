@@ -9,6 +9,7 @@ import { Dimension } from '../../shared/math';
 import { RenderableEntity } from '../entity';
 import { AssetLoader } from '../asset';
 import { Game } from '../Game';
+import { ClientConfig } from '../ClientConfig';
 
 /**
  * a basic renderer interface to have future space for eg webgl
@@ -18,7 +19,7 @@ export interface Renderer {
     /**
      * set up the game environment to a given dimension
      */
-    setup(gameDimension: Dimension): void;
+    setup(clientConfig: ClientConfig): void;
 
     /**
      * this method is called during gameLoop before render is called

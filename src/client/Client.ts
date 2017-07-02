@@ -68,7 +68,7 @@ export abstract class Client {
 
         // setup renderer
         this.renderer = new this.clientConfig.rederer();
-        this.renderer.setup(this.clientConfig.gameDimension);
+        this.renderer.setup(this.clientConfig);
 
         // start the preload phase
         this.preload();

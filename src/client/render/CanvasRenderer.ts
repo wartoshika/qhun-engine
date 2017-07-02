@@ -10,8 +10,11 @@ import { Dimension } from '../../shared/math';
 import { Log } from '../../shared/log';
 import { Image, AssetLoader, AssetType } from '../asset';
 import { BasicRenderer } from '../render/BasicRenderer';
+import { ClientConfig } from '../ClientConfig';
 
 import { RamStorage } from '../../shared/storage';
+
+const FPS_OFFSET = 25;
 
 /**
  * a game renderer based on the html canvas element
@@ -38,6 +41,11 @@ export class CanvasRenderer extends BasicRenderer implements Renderer {
      */
     private gameDimension: Dimension;
 
+    /**
+     * holder of the client config
+     */
+    private clientConfig: ClientConfig;
+
     constructor() {
         super();
 
@@ -54,14 +62,44 @@ export class CanvasRenderer extends BasicRenderer implements Renderer {
     /**
      * set up the game environment to a given dimension
      */
-    public setup(gameDimension: Dimension): void {
+    public setup(clientConfig: ClientConfig): void {
+
+        // call super function
+        super.setup(clientConfig);
+        this.clientConfig = clientConfig;
 
         // save the dimension and create the canvas
-        this.gameDimension = gameDimension;
+        this.gameDimension = clientConfig.gameDimension;
         this.createCanvas();
 
         // get the 2d context
         this.ctx = this.canvas.getContext('2d');
+    }
+
+    /**
+     * print the current fps on the screen
+     *
+     * @param fps the current fps
+     */
+    protected printFps(): void {
+
+        // print only if the user want this
+        if (!this.clientConfig.printFps) return;
+
+        // calculate the fps
+        this.calculateFps();
+
+        // write the fps number to the canvas context
+        this.ctx.fillStyle = "white";
+        this.ctx.font = "30px Arial";
+        this.ctx.textAlign = "center";
+        this.ctx.fillText(this.fps.fps.toFixed(0), FPS_OFFSET, FPS_OFFSET);
+
+        // black stroke
+        this.ctx.strokeStyle = "black";
+        this.ctx.font = "361x Arial";
+        this.ctx.textAlign = "center";
+        this.ctx.strokeText(this.fps.fps.toFixed(0), FPS_OFFSET, FPS_OFFSET);
     }
 
     /**
@@ -109,6 +147,11 @@ export class CanvasRenderer extends BasicRenderer implements Renderer {
             );
         });
 
+        // print fps
+        this.printFps();
+
+        // fps update
+        this.fps.lastUpdate = +new Date();
     }
 
 }

@@ -18,8 +18,6 @@ describe('shared/helper/Singleton.ts', () => {
 
     it('singleton should store its instance in the ram storage', () => {
 
-
-
         // ram storage should not contain any singleton classes
         expect(RamStorage.getSize("singleton.instance.TestClass")).to.eq(0);
 
@@ -27,6 +25,18 @@ describe('shared/helper/Singleton.ts', () => {
 
         // the storage should not grow
         expect(RamStorage.get<TestClass>("singleton.instance.TestClass")).to.eq(test);
+    });
+
+    it('bindInstace() sould bind the given instance to the storage', () => {
+
+        let a = new TestClass();
+        (<any>a).test = true;
+        (<any>TestClass).bindInstance(a);
+
+        // get from the storage
+        let b = RamStorage.get<TestClass>("singleton.instance.TestClass");
+
+        expect((<any>b).test).to.be.true;
     });
 
 });

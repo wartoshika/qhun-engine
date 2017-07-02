@@ -453,6 +453,15 @@ class Helper {
     static roundToPrecision(number, precision = 2) {
         return +number.toFixed(precision);
     }
+    /**
+     * converts mass to newtons based on a given force
+     *
+     * @param mass the mass of the object
+     * @param force the gravity force
+     */
+    static massToWeight(mass, force) {
+        return mass * force;
+    }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = Helper;
 
@@ -1042,6 +1051,21 @@ class BasicRenderer extends __WEBPACK_IMPORTED_MODULE_0__shared_helper__["b" /* 
     constructor() {
         super(...arguments);
         this.entities = [];
+        /**
+         * holder of fps things
+         */
+        this.fps = {
+            fps: 0,
+            lastUpdate: +new Date(),
+            filter: 50
+        };
+    }
+    /**
+     * sets up the renderer
+     *
+     * @param clientConfig the current config
+     */
+    setup(clientConfig) {
     }
     /**
      * get all renderable entities
@@ -1055,6 +1079,19 @@ class BasicRenderer extends __WEBPACK_IMPORTED_MODULE_0__shared_helper__["b" /* 
         });
         // just return the currently visible entities
         return renderableEntities;
+    }
+    /**
+     * print the current fps on the canvas
+     */
+    calculateFps() {
+        // @see https://stackoverflow.com/questions/5078913/html5-canvas-performance-calculating-loops-frames-per-second
+        let thisFrameFps = 1000 / ((this.fps.now = +new Date()) - this.fps.lastUpdate);
+        // if there was an update
+        if (this.fps.now != this.fps.lastUpdate) {
+            // yes, calculate the new fps
+            this.fps.fps += (thisFrameFps - this.fps.fps) / this.fps.filter;
+            this.fps.lastUpdate = this.fps.now;
+        }
     }
     /**
      * add an entity to the current game scene
@@ -1110,7 +1147,8 @@ class MyAwesomeGame extends __WEBPACK_IMPORTED_MODULE_0__client_Client__["a" /* 
     constructor() {
         super({
             gameDimension: __WEBPACK_IMPORTED_MODULE_2__client_environment__["a" /* Viewport */].getWindowDimension(),
-            rederer: __WEBPACK_IMPORTED_MODULE_1__client_render__["a" /* CanvasRenderer */]
+            rederer: __WEBPACK_IMPORTED_MODULE_1__client_render__["a" /* CanvasRenderer */],
+            printFps: true
         });
     }
     /**
@@ -1228,7 +1266,7 @@ class Client {
         let assetLoader = __WEBPACK_IMPORTED_MODULE_4__asset__["a" /* AssetLoader */].getInstance();
         // setup renderer
         this.renderer = new this.clientConfig.rederer();
-        this.renderer.setup(this.clientConfig.gameDimension);
+        this.renderer.setup(this.clientConfig);
         // start the preload phase
         this.preload();
         // await the asset loading
@@ -4465,6 +4503,7 @@ class Input extends __WEBPACK_IMPORTED_MODULE_0__shared_helper__["b" /* Singleto
 
 
 
+const FPS_OFFSET = 25;
 /**
  * a game renderer based on the html canvas element
  */
@@ -4481,12 +4520,37 @@ class CanvasRenderer extends __WEBPACK_IMPORTED_MODULE_2__render_BasicRenderer__
     /**
      * set up the game environment to a given dimension
      */
-    setup(gameDimension) {
+    setup(clientConfig) {
+        // call super function
+        super.setup(clientConfig);
+        this.clientConfig = clientConfig;
         // save the dimension and create the canvas
-        this.gameDimension = gameDimension;
+        this.gameDimension = clientConfig.gameDimension;
         this.createCanvas();
         // get the 2d context
         this.ctx = this.canvas.getContext('2d');
+    }
+    /**
+     * print the current fps on the screen
+     *
+     * @param fps the current fps
+     */
+    printFps() {
+        // print only if the user want this
+        if (!this.clientConfig.printFps)
+            return;
+        // calculate the fps
+        this.calculateFps();
+        // write the fps number to the canvas context
+        this.ctx.fillStyle = "white";
+        this.ctx.font = "30px Arial";
+        this.ctx.textAlign = "center";
+        this.ctx.fillText(this.fps.fps.toFixed(0), FPS_OFFSET, FPS_OFFSET);
+        // black stroke
+        this.ctx.strokeStyle = "black";
+        this.ctx.font = "361x Arial";
+        this.ctx.textAlign = "center";
+        this.ctx.strokeText(this.fps.fps.toFixed(0), FPS_OFFSET, FPS_OFFSET);
     }
     /**
      * creates the canvas element and append it to the given parentNode
@@ -4518,6 +4582,10 @@ class CanvasRenderer extends __WEBPACK_IMPORTED_MODULE_2__render_BasicRenderer__
             // get the image of the entity
             this.assetLoader.getAsset(entity.getImage(), __WEBPACK_IMPORTED_MODULE_1__asset__["b" /* AssetType */].Image).getData(), entity.getPosition().x, entity.getPosition().y);
         });
+        // print fps
+        this.printFps();
+        // fps update
+        this.fps.lastUpdate = +new Date();
     }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = CanvasRenderer;

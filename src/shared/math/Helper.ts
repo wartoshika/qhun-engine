@@ -6,6 +6,11 @@
  */
 
 /**
+ * the newton units as seperate type for a better readabillity
+ */
+export declare type newtons = number;
+
+/**
  * simple math helper class
  */
 export class Helper {
@@ -47,5 +52,16 @@ export class Helper {
     public static roundToPrecision(number: number, precision: number = 2): number {
 
         return +number.toFixed(precision);
+    }
+
+    /**
+     * converts mass to newtons based on a given force
+     *
+     * @param mass the mass of the object
+     * @param force the gravity force
+     */
+    public static massToWeight(mass: number, force: number): newtons {
+
+        return mass * force;
     }
 }

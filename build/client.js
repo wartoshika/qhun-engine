@@ -295,6 +295,15 @@ class Helper {
     static roundToPrecision(number, precision = 2) {
         return +number.toFixed(precision);
     }
+    /**
+     * converts mass to newtons based on a given force
+     *
+     * @param mass the mass of the object
+     * @param force the gravity force
+     */
+    static massToWeight(mass, force) {
+        return mass * force;
+    }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = Helper;
 
@@ -883,7 +892,7 @@ class Client {
         let assetLoader = __WEBPACK_IMPORTED_MODULE_4__asset__["a" /* AssetLoader */].getInstance();
         // setup renderer
         this.renderer = new this.clientConfig.rederer();
-        this.renderer.setup(this.clientConfig.gameDimension);
+        this.renderer.setup(this.clientConfig);
         // start the preload phase
         this.preload();
         // await the asset loading

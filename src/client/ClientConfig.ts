@@ -22,4 +22,9 @@ export interface ClientConfig {
      * the game height and width for the viewport
      */
     gameDimension: Dimension;
+
+    /**
+     * should the current fps be printed on the screen?
+     */
+    printFps?: boolean;
 }

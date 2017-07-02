@@ -26,7 +26,8 @@ class MyAwesomeGame extends Client {
 
         super({
             gameDimension: Viewport.getWindowDimension(),
-            rederer: CanvasRenderer
+            rederer: CanvasRenderer,
+            printFps: true
         });
 
     }
