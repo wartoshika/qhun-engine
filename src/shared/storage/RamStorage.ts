@@ -107,7 +107,7 @@ export class RamStorage {
 }
 
 // debug
-if (<any>window) {
+if (typeof window !== 'undefined' && window) {
 
     (<any>window).cache = (<any>RamStorage).cache;
 }

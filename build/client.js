@@ -1642,7 +1642,7 @@ var RamStorage = (function () {
 }());
 exports.RamStorage = RamStorage;
 // debug
-if (window) {
+if (typeof window !== 'undefined' && window) {
     window.cache = RamStorage.cache;
 }
 
