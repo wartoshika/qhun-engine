@@ -162,11 +162,14 @@ export class CanvasRenderer extends BasicRenderer implements Renderer {
         // render the entity at its center point
         visibleEntities.forEach(entity => {
 
+            // get the draw array
+            let renderable = CameraOffsetCalculator.imageScaleDrawEntity(entity, this.currentCamera);
+
+            // check if the element is visible
+            if (!renderable) return;
 
             // calculate the new height and width and draw the entity
-            (<any>this.ctx).drawImage(
-                ...CameraOffsetCalculator.imageScaleDrawEntity(entity, this.currentCamera)
-            );
+            (<any>this.ctx).drawImage(...<any[]>renderable);
         });
 
         // print fps

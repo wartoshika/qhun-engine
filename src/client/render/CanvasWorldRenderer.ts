@@ -67,20 +67,17 @@ export class CanvasWorldRenderer {
                     );
 
                     // draw the tile
-                    (<any>this.ctx).drawImage(
-                        ...CameraOffsetCalculator.imageScaleDrawTile(
-                            new Dimension(
-                                h * tileDimension.x, v * tileDimension.y
-                            ), tileImage, this.camera
-                        )
+                    let renderable = CameraOffsetCalculator.imageScaleDrawTile(
+                        new Dimension(
+                            h * tileDimension.x, v * tileDimension.y
+                        ), tileImage, this.camera
                     );
 
-                    // draw the tile
-                    /*this.ctx.drawImage(
-                        <ImageBitmap>tileImage.getData(),
-                        h * tileDimension.x,
-                        v * tileDimension.y
-                    );*/
+                    // is not visible, ignore
+                    if (!renderable) continue;
+
+                    (<any>this.ctx).drawImage(...<any[]>renderable);
+
                 }
             }
 

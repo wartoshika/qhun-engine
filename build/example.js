@@ -5459,8 +5459,13 @@ var CanvasRenderer = (function (_super) {
         var visibleEntities = this.getRenderableEntities();
         // render the entity at its center point
         visibleEntities.forEach(function (entity) {
+            // get the draw array
+            var renderable = CameraOffsetCalculator_1.CameraOffsetCalculator.imageScaleDrawEntity(entity, _this.currentCamera);
+            // check if the element is visible
+            if (!renderable)
+                return;
             // calculate the new height and width and draw the entity
-            (_a = _this.ctx).drawImage.apply(_a, CameraOffsetCalculator_1.CameraOffsetCalculator.imageScaleDrawEntity(entity, _this.currentCamera));
+            (_a = _this.ctx).drawImage.apply(_a, renderable);
             var _a;
         });
         // print fps
@@ -5537,13 +5542,11 @@ var CanvasWorldRenderer = (function () {
                     // @todo: local asset caching meight be a performance improvement
                     var tileImage = assetLoader.getAsset(this.world.getTileMap().getName() + "[" + tileNumber + "]", asset_1.AssetType.Image);
                     // draw the tile
-                    (_a = this.ctx).drawImage.apply(_a, CameraOffsetCalculator_1.CameraOffsetCalculator.imageScaleDrawTile(new math_1.Dimension(h * tileDimension.x, v * tileDimension.y), tileImage, this.camera));
-                    // draw the tile
-                    /*this.ctx.drawImage(
-                        <ImageBitmap>tileImage.getData(),
-                        h * tileDimension.x,
-                        v * tileDimension.y
-                    );*/
+                    var renderable = CameraOffsetCalculator_1.CameraOffsetCalculator.imageScaleDrawTile(new math_1.Dimension(h * tileDimension.x, v * tileDimension.y), tileImage, this.camera);
+                    // is not visible, ignore
+                    if (!renderable)
+                        continue;
+                    (_a = this.ctx).drawImage.apply(_a, renderable);
                 }
             }
         }
@@ -5846,6 +5849,7 @@ var CameraMode;
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 var asset_1 = __webpack_require__(4);
+var math_1 = __webpack_require__(0);
 /**
  * a helper class to calculate the right offset and scale of objects
  * when a camera is unsed to display the game
@@ -5857,6 +5861,8 @@ var CameraOffsetCalculator = (function () {
      * calculates the entity offset and scaleability of its image by using one
      * camera object.
      * the return array can be directiy used to draw the image
+     *
+     * @return the array for ctx.drawImage() or boolean === false if the entity is not within the canvas
      */
     CameraOffsetCalculator.imageScaleDrawEntity = function (entity, camera) {
         // get the entity image scale from the camera
@@ -5867,14 +5873,18 @@ var CameraOffsetCalculator = (function () {
         var newWidth = entityImage.width * scale * entity.getScale();
         var newHeight = entityImage.width * scale * entity.getScale();
         // calculate position
+        var newPosition = CameraOffsetCalculator.calculatePositionOffsetForCameraFollow(entity.getPosition(), camera);
+        // check if visible
+        if (!CameraOffsetCalculator.positionIsWithinCameraRange(newPosition, new math_1.Vector2D(newWidth, newHeight)))
+            return false;
         return [
             entityImage,
             0,
             0,
             entityImage.width,
             entityImage.height,
-            entity.getPosition().x,
-            entity.getPosition().y,
+            newPosition.x,
+            newPosition.y,
             newWidth,
             newHeight
         ];
@@ -5885,6 +5895,8 @@ var CameraOffsetCalculator = (function () {
      * @param originalPosition the position of the tile where it should originally be drawn
      * @param tile the image to draw
      * @param camera the active camera
+     *
+     * @return the array for ctx.drawImage() or boolean === false if the entity is not within the canvas
      */
     CameraOffsetCalculator.imageScaleDrawTile = function (originalPosition, tile, camera) {
         // get the current camera scale
@@ -5896,17 +5908,58 @@ var CameraOffsetCalculator = (function () {
         var newHeight = tileImage.width * scale;
         // calculate position
         // @todo: result is not 100% accurate... need further investigations
+        var newPosition = CameraOffsetCalculator.calculatePositionOffsetForCameraFollow(new math_1.Vector2D(originalPosition.x * scale, originalPosition.y * scale), camera);
+        // check if visible
+        if (!CameraOffsetCalculator.positionIsWithinCameraRange(newPosition, new math_1.Vector2D(newWidth, newHeight)))
+            return false;
         return [
             tileImage,
             0,
             0,
             tileImage.width,
             tileImage.height,
-            originalPosition.x * scale,
-            originalPosition.y * scale,
+            newPosition.x,
+            newPosition.y,
             newWidth,
             newHeight
         ];
+    };
+    /**
+     * check if an object is visible by the camera
+     *
+     * @param position
+     * @param objectDimension
+     */
+    CameraOffsetCalculator.positionIsWithinCameraRange = function (position, objectDimension) {
+        // @todo: no check with window here, use the canvas object itself
+        var canvasDim = CameraOffsetCalculator.getCanvasDimension();
+        var canvasWidth = canvasDim.x;
+        var canvasHeight = canvasDim.y;
+        // add the two vectors
+        var maxOffsetVector = position.substract(objectDimension);
+        // check if visible
+        return canvasWidth >= maxOffsetVector.x && canvasHeight >= maxOffsetVector.y;
+    };
+    /**
+     * get the current canvas dimension
+     */
+    CameraOffsetCalculator.getCanvasDimension = function () {
+        var canvas = document.querySelector('canvas');
+        return new math_1.Vector2D(canvas.width, canvas.height);
+    };
+    /**
+     * calculates the position offset for camera following
+     */
+    CameraOffsetCalculator.calculatePositionOffsetForCameraFollow = function (originalPosition, camera) {
+        // first check if there is any following
+        var entity = camera.getFollowingEntity();
+        // if no following is active, return the original position
+        if (!entity)
+            return originalPosition;
+        // calculate the offset. the entity should be in the center of the screen
+        var canvasDim = CameraOffsetCalculator.getCanvasDimension();
+        // calculate!
+        return originalPosition.substract(entity.getPosition()).add(canvasDim.divide(new math_1.Vector2D(2, 2)));
     };
     CameraOffsetCalculator.assetLoader = asset_1.AssetLoader.getInstance();
     return CameraOffsetCalculator;
