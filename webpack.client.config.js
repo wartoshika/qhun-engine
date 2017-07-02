@@ -13,7 +13,7 @@ module.exports = {
     },
     resolve: {
         // Add `.ts` and `.tsx` as a resolvable extension.
-        extensions: ['.ts', '.tsx', '.js'] // note if using webpack 1 you'd also need a '' in the array as well
+        extensions: ['.ts', '.js'] // note if using webpack 1 you'd also need a '' in the array as well
     },
     devtool: "source-map",
     module: {
@@ -32,7 +32,7 @@ module.exports = {
     },
     resolve: {
         modules: ['src', 'node_modules'],
-        extensions: ['.js', '.ts', '.tsx']
+        extensions: ['.js', '.ts']
     },
     plugins: [
         new CircularDependencyPlugin({
@@ -40,10 +40,10 @@ module.exports = {
             exclude: /node_modules/,
             // add errors to webpack instead of warnings
             failOnError: true
-        }),
+        })/*,
         new webpack.optimize.UglifyJsPlugin({
             sourceMap: true,
             include: /\.min\.js$/
-        })
+        })*/
     ]
 }

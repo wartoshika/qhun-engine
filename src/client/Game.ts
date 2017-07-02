@@ -8,11 +8,11 @@
 import { Singleton } from '../shared/helper';
 import { Renderer } from './render';
 import { Entity } from './entity';
-import { Camera } from './camera';
 import { Scene } from './scene';
 import { World } from './world';
+import { Log } from '../shared/log';
 
-declare type Thing = Entity | Camera | Scene | World;
+declare type Thing = Entity | Scene | World;
 
 /**
  * a class that handles adding of entities, cameras, physics ...
@@ -23,6 +23,11 @@ export class Game extends Singleton {
      * the holder of the currently visible scene
      */
     protected currentScene: Scene;
+
+    /**
+     * holder of the registered worlds
+     */
+    protected worldStack: { [worldName: string]: World } = {};
 
     constructor(
         private renderer: Renderer
@@ -47,9 +52,6 @@ export class Game extends Singleton {
             if (thing instanceof Entity) {
 
                 this.addEntity(<Entity>thing);
-            } else if (thing instanceof Camera) {
-
-                this.addCamera(<Camera>thing);
             } else if (thing instanceof Scene) {
 
                 this.addScene(<Scene>thing);
@@ -77,16 +79,8 @@ export class Game extends Singleton {
      * @param world the world to add
      */
     public addWorld(world: World): void {
-    }
 
-    /**
-     * add one camera to the game
-     *
-     * @param camera the camera to add
-     */
-    public addCamera(camera: Camera): void {
-
-        console.log("add camera", camera);
+        this.worldStack[world.getName()] = world;
     }
 
     /**
@@ -131,5 +125,24 @@ export class Game extends Singleton {
         // set the new scene
         this.currentScene = scene;
         this.currentScene.create(this);
+    }
+
+    /**
+     * load a world and render it in the background
+     *
+     * @param world the world name to load
+     */
+    public loadWorld(world: string): void {
+
+        // does the world exists?
+        if (!(world in this.worldStack)) {
+
+            // print error
+            Log.error("Trying to load", world, "but this world does not exists");
+            return;
+        }
+
+        // set the world in the renderer
+        this.renderer.setWorld(this.worldStack[world]);
     }
 }

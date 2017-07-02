@@ -110,6 +110,14 @@ export class AssetLoader extends Singleton {
      */
     public getAsset<T>(name: string, type: AssetType): T {
 
+        // check if the asset is available
+        if(!RamStorage.has(this.getAssetStorageName(name, type))) {
+
+            // print error
+            Log.error("Trying to load not existing asset", name, "with type",AssetType[type]);
+            return;
+        }
+
         // ask the ram storage for the asset
         return RamStorage.get<T>(this.getAssetStorageName(name, type));
     }

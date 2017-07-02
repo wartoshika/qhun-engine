@@ -8,6 +8,7 @@
 import { Dimension } from '../../shared/math';
 import { RenderableEntity } from '../entity';
 import { AssetLoader } from '../asset';
+import { World } from '../world';
 import { Game } from '../Game';
 import { ClientConfig } from '../ClientConfig';
 
@@ -41,4 +42,9 @@ export interface Renderer {
      * add one or many entities to the current game scene
      */
     addEntity(entity: RenderableEntity): void;
+
+    /**
+     * set the current visible world as background
+     */
+    setWorld(world: World): void;
 }

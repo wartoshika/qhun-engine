@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 17);
+/******/ 	return __webpack_require__(__webpack_require__.s = 18);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -104,8 +104,8 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(5));
-__export(__webpack_require__(20));
+__export(__webpack_require__(8));
+__export(__webpack_require__(21));
 
 
 /***/ }),
@@ -126,7 +126,7 @@ function __export(m) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(__webpack_require__(22));
 __export(__webpack_require__(32));
-__export(__webpack_require__(9));
+__export(__webpack_require__(11));
 
 
 /***/ }),
@@ -141,27 +141,8 @@ __export(__webpack_require__(9));
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(23));
-
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-var AssetLoader_1 = __webpack_require__(15);
+var AssetLoader_1 = __webpack_require__(17);
 /**
  * a basic class for implementing the getter and setter function
  * of the required asset interface
@@ -210,7 +191,160 @@ exports.AbstractAsset = AbstractAsset;
 
 
 /***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(23));
+
+
+/***/ }),
 /* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(9));
+__export(__webpack_require__(31));
+__export(__webpack_require__(10));
+
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [0, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var AssetType_1 = __webpack_require__(0);
+var AbstractAsset_1 = __webpack_require__(3);
+/**
+ * the image class handles exactly one image
+ */
+var Image = (function (_super) {
+    __extends(Image, _super);
+    function Image(name, path, data) {
+        return _super.call(this, name, path, AssetType_1.AssetType.Image, data) || this;
+    }
+    /**
+     * register an image asset
+     *
+     * @param name the unique name of the image
+     * @param path the path to the image
+     */
+    Image.register = function () {
+        var images = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            images[_i] = arguments[_i];
+        }
+        return __awaiter(this, void 0, void 0, function () {
+            var _a;
+            return __generator(this, function (_b) {
+                // add the asset type
+                images.forEach(function (image) { return image.assetType = AssetType_1.AssetType.Image; });
+                // resiger all given images
+                return [2 /*return*/, (_a = Image.getAssetLoader()).registerAsset.apply(_a, [Image].concat(images))];
+            });
+        });
+    };
+    return Image;
+}(AbstractAsset_1.AbstractAsset));
+exports.Image = Image;
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(45));
+
+
+/***/ }),
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -235,28 +369,7 @@ var LogLevel;
 
 
 /***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(7));
-__export(__webpack_require__(31));
-__export(__webpack_require__(8));
-
-
-/***/ }),
-/* 7 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -321,7 +434,7 @@ exports.Helper = Helper;
 
 
 /***/ }),
-/* 8 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -354,7 +467,7 @@ exports.Dimension = Dimension;
 
 
 /***/ }),
-/* 9 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -403,7 +516,7 @@ exports.File = File;
 
 
 /***/ }),
-/* 10 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -425,7 +538,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var AnimationEntity_1 = __webpack_require__(11);
+var AnimationEntity_1 = __webpack_require__(13);
 /**
  * the base class for all game entities
  */
@@ -440,7 +553,7 @@ exports.Entity = Entity;
 
 
 /***/ }),
-/* 11 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -462,8 +575,8 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var entity_1 = __webpack_require__(34);
-var Animation_1 = __webpack_require__(36);
+var entity_1 = __webpack_require__(35);
+var Animation_1 = __webpack_require__(37);
 var log_1 = __webpack_require__(1);
 /**
  * a base class for animations on entities
@@ -559,7 +672,7 @@ exports.AnimationEntity = AnimationEntity;
 
 
 /***/ }),
-/* 12 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -571,7 +684,7 @@ exports.AnimationEntity = AnimationEntity;
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-var math_1 = __webpack_require__(6);
+var math_1 = __webpack_require__(5);
 /**
  * the base class for all game entities
  */
@@ -600,7 +713,7 @@ exports.Entity = Entity;
 
 
 /***/ }),
-/* 13 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -624,7 +737,7 @@ exports.Scene = Scene;
 
 
 /***/ }),
-/* 14 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -635,90 +748,20 @@ exports.Scene = Scene;
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [0, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
 Object.defineProperty(exports, "__esModule", { value: true });
-var AssetType_1 = __webpack_require__(0);
-var AbstractAsset_1 = __webpack_require__(4);
-/**
- * the image class handles exactly one image
- */
-var Image = (function (_super) {
-    __extends(Image, _super);
-    function Image(name, path, data) {
-        return _super.call(this, name, path, AssetType_1.AssetType.Image, data) || this;
-    }
-    /**
-     * register an image asset
-     *
-     * @param name the unique name of the image
-     * @param path the path to the image
-     */
-    Image.register = function () {
-        var images = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            images[_i] = arguments[_i];
-        }
-        return __awaiter(this, void 0, void 0, function () {
-            var _a;
-            return __generator(this, function (_b) {
-                // add the asset type
-                images.forEach(function (image) { return image.assetType = AssetType_1.AssetType.Image; });
-                // resiger all given images
-                return [2 /*return*/, (_a = Image.getAssetLoader()).registerAsset.apply(_a, [Image].concat(images))];
-            });
-        });
-    };
-    return Image;
-}(AbstractAsset_1.AbstractAsset));
-exports.Image = Image;
+__export(__webpack_require__(6));
+__export(__webpack_require__(46));
+__export(__webpack_require__(47));
+__export(__webpack_require__(0));
+__export(__webpack_require__(17));
+__export(__webpack_require__(48));
 
 
 /***/ }),
-/* 15 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -777,9 +820,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var AssetType_1 = __webpack_require__(0);
 var helper_1 = __webpack_require__(2);
-var storage_1 = __webpack_require__(3);
+var storage_1 = __webpack_require__(4);
 var log_1 = __webpack_require__(1);
-var network_1 = __webpack_require__(16);
+var network_1 = __webpack_require__(7);
 /**
  * a class that can handle asset loading such as images and audio
  */
@@ -874,6 +917,12 @@ var AssetLoader = (function (_super) {
      * @param name the name of the asset
      */
     AssetLoader.prototype.getAsset = function (name, type) {
+        // check if the asset is available
+        if (!storage_1.RamStorage.has(this.getAssetStorageName(name, type))) {
+            // print error
+            log_1.Log.error("Trying to load not existing asset", name, "with type", AssetType_1.AssetType[type]);
+            return;
+        }
         // ask the ram storage for the asset
         return storage_1.RamStorage.get(this.getAssetStorageName(name, type));
     };
@@ -978,26 +1027,7 @@ exports.AssetLoader = AssetLoader;
 
 
 /***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(43));
-
-
-/***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1018,13 +1048,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var decorator_1 = __webpack_require__(18);
+var decorator_1 = __webpack_require__(19);
 var log_1 = __webpack_require__(1);
 var helper_1 = __webpack_require__(2);
-var Game_1 = __webpack_require__(21);
-var storage_1 = __webpack_require__(3);
-var asset_1 = __webpack_require__(42);
-var input_1 = __webpack_require__(46);
+var Game_1 = __webpack_require__(33);
+var storage_1 = __webpack_require__(4);
+var asset_1 = __webpack_require__(16);
+var input_1 = __webpack_require__(49);
 /**
  * the initiation class of the game client
  */
@@ -1123,7 +1153,7 @@ exports.Client = Client;
 
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1138,11 +1168,11 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(19));
+__export(__webpack_require__(20));
 
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1180,7 +1210,7 @@ exports.logMethodCall = logMethodCall;
 
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1192,7 +1222,7 @@ exports.logMethodCall = logMethodCall;
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-var LogLevel_1 = __webpack_require__(5);
+var LogLevel_1 = __webpack_require__(8);
 /**
  * a log wrapper to allow log levels and a more complex
  * logging structure
@@ -1311,184 +1341,6 @@ exports.Log = Log;
 
 
 /***/ }),
-/* 21 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [0, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var helper_1 = __webpack_require__(2);
-var entity_1 = __webpack_require__(33);
-var camera_1 = __webpack_require__(38);
-var scene_1 = __webpack_require__(40);
-var world_1 = __webpack_require__(50);
-/**
- * a class that handles adding of entities, cameras, physics ...
- */
-var Game = (function (_super) {
-    __extends(Game, _super);
-    function Game(renderer) {
-        var _this = _super.call(this) || this;
-        _this.renderer = renderer;
-        // bind singleton
-        Game.bindInstance(_this);
-        return _this;
-    }
-    /**
-     * add a thing to the game
-     *
-     * @param things the things to add
-     */
-    Game.prototype.add = function () {
-        var _this = this;
-        var things = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            things[_i] = arguments[_i];
-        }
-        // iterate through all things
-        things.forEach(function (thing) {
-            // check the type of the thing
-            if (thing instanceof entity_1.Entity) {
-                _this.addEntity(thing);
-            }
-            else if (thing instanceof camera_1.Camera) {
-                _this.addCamera(thing);
-            }
-            else if (thing instanceof scene_1.Scene) {
-                _this.addScene(thing);
-            }
-            else if (thing instanceof world_1.World) {
-                _this.addWorld(thing);
-            }
-        });
-    };
-    /**
-     * add one entity to the game
-     *
-     * @param entity the entity to add
-     */
-    Game.prototype.addEntity = function (entity) {
-        this.renderer.addEntity(entity);
-    };
-    /**
-     * add one world to the game
-     *
-     * @param world the world to add
-     */
-    Game.prototype.addWorld = function (world) {
-    };
-    /**
-     * add one camera to the game
-     *
-     * @param camera the camera to add
-     */
-    Game.prototype.addCamera = function (camera) {
-        console.log("add camera", camera);
-    };
-    /**
-     * add one scene to the game
-     *
-     * @param scene the scene to add
-     * @param autostart should the scene start?
-     */
-    Game.prototype.addScene = function (scene, autostart) {
-        if (autostart === void 0) { autostart = false; }
-        if (autostart) {
-            // load the scene
-            this.loadScene(scene);
-        }
-    };
-    /**
-     * get the currently visible scene
-     */
-    Game.prototype.getCurrentScene = function () {
-        return this.currentScene;
-    };
-    /**
-     * load a new scene
-     *
-     * @param scene the scene to load
-     */
-    Game.prototype.loadScene = function (scene) {
-        return __awaiter(this, void 0, void 0, function () {
-            var promise;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        promise = new Promise(function (r) { return r(); });
-                        if (!this.currentScene) return [3 /*break*/, 2];
-                        // wait for complete destruction
-                        return [4 /*yield*/, this.currentScene.destroy(this)];
-                    case 1:
-                        // wait for complete destruction
-                        _a.sent();
-                        _a.label = 2;
-                    case 2:
-                        // set the new scene
-                        this.currentScene = scene;
-                        this.currentScene.create(this);
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    return Game;
-}(helper_1.Singleton));
-exports.Game = Game;
-
-
-/***/ }),
 /* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1501,7 +1353,7 @@ exports.Game = Game;
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-var storage_1 = __webpack_require__(3);
+var storage_1 = __webpack_require__(4);
 /**
  * a class to handle the singleton paradigmen
  */
@@ -1558,8 +1410,8 @@ exports.Singleton = Singleton;
 Object.defineProperty(exports, "__esModule", { value: true });
 // the dependency to get the memory footprint ob stored objects
 var sizeof = __webpack_require__(24);
-var math_1 = __webpack_require__(6);
-var File_1 = __webpack_require__(9);
+var math_1 = __webpack_require__(5);
+var File_1 = __webpack_require__(11);
 /**
  * holds objects in the ram of the operating unit
  */
@@ -3790,8 +3642,8 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var Helper_1 = __webpack_require__(7);
-var Dimension_1 = __webpack_require__(8);
+var Helper_1 = __webpack_require__(9);
+var Dimension_1 = __webpack_require__(10);
 /**
  * represents a 2D vector with x and y coordinates.
  */
@@ -3922,13 +3774,179 @@ exports.Binary = Binary;
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [0, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(10));
-__export(__webpack_require__(37));
-__export(__webpack_require__(11));
+var helper_1 = __webpack_require__(2);
+var entity_1 = __webpack_require__(34);
+var scene_1 = __webpack_require__(39);
+var world_1 = __webpack_require__(41);
+var log_1 = __webpack_require__(1);
+/**
+ * a class that handles adding of entities, cameras, physics ...
+ */
+var Game = (function (_super) {
+    __extends(Game, _super);
+    function Game(renderer) {
+        var _this = _super.call(this) || this;
+        _this.renderer = renderer;
+        /**
+         * holder of the registered worlds
+         */
+        _this.worldStack = {};
+        // bind singleton
+        Game.bindInstance(_this);
+        return _this;
+    }
+    /**
+     * add a thing to the game
+     *
+     * @param things the things to add
+     */
+    Game.prototype.add = function () {
+        var _this = this;
+        var things = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            things[_i] = arguments[_i];
+        }
+        // iterate through all things
+        things.forEach(function (thing) {
+            // check the type of the thing
+            if (thing instanceof entity_1.Entity) {
+                _this.addEntity(thing);
+            }
+            else if (thing instanceof scene_1.Scene) {
+                _this.addScene(thing);
+            }
+            else if (thing instanceof world_1.World) {
+                _this.addWorld(thing);
+            }
+        });
+    };
+    /**
+     * add one entity to the game
+     *
+     * @param entity the entity to add
+     */
+    Game.prototype.addEntity = function (entity) {
+        this.renderer.addEntity(entity);
+    };
+    /**
+     * add one world to the game
+     *
+     * @param world the world to add
+     */
+    Game.prototype.addWorld = function (world) {
+        this.worldStack[world.getName()] = world;
+    };
+    /**
+     * add one scene to the game
+     *
+     * @param scene the scene to add
+     * @param autostart should the scene start?
+     */
+    Game.prototype.addScene = function (scene, autostart) {
+        if (autostart === void 0) { autostart = false; }
+        if (autostart) {
+            // load the scene
+            this.loadScene(scene);
+        }
+    };
+    /**
+     * get the currently visible scene
+     */
+    Game.prototype.getCurrentScene = function () {
+        return this.currentScene;
+    };
+    /**
+     * load a new scene
+     *
+     * @param scene the scene to load
+     */
+    Game.prototype.loadScene = function (scene) {
+        return __awaiter(this, void 0, void 0, function () {
+            var promise;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        promise = new Promise(function (r) { return r(); });
+                        if (!this.currentScene) return [3 /*break*/, 2];
+                        // wait for complete destruction
+                        return [4 /*yield*/, this.currentScene.destroy(this)];
+                    case 1:
+                        // wait for complete destruction
+                        _a.sent();
+                        _a.label = 2;
+                    case 2:
+                        // set the new scene
+                        this.currentScene = scene;
+                        this.currentScene.create(this);
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    /**
+     * load a world and render it in the background
+     *
+     * @param world the world name to load
+     */
+    Game.prototype.loadWorld = function (world) {
+        // does the world exists?
+        if (!(world in this.worldStack)) {
+            // print error
+            log_1.Log.error("Trying to load", world, "but this world does not exists");
+            return;
+        }
+        // set the world in the renderer
+        this.renderer.setWorld(this.worldStack[world]);
+    };
+    return Game;
+}(helper_1.Singleton));
+exports.Game = Game;
 
 
 /***/ }),
@@ -3948,11 +3966,32 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(__webpack_require__(12));
-__export(__webpack_require__(35));
+__export(__webpack_require__(38));
+__export(__webpack_require__(13));
 
 
 /***/ }),
 /* 35 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(14));
+__export(__webpack_require__(36));
+
+
+/***/ }),
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3974,7 +4013,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var Entity_1 = __webpack_require__(12);
+var Entity_1 = __webpack_require__(14);
 /**
  * an entity that can collide with other collidable entities
  */
@@ -4004,7 +4043,7 @@ exports.CollidableEntity = CollidableEntity;
 
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4083,7 +4122,7 @@ exports.Animation = Animation;
 
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4105,7 +4144,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var Entity_1 = __webpack_require__(10);
+var Entity_1 = __webpack_require__(12);
 /**
  * the client class for a collidable entity
  */
@@ -4151,25 +4190,6 @@ exports.CollidableEntity = CollidableEntity;
 
 
 /***/ }),
-/* 38 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(39));
-
-
-/***/ }),
 /* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4181,37 +4201,16 @@ __export(__webpack_require__(39));
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-Object.defineProperty(exports, "__esModule", { value: true });
-var Camera = (function () {
-    function Camera() {
-    }
-    return Camera;
-}());
-exports.Camera = Camera;
-
-
-/***/ }),
-/* 40 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(13));
-__export(__webpack_require__(41));
+__export(__webpack_require__(15));
+__export(__webpack_require__(40));
 
 
 /***/ }),
-/* 41 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4268,7 +4267,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var Scene_1 = __webpack_require__(13);
+var Scene_1 = __webpack_require__(15);
 /**
  * a basic loading screen scene
  */
@@ -4319,7 +4318,7 @@ exports.LoadingScreenScene = LoadingScreenScene;
 
 
 /***/ }),
-/* 42 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4334,16 +4333,105 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(14));
-__export(__webpack_require__(44));
-__export(__webpack_require__(45));
-__export(__webpack_require__(0));
-__export(__webpack_require__(15));
-__export(__webpack_require__(49));
+__export(__webpack_require__(42));
+
+
+/***/ }),
+/* 42 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+var physic_1 = __webpack_require__(43);
+var math_1 = __webpack_require__(5);
+var asset_1 = __webpack_require__(16);
+/**
+ * a class to handle world spefific things
+ */
+var World = (function () {
+    /**
+     * @param game the game object
+     * @param map the map to show
+     * @param camera the camera of the world
+     * @param gravity the gravity that is present on this world
+     */
+    function World(game, map, camera, gravity) {
+        if (gravity === void 0) { gravity = new math_1.Vector2D(physic_1.GravityForce.None, physic_1.GravityForce.None); }
+        this.camera = camera;
+        this.gravity = gravity;
+        // get the tilemap from the asset loader
+        this.map = asset_1.AssetLoader.getInstance()
+            .getAsset(map, asset_1.AssetType.TileMap);
+    }
+    /**
+     * get the world name aka tilemap name
+     */
+    World.prototype.getName = function () {
+        return this.map.getName();
+    };
+    /**
+     * get the tilemap of the world
+     */
+    World.prototype.getTileMap = function () {
+        return this.map;
+    };
+    return World;
+}());
+exports.World = World;
 
 
 /***/ }),
 /* 43 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(44));
+
+
+/***/ }),
+/* 44 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * example gravity forces. units are m/sec^2
+ */
+var GravityForce;
+(function (GravityForce) {
+    GravityForce[GravityForce["Earth"] = 9.8] = "Earth";
+    GravityForce[GravityForce["Moon"] = 1.67] = "Moon";
+    GravityForce[GravityForce["None"] = 0] = "None";
+})(GravityForce = exports.GravityForce || (exports.GravityForce = {}));
+
+
+/***/ }),
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4450,7 +4538,7 @@ exports.Request = Request;
 
 
 /***/ }),
-/* 44 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4508,9 +4596,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var AssetType_1 = __webpack_require__(0);
-var Image_1 = __webpack_require__(14);
-var AbstractAsset_1 = __webpack_require__(4);
-var network_1 = __webpack_require__(16);
+var Image_1 = __webpack_require__(6);
+var AbstractAsset_1 = __webpack_require__(3);
+var network_1 = __webpack_require__(7);
 var SPRITE_MAP_DELIMITER = ',';
 /**
  * an internal enum to index the correct array position for sprite maps
@@ -4626,7 +4714,7 @@ exports.Sprite = Sprite;
 
 
 /***/ }),
-/* 45 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4649,7 +4737,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var AssetType_1 = __webpack_require__(0);
-var AbstractAsset_1 = __webpack_require__(4);
+var AbstractAsset_1 = __webpack_require__(3);
 var Sound = (function (_super) {
     __extends(Sound, _super);
     function Sound(name, path, data) {
@@ -4678,7 +4766,190 @@ exports.Sound = Sound;
 
 
 /***/ }),
-/* 46 */
+/* 48 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [0, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var AbstractAsset_1 = __webpack_require__(3);
+var AssetType_1 = __webpack_require__(0);
+var Image_1 = __webpack_require__(6);
+var network_1 = __webpack_require__(7);
+/**
+ * an asset class to load a tilemap as world
+ */
+var TileMap = (function (_super) {
+    __extends(TileMap, _super);
+    function TileMap(name, path, data, map, dimension) {
+        var _this = _super.call(this, name, path, AssetType_1.AssetType.TileMap, data) || this;
+        _this.map = map;
+        _this.dimension = dimension;
+        return _this;
+    }
+    /**
+     * get the map of the filemap object
+     */
+    TileMap.prototype.getMap = function () {
+        return this.map;
+    };
+    /**
+     * get the tile dimension object
+     */
+    TileMap.prototype.getDimension = function () {
+        return this.dimension;
+    };
+    /**
+     * register a tilemap asset
+     *
+     * @param name the unique name of the image
+     * @param path the path to the image
+     */
+    TileMap.register = function () {
+        var tilemaps = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            tilemaps[_i] = arguments[_i];
+        }
+        return __awaiter(this, void 0, void 0, function () {
+            var assetLoader, mapLoaderPromise, tileMapStack;
+            return __generator(this, function (_a) {
+                assetLoader = TileMap.getAssetLoader();
+                mapLoaderPromise = [];
+                tileMapStack = [];
+                // load sprite maps and add asset type to the inline asset
+                tilemaps.forEach(function (tilemap) {
+                    // set the asset type
+                    tilemap.assetType = AssetType_1.AssetType.TileMap;
+                    // get the map csv data file to save the map information
+                    mapLoaderPromise.push(network_1.Request.get(tilemap.path + ".csv")
+                        .then(function (map) { return tileMapStack.push(map); }));
+                });
+                // if the maps are loaded, start the regist
+                // previously the current map loader promises should be added to
+                // the asset loadering promises to prevent game from beeing started to early
+                return [2 /*return*/, Promise.all(assetLoader.addAssetLoaderPromise(new Promise(function (resolve) {
+                        // now await the map loading
+                        return Promise.all(mapLoaderPromise).then(function () {
+                            // register the sprite as image
+                            return assetLoader.registerAsset.apply(assetLoader, [TileMap].concat(tilemaps)).then(function (resources) {
+                                // cast the resources
+                                var tileMaps = resources;
+                                var tileMapTransformPromise = [];
+                                // add the sprite maps
+                                tileMaps.forEach(function (tilemap, index) {
+                                    // add the map and the dimension
+                                    tilemap.map = tileMapStack[index];
+                                    tilemap.dimension = tilemaps[index].tileMapDimension;
+                                    // register all sub images
+                                    tileMapTransformPromise.push(TileMap.registerTileMapSubImages(tilemap));
+                                });
+                                // await the sprite transform
+                                return Promise.all(tileMapTransformPromise).then(function () {
+                                    // return all generated image assets
+                                    resolve(tileMaps);
+                                });
+                            });
+                        });
+                    })))];
+            });
+        });
+    };
+    /**
+     * registers every tileMap image as image in the asset system
+     *
+     * @param tileMap the tilemap to register
+     */
+    TileMap.registerTileMapSubImages = function (tileMap) {
+        return __awaiter(this, void 0, void 0, function () {
+            var tileMapHeight, tileMapWidth, horizontalTileAmount, verticalTileAmount, canvas, ctx, itemRegisterPromiseStack, tileCounter, v, h;
+            return __generator(this, function (_a) {
+                tileMapHeight = tileMap.getData().height;
+                tileMapWidth = tileMap.getData().width;
+                horizontalTileAmount = tileMapWidth / tileMap.dimension.x;
+                verticalTileAmount = tileMapHeight / tileMap.dimension.y;
+                canvas = document.createElement('canvas');
+                ctx = canvas.getContext('2d');
+                itemRegisterPromiseStack = [];
+                // height and width of each tile is fixed
+                canvas.width = tileMap.dimension.x;
+                canvas.height = tileMap.dimension.y;
+                tileCounter = 0;
+                // iterate through all tiles
+                for (v = 0; v < verticalTileAmount; v++) {
+                    // now every horizontal image in the line v
+                    for (h = 0; h < horizontalTileAmount; h++) {
+                        // draw the image at the canvas
+                        ctx.drawImage(tileMap.getData(), -(h * tileMap.dimension.x), -(v * tileMap.dimension.y));
+                        // get the image as data uri to register the new image
+                        itemRegisterPromiseStack.push(Image_1.Image.register({
+                            name: tileMap.name + "[" + tileCounter++ + "]",
+                            path: canvas.toDataURL()
+                        }));
+                    }
+                }
+                // await the registration process
+                return [2 /*return*/, Promise.all(itemRegisterPromiseStack)];
+            });
+        });
+    };
+    return TileMap;
+}(AbstractAsset_1.AbstractAsset));
+exports.TileMap = TileMap;
+
+
+/***/ }),
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4693,11 +4964,11 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(47));
+__export(__webpack_require__(50));
 
 
 /***/ }),
-/* 47 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4783,277 +5054,6 @@ var Input = (function (_super) {
     return Input;
 }(helper_1.Singleton));
 exports.Input = Input;
-
-
-/***/ }),
-/* 48 */,
-/* 49 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [0, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var AbstractAsset_1 = __webpack_require__(4);
-var AssetType_1 = __webpack_require__(0);
-var Image_1 = __webpack_require__(14);
-var network_1 = __webpack_require__(16);
-/**
- * an asset class to load a tilemap as world
- */
-var TileMap = (function (_super) {
-    __extends(TileMap, _super);
-    function TileMap(name, path, data, map, dimension) {
-        var _this = _super.call(this, name, path, AssetType_1.AssetType.TileMap, data) || this;
-        _this.map = map;
-        _this.dimension = dimension;
-        return _this;
-    }
-    /**
-     * register a tilemap asset
-     *
-     * @param name the unique name of the image
-     * @param path the path to the image
-     */
-    TileMap.register = function () {
-        var tilemaps = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            tilemaps[_i] = arguments[_i];
-        }
-        return __awaiter(this, void 0, void 0, function () {
-            var assetLoader, mapLoaderPromise, tileMapStack;
-            return __generator(this, function (_a) {
-                assetLoader = TileMap.getAssetLoader();
-                mapLoaderPromise = [];
-                tileMapStack = [];
-                // load sprite maps and add asset type to the inline asset
-                tilemaps.forEach(function (tilemap) {
-                    // set the asset type
-                    tilemap.assetType = AssetType_1.AssetType.Image;
-                    // get the map csv data file to save the map information
-                    mapLoaderPromise.push(network_1.Request.get(tilemap.path + ".csv")
-                        .then(function (map) { return tileMapStack.push(map); }));
-                });
-                // if the maps are loaded, start the regist
-                // previously the current map loader promises should be added to
-                // the asset loadering promises to prevent game from beeing started to early
-                return [2 /*return*/, Promise.all(assetLoader.addAssetLoaderPromise(new Promise(function (resolve) {
-                        // now await the map loading
-                        return Promise.all(mapLoaderPromise).then(function () {
-                            // register the sprite as image
-                            return assetLoader.registerAsset.apply(assetLoader, [TileMap].concat(tilemaps)).then(function (resources) {
-                                // cast the resources
-                                var tileMaps = resources;
-                                var tileMapTransformPromise = [];
-                                // add the sprite maps
-                                tileMaps.forEach(function (tilemap, index) {
-                                    // add the map and the dimension
-                                    tilemap.map = tileMapStack[index];
-                                    tilemap.dimension = tilemaps[index].tileMapDimension;
-                                    // register all sub images
-                                    tileMapTransformPromise.push(TileMap.registerTileMapSubImages(tilemap));
-                                });
-                                // await the sprite transform
-                                return Promise.all(tileMapTransformPromise).then(function () {
-                                    // return all generated image assets
-                                    resolve(tileMaps);
-                                });
-                            });
-                        });
-                    })))];
-            });
-        });
-    };
-    /**
-     * registers every tileMap image as image in the asset system
-     *
-     * @param tileMap the tilemap to register
-     */
-    TileMap.registerTileMapSubImages = function (tileMap) {
-        return __awaiter(this, void 0, void 0, function () {
-            var itemRegisterPromiseStack, mapLines, horizontalImageCount, verticalImageCount, canvas, ctx, v, h;
-            return __generator(this, function (_a) {
-                itemRegisterPromiseStack = [];
-                mapLines = tileMap.map.split(String.fromCharCode(13));
-                horizontalImageCount = mapLines.length;
-                verticalImageCount = mapLines[0].split(',').length;
-                canvas = document.createElement('canvas');
-                ctx = canvas.getContext('2d');
-                // height and width are fixed
-                canvas.width = tileMap.dimension.x;
-                canvas.height = tileMap.dimension.y;
-                // iterate through all tiles
-                for (v = 0; v < verticalImageCount; v++) {
-                    // now every horizontal image in the line v
-                    for (h = 0; h < horizontalImageCount; h++) {
-                        // draw the image at the canvas
-                        ctx.drawImage(tileMap.getData(), -(h * tileMap.dimension.x), -(v * tileMap.dimension.y));
-                        // get the image as data uri to register the new image
-                        itemRegisterPromiseStack.push(Image_1.Image.register({
-                            name: tileMap.name + "[" + v + h + "]",
-                            path: canvas.toDataURL()
-                        }));
-                    }
-                }
-                // await the registration process
-                return [2 /*return*/, Promise.all(itemRegisterPromiseStack)];
-            });
-        });
-    };
-    return TileMap;
-}(AbstractAsset_1.AbstractAsset));
-exports.TileMap = TileMap;
-
-
-/***/ }),
-/* 50 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(51));
-
-
-/***/ }),
-/* 51 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-var physic_1 = __webpack_require__(52);
-var math_1 = __webpack_require__(6);
-var asset_1 = __webpack_require__(42);
-/**
- * a class to handle world spefific things
- */
-var World = (function () {
-    /**
-     * @param game the game object
-     * @param map the map to show
-     * @param camera the camera of the world
-     * @param gravity the gravity that is present on this world
-     */
-    function World(game, map, camera, gravity) {
-        if (gravity === void 0) { gravity = new math_1.Vector2D(physic_1.GravityForce.None, physic_1.GravityForce.None); }
-        this.camera = camera;
-        this.gravity = gravity;
-        // get the tilemap from the asset loader
-        this.map = asset_1.AssetLoader.getInstance()
-            .getAsset(map, asset_1.AssetType.TileMap);
-    }
-    return World;
-}());
-exports.World = World;
-
-
-/***/ }),
-/* 52 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(53));
-
-
-/***/ }),
-/* 53 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * example gravity forces. units are m/sec^2
- */
-var GravityForce;
-(function (GravityForce) {
-    GravityForce[GravityForce["Earth"] = 9.8] = "Earth";
-    GravityForce[GravityForce["Moon"] = 1.67] = "Moon";
-    GravityForce[GravityForce["None"] = 0] = "None";
-})(GravityForce = exports.GravityForce || (exports.GravityForce = {}));
 
 
 /***/ })

@@ -41,4 +41,20 @@ export class World {
         this.map = AssetLoader.getInstance<AssetLoader>()
             .getAsset<TileMap>(map, AssetType.TileMap);
     }
+
+    /**
+     * get the world name aka tilemap name
+     */
+    public getName(): string {
+
+        return this.map.getName();
+    }
+
+    /**
+     * get the tilemap of the world
+     */
+    public getTileMap(): TileMap {
+
+        return this.map;
+    }
 }

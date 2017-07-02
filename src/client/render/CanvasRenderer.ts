@@ -9,8 +9,10 @@ import { Renderer } from '../render/Renderer';
 import { Dimension } from '../../shared/math';
 import { Log } from '../../shared/log';
 import { Image, AssetLoader, AssetType } from '../asset';
+import { World } from '../world';
 import { BasicRenderer } from '../render/BasicRenderer';
 import { ClientConfig } from '../ClientConfig';
+import { CanvasWorldRenderer } from './CanvasWorldRenderer';
 
 import { RamStorage } from '../../shared/storage';
 
@@ -45,6 +47,11 @@ export class CanvasRenderer extends BasicRenderer implements Renderer {
      * holder of the client config
      */
     private clientConfig: ClientConfig;
+
+    /**
+     * holder of the canvas world renderer
+     */
+    private worldRenderer: CanvasWorldRenderer = null;
 
     constructor() {
         super();
@@ -115,14 +122,27 @@ export class CanvasRenderer extends BasicRenderer implements Renderer {
     }
 
     /**
-     * the method where all the magic takes place. called in gameloop
-     * to render all entities and other stuff
+     * pre rendering
      */
-    public render(): void {
+    public preRender(): void {
 
         // clear the current canvas
         this.ctx.fillStyle = '#ffffff';
         this.ctx.fillRect(0, 0, this.gameDimension.x, this.gameDimension.y);
+
+        // check if a world should be rendered
+        if (this.worldRenderer) {
+
+            // render it!
+            this.worldRenderer.render();
+        }
+    }
+
+    /**
+     * the method where all the magic takes place. called in gameloop
+     * to render all entities and other stuff
+     */
+    public render(): void {
 
         // get all entities that shoule be visible by the client
         // @todo: only render entitites that are visible by the camera
@@ -149,6 +169,17 @@ export class CanvasRenderer extends BasicRenderer implements Renderer {
 
         // fps update
         this.fps.lastUpdate = +new Date();
+    }
+
+    /**
+     * set the current visible world as background
+     */
+    public setWorld(world: World): void {
+
+        // instantiate the world renderer
+        this.worldRenderer = new CanvasWorldRenderer(
+            world, this.canvas, this.ctx
+        );
     }
 
 }

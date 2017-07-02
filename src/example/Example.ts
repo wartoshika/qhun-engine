@@ -67,12 +67,14 @@ class MyAwesomeGame extends Client {
         // play idle animation
         this.player.playAnimation('idle', true);
 
-        // load world
+        // add world
         game.add(new World(
             game, 'world1', new Camera()
         ));
 
 
+        // load the world
+        game.loadWorld('world1');
     }
 
     /**

@@ -37,6 +37,22 @@ export class TileMap extends AbstractAsset {
     }
 
     /**
+     * get the map of the filemap object
+     */
+    public getMap(): string {
+
+        return this.map;
+    }
+
+    /**
+     * get the tile dimension object
+     */
+    public getDimension(): Dimension {
+
+        return this.dimension;
+    }
+
+    /**
      * register a tilemap asset
      *
      * @param name the unique name of the image
@@ -53,7 +69,7 @@ export class TileMap extends AbstractAsset {
         tilemaps.forEach(tilemap => {
 
             // set the asset type
-            tilemap.assetType = AssetType.Image;
+            tilemap.assetType = AssetType.TileMap;
 
             // get the map csv data file to save the map information
             mapLoaderPromise.push(
@@ -108,25 +124,33 @@ export class TileMap extends AbstractAsset {
      */
     private static async registerTileMapSubImages(tileMap: TileMap): Promise<Image[]> {
 
-        // stack for all images
-        let itemRegisterPromiseStack: Promise<Image>[] = [];
-        let mapLines = tileMap.map.split(String.fromCharCode(13));
-        let horizontalImageCount = mapLines.length;
-        let verticalImageCount = mapLines[0].split(',').length;
+        // the first check is, how height and width the tilemap image is
+        // with this data and the dimension of each tile, the loop
+        // can be build to get each tile as seperate image
+        let tileMapHeight = (<ImageBitmap>tileMap.getData()).height;
+        let tileMapWidth = (<ImageBitmap>tileMap.getData()).width;
+
+        // get the amount of tiles
+        let horizontalTileAmount = tileMapWidth / tileMap.dimension.x;
+        let verticalTileAmount = tileMapHeight / tileMap.dimension.y;
 
         // create a canvas element for the picture extraction
         let canvas = document.createElement('canvas');
         let ctx = canvas.getContext('2d');
+        let itemRegisterPromiseStack: Promise<Image>[] = [];
 
-        // height and width are fixed
+        // height and width of each tile is fixed
         canvas.width = tileMap.dimension.x;
         canvas.height = tileMap.dimension.y;
 
+        // the tile number counter
+        let tileCounter = 0;
+
         // iterate through all tiles
-        for (let v = 0; v < verticalImageCount; v++) {
+        for (let v = 0; v < verticalTileAmount; v++) {
 
             // now every horizontal image in the line v
-            for (let h = 0; h < horizontalImageCount; h++) {
+            for (let h = 0; h < horizontalTileAmount; h++) {
 
                 // draw the image at the canvas
                 ctx.drawImage(
@@ -137,7 +161,7 @@ export class TileMap extends AbstractAsset {
 
                 // get the image as data uri to register the new image
                 itemRegisterPromiseStack.push(Image.register({
-                    name: `${tileMap.name}[${v}${h}]`,
+                    name: `${tileMap.name}[${tileCounter++}]`,
                     path: canvas.toDataURL()
                 }));
             }
