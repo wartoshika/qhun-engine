@@ -631,6 +631,10 @@ var Game = (function (_super) {
         var _this = _super.call(this) || this;
         _this.renderer = renderer;
         /**
+         * the stack of the entities that are currently in the game
+         */
+        _this.currentEntities = [];
+        /**
          * holder of the registered worlds
          */
         _this.worldStack = {};
@@ -672,7 +676,11 @@ var Game = (function (_super) {
      * @param entity the entity to add
      */
     Game.prototype.addEntity = function (entity) {
-        this.renderer.addEntity(entity);
+        if (this.currentEntities.indexOf(entity) === -1) {
+            // add the entity
+            this.currentEntities.push(entity);
+            this.renderer.addEntity(entity);
+        }
     };
     /**
      * add a camera to the game
@@ -682,6 +690,7 @@ var Game = (function (_super) {
     Game.prototype.addCamera = function (camera) {
         // currently only one camera can be added.
         this.renderer.setCamera(camera);
+        this.currentCamera = camera;
     };
     /**
      * add one world to the game
@@ -752,6 +761,18 @@ var Game = (function (_super) {
         }
         // set the world in the renderer
         this.renderer.setWorld(this.worldStack[world]);
+    };
+    /**
+     * get all entities that are in the game
+     */
+    Game.prototype.getCurrentEntities = function () {
+        return this.currentEntities;
+    };
+    /**
+     * get the current visible camera
+     */
+    Game.prototype.getCurrentCamera = function () {
+        return this.currentCamera;
     };
     return Game;
 }(helper_1.Singleton));
@@ -991,7 +1012,7 @@ var Entity = (function () {
         this.position = position;
     }
     /**
-     * get the current position of the entity (center point)
+     * get the current position of the entity ( top left )
      */
     Entity.prototype.getPosition = function () {
         return this.position;
@@ -1578,10 +1599,6 @@ var CameraOffsetCalculator = (function () {
             // the distance from world bounds and canvas dim
             tmpVector.y = originalPosition.y - (worldBounds.y - canvasDim.y);
         }
-        if (window.log === true) {
-            console.log(canvasDim, worldBoundCanvas);
-            window.log = false;
-        }
         // return the corrected position vector
         return tmpVector;
     };
@@ -1664,16 +1681,23 @@ var MyAwesomeGame = (function (_super) {
      */
     MyAwesomeGame.prototype.loaded = function (game) {
         // create entities
-        this.player = new Link_1.Link();
+        // link is a CollidableEntity so collision detection
+        // is automaticly on
+        this.link = new Link_1.Link();
         // create game objects
         var camera = new camera_1.Camera(1.5);
         var world = new world_1.World(game, 'world1');
+        // set tile collision
+        world.setCollisionDetection.apply(world, [
+            137, 138, 139, 160, 161, 163, 164, 165, 166, 167, 168,
+            208, 209, 210
+        ]);
         // add game objects
-        game.add(this.player, world, camera);
+        game.add(this.link, world, camera);
         // load the world
         game.loadWorld('world1');
         // follow the player with the camera
-        camera.followEntity(this.player);
+        camera.followEntity(this.link);
         // let the camera stick to the world
         camera.setWorldBounds(world);
     };
@@ -1686,7 +1710,7 @@ var MyAwesomeGame = (function (_super) {
      */
     MyAwesomeGame.prototype.update = function (game, input) {
         // handle movement for link
-        this.player.handleMovement(input.getArrowKeys());
+        this.link.handleMovement(input.getArrowKeys());
     };
     __decorate([
         decorator_1.logMethodCall,
@@ -1729,6 +1753,7 @@ var Game_1 = __webpack_require__(14);
 var storage_1 = __webpack_require__(6);
 var asset_1 = __webpack_require__(1);
 var input_1 = __webpack_require__(55);
+var collision_1 = __webpack_require__(65);
 /**
  * the initiation class of the game client
  */
@@ -1797,6 +1822,8 @@ var Client = (function () {
     Client.prototype.gameLoop = function () {
         // call update method
         this.update(this.gameInstance, this.inputInstance);
+        // run collision detection
+        collision_1.CollisionDetection.entitiesWithWorld(this.gameInstance.getCurrentEntities(), this.renderer.getWorld(), this.gameInstance.getCurrentCamera());
         // call the scene update
         var scene = this.gameInstance.getCurrentScene();
         if (scene)
@@ -4316,6 +4343,15 @@ var Vector2D = (function (_super) {
         return _super.call(this, x, y) || this;
     }
     /**
+     * helper method to get vector instances
+     *
+     * @param x the x value
+     * @param y the y value. if no y value is present, x and y will come from x
+     */
+    Vector2D.from = function (x, y) {
+        return new Vector2D(x, y !== undefined ? y : x);
+    };
+    /**
      * adds another vector
      *
      * @param vector the other vector
@@ -4620,6 +4656,17 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var Entity_1 = __webpack_require__(16);
 /**
+ * a helper type for eg. blocked directions
+ */
+var Direction;
+(function (Direction) {
+    Direction[Direction["Left"] = 0] = "Left";
+    Direction[Direction["Right"] = 1] = "Right";
+    Direction[Direction["Up"] = 2] = "Up";
+    Direction[Direction["Down"] = 3] = "Down";
+})(Direction = exports.Direction || (exports.Direction = {}));
+;
+/**
  * the client class for a collidable entity
  */
 var CollidableEntity = (function (_super) {
@@ -4632,6 +4679,19 @@ var CollidableEntity = (function (_super) {
          * the current mass of the entity
          */
         _this.mass = 0;
+        /**
+         * the state of entity world bound collision
+         */
+        _this.collidesWithWorldBounds = true;
+        /**
+         * a state object for blocked directions
+         */
+        _this.directionBlocked = {
+            Left: false,
+            Right: false,
+            Up: false,
+            Down: false
+        };
         return _this;
     }
     /**
@@ -4657,6 +4717,38 @@ var CollidableEntity = (function (_super) {
      */
     CollidableEntity.prototype.setMass = function (mass) {
         this.mass = mass;
+    };
+    /**
+     * get the directions of the entity that are blocked
+     */
+    CollidableEntity.prototype.getBlockedDirections = function () {
+        return this.directionBlocked;
+    };
+    /**
+     * set the given direction as blocked or unblocked
+     *
+     * @param direction the direction
+     * @param blocked blocked or not?
+     */
+    CollidableEntity.prototype.setDirectionBlocked = function (direction, blocked) {
+        if (blocked === void 0) { blocked = true; }
+        this.directionBlocked[Direction[direction]] = blocked;
+    };
+    /**
+     * allow this entity to collide with the world bounds
+     * and set the direction to blocked at the end of the world
+     *
+     * @param collision if the entity should collide with the world bound
+     */
+    CollidableEntity.prototype.setWorldBoundCollision = function (collision) {
+        if (collision === void 0) { collision = true; }
+        this.collidesWithWorldBounds = collision;
+    };
+    /**
+     * get the current world bound collision state
+     */
+    CollidableEntity.prototype.getWorldBoundCollision = function () {
+        return this.collidesWithWorldBounds;
     };
     return CollidableEntity;
 }(Entity_1.Entity));
@@ -4819,6 +4911,10 @@ var World = (function () {
     function World(game, map, gravity) {
         if (gravity === void 0) { gravity = new math_1.Vector2D(physic_1.GravityForce.None, physic_1.GravityForce.None); }
         this.gravity = gravity;
+        /**
+         * the tile numbers that collides with entities derived from {@link CollidableEntity}
+         */
+        this.collisionTiles = [];
         // get the tilemap from the asset loader
         this.map = asset_1.AssetLoader.getInstance()
             .getAsset(map, asset_1.AssetType.TileMap);
@@ -4840,6 +4936,65 @@ var World = (function () {
      */
     World.prototype.getWorldDimension = function () {
         return this.map.getWorldDimension();
+    };
+    /**
+     * set single tile numbers to collide with
+     *
+     * @param tileNumbers the tile numbers to collide with
+     */
+    World.prototype.setCollisionDetection = function () {
+        var tileNumbers = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            tileNumbers[_i] = arguments[_i];
+        }
+        (_a = this.collisionTiles).push.apply(_a, tileNumbers);
+        var _a;
+    };
+    /**
+     * set all tiles with this numbers to collide with
+     *
+     * @param from from tile number
+     * @param to to tile number
+     */
+    World.prototype.setCollisionDetectionBetween = function (from, to) {
+        // loop through the tile numbers
+        for (var tile = from; tile <= to; tile++) {
+            this.collisionTiles.push(tile);
+        }
+    };
+    /**
+     * get the collidable tileNumbers for this world
+     */
+    World.prototype.getCollidableTileNumbers = function () {
+        return this.collisionTiles;
+    };
+    /**
+     * get the tile numbers for a position on the map
+     * if the position is not on the map, a -2 will be returned
+     *
+     * @param position the point on the tile map
+     */
+    World.prototype.getTileNumbersForPosition = function (position) {
+        var numbers = [];
+        // iterate through the map and each layer
+        this.map.map.forEach(function (map, layer) {
+            // the y axis
+            var line = map.split(String.fromCharCode(13));
+            if (line[position.y]) {
+                // the x axis
+                var tiles = line[position.y].split(',');
+                if (tiles[position.x]) {
+                    numbers.push(parseInt(tiles[position.x]));
+                }
+                else {
+                    numbers.push(-2);
+                }
+            }
+            else {
+                numbers.push(-2);
+            }
+        });
+        return numbers;
     };
     return World;
 }());
@@ -5839,6 +5994,14 @@ var CanvasRenderer = (function (_super) {
         // instantiate the world renderer
         this.worldRenderer = new CanvasWorldRenderer_1.CanvasWorldRenderer(world, this.canvas, this.ctx, this.currentCamera);
     };
+    /**
+     * get the current renderd world
+     */
+    CanvasRenderer.prototype.getWorld = function () {
+        if (!this.worldRenderer)
+            return;
+        return this.worldRenderer.getWorld();
+    };
     return CanvasRenderer;
 }(BasicRenderer_1.BasicRenderer));
 exports.CanvasRenderer = CanvasRenderer;
@@ -5870,6 +6033,12 @@ var CanvasWorldRenderer = (function () {
         this.ctx = ctx;
         this.camera = camera;
     }
+    /**
+     * get the current world
+     */
+    CanvasWorldRenderer.prototype.getWorld = function () {
+        return this.world;
+    };
     /**
      * render the world!
      */
@@ -5998,7 +6167,7 @@ var collision_1 = __webpack_require__(63);
 var Link = (function (_super) {
     __extends(Link, _super);
     function Link() {
-        var _this = _super.call(this, 20, 20, new math_1.Vector2D(10, 10)) || this;
+        var _this = _super.call(this, 16, 24, new math_1.Vector2D(10, 10)) || this;
         _this.scaleFactor = 2;
         // add the animations for the player
         _this.addAnimation({
@@ -6068,20 +6237,22 @@ var Link = (function (_super) {
      * @param arrowKeys the current pressed keys
      */
     Link.prototype.handleMovement = function (arrowKeys) {
+        // get moveable directions
+        var blockedDirections = this.getBlockedDirections();
         // move the player
-        if (arrowKeys.left) {
+        if (arrowKeys.left && !blockedDirections.Left) {
             this.setPosition(this.position.add(new math_1.Vector2D(-5, 0)));
             this.playAnimation('run_left', true);
         }
-        else if (arrowKeys.right) {
+        else if (arrowKeys.right && !blockedDirections.Right) {
             this.setPosition(this.position.add(new math_1.Vector2D(5, 0)));
             this.playAnimation('run_right', true);
         }
-        if (arrowKeys.down) {
+        if (arrowKeys.down && !blockedDirections.Down) {
             this.setPosition(this.position.add(new math_1.Vector2D(0, 5)));
             this.playAnimation('run_down', true);
         }
-        else if (arrowKeys.up) {
+        else if (arrowKeys.up && !blockedDirections.Up) {
             this.setPosition(this.position.add(new math_1.Vector2D(0, -5)));
             this.playAnimation('run_up', true);
         }
@@ -6139,6 +6310,105 @@ var CollisionType;
     CollisionType[CollisionType["Rectangle"] = 1] = "Rectangle";
     CollisionType[CollisionType["RotatedRectangle"] = 2] = "RotatedRectangle";
 })(CollisionType = exports.CollisionType || (exports.CollisionType = {}));
+
+
+/***/ }),
+/* 65 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(66));
+
+
+/***/ }),
+/* 66 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+var entity_1 = __webpack_require__(15);
+var math_1 = __webpack_require__(0);
+var CollisionDetection = (function () {
+    function CollisionDetection() {
+    }
+    /**
+     * checks if the given entities collides with the world
+     *
+     * @param entities the entities to test
+     * @param world the current world
+     */
+    CollisionDetection.entitiesWithWorld = function (entities, world, camera) {
+        // only take entities that can collide
+        entities.filter(function (entity) { return entity instanceof entity_1.CollidableEntity; }).forEach(function (entity) {
+            // calculate the entity position in every direction from its
+            // hitbox
+            var position = {};
+            // get the position of the entity
+            var entityPosition = entity.getPosition();
+            var tileDimension = world.getTileMap().getDimension();
+            var entityCollidesWithWorldBounds = entity.getWorldBoundCollision();
+            // calculate the tile position on the map
+            var tilePosition = entityPosition
+                .divide(camera.getScaneVector())
+                .divide(math_1.Vector2D.from(tileDimension.y, tileDimension.y))
+                .round(0);
+            // now the system should check if the entity can move
+            position[entity_1.Direction.Left] = tilePosition.add(math_1.Vector2D.from(-1, 0));
+            position[entity_1.Direction.Right] = tilePosition.add(math_1.Vector2D.from(1, 0));
+            position[entity_1.Direction.Up] = tilePosition.add(math_1.Vector2D.from(0, -1));
+            position[entity_1.Direction.Down] = tilePosition.add(math_1.Vector2D.from(0, 1));
+            // iterate the directions
+            Object.keys(position).forEach(function (key) {
+                var direction = parseInt(key);
+                var collision = false;
+                // get the tile numbers that are at the players point
+                var tileNumbers = world.getTileNumbersForPosition(position[direction]);
+                if (window.log === true) {
+                    if (direction === entity_1.Direction.Right) {
+                        console.log(tileNumbers);
+                        window.log = false;
+                    }
+                }
+                // on a collidable tile?
+                var collidableTileNumbers = world.getCollidableTileNumbers();
+                // test collision
+                tileNumbers.forEach(function (number) {
+                    // does the number exist?
+                    if (
+                    // collidable tile
+                    collidableTileNumbers.indexOf(number) !== -1
+                        ||
+                            // world bound
+                            (entityCollidesWithWorldBounds && number === -2)) {
+                        collision = true;
+                    }
+                });
+                // set the direction
+                entity.setDirectionBlocked(direction, collision);
+            });
+        });
+    };
+    return CollisionDetection;
+}());
+exports.CollisionDetection = CollisionDetection;
 
 
 /***/ })

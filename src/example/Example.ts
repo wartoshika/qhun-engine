@@ -22,7 +22,7 @@ import { Camera } from '../client/camera';
 
 class MyAwesomeGame extends Client {
 
-    private player: Link;
+    private link: Link;
 
     constructor() {
 
@@ -61,7 +61,9 @@ class MyAwesomeGame extends Client {
     public loaded(game: Game): void {
 
         // create entities
-        this.player = new Link();
+        // link is a CollidableEntity so collision detection
+        // is automaticly on
+        this.link = new Link();
 
         // create game objects
         let camera = new Camera(1.5);
@@ -69,14 +71,20 @@ class MyAwesomeGame extends Client {
             game, 'world1'
         );
 
+        // set tile collision
+        world.setCollisionDetection(...[
+            137, 138, 139, 160, 161, 163, 164, 165, 166, 167, 168,
+            208, 209, 210
+        ]);
+
         // add game objects
-        game.add(this.player, world, camera);
+        game.add(this.link, world, camera);
 
         // load the world
         game.loadWorld('world1');
 
         // follow the player with the camera
-        camera.followEntity(this.player);
+        camera.followEntity(this.link);
 
         // let the camera stick to the world
         camera.setWorldBounds(world);
@@ -92,7 +100,7 @@ class MyAwesomeGame extends Client {
     public update(game: Game, input: Input): void {
 
         // handle movement for link
-        this.player.handleMovement(input.getArrowKeys());
+        this.link.handleMovement(input.getArrowKeys());
     }
 }
 

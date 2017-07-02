@@ -190,4 +190,13 @@ export class CanvasRenderer extends BasicRenderer implements Renderer {
         );
     }
 
+    /**
+     * get the current renderd world
+     */
+    public getWorld(): World {
+
+        if (!this.worldRenderer) return;
+        return this.worldRenderer.getWorld();
+    }
+
 }

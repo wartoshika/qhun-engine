@@ -26,6 +26,17 @@ export class Vector2D<T extends number = number> extends Dimension {
     }
 
     /**
+     * helper method to get vector instances
+     *
+     * @param x the x value
+     * @param y the y value. if no y value is present, x and y will come from x
+     */
+    public static from(x: number, y?: number): Vector2D {
+
+        return new Vector2D(x, y !== undefined ? y : x);
+    }
+
+    /**
      * adds another vector
      *
      * @param vector the other vector

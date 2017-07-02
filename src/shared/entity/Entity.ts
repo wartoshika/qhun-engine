@@ -17,7 +17,7 @@ export abstract class Entity {
     ) { }
 
     /**
-     * get the current position of the entity (center point)
+     * get the current position of the entity ( top left )
      */
     public getPosition(): Vector2D {
 

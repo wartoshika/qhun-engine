@@ -15,6 +15,7 @@ import { RamStorage } from '../shared/storage';
 import { AssetLoader, AssetType } from './asset';
 import { Renderer } from './render';
 import { Input } from './input';
+import { CollisionDetection } from './collision';
 
 /**
  * the initiation class of the game client
@@ -121,6 +122,9 @@ export abstract class Client {
 
         // call update method
         this.update(this.gameInstance, this.inputInstance);
+
+        // run collision detection
+        CollisionDetection.entitiesWithWorld(this.gameInstance.getCurrentEntities(), this.renderer.getWorld(), this.gameInstance.getCurrentCamera());
 
         // call the scene update
         let scene = this.gameInstance.getCurrentScene();

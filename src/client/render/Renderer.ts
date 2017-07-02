@@ -50,6 +50,11 @@ export interface Renderer {
     setWorld(world: World): void;
 
     /**
+     * get the current world
+     */
+    getWorld(): World;
+
+    /**
      * set the current camera as the users view into the game
      */
     setCamera(camera: Camera): void;

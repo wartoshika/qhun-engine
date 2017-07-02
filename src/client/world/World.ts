@@ -17,6 +17,11 @@ import { Game } from '../Game';
 export class World {
 
     /**
+     * the tile numbers that collides with entities derived from {@link CollidableEntity}
+     */
+    private collisionTiles: number[] = [];
+
+    /**
      * the current tilemap
      */
     private map: TileMap;
@@ -62,5 +67,72 @@ export class World {
     public getWorldDimension(): Dimension {
 
         return this.map.getWorldDimension();
+    }
+
+
+    /**
+     * set single tile numbers to collide with
+     *
+     * @param tileNumbers the tile numbers to collide with
+     */
+    public setCollisionDetection(...tileNumbers: number[]): void {
+
+        this.collisionTiles.push(...tileNumbers);
+    }
+
+    /**
+     * set all tiles with this numbers to collide with
+     *
+     * @param from from tile number
+     * @param to to tile number
+     */
+    public setCollisionDetectionBetween(from: number, to: number): void {
+
+        // loop through the tile numbers
+        for (let tile = from; tile <= to; tile++) {
+
+            this.collisionTiles.push(tile);
+        }
+    }
+
+    /**
+     * get the collidable tileNumbers for this world
+     */
+    public getCollidableTileNumbers(): number[] {
+
+        return this.collisionTiles;
+    }
+
+    /**
+     * get the tile numbers for a position on the map
+     * if the position is not on the map, a -2 will be returned
+     *
+     * @param position the point on the tile map
+     */
+    public getTileNumbersForPosition(position: Vector2D): number[] {
+
+        let numbers: number[] = [];
+
+        // iterate through the map and each layer
+        this.map.map.forEach((map, layer) => {
+
+            // the y axis
+            let line = map.split(String.fromCharCode(13));
+            if (line[position.y]) {
+
+                // the x axis
+                let tiles = line[position.y].split(',');
+                if (tiles[position.x]) {
+                    numbers.push(parseInt(tiles[position.x]));
+                } else {
+
+                    numbers.push(-2);
+                }
+            } else {
+                numbers.push(-2);
+            }
+        });
+
+        return numbers;
     }
 }

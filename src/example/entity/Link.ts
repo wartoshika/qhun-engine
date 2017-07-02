@@ -19,7 +19,7 @@ export class Link extends CollidableEntity {
 
     constructor() {
 
-        super(20, 20, new Vector2D(10, 10));
+        super(16, 24, new Vector2D(10, 10));
 
         // add the animations for the player
         this.addAnimation({
@@ -95,14 +95,17 @@ export class Link extends CollidableEntity {
      */
     public handleMovement(arrowKeys: InputArrowKeys): void {
 
+        // get moveable directions
+        let blockedDirections = this.getBlockedDirections();
+
         // move the player
-        if (arrowKeys.left) {
+        if (arrowKeys.left && !blockedDirections.Left) {
 
             this.setPosition(this.position.add(
                 new Vector2D(-5, 0)
             ));
             this.playAnimation('run_left', true);
-        } else if (arrowKeys.right) {
+        } else if (arrowKeys.right && !blockedDirections.Right) {
 
             this.setPosition(this.position.add(
                 new Vector2D(5, 0)
@@ -110,13 +113,13 @@ export class Link extends CollidableEntity {
             this.playAnimation('run_right', true);
         }
 
-        if (arrowKeys.down) {
+        if (arrowKeys.down && !blockedDirections.Down) {
 
             this.setPosition(this.position.add(
                 new Vector2D(0, 5)
             ));
             this.playAnimation('run_down', true);
-        } else if (arrowKeys.up) {
+        } else if (arrowKeys.up && !blockedDirections.Up) {
 
             this.setPosition(this.position.add(
                 new Vector2D(0, -5)

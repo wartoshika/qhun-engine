@@ -9,6 +9,7 @@ TODO
 - [x] multilayer tilemap import and rendering
 - [x] add world scale (can be done by scaling the camera)
 - [o] controls
+- [o] collision detection incl. tilemaps
 - [] physics
 - [] animation states should have possible random values as callback function
 

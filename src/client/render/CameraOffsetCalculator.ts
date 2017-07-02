@@ -198,12 +198,6 @@ export class CameraOffsetCalculator {
             tmpVector.y = originalPosition.y - (worldBounds.y - canvasDim.y);
         }
 
-        if ((<any>window).log === true) {
-
-            console.log(canvasDim, worldBoundCanvas);
-            (<any>window).log = false;
-        }
-
         // return the corrected position vector
         return tmpVector;
     }

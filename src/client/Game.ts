@@ -26,6 +26,16 @@ export class Game extends Singleton {
     protected currentScene: Scene;
 
     /**
+     * the stack of the entities that are currently in the game
+     */
+    protected currentEntities: Entity[] = [];
+
+    /**
+     * the current camera
+     */
+    protected currentCamera: Camera;
+
+    /**
      * holder of the registered worlds
      */
     protected worldStack: { [worldName: string]: World } = {};
@@ -73,7 +83,12 @@ export class Game extends Singleton {
      */
     public addEntity(entity: Entity): void {
 
-        this.renderer.addEntity(entity);
+        if (this.currentEntities.indexOf(entity) === -1) {
+
+            // add the entity
+            this.currentEntities.push(entity);
+            this.renderer.addEntity(entity);
+        }
     }
 
     /**
@@ -85,6 +100,7 @@ export class Game extends Singleton {
 
         // currently only one camera can be added.
         this.renderer.setCamera(camera);
+        this.currentCamera = camera;
     }
 
 
@@ -159,5 +175,21 @@ export class Game extends Singleton {
 
         // set the world in the renderer
         this.renderer.setWorld(this.worldStack[world]);
+    }
+
+    /**
+     * get all entities that are in the game
+     */
+    public getCurrentEntities(): Entity[] {
+
+        return this.currentEntities;
+    }
+
+    /**
+     * get the current visible camera
+     */
+    public getCurrentCamera(): Camera {
+
+        return this.currentCamera;
     }
 }

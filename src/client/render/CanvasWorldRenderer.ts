@@ -24,6 +24,14 @@ export class CanvasWorldRenderer {
     ) { }
 
     /**
+     * get the current world
+     */
+    public getWorld(): World {
+
+        return this.world;
+    }
+
+    /**
      * render the world!
      */
     public render(): void {
