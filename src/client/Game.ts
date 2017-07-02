@@ -11,8 +11,9 @@ import { Entity } from './entity';
 import { Scene } from './scene';
 import { World } from './world';
 import { Log } from '../shared/log';
+import { Camera } from './camera';
 
-declare type Thing = Entity | Scene | World;
+declare type Thing = Entity | Scene | World | Camera;
 
 /**
  * a class that handles adding of entities, cameras, physics ...
@@ -58,6 +59,9 @@ export class Game extends Singleton {
             } else if (thing instanceof World) {
 
                 this.addWorld(<World>thing);
+            } else if (thing instanceof Camera) {
+
+                this.addCamera(<Camera>thing);
             }
         });
     }
@@ -70,6 +74,17 @@ export class Game extends Singleton {
     public addEntity(entity: Entity): void {
 
         this.renderer.addEntity(entity);
+    }
+
+    /**
+     * add a camera to the game
+     *
+     * @param camera the camera to add
+     */
+    public addCamera(camera: Camera): void {
+
+        // currently only one camera can be added.
+        this.renderer.setCamera(camera);
     }
 
 

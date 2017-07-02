@@ -7,6 +7,9 @@
 
 import { World } from '../world';
 import { AssetLoader, AssetType, Image } from '../asset';
+import { Camera } from '../camera';
+import { CameraOffsetCalculator } from './CameraOffsetCalculator';
+import { Dimension } from '../../shared/math';
 
 /**
  * the canvas world renderer implementation
@@ -16,7 +19,8 @@ export class CanvasWorldRenderer {
     constructor(
         private world: World,
         private canvas: HTMLCanvasElement,
-        private ctx: CanvasRenderingContext2D
+        private ctx: CanvasRenderingContext2D,
+        private camera: Camera
     ) { }
 
     /**
@@ -52,6 +56,9 @@ export class CanvasWorldRenderer {
                     // get the tile number from the map
                     let tileNumber = parseInt(mapLines[v].split(',')[h]);
 
+                    // ignore -1 tiles
+                    if (tileNumber === -1) continue;
+
                     // get the asset
                     // @todo: local asset caching meight be a performance improvement
                     let tileImage = assetLoader.getAsset<Image>(
@@ -60,11 +67,20 @@ export class CanvasWorldRenderer {
                     );
 
                     // draw the tile
-                    this.ctx.drawImage(
+                    (<any>this.ctx).drawImage(
+                        ...CameraOffsetCalculator.imageScaleDrawTile(
+                            new Dimension(
+                                h * tileDimension.x, v * tileDimension.y
+                            ), tileImage, this.camera
+                        )
+                    );
+
+                    // draw the tile
+                    /*this.ctx.drawImage(
                         <ImageBitmap>tileImage.getData(),
                         h * tileDimension.x,
                         v * tileDimension.y
-                    );
+                    );*/
                 }
             }
 

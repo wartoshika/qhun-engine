@@ -10,9 +10,11 @@ import { Dimension } from '../../shared/math';
 import { Log } from '../../shared/log';
 import { Image, AssetLoader, AssetType } from '../asset';
 import { World } from '../world';
+import { Camera } from '../camera';
 import { BasicRenderer } from '../render/BasicRenderer';
 import { ClientConfig } from '../ClientConfig';
 import { CanvasWorldRenderer } from './CanvasWorldRenderer';
+import { CameraOffsetCalculator } from './CameraOffsetCalculator';
 
 import { RamStorage } from '../../shared/storage';
 
@@ -53,6 +55,8 @@ export class CanvasRenderer extends BasicRenderer implements Renderer {
      */
     private worldRenderer: CanvasWorldRenderer = null;
 
+    private currentCamera: Camera = null;
+
     constructor() {
         super();
 
@@ -78,6 +82,14 @@ export class CanvasRenderer extends BasicRenderer implements Renderer {
 
         // get the 2d context
         this.ctx = this.canvas.getContext('2d');
+    }
+
+    /**
+     * set the current camera as the users view into the game
+     */
+    public setCamera(camera: Camera): void {
+
+        this.currentCamera = camera;
     }
 
     /**
@@ -127,8 +139,7 @@ export class CanvasRenderer extends BasicRenderer implements Renderer {
     public preRender(): void {
 
         // clear the current canvas
-        this.ctx.fillStyle = '#ffffff';
-        this.ctx.fillRect(0, 0, this.gameDimension.x, this.gameDimension.y);
+        this.ctx.clearRect(0, 0, this.gameDimension.x, this.gameDimension.y);
 
         // check if a world should be rendered
         if (this.worldRenderer) {
@@ -151,16 +162,10 @@ export class CanvasRenderer extends BasicRenderer implements Renderer {
         // render the entity at its center point
         visibleEntities.forEach(entity => {
 
-            // draw the entity
-            this.ctx.drawImage(
 
-                // get the image of the entity
-                this.assetLoader.getAsset<Image>(
-                    entity.getImage(), AssetType.Image
-                ).getData(),
-
-                entity.getPosition().x,
-                entity.getPosition().y
+            // calculate the new height and width and draw the entity
+            (<any>this.ctx).drawImage(
+                ...CameraOffsetCalculator.imageScaleDrawEntity(entity, this.currentCamera)
             );
         });
 
@@ -178,7 +183,7 @@ export class CanvasRenderer extends BasicRenderer implements Renderer {
 
         // instantiate the world renderer
         this.worldRenderer = new CanvasWorldRenderer(
-            world, this.canvas, this.ctx
+            world, this.canvas, this.ctx, this.currentCamera
         );
     }
 

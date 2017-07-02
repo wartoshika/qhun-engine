@@ -8,6 +8,7 @@
 import { Dimension } from '../../shared/math';
 import { RenderableEntity } from '../entity';
 import { AssetLoader } from '../asset';
+import { Camera } from '../camera';
 import { World } from '../world';
 import { Game } from '../Game';
 import { ClientConfig } from '../ClientConfig';
@@ -47,4 +48,9 @@ export interface Renderer {
      * set the current visible world as background
      */
     setWorld(world: World): void;
+
+    /**
+     * set the current camera as the users view into the game
+     */
+    setCamera(camera: Camera): void;
 }

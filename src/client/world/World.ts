@@ -24,13 +24,11 @@ export class World {
     /**
      * @param game the game object
      * @param map the map to show
-     * @param camera the camera of the world
      * @param gravity the gravity that is present on this world
      */
     constructor(
         game: Game,
         map: string,
-        private camera: Camera,
         private gravity: Vector2D<GravityForce> = new Vector2D<GravityForce>(
             GravityForce.None,
             GravityForce.None

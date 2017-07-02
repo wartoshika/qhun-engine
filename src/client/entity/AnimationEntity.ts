@@ -37,6 +37,11 @@ export abstract class AnimationEntity extends Entity implements AnimationableEnt
     protected currentAnimation: Animation;
 
     /**
+     * the current scale factor
+     */
+    protected scaleFactor: number = 1;
+
+    /**
      * add one or many animations to the entity
      */
     public addAnimation(...animations: InlineAnimation[]): void {
@@ -119,5 +124,23 @@ export abstract class AnimationEntity extends Entity implements AnimationableEnt
     public setVisible(visible: boolean): void {
 
         this.visible = visible;
+    }
+
+    /**
+     * get the current scale
+     */
+    public getScale(): number {
+
+        return this.scaleFactor;
+    }
+
+    /**
+     * set the current local entity scale
+     *
+     * @param scale the new scale
+     */
+    public setScale(scale: number): void {
+
+        this.scaleFactor = scale;
     }
 }

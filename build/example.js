@@ -621,6 +621,7 @@ var entity_1 = __webpack_require__(15);
 var scene_1 = __webpack_require__(19);
 var world_1 = __webpack_require__(21);
 var log_1 = __webpack_require__(2);
+var camera_1 = __webpack_require__(61);
 /**
  * a class that handles adding of entities, cameras, physics ...
  */
@@ -660,6 +661,9 @@ var Game = (function (_super) {
             else if (thing instanceof world_1.World) {
                 _this.addWorld(thing);
             }
+            else if (thing instanceof camera_1.Camera) {
+                _this.addCamera(thing);
+            }
         });
     };
     /**
@@ -669,6 +673,15 @@ var Game = (function (_super) {
      */
     Game.prototype.addEntity = function (entity) {
         this.renderer.addEntity(entity);
+    };
+    /**
+     * add a camera to the game
+     *
+     * @param camera the camera to add
+     */
+    Game.prototype.addCamera = function (camera) {
+        // currently only one camera can be added.
+        this.renderer.setCamera(camera);
     };
     /**
      * add one world to the game
@@ -844,6 +857,10 @@ var AnimationEntity = (function (_super) {
          * the visibility flag
          */
         _this.visible = true;
+        /**
+         * the current scale factor
+         */
+        _this.scaleFactor = 1;
         return _this;
     }
     /**
@@ -916,6 +933,20 @@ var AnimationEntity = (function (_super) {
      */
     AnimationEntity.prototype.setVisible = function (visible) {
         this.visible = visible;
+    };
+    /**
+     * get the current scale
+     */
+    AnimationEntity.prototype.getScale = function () {
+        return this.scaleFactor;
+    };
+    /**
+     * set the current local entity scale
+     *
+     * @param scale the new scale
+     */
+    AnimationEntity.prototype.setScale = function (scale) {
+        this.scaleFactor = scale;
     };
     return AnimationEntity;
 }(entity_1.Entity));
@@ -1453,10 +1484,10 @@ var MyAwesomeGame = (function (_super) {
         // create entities
         this.player = new Player_1.Player();
         // create game objects
-        var camera = new camera_1.Camera(5);
-        var world = new world_1.World(game, 'world1', camera);
+        var camera = new camera_1.Camera(2);
+        var world = new world_1.World(game, 'world1');
         // add game objects
-        game.add(this.player, world);
+        game.add(this.player, world, camera);
         // load the world
         game.loadWorld('world1');
         // follow the player with the camera
@@ -1563,6 +1594,7 @@ var Client = (function () {
         Promise.all(assetLoader.getUnresolvedPromised()).then(function () {
             // log the information about the registration process of assets
             log_1.Log.info("Registered", assetLoader.getAssetAmount(asset_1.AssetType.Image), "Images");
+            log_1.Log.info("Registered", assetLoader.getAssetAmount(asset_1.AssetType.TileMap), "TileMaps");
             log_1.Log.info("Registered", assetLoader.getAssetAmount(asset_1.AssetType.Audio), "Sounds");
             log_1.Log.info("Registered", assetLoader.getAssetAmount(asset_1.AssetType.Json), "JSON Objects");
             // all assets loaded, continue startup
@@ -4564,12 +4596,10 @@ var World = (function () {
     /**
      * @param game the game object
      * @param map the map to show
-     * @param camera the camera of the world
      * @param gravity the gravity that is present on this world
      */
-    function World(game, map, camera, gravity) {
+    function World(game, map, gravity) {
         if (gravity === void 0) { gravity = new math_1.Vector2D(physic_1.GravityForce.None, physic_1.GravityForce.None); }
-        this.camera = camera;
         this.gravity = gravity;
         // get the tilemap from the asset loader
         this.map = asset_1.AssetLoader.getInstance()
@@ -5123,8 +5153,6 @@ var TileMap = (function (_super) {
                                     // register all sub images
                                     tileMapTransformPromise.push(TileMap.registerTileMapSubImages(tilemap));
                                 });
-                                // register the fully transparent -1 tile
-                                tileMapTransformPromise.push(TileMap.registerUndefinedTile(tileMaps[0].getName(), tileMaps[0].getDimension()));
                                 // await the sprite transform
                                 return Promise.all(tileMapTransformPromise).then(function () {
                                     // return all generated image assets
@@ -5173,28 +5201,6 @@ var TileMap = (function (_super) {
                 }
                 // await the registration process
                 return [2 /*return*/, Promise.all(itemRegisterPromiseStack)];
-            });
-        });
-    };
-    /**
-     * register a fully transparent file with index -1
-     */
-    TileMap.registerUndefinedTile = function (mapName, tileDimension) {
-        return __awaiter(this, void 0, void 0, function () {
-            var canvas, ctx;
-            return __generator(this, function (_a) {
-                canvas = document.createElement('canvas');
-                ctx = canvas.getContext('2d');
-                // set the canvas height and width
-                canvas.width = tileDimension.x;
-                canvas.height = tileDimension.y;
-                // clear the canvas complete
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                // get this as data url and register the tile
-                return [2 /*return*/, Image_1.Image.register({
-                        name: mapName + "[-1]",
-                        path: canvas.toDataURL()
-                    })];
             });
         });
     };
@@ -5357,6 +5363,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var asset_1 = __webpack_require__(4);
 var BasicRenderer_1 = __webpack_require__(23);
 var CanvasWorldRenderer_1 = __webpack_require__(55);
+var CameraOffsetCalculator_1 = __webpack_require__(64);
 var FPS_OFFSET = 25;
 /**
  * a game renderer based on the html canvas element
@@ -5369,6 +5376,7 @@ var CanvasRenderer = (function (_super) {
          * holder of the canvas world renderer
          */
         _this.worldRenderer = null;
+        _this.currentCamera = null;
         // get the asset loader
         _this.assetLoader = asset_1.AssetLoader.getInstance();
         // bind the instance
@@ -5387,6 +5395,12 @@ var CanvasRenderer = (function (_super) {
         this.createCanvas();
         // get the 2d context
         this.ctx = this.canvas.getContext('2d');
+    };
+    /**
+     * set the current camera as the users view into the game
+     */
+    CanvasRenderer.prototype.setCamera = function (camera) {
+        this.currentCamera = camera;
     };
     /**
      * print the current fps on the screen
@@ -5427,8 +5441,7 @@ var CanvasRenderer = (function (_super) {
      */
     CanvasRenderer.prototype.preRender = function () {
         // clear the current canvas
-        this.ctx.fillStyle = '#ffffff';
-        this.ctx.fillRect(0, 0, this.gameDimension.x, this.gameDimension.y);
+        this.ctx.clearRect(0, 0, this.gameDimension.x, this.gameDimension.y);
         // check if a world should be rendered
         if (this.worldRenderer) {
             // render it!
@@ -5446,10 +5459,9 @@ var CanvasRenderer = (function (_super) {
         var visibleEntities = this.getRenderableEntities();
         // render the entity at its center point
         visibleEntities.forEach(function (entity) {
-            // draw the entity
-            _this.ctx.drawImage(
-            // get the image of the entity
-            _this.assetLoader.getAsset(entity.getImage(), asset_1.AssetType.Image).getData(), entity.getPosition().x, entity.getPosition().y);
+            // calculate the new height and width and draw the entity
+            (_a = _this.ctx).drawImage.apply(_a, CameraOffsetCalculator_1.CameraOffsetCalculator.imageScaleDrawEntity(entity, _this.currentCamera));
+            var _a;
         });
         // print fps
         this.printFps();
@@ -5461,7 +5473,7 @@ var CanvasRenderer = (function (_super) {
      */
     CanvasRenderer.prototype.setWorld = function (world) {
         // instantiate the world renderer
-        this.worldRenderer = new CanvasWorldRenderer_1.CanvasWorldRenderer(world, this.canvas, this.ctx);
+        this.worldRenderer = new CanvasWorldRenderer_1.CanvasWorldRenderer(world, this.canvas, this.ctx, this.currentCamera);
     };
     return CanvasRenderer;
 }(BasicRenderer_1.BasicRenderer));
@@ -5482,14 +5494,17 @@ exports.CanvasRenderer = CanvasRenderer;
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 var asset_1 = __webpack_require__(4);
+var CameraOffsetCalculator_1 = __webpack_require__(64);
+var math_1 = __webpack_require__(0);
 /**
  * the canvas world renderer implementation
  */
 var CanvasWorldRenderer = (function () {
-    function CanvasWorldRenderer(world, canvas, ctx) {
+    function CanvasWorldRenderer(world, canvas, ctx, camera) {
         this.world = world;
         this.canvas = canvas;
         this.ctx = ctx;
+        this.camera = camera;
     }
     /**
      * render the world!
@@ -5515,14 +5530,24 @@ var CanvasWorldRenderer = (function () {
                 for (var h = 0; h < horizontalImageCount; h++) {
                     // get the tile number from the map
                     var tileNumber = parseInt(mapLines[v].split(',')[h]);
+                    // ignore -1 tiles
+                    if (tileNumber === -1)
+                        continue;
                     // get the asset
                     // @todo: local asset caching meight be a performance improvement
                     var tileImage = assetLoader.getAsset(this.world.getTileMap().getName() + "[" + tileNumber + "]", asset_1.AssetType.Image);
                     // draw the tile
-                    this.ctx.drawImage(tileImage.getData(), h * tileDimension.x, v * tileDimension.y);
+                    (_a = this.ctx).drawImage.apply(_a, CameraOffsetCalculator_1.CameraOffsetCalculator.imageScaleDrawTile(new math_1.Dimension(h * tileDimension.x, v * tileDimension.y), tileImage, this.camera));
+                    // draw the tile
+                    /*this.ctx.drawImage(
+                        <ImageBitmap>tileImage.getData(),
+                        h * tileDimension.x,
+                        v * tileDimension.y
+                    );*/
                 }
             }
         }
+        var _a;
     };
     return CanvasWorldRenderer;
 }());
@@ -5613,6 +5638,7 @@ var Player = (function (_super) {
     __extends(Player, _super);
     function Player() {
         var _this = _super.call(this, 20, 20, new math_1.Vector2D(10, 10)) || this;
+        _this.scaleFactor = .5;
         // add the animations for the player
         _this.addAnimation({
             name: 'idle',
@@ -5804,6 +5830,88 @@ var CameraMode;
 (function (CameraMode) {
     CameraMode[CameraMode["Orthogonal"] = 0] = "Orthogonal";
 })(CameraMode = exports.CameraMode || (exports.CameraMode = {}));
+
+
+/***/ }),
+/* 64 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+var asset_1 = __webpack_require__(4);
+/**
+ * a helper class to calculate the right offset and scale of objects
+ * when a camera is unsed to display the game
+ */
+var CameraOffsetCalculator = (function () {
+    function CameraOffsetCalculator() {
+    }
+    /**
+     * calculates the entity offset and scaleability of its image by using one
+     * camera object.
+     * the return array can be directiy used to draw the image
+     */
+    CameraOffsetCalculator.imageScaleDrawEntity = function (entity, camera) {
+        // get the entity image scale from the camera
+        var scale = camera.getScale();
+        // get the original image as ImageBitmap
+        var entityImage = CameraOffsetCalculator.assetLoader.getAsset(entity.getImage(), asset_1.AssetType.Image).getData();
+        // calculate the scale
+        var newWidth = entityImage.width * scale * entity.getScale();
+        var newHeight = entityImage.width * scale * entity.getScale();
+        // calculate position
+        return [
+            entityImage,
+            0,
+            0,
+            entityImage.width,
+            entityImage.height,
+            entity.getPosition().x,
+            entity.getPosition().y,
+            newWidth,
+            newHeight
+        ];
+    };
+    /**
+     * a helper function to draw a tile with camera and offset calculations
+     *
+     * @param originalPosition the position of the tile where it should originally be drawn
+     * @param tile the image to draw
+     * @param camera the active camera
+     */
+    CameraOffsetCalculator.imageScaleDrawTile = function (originalPosition, tile, camera) {
+        // get the current camera scale
+        var scale = camera.getScale();
+        // get the tile image as BitmapImage
+        var tileImage = tile.getData();
+        // calculate the scale
+        var newWidth = tileImage.width * scale;
+        var newHeight = tileImage.width * scale;
+        // calculate position
+        // @todo: result is not 100% accurate... need further investigations
+        return [
+            tileImage,
+            0,
+            0,
+            tileImage.width,
+            tileImage.height,
+            originalPosition.x * scale,
+            originalPosition.y * scale,
+            newWidth,
+            newHeight
+        ];
+    };
+    CameraOffsetCalculator.assetLoader = asset_1.AssetLoader.getInstance();
+    return CameraOffsetCalculator;
+}());
+exports.CameraOffsetCalculator = CameraOffsetCalculator;
 
 
 /***/ })

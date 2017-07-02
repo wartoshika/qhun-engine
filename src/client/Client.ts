@@ -82,6 +82,7 @@ export abstract class Client {
 
             // log the information about the registration process of assets
             Log.info("Registered", assetLoader.getAssetAmount(AssetType.Image), "Images");
+            Log.info("Registered", assetLoader.getAssetAmount(AssetType.TileMap), "TileMaps");
             Log.info("Registered", assetLoader.getAssetAmount(AssetType.Audio), "Sounds");
             Log.info("Registered", assetLoader.getAssetAmount(AssetType.Json), "JSON Objects");
 

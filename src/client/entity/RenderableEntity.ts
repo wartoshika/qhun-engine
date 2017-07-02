@@ -36,4 +36,14 @@ export interface RenderableEntity {
      * get the position from the entity (top, left)
      */
     getPosition(): Vector2D;
+
+    /**
+     * get the current local entity scale
+     */
+    getScale(): number;
+
+    /**
+     * set a local entity scale. this is multiplied with the camera scale and the entity width / height
+     */
+    setScale(scale: number): void;
 }

@@ -593,6 +593,10 @@ var AnimationEntity = (function (_super) {
          * the visibility flag
          */
         _this.visible = true;
+        /**
+         * the current scale factor
+         */
+        _this.scaleFactor = 1;
         return _this;
     }
     /**
@@ -665,6 +669,20 @@ var AnimationEntity = (function (_super) {
      */
     AnimationEntity.prototype.setVisible = function (visible) {
         this.visible = visible;
+    };
+    /**
+     * get the current scale
+     */
+    AnimationEntity.prototype.getScale = function () {
+        return this.scaleFactor;
+    };
+    /**
+     * set the current local entity scale
+     *
+     * @param scale the new scale
+     */
+    AnimationEntity.prototype.setScale = function (scale) {
+        this.scaleFactor = scale;
     };
     return AnimationEntity;
 }(entity_1.Entity));
@@ -1092,6 +1110,7 @@ var Client = (function () {
         Promise.all(assetLoader.getUnresolvedPromised()).then(function () {
             // log the information about the registration process of assets
             log_1.Log.info("Registered", assetLoader.getAssetAmount(asset_1.AssetType.Image), "Images");
+            log_1.Log.info("Registered", assetLoader.getAssetAmount(asset_1.AssetType.TileMap), "TileMaps");
             log_1.Log.info("Registered", assetLoader.getAssetAmount(asset_1.AssetType.Audio), "Sounds");
             log_1.Log.info("Registered", assetLoader.getAssetAmount(asset_1.AssetType.Json), "JSON Objects");
             // all assets loaded, continue startup
@@ -3825,6 +3844,7 @@ var entity_1 = __webpack_require__(34);
 var scene_1 = __webpack_require__(39);
 var world_1 = __webpack_require__(41);
 var log_1 = __webpack_require__(1);
+var camera_1 = __webpack_require__(51);
 /**
  * a class that handles adding of entities, cameras, physics ...
  */
@@ -3864,6 +3884,9 @@ var Game = (function (_super) {
             else if (thing instanceof world_1.World) {
                 _this.addWorld(thing);
             }
+            else if (thing instanceof camera_1.Camera) {
+                _this.addCamera(thing);
+            }
         });
     };
     /**
@@ -3873,6 +3896,15 @@ var Game = (function (_super) {
      */
     Game.prototype.addEntity = function (entity) {
         this.renderer.addEntity(entity);
+    };
+    /**
+     * add a camera to the game
+     *
+     * @param camera the camera to add
+     */
+    Game.prototype.addCamera = function (camera) {
+        // currently only one camera can be added.
+        this.renderer.setCamera(camera);
     };
     /**
      * add one world to the game
@@ -4359,12 +4391,10 @@ var World = (function () {
     /**
      * @param game the game object
      * @param map the map to show
-     * @param camera the camera of the world
      * @param gravity the gravity that is present on this world
      */
-    function World(game, map, camera, gravity) {
+    function World(game, map, gravity) {
         if (gravity === void 0) { gravity = new math_1.Vector2D(physic_1.GravityForce.None, physic_1.GravityForce.None); }
-        this.camera = camera;
         this.gravity = gravity;
         // get the tilemap from the asset loader
         this.map = asset_1.AssetLoader.getInstance()
@@ -4918,8 +4948,6 @@ var TileMap = (function (_super) {
                                     // register all sub images
                                     tileMapTransformPromise.push(TileMap.registerTileMapSubImages(tilemap));
                                 });
-                                // register the fully transparent -1 tile
-                                tileMapTransformPromise.push(TileMap.registerUndefinedTile(tileMaps[0].getName(), tileMaps[0].getDimension()));
                                 // await the sprite transform
                                 return Promise.all(tileMapTransformPromise).then(function () {
                                     // return all generated image assets
@@ -4968,28 +4996,6 @@ var TileMap = (function (_super) {
                 }
                 // await the registration process
                 return [2 /*return*/, Promise.all(itemRegisterPromiseStack)];
-            });
-        });
-    };
-    /**
-     * register a fully transparent file with index -1
-     */
-    TileMap.registerUndefinedTile = function (mapName, tileDimension) {
-        return __awaiter(this, void 0, void 0, function () {
-            var canvas, ctx;
-            return __generator(this, function (_a) {
-                canvas = document.createElement('canvas');
-                ctx = canvas.getContext('2d');
-                // set the canvas height and width
-                canvas.width = tileDimension.x;
-                canvas.height = tileDimension.y;
-                // clear the canvas complete
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                // get this as data url and register the tile
-                return [2 /*return*/, Image_1.Image.register({
-                        name: mapName + "[-1]",
-                        path: canvas.toDataURL()
-                    })];
             });
         });
     };
@@ -5104,6 +5110,118 @@ var Input = (function (_super) {
     return Input;
 }(helper_1.Singleton));
 exports.Input = Input;
+
+
+/***/ }),
+/* 51 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(52));
+
+
+/***/ }),
+/* 52 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+var CameraMode_1 = __webpack_require__(53);
+/**
+ * the view for the player into the game
+ */
+var Camera = (function () {
+    /**
+     *
+     * @param scale the scale of the world. 1 means that a tile of 32x32 will renderes on 32x32 pixel. scane 5 means that a tile of 32x32 will be rendered as (32*5)x(32*5) pixel...
+     * @param mode the camera mode
+     */
+    function Camera(scale, mode) {
+        if (scale === void 0) { scale = 1; }
+        if (mode === void 0) { mode = CameraMode_1.CameraMode.Orthogonal; }
+        this.scale = scale;
+        this.mode = mode;
+        /**
+         * the entitiy which the camera should follow
+         */
+        this.followingEntity = null;
+    }
+    /**
+     * get the camera mode
+     */
+    Camera.prototype.getMode = function () {
+        return this.mode;
+    };
+    /**
+     * get the current world scale modificator
+     */
+    Camera.prototype.getScale = function () {
+        return this.scale;
+    };
+    /**
+     * set the current world scale modificator
+     */
+    Camera.prototype.setScale = function (scale) {
+        this.scale = scale;
+    };
+    /**
+     * follows one entity
+     *
+     * @param entity the entity to follow
+     */
+    Camera.prototype.followEntity = function (entity) {
+        this.followingEntity = entity;
+    };
+    /**
+     * get the current entity the camera follows.
+     * can be undefined is the camera is not following an entity
+     */
+    Camera.prototype.getFollowingEntity = function () {
+        return this.followingEntity;
+    };
+    return Camera;
+}());
+exports.Camera = Camera;
+
+
+/***/ }),
+/* 53 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * the currently supported camera modes
+ */
+var CameraMode;
+(function (CameraMode) {
+    CameraMode[CameraMode["Orthogonal"] = 0] = "Orthogonal";
+})(CameraMode = exports.CameraMode || (exports.CameraMode = {}));
 
 
 /***/ })

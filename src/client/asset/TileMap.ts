@@ -143,12 +143,6 @@ export class TileMap extends AbstractAsset {
                         );
                     });
 
-                    // register the fully transparent -1 tile
-                    tileMapTransformPromise.push(TileMap.registerUndefinedTile(
-                        tileMaps[0].getName(),
-                        tileMaps[0].getDimension()
-                    ));
-
                     // await the sprite transform
                     return Promise.all(tileMapTransformPromise).then(() => {
 
@@ -215,28 +209,5 @@ export class TileMap extends AbstractAsset {
 
         // await the registration process
         return Promise.all(itemRegisterPromiseStack);
-    }
-
-    /**
-     * register a fully transparent file with index -1
-     */
-    private static async registerUndefinedTile(mapName: string, tileDimension: Dimension): Promise<Image[]> {
-
-        // create a transparent canvas context
-        let canvas = document.createElement('canvas');
-        let ctx = canvas.getContext('2d');
-
-        // set the canvas height and width
-        canvas.width = tileDimension.x;
-        canvas.height = tileDimension.y;
-
-        // clear the canvas complete
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        // get this as data url and register the tile
-        return Image.register({
-            name: `${mapName}[-1]`,
-            path: canvas.toDataURL()
-        });
     }
 }

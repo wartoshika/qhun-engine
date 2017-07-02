@@ -14,6 +14,8 @@ import { CollisionType } from '../../shared/collision';
  */
 export class Player extends CollidableEntity {
 
+    protected scaleFactor: number = .5;
+
     constructor() {
 
         super(20, 20, new Vector2D(10, 10));

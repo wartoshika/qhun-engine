@@ -64,13 +64,13 @@ class MyAwesomeGame extends Client {
         this.player = new Player();
 
         // create game objects
-        let camera = new Camera(5);
+        let camera = new Camera(2);
         let world = new World(
-            game, 'world1', camera
+            game, 'world1'
         );
 
         // add game objects
-        game.add(this.player, world);
+        game.add(this.player, world, camera);
 
         // load the world
         game.loadWorld('world1');
