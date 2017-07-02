@@ -893,6 +893,8 @@ class Client {
         // setup renderer
         this.renderer = new this.clientConfig.rederer();
         this.renderer.setup(this.clientConfig);
+        // some logging
+        __WEBPACK_IMPORTED_MODULE_1__shared_log__["a" /* Log */].info("Using", this.renderer.constructor.name, "as Renderer");
         // start the preload phase
         this.preload();
         // await the asset loading
@@ -3532,7 +3534,7 @@ class Vector2D extends __WEBPACK_IMPORTED_MODULE_1__Dimension__["a" /* Dimension
      * @param vector the other vector
      */
     add(vector) {
-        return new Vector2D(this.x + vector.x, this.y + vector.y);
+        return new Vector2D((this.x + vector.x), (this.y + vector.y));
     }
     /**
      * substract another vector
@@ -3540,7 +3542,7 @@ class Vector2D extends __WEBPACK_IMPORTED_MODULE_1__Dimension__["a" /* Dimension
      * @param vector the other vector
      */
     substract(vector) {
-        return new Vector2D(this.x - vector.x, this.y - vector.y);
+        return new Vector2D((this.x - vector.x), (this.y - vector.y));
     }
     /**
      * divide another vector
@@ -3548,7 +3550,7 @@ class Vector2D extends __WEBPACK_IMPORTED_MODULE_1__Dimension__["a" /* Dimension
      * @param vector the other vector
      */
     divide(vector) {
-        return new Vector2D(this.x / vector.x, this.y / vector.y);
+        return new Vector2D((this.x / vector.x), (this.y / vector.y));
     }
     /**
      * multiply two vectors
@@ -3556,13 +3558,13 @@ class Vector2D extends __WEBPACK_IMPORTED_MODULE_1__Dimension__["a" /* Dimension
      * @param vector the other vector
      */
     multiply(vector) {
-        return new Vector2D(this.x * vector.x, this.y * vector.y);
+        return new Vector2D((this.x * vector.x), (this.y * vector.y));
     }
     /**
      * rounds the vector to a given precision
      */
     round(precision = 2) {
-        return new Vector2D(__WEBPACK_IMPORTED_MODULE_0__Helper__["a" /* Helper */].roundToPrecision(this.x, precision), __WEBPACK_IMPORTED_MODULE_0__Helper__["a" /* Helper */].roundToPrecision(this.y, precision));
+        return new Vector2D((__WEBPACK_IMPORTED_MODULE_0__Helper__["a" /* Helper */].roundToPrecision(this.x, precision)), (__WEBPACK_IMPORTED_MODULE_0__Helper__["a" /* Helper */].roundToPrecision(this.y, precision)));
     }
     /**
      * calculates the distance of two vector points
@@ -3801,6 +3803,10 @@ class CollidableEntity extends __WEBPACK_IMPORTED_MODULE_0__Entity__["a" /* Enti
         super(position);
         this.entityWidth = entityWidth;
         this.entityHeight = entityHeight;
+        /**
+         * the current mass of the entity
+         */
+        this.mass = 0;
     }
     /**
      * get the width of the entity
@@ -3813,6 +3819,18 @@ class CollidableEntity extends __WEBPACK_IMPORTED_MODULE_0__Entity__["a" /* Enti
      */
     getHeight() {
         return this.entityHeight;
+    }
+    /**
+     * get the current mass of the entity
+     */
+    getMass() {
+        return this.mass;
+    }
+    /**
+     * set a new mass to an entity
+     */
+    setMass(mass) {
+        this.mass = mass;
     }
 }
 /* unused harmony export CollidableEntity */

@@ -1267,6 +1267,8 @@ class Client {
         // setup renderer
         this.renderer = new this.clientConfig.rederer();
         this.renderer.setup(this.clientConfig);
+        // some logging
+        __WEBPACK_IMPORTED_MODULE_1__shared_log__["a" /* Log */].info("Using", this.renderer.constructor.name, "as Renderer");
         // start the preload phase
         this.preload();
         // await the asset loading
@@ -3776,7 +3778,7 @@ class Vector2D extends __WEBPACK_IMPORTED_MODULE_1__Dimension__["a" /* Dimension
      * @param vector the other vector
      */
     add(vector) {
-        return new Vector2D(this.x + vector.x, this.y + vector.y);
+        return new Vector2D((this.x + vector.x), (this.y + vector.y));
     }
     /**
      * substract another vector
@@ -3784,7 +3786,7 @@ class Vector2D extends __WEBPACK_IMPORTED_MODULE_1__Dimension__["a" /* Dimension
      * @param vector the other vector
      */
     substract(vector) {
-        return new Vector2D(this.x - vector.x, this.y - vector.y);
+        return new Vector2D((this.x - vector.x), (this.y - vector.y));
     }
     /**
      * divide another vector
@@ -3792,7 +3794,7 @@ class Vector2D extends __WEBPACK_IMPORTED_MODULE_1__Dimension__["a" /* Dimension
      * @param vector the other vector
      */
     divide(vector) {
-        return new Vector2D(this.x / vector.x, this.y / vector.y);
+        return new Vector2D((this.x / vector.x), (this.y / vector.y));
     }
     /**
      * multiply two vectors
@@ -3800,13 +3802,13 @@ class Vector2D extends __WEBPACK_IMPORTED_MODULE_1__Dimension__["a" /* Dimension
      * @param vector the other vector
      */
     multiply(vector) {
-        return new Vector2D(this.x * vector.x, this.y * vector.y);
+        return new Vector2D((this.x * vector.x), (this.y * vector.y));
     }
     /**
      * rounds the vector to a given precision
      */
     round(precision = 2) {
-        return new Vector2D(__WEBPACK_IMPORTED_MODULE_0__Helper__["a" /* Helper */].roundToPrecision(this.x, precision), __WEBPACK_IMPORTED_MODULE_0__Helper__["a" /* Helper */].roundToPrecision(this.y, precision));
+        return new Vector2D((__WEBPACK_IMPORTED_MODULE_0__Helper__["a" /* Helper */].roundToPrecision(this.x, precision)), (__WEBPACK_IMPORTED_MODULE_0__Helper__["a" /* Helper */].roundToPrecision(this.y, precision)));
     }
     /**
      * calculates the distance of two vector points
@@ -4023,6 +4025,10 @@ class CollidableEntity extends __WEBPACK_IMPORTED_MODULE_0__Entity__["a" /* Enti
         super(position);
         this.entityWidth = entityWidth;
         this.entityHeight = entityHeight;
+        /**
+         * the current mass of the entity
+         */
+        this.mass = 0;
     }
     /**
      * get the width of the entity
@@ -4035,6 +4041,18 @@ class CollidableEntity extends __WEBPACK_IMPORTED_MODULE_0__Entity__["a" /* Enti
      */
     getHeight() {
         return this.entityHeight;
+    }
+    /**
+     * get the current mass of the entity
+     */
+    getMass() {
+        return this.mass;
+    }
+    /**
+     * set a new mass to an entity
+     */
+    setMass(mass) {
+        this.mass = mass;
     }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = CollidableEntity;
@@ -4491,9 +4509,8 @@ class Input extends __WEBPACK_IMPORTED_MODULE_0__shared_helper__["b" /* Singleto
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__shared_log__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__asset__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__render_BasicRenderer__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__asset__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__render_BasicRenderer__ = __webpack_require__(22);
 /**
  * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
  *
@@ -4502,18 +4519,15 @@ class Input extends __WEBPACK_IMPORTED_MODULE_0__shared_helper__["b" /* Singleto
  */
 
 
-
 const FPS_OFFSET = 25;
 /**
  * a game renderer based on the html canvas element
  */
-class CanvasRenderer extends __WEBPACK_IMPORTED_MODULE_2__render_BasicRenderer__["a" /* BasicRenderer */] {
+class CanvasRenderer extends __WEBPACK_IMPORTED_MODULE_1__render_BasicRenderer__["a" /* BasicRenderer */] {
     constructor() {
         super();
-        // some logging
-        __WEBPACK_IMPORTED_MODULE_0__shared_log__["a" /* Log */].info("Using", this, "as Renderer");
         // get the asset loader
-        this.assetLoader = __WEBPACK_IMPORTED_MODULE_1__asset__["a" /* AssetLoader */].getInstance();
+        this.assetLoader = __WEBPACK_IMPORTED_MODULE_0__asset__["a" /* AssetLoader */].getInstance();
         // bind the instance
         CanvasRenderer.bindInstance(this);
     }
@@ -4580,7 +4594,7 @@ class CanvasRenderer extends __WEBPACK_IMPORTED_MODULE_2__render_BasicRenderer__
             // draw the entity
             this.ctx.drawImage(
             // get the image of the entity
-            this.assetLoader.getAsset(entity.getImage(), __WEBPACK_IMPORTED_MODULE_1__asset__["b" /* AssetType */].Image).getData(), entity.getPosition().x, entity.getPosition().y);
+            this.assetLoader.getAsset(entity.getImage(), __WEBPACK_IMPORTED_MODULE_0__asset__["b" /* AssetType */].Image).getData(), entity.getPosition().x, entity.getPosition().y);
         });
         // print fps
         this.printFps();

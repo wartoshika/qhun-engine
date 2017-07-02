@@ -70,6 +70,9 @@ export abstract class Client {
         this.renderer = new this.clientConfig.rederer();
         this.renderer.setup(this.clientConfig);
 
+        // some logging
+        Log.info("Using", this.renderer.constructor.name, "as Renderer");
+
         // start the preload phase
         this.preload();
 

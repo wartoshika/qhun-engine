@@ -49,9 +49,6 @@ export class CanvasRenderer extends BasicRenderer implements Renderer {
     constructor() {
         super();
 
-        // some logging
-        Log.info("Using", this, "as Renderer");
-
         // get the asset loader
         this.assetLoader = AssetLoader.getInstance<AssetLoader>();
 

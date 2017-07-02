@@ -5,4 +5,4 @@
  * https://opensource.org/licenses/MIT
  */
 
-export * from './physic/GravityForce';
+export * from './world/World';

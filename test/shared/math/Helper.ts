@@ -6,6 +6,7 @@
  */
 
 import { Helper } from '../../../src/shared/math/Helper';
+import { GravityForce } from '../../../src/client/physic';
 import { expect } from 'chai';
 import 'mocha';
 
@@ -40,5 +41,13 @@ describe('shared/math/Helper.ts', () => {
         expect(Helper.roundToPrecision(float, 0)).to.equal(5);
 
         expect(Helper.roundToPrecision(float)).to.equal(5.12);
+    });
+
+    it('massToWeight() should calculate correctly', () => {
+
+        let mass = 15; //kg
+        let weight = Helper.massToWeight(mass, GravityForce.Earth);
+
+        expect(weight).to.eq(147);
     });
 });

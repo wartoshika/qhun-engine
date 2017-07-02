@@ -9,5 +9,5 @@
  * example gravity forces. units are m/sec^2
  */
 export enum GravityForce {
-    Earth = 9.8, Moon = 1.67
+    Earth = 9.8, Moon = 1.67, None = 0
 }
