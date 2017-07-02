@@ -6,7 +6,10 @@
  */
 
 import { GravityForce } from '../physic';
-import { Vector2D } from '../../shared/math';
+import { Vector2D, Dimension } from '../../shared/math';
+import { TileMap, AssetLoader, AssetType } from '../asset';
+import { Camera } from '../camera';
+import { Game } from '../Game';
 
 /**
  * a class to handle world spefific things
@@ -14,11 +17,28 @@ import { Vector2D } from '../../shared/math';
 export class World {
 
     /**
-     * @param name the name of the world or level
+     * the current tilemap
+     */
+    private map: TileMap;
+
+    /**
+     * @param game the game object
+     * @param map the map to show
+     * @param camera the camera of the world
      * @param gravity the gravity that is present on this world
      */
     constructor(
-        private name: string,
-        private gravity: Vector2D<GravityForce>
-    ) { }
+        game: Game,
+        map: string,
+        private camera: Camera,
+        private gravity: Vector2D<GravityForce> = new Vector2D<GravityForce>(
+            GravityForce.None,
+            GravityForce.None
+        )
+    ) {
+
+        // get the tilemap from the asset loader
+        this.map = AssetLoader.getInstance<AssetLoader>()
+            .getAsset<TileMap>(map, AssetType.TileMap);
+    }
 }

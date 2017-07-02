@@ -10,6 +10,7 @@
  */
 export enum AssetType {
     Image,
+    TileMap,
     Audio,
     Json
 }

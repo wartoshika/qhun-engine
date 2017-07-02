@@ -89,7 +89,6 @@ export class RamStorage {
 
     /**
      * calculates the used memory for the selected objects in the storage.
-     * unit is in MB or the given type
      *
      * @param path the path to the object. dots can be used to structure
      */
@@ -102,7 +101,13 @@ export class RamStorage {
             if (key.indexOf(path) === 0) byteCounter += sizeof(RamStorage.cache[key]);
         });
 
-        let mb = File.byteToSize(byteCounter, type);
-        return Helper.roundToPrecision(mb, 2);
+        let bytes = File.byteToSize(byteCounter, type);
+        return Helper.roundToPrecision(bytes, 2);
     }
+}
+
+// debug
+if (<any>window) {
+
+    (<any>window).cache = (<any>RamStorage).cache;
 }

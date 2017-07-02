@@ -10,8 +10,9 @@ import { Renderer } from './render';
 import { Entity } from './entity';
 import { Camera } from './camera';
 import { Scene } from './scene';
+import { World } from './world';
 
-declare type Thing = Entity | Camera | Scene;
+declare type Thing = Entity | Camera | Scene | World;
 
 /**
  * a class that handles adding of entities, cameras, physics ...
@@ -52,6 +53,9 @@ export class Game extends Singleton {
             } else if (thing instanceof Scene) {
 
                 this.addScene(<Scene>thing);
+            } else if (thing instanceof World) {
+
+                this.addWorld(<World>thing);
             }
         });
     }
@@ -64,6 +68,15 @@ export class Game extends Singleton {
     public addEntity(entity: Entity): void {
 
         this.renderer.addEntity(entity);
+    }
+
+
+    /**
+     * add one world to the game
+     *
+     * @param world the world to add
+     */
+    public addWorld(world: World): void {
     }
 
     /**

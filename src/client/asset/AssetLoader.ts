@@ -85,6 +85,7 @@ export class AssetLoader extends Singleton {
         switch (instance.getAssetType()) {
 
             case AssetType.Image:
+            case AssetType.TileMap:
 
                 callback = this.loadImage.bind(this);
                 break;

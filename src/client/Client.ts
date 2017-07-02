@@ -8,6 +8,7 @@
 import { ClientConfig } from './ClientConfig';
 import { logMethodCall } from '../shared/decorator';
 import { Log } from '../shared/log';
+import { FileSizeType } from '../shared/helper';
 import { Game } from './Game';
 import { RamStorage } from '../shared/storage';
 
@@ -102,9 +103,9 @@ export abstract class Client {
      */
     private printMemoryFootprint(): void {
 
-        let assets = RamStorage.getSize("assetloader");
-        let misc = RamStorage.getSize("singleton");
-        let overall = assets + misc;
+        let assets = RamStorage.getSize("assetloader", FileSizeType.Megabyte);
+        let misc = RamStorage.getSize("singleton", FileSizeType.Megabyte);
+        let overall = +(assets + misc).toFixed(2);
 
         // print current memory footprint
         Log.info("Memory footprint:", overall, "MB");

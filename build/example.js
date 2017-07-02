@@ -103,8 +103,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var AssetType;
 (function (AssetType) {
     AssetType[AssetType["Image"] = 0] = "Image";
-    AssetType[AssetType["Audio"] = 1] = "Audio";
-    AssetType[AssetType["Json"] = 2] = "Json";
+    AssetType[AssetType["TileMap"] = 1] = "TileMap";
+    AssetType[AssetType["Audio"] = 2] = "Audio";
+    AssetType[AssetType["Json"] = 3] = "Json";
 })(AssetType = exports.AssetType || (exports.AssetType = {}));
 
 
@@ -189,6 +190,7 @@ __export(__webpack_require__(46));
 __export(__webpack_require__(47));
 __export(__webpack_require__(1));
 __export(__webpack_require__(20));
+__export(__webpack_require__(58));
 
 
 /***/ }),
@@ -358,6 +360,7 @@ var helper_1 = __webpack_require__(3);
 var entity_1 = __webpack_require__(13);
 var camera_1 = __webpack_require__(42);
 var scene_1 = __webpack_require__(17);
+var world_1 = __webpack_require__(59);
 /**
  * a class that handles adding of entities, cameras, physics ...
  */
@@ -393,6 +396,9 @@ var Game = (function (_super) {
             else if (thing instanceof scene_1.Scene) {
                 _this.addScene(thing);
             }
+            else if (thing instanceof world_1.World) {
+                _this.addWorld(thing);
+            }
         });
     };
     /**
@@ -402,6 +408,13 @@ var Game = (function (_super) {
      */
     Game.prototype.addEntity = function (entity) {
         this.renderer.addEntity(entity);
+    };
+    /**
+     * add one world to the game
+     *
+     * @param world the world to add
+     */
+    Game.prototype.addWorld = function (world) {
     };
     /**
      * add one camera to the game
@@ -1102,6 +1115,7 @@ var AssetLoader = (function (_super) {
             return __generator(this, function (_a) {
                 switch (instance.getAssetType()) {
                     case AssetType_1.AssetType.Image:
+                    case AssetType_1.AssetType.TileMap:
                         callback = this.loadImage.bind(this);
                         break;
                     default:
@@ -1371,6 +1385,8 @@ var decorator_1 = __webpack_require__(7);
 var Player_1 = __webpack_require__(54);
 var scene_1 = __webpack_require__(17);
 var math_1 = __webpack_require__(0);
+var world_1 = __webpack_require__(59);
+var camera_1 = __webpack_require__(42);
 var MyAwesomeGame = (function (_super) {
     __extends(MyAwesomeGame, _super);
     function MyAwesomeGame() {
@@ -1389,6 +1405,11 @@ var MyAwesomeGame = (function (_super) {
             name: 'player',
             path: 'asset/image/player.png'
         });
+        asset_1.TileMap.register({
+            name: 'world1',
+            path: 'asset/image/world1.png',
+            tileMapDimension: new math_1.Dimension(32, 32)
+        });
     };
     /**
      * a function that is called if the preload phase is completed
@@ -1401,6 +1422,8 @@ var MyAwesomeGame = (function (_super) {
         game.loadScene(new scene_1.LoadingScreenScene());
         // play idle animation
         this.player.playAnimation('idle', true);
+        // load world
+        game.add(new world_1.World(game, 'world1', new camera_1.Camera()));
     };
     /**
      * update function handles the interaction with the player eg. the keybord
@@ -1461,6 +1484,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var decorator_1 = __webpack_require__(7);
 var log_1 = __webpack_require__(2);
+var helper_1 = __webpack_require__(3);
 var Game_1 = __webpack_require__(9);
 var storage_1 = __webpack_require__(4);
 var asset_1 = __webpack_require__(5);
@@ -1518,9 +1542,9 @@ var Client = (function () {
      * logs the current memory footprint to the console
      */
     Client.prototype.printMemoryFootprint = function () {
-        var assets = storage_1.RamStorage.getSize("assetloader");
-        var misc = storage_1.RamStorage.getSize("singleton");
-        var overall = assets + misc;
+        var assets = storage_1.RamStorage.getSize("assetloader", helper_1.FileSizeType.Megabyte);
+        var misc = storage_1.RamStorage.getSize("singleton", helper_1.FileSizeType.Megabyte);
+        var overall = +(assets + misc).toFixed(2);
         // print current memory footprint
         log_1.Log.info("Memory footprint:", overall, "MB");
         log_1.Log.info("\t- Assets:\t", assets, "MB");
@@ -1864,7 +1888,6 @@ var RamStorage = (function () {
     };
     /**
      * calculates the used memory for the selected objects in the storage.
-     * unit is in MB or the given type
      *
      * @param path the path to the object. dots can be used to structure
      */
@@ -1877,14 +1900,18 @@ var RamStorage = (function () {
             if (key.indexOf(path) === 0)
                 byteCounter += sizeof(RamStorage.cache[key]);
         });
-        var mb = File_1.File.byteToSize(byteCounter, type);
-        return math_1.Helper.roundToPrecision(mb, 2);
+        var bytes = File_1.File.byteToSize(byteCounter, type);
+        return math_1.Helper.roundToPrecision(bytes, 2);
     };
     // the private cache object
     RamStorage.cache = {};
     return RamStorage;
 }());
 exports.RamStorage = RamStorage;
+// debug
+if (window) {
+    window.cache = RamStorage.cache;
+}
 
 
 /***/ }),
@@ -5256,6 +5283,277 @@ var CollisionType;
     CollisionType[CollisionType["Rectangle"] = 1] = "Rectangle";
     CollisionType[CollisionType["RotatedRectangle"] = 2] = "RotatedRectangle";
 })(CollisionType = exports.CollisionType || (exports.CollisionType = {}));
+
+
+/***/ }),
+/* 57 */,
+/* 58 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [0, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var AbstractAsset_1 = __webpack_require__(6);
+var AssetType_1 = __webpack_require__(1);
+var Image_1 = __webpack_require__(19);
+var network_1 = __webpack_require__(21);
+/**
+ * an asset class to load a tilemap as world
+ */
+var TileMap = (function (_super) {
+    __extends(TileMap, _super);
+    function TileMap(name, path, data, map, dimension) {
+        var _this = _super.call(this, name, path, AssetType_1.AssetType.TileMap, data) || this;
+        _this.map = map;
+        _this.dimension = dimension;
+        return _this;
+    }
+    /**
+     * register a tilemap asset
+     *
+     * @param name the unique name of the image
+     * @param path the path to the image
+     */
+    TileMap.register = function () {
+        var tilemaps = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            tilemaps[_i] = arguments[_i];
+        }
+        return __awaiter(this, void 0, void 0, function () {
+            var assetLoader, mapLoaderPromise, tileMapStack;
+            return __generator(this, function (_a) {
+                assetLoader = TileMap.getAssetLoader();
+                mapLoaderPromise = [];
+                tileMapStack = [];
+                // load sprite maps and add asset type to the inline asset
+                tilemaps.forEach(function (tilemap) {
+                    // set the asset type
+                    tilemap.assetType = AssetType_1.AssetType.Image;
+                    // get the map csv data file to save the map information
+                    mapLoaderPromise.push(network_1.Request.get(tilemap.path + ".csv")
+                        .then(function (map) { return tileMapStack.push(map); }));
+                });
+                // if the maps are loaded, start the regist
+                // previously the current map loader promises should be added to
+                // the asset loadering promises to prevent game from beeing started to early
+                return [2 /*return*/, Promise.all(assetLoader.addAssetLoaderPromise(new Promise(function (resolve) {
+                        // now await the map loading
+                        return Promise.all(mapLoaderPromise).then(function () {
+                            // register the sprite as image
+                            return assetLoader.registerAsset.apply(assetLoader, [TileMap].concat(tilemaps)).then(function (resources) {
+                                // cast the resources
+                                var tileMaps = resources;
+                                var tileMapTransformPromise = [];
+                                // add the sprite maps
+                                tileMaps.forEach(function (tilemap, index) {
+                                    // add the map and the dimension
+                                    tilemap.map = tileMapStack[index];
+                                    tilemap.dimension = tilemaps[index].tileMapDimension;
+                                    // register all sub images
+                                    tileMapTransformPromise.push(TileMap.registerTileMapSubImages(tilemap));
+                                });
+                                // await the sprite transform
+                                return Promise.all(tileMapTransformPromise).then(function () {
+                                    // return all generated image assets
+                                    resolve(tileMaps);
+                                });
+                            });
+                        });
+                    })))];
+            });
+        });
+    };
+    /**
+     * registers every tileMap image as image in the asset system
+     *
+     * @param tileMap the tilemap to register
+     */
+    TileMap.registerTileMapSubImages = function (tileMap) {
+        return __awaiter(this, void 0, void 0, function () {
+            var itemRegisterPromiseStack, mapLines, horizontalImageCount, verticalImageCount, canvas, ctx, v, h;
+            return __generator(this, function (_a) {
+                itemRegisterPromiseStack = [];
+                mapLines = tileMap.map.split(String.fromCharCode(13));
+                horizontalImageCount = mapLines.length;
+                verticalImageCount = mapLines[0].split(',').length;
+                canvas = document.createElement('canvas');
+                ctx = canvas.getContext('2d');
+                // height and width are fixed
+                canvas.width = tileMap.dimension.x;
+                canvas.height = tileMap.dimension.y;
+                // iterate through all tiles
+                for (v = 0; v < verticalImageCount; v++) {
+                    // now every horizontal image in the line v
+                    for (h = 0; h < horizontalImageCount; h++) {
+                        // draw the image at the canvas
+                        ctx.drawImage(tileMap.getData(), -(h * tileMap.dimension.x), -(v * tileMap.dimension.y));
+                        // get the image as data uri to register the new image
+                        itemRegisterPromiseStack.push(Image_1.Image.register({
+                            name: tileMap.name + "[" + v + h + "]",
+                            path: canvas.toDataURL()
+                        }));
+                    }
+                }
+                // await the registration process
+                return [2 /*return*/, Promise.all(itemRegisterPromiseStack)];
+            });
+        });
+    };
+    return TileMap;
+}(AbstractAsset_1.AbstractAsset));
+exports.TileMap = TileMap;
+
+
+/***/ }),
+/* 59 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(60));
+
+
+/***/ }),
+/* 60 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+var physic_1 = __webpack_require__(61);
+var math_1 = __webpack_require__(0);
+var asset_1 = __webpack_require__(5);
+/**
+ * a class to handle world spefific things
+ */
+var World = (function () {
+    /**
+     * @param game the game object
+     * @param map the map to show
+     * @param camera the camera of the world
+     * @param gravity the gravity that is present on this world
+     */
+    function World(game, map, camera, gravity) {
+        if (gravity === void 0) { gravity = new math_1.Vector2D(physic_1.GravityForce.None, physic_1.GravityForce.None); }
+        this.camera = camera;
+        this.gravity = gravity;
+        // get the tilemap from the asset loader
+        this.map = asset_1.AssetLoader.getInstance()
+            .getAsset(map, asset_1.AssetType.TileMap);
+    }
+    return World;
+}());
+exports.World = World;
+
+
+/***/ }),
+/* 61 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(62));
+
+
+/***/ }),
+/* 62 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * example gravity forces. units are m/sec^2
+ */
+var GravityForce;
+(function (GravityForce) {
+    GravityForce[GravityForce["Earth"] = 9.8] = "Earth";
+    GravityForce[GravityForce["Moon"] = 1.67] = "Moon";
+    GravityForce[GravityForce["None"] = 0] = "None";
+})(GravityForce = exports.GravityForce || (exports.GravityForce = {}));
 
 
 /***/ })

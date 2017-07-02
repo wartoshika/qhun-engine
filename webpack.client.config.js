@@ -1,9 +1,15 @@
 let CircularDependencyPlugin = require('circular-dependency-plugin');
+let webpack = require('webpack');
+let path = require('path');
 
 module.exports = {
-    entry: './src/client/Client.ts',
+    entry: {
+        'client': './src/client/Client.ts',
+        'client.min': './src/client/Client.ts'
+    },
     output: {
-        filename: './build/client.js'
+        path: path.resolve('./build'),
+        filename: '[name].js'
     },
     resolve: {
         // Add `.ts` and `.tsx` as a resolvable extension.
@@ -34,6 +40,10 @@ module.exports = {
             exclude: /node_modules/,
             // add errors to webpack instead of warnings
             failOnError: true
+        }),
+        new webpack.optimize.UglifyJsPlugin({
+            sourceMap: true,
+            include: /\.min\.js$/
         })
     ]
 }

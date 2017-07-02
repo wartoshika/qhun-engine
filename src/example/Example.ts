@@ -10,13 +10,15 @@ import { CanvasRenderer } from '../client/render';
 import { Viewport } from '../client/environment';
 import { Game } from '../client/Game';
 
-import { Image, Sprite, AssetLoader } from '../client/asset';
+import { Image, Sprite, TileMap, AssetLoader } from '../client/asset';
 import { logMethodCall } from '../shared/decorator';
 
 import { Player } from './entity/Player';
 import { LoadingScreenScene } from '../client/scene';
 import { Input } from '../client/input';
-import { Vector2D } from '../shared/math';
+import { Vector2D, Dimension } from '../shared/math';
+import { World } from '../client/world';
+import { Camera } from '../client/camera';
 
 class MyAwesomeGame extends Client {
 
@@ -42,6 +44,12 @@ class MyAwesomeGame extends Client {
             name: 'player',
             path: 'asset/image/player.png'
         });
+
+        TileMap.register({
+            name: 'world1',
+            path: 'asset/image/world1.png',
+            tileMapDimension: new Dimension(32, 32)
+        });
     }
 
     /**
@@ -58,6 +66,13 @@ class MyAwesomeGame extends Client {
 
         // play idle animation
         this.player.playAnimation('idle', true);
+
+        // load world
+        game.add(new World(
+            game, 'world1', new Camera()
+        ));
+
+
     }
 
     /**
