@@ -9,3 +9,5 @@ TODO
 - [o] multilayer tilemap import and rendering (currently bad performance)
 - [] physics
 - [] animation states should have possible random values as callback function
+- [] add camera and the abillity to follow the player
+- [] add world scale

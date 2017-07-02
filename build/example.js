@@ -1417,7 +1417,6 @@ var Game_1 = __webpack_require__(14);
 var asset_1 = __webpack_require__(4);
 var decorator_1 = __webpack_require__(9);
 var Player_1 = __webpack_require__(58);
-var scene_1 = __webpack_require__(19);
 var math_1 = __webpack_require__(0);
 var world_1 = __webpack_require__(21);
 var camera_1 = __webpack_require__(61);
@@ -1451,16 +1450,17 @@ var MyAwesomeGame = (function (_super) {
      * you now have access to the registered assets
      */
     MyAwesomeGame.prototype.loaded = function (game) {
-        // add the player to the game
+        // create entities
         this.player = new Player_1.Player();
-        game.add(this.player);
-        game.loadScene(new scene_1.LoadingScreenScene());
-        // play idle animation
-        this.player.playAnimation('idle', true);
-        // add world
-        game.add(new world_1.World(game, 'world1', new camera_1.Camera()));
+        // create game objects
+        var camera = new camera_1.Camera(5);
+        var world = new world_1.World(game, 'world1', camera);
+        // add game objects
+        game.add(this.player, world);
         // load the world
         game.loadWorld('world1');
+        // follow the player with the camera
+        camera.followEntity(this.player);
     };
     /**
      * update function handles the interaction with the player eg. the keybord
@@ -5630,6 +5630,8 @@ var Player = (function (_super) {
                 { image: 'red_mouth_open', duration: -1 }
             ]
         });
+        // play idle animation on constructing
+        _this.playAnimation('idle', true);
         return _this;
     }
     /**
@@ -5724,12 +5726,84 @@ __export(__webpack_require__(62));
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+var CameraMode_1 = __webpack_require__(63);
+/**
+ * the view for the player into the game
+ */
 var Camera = (function () {
-    function Camera() {
+    /**
+     *
+     * @param scale the scale of the world. 1 means that a tile of 32x32 will renderes on 32x32 pixel. scane 5 means that a tile of 32x32 will be rendered as (32*5)x(32*5) pixel...
+     * @param mode the camera mode
+     */
+    function Camera(scale, mode) {
+        if (scale === void 0) { scale = 1; }
+        if (mode === void 0) { mode = CameraMode_1.CameraMode.Orthogonal; }
+        this.scale = scale;
+        this.mode = mode;
+        /**
+         * the entitiy which the camera should follow
+         */
+        this.followingEntity = null;
     }
+    /**
+     * get the camera mode
+     */
+    Camera.prototype.getMode = function () {
+        return this.mode;
+    };
+    /**
+     * get the current world scale modificator
+     */
+    Camera.prototype.getScale = function () {
+        return this.scale;
+    };
+    /**
+     * set the current world scale modificator
+     */
+    Camera.prototype.setScale = function (scale) {
+        this.scale = scale;
+    };
+    /**
+     * follows one entity
+     *
+     * @param entity the entity to follow
+     */
+    Camera.prototype.followEntity = function (entity) {
+        this.followingEntity = entity;
+    };
+    /**
+     * get the current entity the camera follows.
+     * can be undefined is the camera is not following an entity
+     */
+    Camera.prototype.getFollowingEntity = function () {
+        return this.followingEntity;
+    };
     return Camera;
 }());
 exports.Camera = Camera;
+
+
+/***/ }),
+/* 63 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * the currently supported camera modes
+ */
+var CameraMode;
+(function (CameraMode) {
+    CameraMode[CameraMode["Orthogonal"] = 0] = "Orthogonal";
+})(CameraMode = exports.CameraMode || (exports.CameraMode = {}));
 
 
 /***/ })

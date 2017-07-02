@@ -35,6 +35,9 @@ export class Player extends CollidableEntity {
                     { image: 'red_mouth_open', duration: -1 }
                 ]
             });
+
+        // play idle animation on constructing
+        this.playAnimation('idle', true);
     }
 
     /**

@@ -60,22 +60,23 @@ class MyAwesomeGame extends Client {
     @logMethodCall
     public loaded(game: Game): void {
 
-        // add the player to the game
+        // create entities
         this.player = new Player();
-        game.add(this.player);
-        game.loadScene(new LoadingScreenScene());
 
-        // play idle animation
-        this.player.playAnimation('idle', true);
+        // create game objects
+        let camera = new Camera(5);
+        let world = new World(
+            game, 'world1', camera
+        );
 
-        // add world
-        game.add(new World(
-            game, 'world1', new Camera()
-        ));
-
+        // add game objects
+        game.add(this.player, world);
 
         // load the world
         game.loadWorld('world1');
+
+        // follow the player with the camera
+        camera.followEntity(this.player);
     }
 
     /**
