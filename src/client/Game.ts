@@ -5,13 +5,13 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { Singleton } from '../shared/helper';
 import { Renderer } from './render';
 import { Entity } from './entity';
 import { Scene } from './scene';
 import { World } from './world';
-import { Log } from '../shared/log';
-import { Camera } from './camera';
+import { Camera, BaseCamera } from './camera';
+
+import { Singleton, Log } from '@shared';
 
 declare type Thing = Entity | Scene | World | Camera;
 
@@ -69,7 +69,7 @@ export class Game extends Singleton {
             } else if (thing instanceof World) {
 
                 this.addWorld(<World>thing);
-            } else if (thing instanceof Camera) {
+            } else if (thing instanceof BaseCamera) {
 
                 this.addCamera(<Camera>thing);
             }

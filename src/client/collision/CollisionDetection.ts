@@ -38,7 +38,7 @@ export class CollisionDetection {
 
             // calculate the tile position on the map
             let tilePosition = entityPosition
-                .divide(camera.getScaneVector())
+                .divide(camera.getScaleVector())
                 .divide(Vector2D.from(tileDimension.y, tileDimension.y))
                 .round(0);
 

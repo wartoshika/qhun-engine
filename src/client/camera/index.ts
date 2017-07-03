@@ -6,3 +6,6 @@
  */
 
 export * from './Camera';
+export * from './BaseCamera';
+export * from './OrthogonalCamera';
+export * from './CameraMode';

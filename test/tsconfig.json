@@ -2,7 +2,7 @@
     "compilerOptions": {
         "sourceMap": true,
         "noImplicitAny": true,
-        "rootDir": "../",
+        "baseUrl": ".",
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "noEmitOnError": true,
@@ -12,7 +12,15 @@
             "node"
         ],
         "typeRoots": [
-            "../node_modules/@types"
-        ]
+            "node_modules/@types"
+        ],
+        "paths": {
+            "@shared": [
+                "../src/shared"
+            ],
+            "@client": [
+                "../src/client"
+            ]
+        }
     }
 }

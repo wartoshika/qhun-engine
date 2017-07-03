@@ -384,7 +384,7 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(__webpack_require__(19));
-__export(__webpack_require__(55));
+__export(__webpack_require__(56));
 __export(__webpack_require__(20));
 
 
@@ -572,14 +572,14 @@ __export(__webpack_require__(1));
 __export(__webpack_require__(17));
 __export(__webpack_require__(18));
 __export(__webpack_require__(9));
-__export(__webpack_require__(56));
+__export(__webpack_require__(57));
 __export(__webpack_require__(23));
 __export(__webpack_require__(7));
 __export(__webpack_require__(24));
-__export(__webpack_require__(60));
+__export(__webpack_require__(61));
 __export(__webpack_require__(27));
 __export(__webpack_require__(28));
-__export(__webpack_require__(64));
+__export(__webpack_require__(65));
 __export(__webpack_require__(31));
 
 
@@ -1038,6 +1038,8 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(__webpack_require__(50));
+__export(__webpack_require__(51));
+__export(__webpack_require__(52));
 
 
 /***/ }),
@@ -1056,7 +1058,7 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(52));
+__export(__webpack_require__(53));
 
 
 /***/ }),
@@ -1120,7 +1122,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var entity_1 = __webpack_require__(21);
-var Animation_1 = __webpack_require__(54);
+var Animation_1 = __webpack_require__(55);
 var log_1 = __webpack_require__(4);
 /**
  * a base class for animations on entities
@@ -1265,7 +1267,7 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(__webpack_require__(22));
-__export(__webpack_require__(53));
+__export(__webpack_require__(54));
 
 
 /***/ }),
@@ -1325,7 +1327,7 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(58));
+__export(__webpack_require__(59));
 
 
 /***/ }),
@@ -1344,7 +1346,7 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(59));
+__export(__webpack_require__(60));
 
 
 /***/ }),
@@ -1526,7 +1528,7 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(62));
+__export(__webpack_require__(63));
 
 
 /***/ }),
@@ -1546,7 +1548,7 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(__webpack_require__(29));
-__export(__webpack_require__(63));
+__export(__webpack_require__(64));
 
 
 /***/ }),
@@ -1589,7 +1591,7 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(65));
+__export(__webpack_require__(66));
 
 
 /***/ }),
@@ -1829,7 +1831,7 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(66));
+__export(__webpack_require__(67));
 __export(__webpack_require__(30));
 __export(__webpack_require__(21));
 __export(__webpack_require__(3));
@@ -1872,7 +1874,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var client_1 = __webpack_require__(11);
 var shared_1 = __webpack_require__(32);
-var Link_1 = __webpack_require__(69);
+var Link_1 = __webpack_require__(70);
 var MyAwesomeGame = (function (_super) {
     __extends(MyAwesomeGame, _super);
     function MyAwesomeGame() {
@@ -1938,10 +1940,11 @@ var MyAwesomeGame = (function (_super) {
     __decorate([
         shared_1.logMethodCall,
         __metadata("design:type", Function),
-        __metadata("design:paramtypes", [client_1.Game]),
+        __metadata("design:paramtypes", [typeof (_a = typeof client_1.Game !== "undefined" && client_1.Game) === "function" && _a || Object]),
         __metadata("design:returntype", void 0)
     ], MyAwesomeGame.prototype, "loaded", null);
     return MyAwesomeGame;
+    var _a;
 }(client_1.Client));
 // start the game
 new MyAwesomeGame();
@@ -5095,20 +5098,20 @@ exports.TileMap = TileMap;
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-var CameraMode_1 = __webpack_require__(51);
-var math_1 = __webpack_require__(0);
+var _client_1 = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"@client\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+var _shared_1 = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"@shared\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 /**
  * the view for the player into the game
  */
-var Camera = (function () {
+var BaseCamera = (function () {
     /**
      *
      * @param scale the scale of the world. 1 means that a tile of 32x32 will renderes on 32x32 pixel. scane 5 means that a tile of 32x32 will be rendered as (32*5)x(32*5) pixel...
      * @param mode the camera mode
      */
-    function Camera(scale, mode) {
+    function BaseCamera(scale, mode) {
         if (scale === void 0) { scale = 1; }
-        if (mode === void 0) { mode = CameraMode_1.CameraMode.Orthogonal; }
+        if (mode === void 0) { mode = _client_1.CameraMode.Orthogonal; }
         this.scale = scale;
         this.mode = mode;
         /**
@@ -5123,25 +5126,25 @@ var Camera = (function () {
     /**
      * get the camera mode
      */
-    Camera.prototype.getMode = function () {
+    BaseCamera.prototype.getMode = function () {
         return this.mode;
     };
     /**
      * get the current world scale modificator
      */
-    Camera.prototype.getScale = function () {
+    BaseCamera.prototype.getScale = function () {
         return this.scale;
     };
     /**
      * get the camera scale as vector
      */
-    Camera.prototype.getScaneVector = function () {
-        return new math_1.Vector2D(this.scale, this.scale);
+    BaseCamera.prototype.getScaleVector = function () {
+        return new _shared_1.Vector2D(this.scale, this.scale);
     };
     /**
      * set the current world scale modificator
      */
-    Camera.prototype.setScale = function (scale) {
+    BaseCamera.prototype.setScale = function (scale) {
         this.scale = scale;
     };
     /**
@@ -5149,43 +5152,80 @@ var Camera = (function () {
      *
      * @param entity the entity to follow
      */
-    Camera.prototype.followEntity = function (entity) {
+    BaseCamera.prototype.followEntity = function (entity) {
         this.followingEntity = entity;
     };
     /**
      * get the current entity the camera follows.
      * can be undefined is the camera is not following an entity
      */
-    Camera.prototype.getFollowingEntity = function () {
+    BaseCamera.prototype.getFollowingEntity = function () {
         return this.followingEntity;
     };
     /**
      * if the camera should be allways within the world, set the world
      * bounds to the current active world
      */
-    Camera.prototype.setWorldBounds = function (world) {
+    BaseCamera.prototype.setWorldBounds = function (world) {
         var dimension = world.getWorldDimension();
-        this.worldBounds = new math_1.Vector2D(dimension.x, dimension.y);
+        this.worldBounds = new _shared_1.Vector2D(dimension.x, dimension.y);
     };
     /**
      * get the current world bounds.
      *
      * @warning return value can be null if no bounds are available!
      */
-    Camera.prototype.getWorldBounds = function () {
+    BaseCamera.prototype.getWorldBounds = function () {
         var wb = this.worldBounds;
         if (!wb)
             return wb;
         // add the current camera scale
-        return wb.multiply(new math_1.Vector2D(this.getScale(), this.getScale()));
+        return wb.multiply(new _shared_1.Vector2D(this.getScale(), this.getScale()));
     };
-    return Camera;
+    return BaseCamera;
 }());
-exports.Camera = Camera;
+exports.BaseCamera = BaseCamera;
 
 
 /***/ }),
 /* 51 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var _client_1 = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"@client\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+/**
+ * an orthogonal camera for the view of the player
+ */
+var OrthogonalCamera = (function (_super) {
+    __extends(OrthogonalCamera, _super);
+    function OrthogonalCamera() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return OrthogonalCamera;
+}(_client_1.BaseCamera));
+exports.OrthogonalCamera = OrthogonalCamera;
+
+
+/***/ }),
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5207,7 +5247,7 @@ var CameraMode;
 
 
 /***/ }),
-/* 52 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5287,7 +5327,7 @@ exports.CollisionDetection = CollisionDetection;
 
 
 /***/ }),
-/* 53 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5339,7 +5379,7 @@ exports.CollidableEntity = CollidableEntity;
 
 
 /***/ }),
-/* 54 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5426,7 +5466,7 @@ exports.Animation = Animation;
 
 
 /***/ }),
-/* 55 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5550,7 +5590,7 @@ exports.CollidableEntity = CollidableEntity;
 
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5565,11 +5605,11 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(57));
+__export(__webpack_require__(58));
 
 
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5601,7 +5641,7 @@ exports.Viewport = Viewport;
 
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5690,7 +5730,7 @@ exports.Input = Input;
 
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5714,7 +5754,7 @@ var GravityForce;
 
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5729,14 +5769,14 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(61));
+__export(__webpack_require__(62));
 __export(__webpack_require__(25));
 __export(__webpack_require__(26));
 __export(__webpack_require__(10));
 
 
 /***/ }),
-/* 61 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5892,7 +5932,7 @@ exports.CanvasRenderer = CanvasRenderer;
 
 
 /***/ }),
-/* 62 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6010,7 +6050,7 @@ exports.World = World;
 
 
 /***/ }),
-/* 63 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6118,7 +6158,7 @@ exports.LoadingScreenScene = LoadingScreenScene;
 
 
 /***/ }),
-/* 64 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6248,7 +6288,7 @@ exports.Client = Client;
 
 
 /***/ }),
-/* 65 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6286,7 +6326,7 @@ exports.logMethodCall = logMethodCall;
 
 
 /***/ }),
-/* 66 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6301,12 +6341,12 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(67));
 __export(__webpack_require__(68));
+__export(__webpack_require__(69));
 
 
 /***/ }),
-/* 67 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6330,7 +6370,7 @@ var CollisionType;
 
 
 /***/ }),
-/* 68 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6366,7 +6406,7 @@ exports.CircleCircleCollision = CircleCircleCollision;
 
 
 /***/ }),
-/* 69 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

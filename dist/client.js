@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 19);
+/******/ 	return __webpack_require__(__webpack_require__.s = 24);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -79,9 +79,9 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(9));
-__export(__webpack_require__(32));
 __export(__webpack_require__(10));
+__export(__webpack_require__(36));
+__export(__webpack_require__(11));
 
 
 /***/ }),
@@ -125,8 +125,8 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(8));
-__export(__webpack_require__(22));
+__export(__webpack_require__(9));
+__export(__webpack_require__(26));
 
 
 /***/ }),
@@ -145,9 +145,9 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(23));
-__export(__webpack_require__(33));
-__export(__webpack_require__(11));
+__export(__webpack_require__(27));
+__export(__webpack_require__(37));
+__export(__webpack_require__(12));
 
 
 /***/ }),
@@ -162,8 +162,27 @@ __export(__webpack_require__(11));
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
 Object.defineProperty(exports, "__esModule", { value: true });
-var AssetLoader_1 = __webpack_require__(18);
+__export(__webpack_require__(28));
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+var AssetLoader_1 = __webpack_require__(20);
 /**
  * a basic class for implementing the getter and setter function
  * of the required asset interface
@@ -209,25 +228,6 @@ var AbstractAsset = (function () {
     return AbstractAsset;
 }());
 exports.AbstractAsset = AbstractAsset;
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(24));
 
 
 /***/ }),
@@ -289,7 +289,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var AssetType_1 = __webpack_require__(1);
-var AbstractAsset_1 = __webpack_require__(4);
+var AbstractAsset_1 = __webpack_require__(5);
 /**
  * the image class handles exactly one image
  */
@@ -340,11 +340,30 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(45));
+__export(__webpack_require__(48));
 
 
 /***/ }),
 /* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(25));
+
+
+/***/ }),
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -369,7 +388,7 @@ var LogLevel;
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -434,7 +453,7 @@ exports.Helper = Helper;
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -467,7 +486,7 @@ exports.Dimension = Dimension;
 
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -516,7 +535,7 @@ exports.File = File;
 
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -531,46 +550,9 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(13));
-__export(__webpack_require__(38));
 __export(__webpack_require__(14));
-
-
-/***/ }),
-/* 13 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-var AnimationEntity_1 = __webpack_require__(14);
-/**
- * the base class for all game entities
- */
-var Entity = (function (_super) {
-    __extends(Entity, _super);
-    function Entity() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    return Entity;
-}(AnimationEntity_1.AnimationEntity));
-exports.Entity = Entity;
+__export(__webpack_require__(41));
+__export(__webpack_require__(15));
 
 
 /***/ }),
@@ -596,8 +578,45 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var entity_1 = __webpack_require__(35);
-var Animation_1 = __webpack_require__(37);
+var AnimationEntity_1 = __webpack_require__(15);
+/**
+ * the base class for all game entities
+ */
+var Entity = (function (_super) {
+    __extends(Entity, _super);
+    function Entity() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return Entity;
+}(AnimationEntity_1.AnimationEntity));
+exports.Entity = Entity;
+
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var entity_1 = __webpack_require__(16);
+var Animation_1 = __webpack_require__(40);
 var log_1 = __webpack_require__(2);
 /**
  * a base class for animations on entities
@@ -726,7 +745,27 @@ exports.AnimationEntity = AnimationEntity;
 
 
 /***/ }),
-/* 15 */
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(17));
+__export(__webpack_require__(39));
+
+
+/***/ }),
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -767,7 +806,7 @@ exports.Entity = Entity;
 
 
 /***/ }),
-/* 16 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -791,7 +830,7 @@ exports.Scene = Scene;
 
 
 /***/ }),
-/* 17 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -807,15 +846,15 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(__webpack_require__(6));
-__export(__webpack_require__(46));
-__export(__webpack_require__(47));
+__export(__webpack_require__(49));
+__export(__webpack_require__(50));
 __export(__webpack_require__(1));
-__export(__webpack_require__(18));
-__export(__webpack_require__(48));
+__export(__webpack_require__(20));
+__export(__webpack_require__(51));
 
 
 /***/ }),
-/* 18 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -874,7 +913,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var AssetType_1 = __webpack_require__(1);
 var helper_1 = __webpack_require__(3);
-var storage_1 = __webpack_require__(5);
+var storage_1 = __webpack_require__(4);
 var log_1 = __webpack_require__(2);
 var network_1 = __webpack_require__(7);
 /**
@@ -1081,7 +1120,156 @@ exports.AssetLoader = AssetLoader;
 
 
 /***/ }),
-/* 19 */
+/* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+var CameraMode_1 = __webpack_require__(22);
+var _shared_1 = __webpack_require__(23);
+/**
+ * the view for the player into the game
+ */
+var BaseCamera = (function () {
+    /**
+     *
+     * @param scale the scale of the world. 1 means that a tile of 32x32 will renderes on 32x32 pixel. scane 5 means that a tile of 32x32 will be rendered as (32*5)x(32*5) pixel...
+     * @param mode the camera mode
+     */
+    function BaseCamera(scale, mode) {
+        if (scale === void 0) { scale = 1; }
+        if (mode === void 0) { mode = CameraMode_1.CameraMode.Orthogonal; }
+        this.scale = scale;
+        this.mode = mode;
+        /**
+         * the entitiy which the camera should follow
+         */
+        this.followingEntity = null;
+        /**
+         * the current camera world bounds
+         */
+        this.worldBounds = null;
+    }
+    /**
+     * get the camera mode
+     */
+    BaseCamera.prototype.getMode = function () {
+        return this.mode;
+    };
+    /**
+     * get the current world scale modificator
+     */
+    BaseCamera.prototype.getScale = function () {
+        return this.scale;
+    };
+    /**
+     * get the camera scale as vector
+     */
+    BaseCamera.prototype.getScaleVector = function () {
+        return new _shared_1.Vector2D(this.scale, this.scale);
+    };
+    /**
+     * set the current world scale modificator
+     */
+    BaseCamera.prototype.setScale = function (scale) {
+        this.scale = scale;
+    };
+    /**
+     * follows one entity
+     *
+     * @param entity the entity to follow
+     */
+    BaseCamera.prototype.followEntity = function (entity) {
+        this.followingEntity = entity;
+    };
+    /**
+     * get the current entity the camera follows.
+     * can be undefined is the camera is not following an entity
+     */
+    BaseCamera.prototype.getFollowingEntity = function () {
+        return this.followingEntity;
+    };
+    /**
+     * if the camera should be allways within the world, set the world
+     * bounds to the current active world
+     */
+    BaseCamera.prototype.setWorldBounds = function (world) {
+        var dimension = world.getWorldDimension();
+        this.worldBounds = new _shared_1.Vector2D(dimension.x, dimension.y);
+    };
+    /**
+     * get the current world bounds.
+     *
+     * @warning return value can be null if no bounds are available!
+     */
+    BaseCamera.prototype.getWorldBounds = function () {
+        var wb = this.worldBounds;
+        if (!wb)
+            return wb;
+        // add the current camera scale
+        return wb.multiply(new _shared_1.Vector2D(this.getScale(), this.getScale()));
+    };
+    return BaseCamera;
+}());
+exports.BaseCamera = BaseCamera;
+
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * the currently supported camera modes
+ */
+var CameraMode;
+(function (CameraMode) {
+    CameraMode[CameraMode["Orthogonal"] = 0] = "Orthogonal";
+})(CameraMode = exports.CameraMode || (exports.CameraMode = {}));
+
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(53));
+__export(__webpack_require__(8));
+__export(__webpack_require__(16));
+__export(__webpack_require__(3));
+__export(__webpack_require__(2));
+__export(__webpack_require__(0));
+__export(__webpack_require__(4));
+
+
+/***/ }),
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1102,14 +1290,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var decorator_1 = __webpack_require__(20);
+var decorator_1 = __webpack_require__(8);
 var log_1 = __webpack_require__(2);
 var helper_1 = __webpack_require__(3);
-var Game_1 = __webpack_require__(34);
-var storage_1 = __webpack_require__(5);
-var asset_1 = __webpack_require__(17);
-var input_1 = __webpack_require__(52);
-var collision_1 = __webpack_require__(54);
+var Game_1 = __webpack_require__(38);
+var storage_1 = __webpack_require__(4);
+var asset_1 = __webpack_require__(19);
+var input_1 = __webpack_require__(57);
+var collision_1 = __webpack_require__(59);
 /**
  * the initiation class of the game client
  */
@@ -1211,26 +1399,7 @@ exports.Client = Client;
 
 
 /***/ }),
-/* 20 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(21));
-
-
-/***/ }),
-/* 21 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1268,7 +1437,7 @@ exports.logMethodCall = logMethodCall;
 
 
 /***/ }),
-/* 22 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1280,7 +1449,7 @@ exports.logMethodCall = logMethodCall;
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-var LogLevel_1 = __webpack_require__(8);
+var LogLevel_1 = __webpack_require__(9);
 /**
  * a log wrapper to allow log levels and a more complex
  * logging structure
@@ -1399,7 +1568,7 @@ exports.Log = Log;
 
 
 /***/ }),
-/* 23 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1411,7 +1580,7 @@ exports.Log = Log;
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-var storage_1 = __webpack_require__(5);
+var storage_1 = __webpack_require__(4);
 /**
  * a class to handle the singleton paradigmen
  */
@@ -1454,7 +1623,7 @@ exports.Singleton = Singleton;
 
 
 /***/ }),
-/* 24 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1467,9 +1636,9 @@ exports.Singleton = Singleton;
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 // the dependency to get the memory footprint ob stored objects
-var sizeof = __webpack_require__(25);
+var sizeof = __webpack_require__(29);
 var math_1 = __webpack_require__(0);
-var File_1 = __webpack_require__(11);
+var File_1 = __webpack_require__(12);
 /**
  * holds objects in the ram of the operating unit
  */
@@ -1558,7 +1727,7 @@ if (typeof window !== 'undefined' && window) {
 
 
 /***/ }),
-/* 25 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1566,8 +1735,8 @@ if (typeof window !== 'undefined' && window) {
 
 
 
-var ECMA_SIZES  = __webpack_require__(26);
-var Buffer = __webpack_require__(27).Buffer;
+var ECMA_SIZES  = __webpack_require__(30);
+var Buffer = __webpack_require__(31).Buffer;
 
 /**
  * Main module's entry point
@@ -1616,7 +1785,7 @@ module.exports = sizeof;
 
 
 /***/ }),
-/* 26 */
+/* 30 */
 /***/ (function(module, exports) {
 
 /**
@@ -1632,7 +1801,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 27 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1646,9 +1815,9 @@ module.exports = {
 
 
 
-var base64 = __webpack_require__(29)
-var ieee754 = __webpack_require__(30)
-var isArray = __webpack_require__(31)
+var base64 = __webpack_require__(33)
+var ieee754 = __webpack_require__(34)
+var isArray = __webpack_require__(35)
 
 exports.Buffer = Buffer
 exports.SlowBuffer = SlowBuffer
@@ -3426,10 +3595,10 @@ function isnan (val) {
   return val !== val // eslint-disable-line no-self-compare
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(28)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32)))
 
 /***/ }),
-/* 28 */
+/* 32 */
 /***/ (function(module, exports) {
 
 var g;
@@ -3456,7 +3625,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 29 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3577,7 +3746,7 @@ function fromByteArray (uint8) {
 
 
 /***/ }),
-/* 30 */
+/* 34 */
 /***/ (function(module, exports) {
 
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
@@ -3667,7 +3836,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 
 
 /***/ }),
-/* 31 */
+/* 35 */
 /***/ (function(module, exports) {
 
 var toString = {}.toString;
@@ -3678,7 +3847,7 @@ module.exports = Array.isArray || function (arr) {
 
 
 /***/ }),
-/* 32 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3700,8 +3869,8 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var Helper_1 = __webpack_require__(9);
-var Dimension_1 = __webpack_require__(10);
+var Helper_1 = __webpack_require__(10);
+var Dimension_1 = __webpack_require__(11);
 /**
  * represents a 2D vector with x and y coordinates.
  */
@@ -3800,7 +3969,7 @@ exports.Vector2D = Vector2D;
 
 
 /***/ }),
-/* 33 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3848,7 +4017,7 @@ exports.Binary = Binary;
 
 
 /***/ }),
-/* 34 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3905,12 +4074,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var helper_1 = __webpack_require__(3);
-var entity_1 = __webpack_require__(12);
-var scene_1 = __webpack_require__(39);
-var world_1 = __webpack_require__(41);
-var log_1 = __webpack_require__(2);
-var camera_1 = __webpack_require__(49);
+var entity_1 = __webpack_require__(13);
+var scene_1 = __webpack_require__(42);
+var world_1 = __webpack_require__(44);
+var camera_1 = __webpack_require__(52);
+var _shared_1 = __webpack_require__(23);
 /**
  * a class that handles adding of entities, cameras, physics ...
  */
@@ -3954,7 +4122,7 @@ var Game = (function (_super) {
             else if (thing instanceof world_1.World) {
                 _this.addWorld(thing);
             }
-            else if (thing instanceof camera_1.Camera) {
+            else if (thing instanceof camera_1.BaseCamera) {
                 _this.addCamera(thing);
             }
         });
@@ -4045,7 +4213,7 @@ var Game = (function (_super) {
         // does the world exists?
         if (!(world in this.worldStack)) {
             // print error
-            log_1.Log.error("Trying to load", world, "but this world does not exists");
+            _shared_1.Log.error("Trying to load", world, "but this world does not exists");
             return;
         }
         // set the world in the renderer
@@ -4064,32 +4232,12 @@ var Game = (function (_super) {
         return this.currentCamera;
     };
     return Game;
-}(helper_1.Singleton));
+}(_shared_1.Singleton));
 exports.Game = Game;
 
 
 /***/ }),
-/* 35 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(15));
-__export(__webpack_require__(36));
-
-
-/***/ }),
-/* 36 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4111,7 +4259,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var Entity_1 = __webpack_require__(15);
+var Entity_1 = __webpack_require__(17);
 /**
  * an entity that can collide with other collidable entities
  */
@@ -4141,7 +4289,7 @@ exports.CollidableEntity = CollidableEntity;
 
 
 /***/ }),
-/* 37 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4228,7 +4376,7 @@ exports.Animation = Animation;
 
 
 /***/ }),
-/* 38 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4250,7 +4398,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var Entity_1 = __webpack_require__(13);
+var Entity_1 = __webpack_require__(14);
 /**
  * a helper type for eg. blocked directions
  */
@@ -4352,7 +4500,7 @@ exports.CollidableEntity = CollidableEntity;
 
 
 /***/ }),
-/* 39 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4367,12 +4515,12 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(16));
-__export(__webpack_require__(40));
+__export(__webpack_require__(18));
+__export(__webpack_require__(43));
 
 
 /***/ }),
-/* 40 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4429,7 +4577,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var Scene_1 = __webpack_require__(16);
+var Scene_1 = __webpack_require__(18);
 /**
  * a basic loading screen scene
  */
@@ -4480,7 +4628,7 @@ exports.LoadingScreenScene = LoadingScreenScene;
 
 
 /***/ }),
-/* 41 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4495,11 +4643,11 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(42));
+__export(__webpack_require__(45));
 
 
 /***/ }),
-/* 42 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4511,9 +4659,9 @@ __export(__webpack_require__(42));
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-var physic_1 = __webpack_require__(43);
+var physic_1 = __webpack_require__(46);
 var math_1 = __webpack_require__(0);
-var asset_1 = __webpack_require__(17);
+var asset_1 = __webpack_require__(19);
 /**
  * a class to handle world spefific things
  */
@@ -4617,7 +4765,7 @@ exports.World = World;
 
 
 /***/ }),
-/* 43 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4632,11 +4780,11 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(44));
+__export(__webpack_require__(47));
 
 
 /***/ }),
-/* 44 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4660,7 +4808,7 @@ var GravityForce;
 
 
 /***/ }),
-/* 45 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4767,7 +4915,7 @@ exports.Request = Request;
 
 
 /***/ }),
-/* 46 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4826,7 +4974,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var AssetType_1 = __webpack_require__(1);
 var Image_1 = __webpack_require__(6);
-var AbstractAsset_1 = __webpack_require__(4);
+var AbstractAsset_1 = __webpack_require__(5);
 var network_1 = __webpack_require__(7);
 var SPRITE_MAP_DELIMITER = ',';
 /**
@@ -4943,7 +5091,7 @@ exports.Sprite = Sprite;
 
 
 /***/ }),
-/* 47 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4966,7 +5114,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var AssetType_1 = __webpack_require__(1);
-var AbstractAsset_1 = __webpack_require__(4);
+var AbstractAsset_1 = __webpack_require__(5);
 var Sound = (function (_super) {
     __extends(Sound, _super);
     function Sound(name, path, data) {
@@ -4995,7 +5143,7 @@ exports.Sound = Sound;
 
 
 /***/ }),
-/* 48 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5052,7 +5200,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var AbstractAsset_1 = __webpack_require__(4);
+var AbstractAsset_1 = __webpack_require__(5);
 var AssetType_1 = __webpack_require__(1);
 var Image_1 = __webpack_require__(6);
 var network_1 = __webpack_require__(7);
@@ -5215,149 +5363,6 @@ exports.TileMap = TileMap;
 
 
 /***/ }),
-/* 49 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(50));
-
-
-/***/ }),
-/* 50 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-var CameraMode_1 = __webpack_require__(51);
-var math_1 = __webpack_require__(0);
-/**
- * the view for the player into the game
- */
-var Camera = (function () {
-    /**
-     *
-     * @param scale the scale of the world. 1 means that a tile of 32x32 will renderes on 32x32 pixel. scane 5 means that a tile of 32x32 will be rendered as (32*5)x(32*5) pixel...
-     * @param mode the camera mode
-     */
-    function Camera(scale, mode) {
-        if (scale === void 0) { scale = 1; }
-        if (mode === void 0) { mode = CameraMode_1.CameraMode.Orthogonal; }
-        this.scale = scale;
-        this.mode = mode;
-        /**
-         * the entitiy which the camera should follow
-         */
-        this.followingEntity = null;
-        /**
-         * the current camera world bounds
-         */
-        this.worldBounds = null;
-    }
-    /**
-     * get the camera mode
-     */
-    Camera.prototype.getMode = function () {
-        return this.mode;
-    };
-    /**
-     * get the current world scale modificator
-     */
-    Camera.prototype.getScale = function () {
-        return this.scale;
-    };
-    /**
-     * get the camera scale as vector
-     */
-    Camera.prototype.getScaneVector = function () {
-        return new math_1.Vector2D(this.scale, this.scale);
-    };
-    /**
-     * set the current world scale modificator
-     */
-    Camera.prototype.setScale = function (scale) {
-        this.scale = scale;
-    };
-    /**
-     * follows one entity
-     *
-     * @param entity the entity to follow
-     */
-    Camera.prototype.followEntity = function (entity) {
-        this.followingEntity = entity;
-    };
-    /**
-     * get the current entity the camera follows.
-     * can be undefined is the camera is not following an entity
-     */
-    Camera.prototype.getFollowingEntity = function () {
-        return this.followingEntity;
-    };
-    /**
-     * if the camera should be allways within the world, set the world
-     * bounds to the current active world
-     */
-    Camera.prototype.setWorldBounds = function (world) {
-        var dimension = world.getWorldDimension();
-        this.worldBounds = new math_1.Vector2D(dimension.x, dimension.y);
-    };
-    /**
-     * get the current world bounds.
-     *
-     * @warning return value can be null if no bounds are available!
-     */
-    Camera.prototype.getWorldBounds = function () {
-        var wb = this.worldBounds;
-        if (!wb)
-            return wb;
-        // add the current camera scale
-        return wb.multiply(new math_1.Vector2D(this.getScale(), this.getScale()));
-    };
-    return Camera;
-}());
-exports.Camera = Camera;
-
-
-/***/ }),
-/* 51 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * the currently supported camera modes
- */
-var CameraMode;
-(function (CameraMode) {
-    CameraMode[CameraMode["Orthogonal"] = 0] = "Orthogonal";
-})(CameraMode = exports.CameraMode || (exports.CameraMode = {}));
-
-
-/***/ }),
 /* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5373,11 +5378,149 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(53));
+__export(__webpack_require__(21));
+__export(__webpack_require__(56));
+__export(__webpack_require__(22));
 
 
 /***/ }),
 /* 53 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(54));
+__export(__webpack_require__(55));
+
+
+/***/ }),
+/* 54 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * an enumeration for all available collision types
+ */
+var CollisionType;
+(function (CollisionType) {
+    CollisionType[CollisionType["Circle"] = 0] = "Circle";
+    CollisionType[CollisionType["Rectangle"] = 1] = "Rectangle";
+    CollisionType[CollisionType["RotatedRectangle"] = 2] = "RotatedRectangle";
+})(CollisionType = exports.CollisionType || (exports.CollisionType = {}));
+
+
+/***/ }),
+/* 55 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * calculates the collision between entities that both have a circle collision type
+ */
+var CircleCircleCollision = (function () {
+    function CircleCircleCollision() {
+    }
+    /**
+     * check if two entities has been collided
+     *
+     * @param entity1 the first entity
+     * @param entity2 the second entity
+     */
+    CircleCircleCollision.check = function (entity1, entity2) {
+        // check if the two circles collide
+        return Math.sqrt(Math.pow(entity1.getPosition().x - entity2.getPosition().x, 2)
+            +
+                Math.pow(entity1.getPosition().y - entity2.getPosition().y, 2)) < entity1.getWidth() / 2;
+    };
+    return CircleCircleCollision;
+}());
+exports.CircleCircleCollision = CircleCircleCollision;
+
+
+/***/ }),
+/* 56 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var BaseCamera_1 = __webpack_require__(21);
+/**
+ * an orthogonal camera for the view of the player
+ */
+var OrthogonalCamera = (function (_super) {
+    __extends(OrthogonalCamera, _super);
+    function OrthogonalCamera() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return OrthogonalCamera;
+}(BaseCamera_1.BaseCamera));
+exports.OrthogonalCamera = OrthogonalCamera;
+
+
+/***/ }),
+/* 57 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(58));
+
+
+/***/ }),
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5466,7 +5609,7 @@ exports.Input = Input;
 
 
 /***/ }),
-/* 54 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5481,11 +5624,11 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(55));
+__export(__webpack_require__(60));
 
 
 /***/ }),
-/* 55 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5497,7 +5640,7 @@ __export(__webpack_require__(55));
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-var entity_1 = __webpack_require__(12);
+var entity_1 = __webpack_require__(13);
 var math_1 = __webpack_require__(0);
 var CollisionDetection = (function () {
     function CollisionDetection() {
@@ -5520,7 +5663,7 @@ var CollisionDetection = (function () {
             var entityCollidesWithWorldBounds = entity.getWorldBoundCollision();
             // calculate the tile position on the map
             var tilePosition = entityPosition
-                .divide(camera.getScaneVector())
+                .divide(camera.getScaleVector())
                 .divide(math_1.Vector2D.from(tileDimension.y, tileDimension.y))
                 .round(0);
             // now the system should check if the entity can move

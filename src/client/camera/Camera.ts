@@ -6,110 +6,61 @@
  */
 
 import { CameraMode } from './CameraMode';
-import { Entity } from '../../shared/entity';
-import { Vector2D } from '../../shared/math';
 import { World } from '../world';
+
+import {
+    Entity, Vector2D
+} from '@shared';
 
 /**
  * the view for the player into the game
  */
-export class Camera {
-
-    /**
-     * the entitiy which the camera should follow
-     */
-    private followingEntity: Entity = null;
-
-    /**
-     * the current camera world bounds
-     */
-    private worldBounds: Vector2D = null;
-
-    /**
-     *
-     * @param scale the scale of the world. 1 means that a tile of 32x32 will renderes on 32x32 pixel. scane 5 means that a tile of 32x32 will be rendered as (32*5)x(32*5) pixel...
-     * @param mode the camera mode
-     */
-    constructor(
-        private scale: number = 1,
-        private readonly mode: CameraMode = CameraMode.Orthogonal
-    ) { }
+export interface Camera {
 
     /**
      * get the camera mode
      */
-    public getMode(): CameraMode {
-
-        return this.mode;
-    }
+    getMode(): CameraMode;
 
     /**
      * get the current world scale modificator
      */
-    public getScale(): number {
-
-        return this.scale;
-    }
+    getScale(): number;
 
     /**
      * get the camera scale as vector
      */
-    public getScaneVector(): Vector2D {
-
-        return new Vector2D(this.scale, this.scale);
-    }
+    getScaleVector(): Vector2D;
 
     /**
      * set the current world scale modificator
      */
-    public setScale(scale: number): void {
-
-        this.scale = scale;
-    }
+    setScale(scale: number): void;
 
     /**
      * follows one entity
      *
      * @param entity the entity to follow
      */
-    public followEntity(entity: Entity): void {
-
-        this.followingEntity = entity;
-    }
+    followEntity(entity: Entity): void;
 
     /**
      * get the current entity the camera follows.
      * can be undefined is the camera is not following an entity
      */
-    public getFollowingEntity(): Entity {
-
-        return this.followingEntity;
-    }
+    getFollowingEntity(): Entity;
 
     /**
      * if the camera should be allways within the world, set the world
      * bounds to the current active world
      */
-    public setWorldBounds(world: World): void {
-
-        let dimension = world.getWorldDimension();
-        this.worldBounds = new Vector2D(
-            dimension.x,
-            dimension.y
-        );
-    }
+    setWorldBounds(world: World): void;
 
     /**
      * get the current world bounds.
      *
      * @warning return value can be null if no bounds are available!
      */
-    public getWorldBounds(): Vector2D {
+    getWorldBounds(): Vector2D;
 
-        let wb = this.worldBounds;
-        if (!wb) return wb;
-
-        // add the current camera scale
-        return wb.multiply(new Vector2D(this.getScale(), this.getScale()));
-    }
 }

@@ -32,7 +32,7 @@ module.exports = {
                 test: /\.tsx?$/,
                 loader: 'awesome-typescript-loader',
                 options: {
-                    configFileName: path.resolve(__dirname, './tsconfig.server.json')
+                    configFileName: path.resolve(__dirname, './server/tsconfig.json')
                 }
             },
             {
@@ -48,7 +48,10 @@ module.exports = {
             path.resolve('./shared'),
             'node_modules'
         ],
-        extensions: ['.js', '.ts']
+        extensions: ['.js', '.ts'],
+        alias: {
+            "@shared": path.resolve(__dirname, "./shared")
+        }
     },
     plugins: [
         new CircularDependencyPlugin({

@@ -5,35 +5,36 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { Helper } from '../../../src/shared/math/Helper';
-import { GravityForce } from '../../../src/client/physic';
+import { Helper } from '@shared';
+import { GravityForce } from '@client';
+
+import { suite, test } from 'mocha-typescript';
 import { expect } from 'chai';
-import 'mocha';
 
-describe('shared/math/Helper.ts', () => {
+@suite("shared/math/Helper") class TestHelper {
 
-    it('randomDegree() should return a positive number', () => {
+    @test "randomDegree() should return a positive number"() {
 
         expect(Helper.randomDegree())
             .to.be.an('number')
             .and.gte(0);
-    });
+    }
 
-    it('degreeToRadian() should work correctly', () => {
+    @test "degreeToRadian() should work correctly"() {
 
         let degree = 250;
         expect(Helper.degreeToRadian(degree))
             .to.be.closeTo(4.36332, 0.0001);
-    });
+    }
 
-    it('radianToDegree() should work correctly', () => {
+    @test "radianToDegree() should work correctly"() {
 
         let radian = 4;
         expect(Helper.radianToDegree(radian))
             .to.be.closeTo(229.183, 0.001);
-    });
+    }
 
-    it('roundToPrecision() should work correctly', () => {
+    @test "roundToPrecision() should work correctly"() {
 
         let float = 5.123456;
         expect(Helper.roundToPrecision(float, 2)).to.equal(5.12);
@@ -41,13 +42,13 @@ describe('shared/math/Helper.ts', () => {
         expect(Helper.roundToPrecision(float, 0)).to.equal(5);
 
         expect(Helper.roundToPrecision(float)).to.equal(5.12);
-    });
+    }
 
-    it('massToWeight() should calculate correctly', () => {
+    @test "massToWeight() should calculate correctly"() {
 
         let mass = 15; //kg
         let weight = Helper.massToWeight(mass, GravityForce.Earth);
 
         expect(weight).to.eq(147);
-    });
-});
+    }
+}

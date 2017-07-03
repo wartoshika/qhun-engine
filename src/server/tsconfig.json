@@ -2,24 +2,26 @@
     "compilerOptions": {
         "sourceMap": true,
         "noImplicitAny": true,
-        "rootDir": ".",
+        "baseUrl": ".",
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "noEmitOnError": true,
-        "target": "es5",
-        "lib": [
-            "es2015",
-            "dom"
-        ],
+        "target": "es6",
+        "module": "commonjs",
         "types": [
             "node"
         ],
         "typeRoots": [
-            "../node_modules/@types"
-        ]
+            "../../node_modules/@types"
+        ],
+        "paths": {
+            "@shared": [
+                "../shared"
+            ]
+        }
     },
     "include": [
-        "./client",
-        "./shared"
+        "./",
+        "../shared"
     ]
 }
