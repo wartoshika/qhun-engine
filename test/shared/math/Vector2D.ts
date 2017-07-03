@@ -10,7 +10,8 @@ import { Vector2D } from '@shared';
 import { suite, test } from 'mocha-typescript';
 import { expect } from 'chai';
 
-@suite("shared/math/Vector2D") class TestVector2D {
+@suite("shared/math/Vector2D")
+class TestVector2D {
 
     @test "constructor should save the position"() {
 

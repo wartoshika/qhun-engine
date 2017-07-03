@@ -5,13 +5,15 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { File, FileSizeType } from '../../../src/shared/helper';
+import { File, FileSizeType } from '@shared';
+
+import { suite, test } from 'mocha-typescript';
 import { expect } from 'chai';
-import 'mocha';
 
-describe('shared/helper/File.ts', () => {
+@suite("shared/helper/File")
+class TestFile {
 
-    it('getFileExtension() should get the right file extension', () => {
+    @test "getFileExtension() should get the right file extension"() {
 
         let filePath = "path/test/test.ext";
         expect(File.getFileExtension(filePath)).to.eq("ext");
@@ -21,9 +23,9 @@ describe('shared/helper/File.ts', () => {
 
         filePath = "/root/text.txt.test.ts";
         expect(File.getFileExtension(filePath)).to.eq("ts");
-    });
+    }
 
-    it('byteToSize() should be working correltcy', () => {
+    @test "byteToSize() should be working correltcy"() {
 
         let byte = 1;
         let kilobyte = byte * 1024;
@@ -37,6 +39,5 @@ describe('shared/helper/File.ts', () => {
         expect(File.byteToSize(megabyte, FileSizeType.Megabyte)).to.closeTo(1, .1);
         expect(File.byteToSize(gibabyte, FileSizeType.Gigabyte)).to.closeTo(1, .1);
         expect(File.byteToSize(terrabyte, FileSizeType.Terrabyte)).to.closeTo(1, .1);
-    });
-
-});
+    }
+}

@@ -5,38 +5,39 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { RamStorage } from '../../../src/shared/storage/RamStorage';
-import { FileSizeType } from '../../../src/shared/helper'
+import { RamStorage, Helper, FileSizeType } from '@shared';
+
+import { suite, test } from 'mocha-typescript';
 import { expect } from 'chai';
-import 'mocha';
 
-describe('shared/storage/RamStorage.ts', () => {
 
-    it('add() should be able to add an object', () => {
+beforeEach(() => {
 
-        RamStorage.clear();
+    RamStorage.clear();
+})
+
+@suite("shared/math/Dimension")
+class TestRamStorage {
+
+    @test "add() should be able to add an object"() {
 
         let element = { a: 'test' };
         let path = 'testPath.test';
         RamStorage.add(path, element);
 
         expect(RamStorage.get<any>(path)).to.eq(element);
-    });
+    }
 
-    it('getSize() should get an acurate memory footprint', () => {
-
-        RamStorage.clear();
+    @test "getSize() should get an acurate memory footprint"() {
 
         let element = { test: 'test' };
         let path = 'testPath.test';
         RamStorage.add(path, element);
 
         expect(RamStorage.getSize('', FileSizeType.Byte)).to.be.eq(16);
-    });
+    }
 
-    it('remove() should remove one element', () => {
-
-        RamStorage.clear();
+    @test "remove() should remove one element"() {
 
         let el = { a: true };
         RamStorage.add("test", el);
@@ -47,11 +48,9 @@ describe('shared/storage/RamStorage.ts', () => {
 
         expect(RamStorage.getSize("test", FileSizeType.Byte)).to.eq(0);
         expect(RamStorage.get<any>("test")).to.eq(undefined);
-    });
+    }
 
-    it('has() should work correctly', () => {
-
-        RamStorage.clear();
+    @test "has() should work correctly"() {
 
         expect(RamStorage.has("test")).to.be.false;
 
@@ -59,11 +58,9 @@ describe('shared/storage/RamStorage.ts', () => {
         RamStorage.add("test", el);
 
         expect(RamStorage.has("test")).to.be.true;
-    });
+    }
 
-    it('amount() should get the right amount from the storage cache', () => {
-
-        RamStorage.clear();
+    @test "amount() should get the right amount from the storage cache"() {
 
         expect(RamStorage.amount("test")).to.eq(0);
 
@@ -71,6 +68,5 @@ describe('shared/storage/RamStorage.ts', () => {
         RamStorage.add("test", el);
 
         expect(RamStorage.amount("test")).to.eq(1);
-    });
-
-});
+    }
+}

@@ -5,15 +5,17 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { Log, LogLevel } from '../../../src/shared/log';
+import { Log, LogLevel } from '@shared';
+
+import { suite, test } from 'mocha-typescript';
 import { expect } from 'chai';
-import 'mocha';
 
-describe('shared/log/Log.ts', () => {
+@suite("shared/log/Log")
+class TestLog {
 
-    it('setLogLevel() should work correctly', () => {
+    @test "setLogLevel() should work correctly"() {
 
         Log.setLogLevel(LogLevel.Debug);
         expect(Log.getLogLevel()).to.eq(LogLevel.Debug);
-    });
-});
+    }
+}

@@ -11,7 +11,8 @@ import { GravityForce } from '@client';
 import { suite, test } from 'mocha-typescript';
 import { expect } from 'chai';
 
-@suite("shared/math/Helper") class TestHelper {
+@suite("shared/math/Helper")
+class TestHelper {
 
     @test "randomDegree() should return a positive number"() {
 

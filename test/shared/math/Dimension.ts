@@ -5,13 +5,15 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { Dimension } from '../../../src/shared/math/Dimension';
+import { Dimension } from '@shared';
+
+import { suite, test } from 'mocha-typescript';
 import { expect } from 'chai';
-import 'mocha';
 
-describe('shared/math/Dimension.ts', () => {
+@suite("shared/math/Dimension")
+class TestDimension {
 
-    it('constructor should store the properties correctly', () => {
+    @test "constructor should store the properties correctly"() {
 
         let dimension = new Dimension(10, 15);
 
@@ -22,6 +24,5 @@ describe('shared/math/Dimension.ts', () => {
 
         expect(dimension.x).to.eq(0);
         expect(dimension.y).to.eq(0);
-    });
-
-});
+    }
+}
