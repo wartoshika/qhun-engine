@@ -18,7 +18,7 @@ export abstract class CollidableEntity extends Entity implements CanCollide {
     constructor(
         private entityWidth: number,
         private entityHeight: number,
-        position: Vector2D
+        position: Vector2D = Vector2D.from(0, 0)
     ) {
         super(position);
     }
@@ -47,6 +47,22 @@ export abstract class CollidableEntity extends Entity implements CanCollide {
     public getHeight(): number {
 
         return this.entityHeight;
+    }
+
+    /**
+     * get the width of the entity
+     */
+    public setWidth(width: number): void {
+
+        this.entityWidth = width;
+    }
+
+    /**
+     * get the height of the entity
+     */
+    public setHeight(height: number): void {
+
+        this.entityHeight = height;
     }
 
 }

@@ -1091,11 +1091,9 @@ var BaseCamera = (function () {
      * @param scale the scale of the world. 1 means that a tile of 32x32 will renderes on 32x32 pixel. scane 5 means that a tile of 32x32 will be rendered as (32*5)x(32*5) pixel...
      * @param mode the camera mode
      */
-    function BaseCamera(scale, mode) {
+    function BaseCamera(scale) {
         if (scale === void 0) { scale = 1; }
-        if (mode === void 0) { mode = CameraMode_1.CameraMode.Orthogonal; }
         this.scale = scale;
-        this.mode = mode;
         /**
          * the entitiy which the camera should follow
          */
@@ -1104,6 +1102,10 @@ var BaseCamera = (function () {
          * the current camera world bounds
          */
         this.worldBounds = null;
+        /**
+         * the camera mode
+         */
+        this.mode = CameraMode_1.CameraMode.Orthogonal;
     }
     /**
      * get the camera mode
@@ -2225,10 +2227,6 @@ var RamStorage = (function () {
     return RamStorage;
 }());
 exports.RamStorage = RamStorage;
-// debug
-if (typeof window !== 'undefined' && window) {
-    window.cache = RamStorage.cache;
-}
 
 
 /***/ }),
@@ -4551,6 +4549,14 @@ var Log = (function () {
         Log.logLevel = level;
     };
     /**
+     * override the current logger object
+     *
+     * @param object the new logger object
+     */
+    Log.overrideLoggerObject = function (object) {
+        Log.loggerObject = object;
+    };
+    /**
      * logs the given data
      *
      * @param level the level to log in
@@ -4577,16 +4583,16 @@ var Log = (function () {
         // go through the different log levels
         switch (level) {
             case LogLevel_1.LogLevel.Debug:
-                callback = console.debug;
+                callback = Log.loggerObject.debug;
                 break;
             case LogLevel_1.LogLevel.Info:
-                callback = console.info;
+                callback = Log.loggerObject.info;
                 break;
             case LogLevel_1.LogLevel.Warning:
-                callback = console.warn;
+                callback = Log.loggerObject.warn;
                 break;
             case LogLevel_1.LogLevel.Error:
-                callback = console.error;
+                callback = Log.loggerObject.error;
                 break;
         }
         return callback;
@@ -4647,6 +4653,8 @@ var Log = (function () {
     };
     // the current loglevel
     Log.logLevel = LogLevel_1.LogLevel.Debug;
+    // the logger object
+    Log.loggerObject = console;
     return Log;
 }());
 exports.Log = Log;
@@ -5224,7 +5232,6 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(__webpack_require__(53));
-__export(__webpack_require__(54));
 
 
 /***/ }),
@@ -5252,42 +5259,7 @@ var CollisionType;
 
 
 /***/ }),
-/* 54 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * calculates the collision between entities that both have a circle collision type
- */
-var CircleCircleCollision = (function () {
-    function CircleCircleCollision() {
-    }
-    /**
-     * check if two entities has been collided
-     *
-     * @param entity1 the first entity
-     * @param entity2 the second entity
-     */
-    CircleCircleCollision.check = function (entity1, entity2) {
-        // check if the two circles collide
-        return Math.sqrt(Math.pow(entity1.getPosition().x - entity2.getPosition().x, 2)
-            +
-                Math.pow(entity1.getPosition().y - entity2.getPosition().y, 2)) < entity1.getWidth() / 2;
-    };
-    return CircleCircleCollision;
-}());
-exports.CircleCircleCollision = CircleCircleCollision;
-
-
-/***/ }),
+/* 54 */,
 /* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5349,12 +5321,14 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var Entity_1 = __webpack_require__(23);
+var math_1 = __webpack_require__(0);
 /**
  * an entity that can collide with other collidable entities
  */
 var CollidableEntity = (function (_super) {
     __extends(CollidableEntity, _super);
     function CollidableEntity(entityWidth, entityHeight, position) {
+        if (position === void 0) { position = math_1.Vector2D.from(0, 0); }
         var _this = _super.call(this, position) || this;
         _this.entityWidth = entityWidth;
         _this.entityHeight = entityHeight;
@@ -5371,6 +5345,18 @@ var CollidableEntity = (function (_super) {
      */
     CollidableEntity.prototype.getHeight = function () {
         return this.entityHeight;
+    };
+    /**
+     * get the width of the entity
+     */
+    CollidableEntity.prototype.setWidth = function (width) {
+        this.entityWidth = width;
+    };
+    /**
+     * get the height of the entity
+     */
+    CollidableEntity.prototype.setHeight = function (height) {
+        this.entityHeight = height;
     };
     return CollidableEntity;
 }(Entity_1.Entity));

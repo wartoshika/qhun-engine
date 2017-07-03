@@ -9,7 +9,7 @@
         "target": "es6",
         "module": "commonjs",
         "types": [
-            "node"
+            "node", "mocha"
         ],
         "typeRoots": [
             "node_modules/@types"

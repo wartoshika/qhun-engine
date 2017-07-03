@@ -30,13 +30,17 @@ export abstract class BaseCamera implements Camera {
     private worldBounds: Vector2D = null;
 
     /**
+     * the camera mode
+     */
+    protected readonly mode: CameraMode = CameraMode.Orthogonal;
+
+    /**
      *
      * @param scale the scale of the world. 1 means that a tile of 32x32 will renderes on 32x32 pixel. scane 5 means that a tile of 32x32 will be rendered as (32*5)x(32*5) pixel...
      * @param mode the camera mode
      */
     constructor(
-        private scale: number = 1,
-        private readonly mode: CameraMode = CameraMode.Orthogonal
+        private scale: number = 1
     ) { }
 
     /**

@@ -10,14 +10,16 @@ import { RamStorage, Helper, FileSizeType } from '@shared';
 import { suite, test } from 'mocha-typescript';
 import { expect } from 'chai';
 
-
-beforeEach(() => {
-
-    RamStorage.clear();
-})
-
 @suite("shared/math/Dimension")
 class TestRamStorage {
+
+    constructor() {
+
+        beforeEach(() => {
+
+            RamStorage.clear();
+        });
+    }
 
     @test "add() should be able to add an object"() {
 

@@ -8,6 +8,17 @@
 import { LogLevel } from './LogLevel';
 
 /**
+ * a generic logger object
+ */
+export interface LoggerObject {
+
+    debug: (...args: any[]) => void;
+    info: (...args: any[]) => void;
+    warn: (...args: any[]) => void;
+    error: (...args: any[]) => void;
+}
+
+/**
  * a log wrapper to allow log levels and a more complex
  * logging structure
  */
@@ -15,6 +26,9 @@ export class Log {
 
     // the current loglevel
     private static logLevel: LogLevel = LogLevel.Debug;
+
+    // the logger object
+    private static loggerObject: LoggerObject = console;
 
     /**
      * sets the log level for the application environment
@@ -24,6 +38,16 @@ export class Log {
     public static setLogLevel(level: LogLevel): void {
 
         Log.logLevel = level;
+    }
+
+    /**
+     * override the current logger object
+     *
+     * @param object the new logger object
+     */
+    public static overrideLoggerObject(object: LoggerObject): void {
+
+        Log.loggerObject = object;
     }
 
     /**
@@ -56,10 +80,10 @@ export class Log {
         // go through the different log levels
         switch (level) {
 
-            case LogLevel.Debug: callback = console.debug; break;
-            case LogLevel.Info: callback = console.info; break;
-            case LogLevel.Warning: callback = console.warn; break;
-            case LogLevel.Error: callback = console.error; break;
+            case LogLevel.Debug: callback = Log.loggerObject.debug; break;
+            case LogLevel.Info: callback = Log.loggerObject.info; break;
+            case LogLevel.Warning: callback = Log.loggerObject.warn; break;
+            case LogLevel.Error: callback = Log.loggerObject.error; break;
         }
 
         return callback;

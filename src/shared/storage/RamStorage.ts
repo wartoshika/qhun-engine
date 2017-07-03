@@ -105,9 +105,3 @@ export class RamStorage {
         return Helper.roundToPrecision(bytes, 2);
     }
 }
-
-// debug
-if (typeof window !== 'undefined' && window) {
-
-    (<any>window).cache = (<any>RamStorage).cache;
-}

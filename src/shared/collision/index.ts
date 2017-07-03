@@ -6,4 +6,3 @@
  */
 
 export * from './CollisionType';
-export * from './CircleCircleCollision';

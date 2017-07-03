@@ -495,6 +495,14 @@ class Log {
         Log.logLevel = level;
     }
     /**
+     * override the current logger object
+     *
+     * @param object the new logger object
+     */
+    static overrideLoggerObject(object) {
+        Log.loggerObject = object;
+    }
+    /**
      * logs the given data
      *
      * @param level the level to log in
@@ -517,16 +525,16 @@ class Log {
         // go through the different log levels
         switch (level) {
             case LogLevel_1.LogLevel.Debug:
-                callback = console.debug;
+                callback = Log.loggerObject.debug;
                 break;
             case LogLevel_1.LogLevel.Info:
-                callback = console.info;
+                callback = Log.loggerObject.info;
                 break;
             case LogLevel_1.LogLevel.Warning:
-                callback = console.warn;
+                callback = Log.loggerObject.warn;
                 break;
             case LogLevel_1.LogLevel.Error:
-                callback = console.error;
+                callback = Log.loggerObject.error;
                 break;
         }
         return callback;
@@ -572,6 +580,8 @@ class Log {
 }
 // the current loglevel
 Log.logLevel = LogLevel_1.LogLevel.Debug;
+// the logger object
+Log.loggerObject = console;
 exports.Log = Log;
 
 
@@ -701,7 +711,6 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(__webpack_require__(21));
-__export(__webpack_require__(22));
 
 
 /***/ }),
@@ -729,39 +738,7 @@ var CollisionType;
 
 
 /***/ }),
-/* 22 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * calculates the collision between entities that both have a circle collision type
- */
-class CircleCircleCollision {
-    /**
-     * check if two entities has been collided
-     *
-     * @param entity1 the first entity
-     * @param entity2 the second entity
-     */
-    static check(entity1, entity2) {
-        // check if the two circles collide
-        return Math.sqrt(Math.pow(entity1.getPosition().x - entity2.getPosition().x, 2)
-            +
-                Math.pow(entity1.getPosition().y - entity2.getPosition().y, 2)) < entity1.getWidth() / 2;
-    }
-}
-exports.CircleCircleCollision = CircleCircleCollision;
-
-
-/***/ }),
+/* 22 */,
 /* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -955,11 +932,12 @@ exports.Vector2D = Vector2D;
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 const Entity_1 = __webpack_require__(3);
+const math_1 = __webpack_require__(1);
 /**
  * an entity that can collide with other collidable entities
  */
 class CollidableEntity extends Entity_1.Entity {
-    constructor(entityWidth, entityHeight, position) {
+    constructor(entityWidth, entityHeight, position = math_1.Vector2D.from(0, 0)) {
         super(position);
         this.entityWidth = entityWidth;
         this.entityHeight = entityHeight;
@@ -975,6 +953,18 @@ class CollidableEntity extends Entity_1.Entity {
      */
     getHeight() {
         return this.entityHeight;
+    }
+    /**
+     * get the width of the entity
+     */
+    setWidth(width) {
+        this.entityWidth = width;
+    }
+    /**
+     * get the height of the entity
+     */
+    setHeight(height) {
+        this.entityHeight = height;
     }
 }
 exports.CollidableEntity = CollidableEntity;
@@ -1146,10 +1136,6 @@ class RamStorage {
 // the private cache object
 RamStorage.cache = {};
 exports.RamStorage = RamStorage;
-// debug
-if (typeof window !== 'undefined' && window) {
-    window.cache = RamStorage.cache;
-}
 
 
 /***/ }),
