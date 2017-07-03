@@ -3,12 +3,12 @@ let CopyWebpackPlugin = require('copy-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 let path = require('path');
 
-let exampleName = "example1";
+let exampleName = 'rpg';
 let exampleDist = path.resolve(__dirname, "../../dist/example");
 
 module.exports = {
     context: __dirname,
-    entry: './MyAwesomeGame.ts',
+    entry: './MyAwesomeRpgGame.ts',
     output: {
         filename: './dist/example/' + exampleName + '/example.js'
     },

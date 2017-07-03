@@ -1133,7 +1133,7 @@ exports.AssetLoader = AssetLoader;
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 var CameraMode_1 = __webpack_require__(22);
-var _shared_1 = __webpack_require__(23);
+var shared_1 = __webpack_require__(23);
 /**
  * the view for the player into the game
  */
@@ -1173,7 +1173,7 @@ var BaseCamera = (function () {
      * get the camera scale as vector
      */
     BaseCamera.prototype.getScaleVector = function () {
-        return new _shared_1.Vector2D(this.scale, this.scale);
+        return new shared_1.Vector2D(this.scale, this.scale);
     };
     /**
      * set the current world scale modificator
@@ -1202,7 +1202,7 @@ var BaseCamera = (function () {
      */
     BaseCamera.prototype.setWorldBounds = function (world) {
         var dimension = world.getWorldDimension();
-        this.worldBounds = new _shared_1.Vector2D(dimension.x, dimension.y);
+        this.worldBounds = new shared_1.Vector2D(dimension.x, dimension.y);
     };
     /**
      * get the current world bounds.
@@ -1214,7 +1214,7 @@ var BaseCamera = (function () {
         if (!wb)
             return wb;
         // add the current camera scale
-        return wb.multiply(new _shared_1.Vector2D(this.getScale(), this.getScale()));
+        return wb.multiply(new shared_1.Vector2D(this.getScale(), this.getScale()));
     };
     return BaseCamera;
 }());
@@ -4078,7 +4078,7 @@ var entity_1 = __webpack_require__(13);
 var scene_1 = __webpack_require__(42);
 var world_1 = __webpack_require__(44);
 var camera_1 = __webpack_require__(52);
-var _shared_1 = __webpack_require__(23);
+var shared_1 = __webpack_require__(23);
 /**
  * a class that handles adding of entities, cameras, physics ...
  */
@@ -4213,7 +4213,7 @@ var Game = (function (_super) {
         // does the world exists?
         if (!(world in this.worldStack)) {
             // print error
-            _shared_1.Log.error("Trying to load", world, "but this world does not exists");
+            shared_1.Log.error("Trying to load", world, "but this world does not exists");
             return;
         }
         // set the world in the renderer
@@ -4232,7 +4232,7 @@ var Game = (function (_super) {
         return this.currentCamera;
     };
     return Game;
-}(_shared_1.Singleton));
+}(shared_1.Singleton));
 exports.Game = Game;
 
 

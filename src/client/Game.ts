@@ -11,7 +11,9 @@ import { Scene } from './scene';
 import { World } from './world';
 import { Camera, BaseCamera } from './camera';
 
-import { Singleton, Log } from '@shared';
+import {
+    Singleton, Log
+} from '../shared';
 
 declare type Thing = Entity | Scene | World | Camera;
 

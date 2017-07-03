@@ -8,5 +8,5 @@ module.exports = [
     // ########################
     // # EXAMPLE FILES
     // ########################
-    //require('./example/example1/webpack.config.js')
+    require('./example/rpg/webpack.config.js')
 ]

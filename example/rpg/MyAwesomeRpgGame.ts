@@ -8,7 +8,7 @@
 import {
     Client, CanvasRenderer, Viewport, Game,
     Image, Sprite, TileMap, AssetLoader,
-    LoadingScreenScene, Input, World, Camera
+    LoadingScreenScene, Input, World, OrthogonalCamera
 } from '@qhun-engine/client';
 
 import {
@@ -17,7 +17,7 @@ import {
 
 import { Link } from './entity/Link';
 
-class MyAwesomeGame extends Client {
+class MyAwesomeRpgGame extends Client {
 
     private link: Link;
 
@@ -39,12 +39,12 @@ class MyAwesomeGame extends Client {
 
         Sprite.register({
             name: 'link_run',
-            path: 'example/example1/asset/image/link_run.png'
+            path: 'example/rpg/asset/image/link_run.png'
         });
 
         TileMap.register({
             name: 'world1',
-            path: 'example/example1/asset/image/world1.png',
+            path: 'example/rpg/asset/image/world1.png',
             tileMapDimension: new Dimension(32, 32),
             layerCount: 2
         });
@@ -63,7 +63,7 @@ class MyAwesomeGame extends Client {
         this.link = new Link();
 
         // create game objects
-        let camera = new Camera(1.5);
+        let camera = new OrthogonalCamera(1.5);
         let world = new World(
             game, 'world1'
         );
@@ -102,4 +102,4 @@ class MyAwesomeGame extends Client {
 }
 
 // start the game
-new MyAwesomeGame();
+new MyAwesomeRpgGame();

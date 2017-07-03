@@ -12,7 +12,7 @@ import { Camera } from './Camera';
 
 import {
     Vector2D
-} from '@shared';
+} from '../../shared';
 
 /**
  * the view for the player into the game

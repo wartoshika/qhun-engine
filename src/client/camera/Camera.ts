@@ -10,7 +10,7 @@ import { World } from '../world';
 
 import {
     Entity, Vector2D
-} from '@shared';
+} from '../../shared';
 
 /**
  * the view for the player into the game
