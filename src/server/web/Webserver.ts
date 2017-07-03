@@ -6,7 +6,7 @@
  */
 
 // need the index file in the build directory
-require('file-loader?name=build/[name].[ext]!./index.html');
+require('file-loader?name=[name].[ext]!./index.html');
 
 import * as http from 'http';
 import * as express from 'express';
@@ -55,7 +55,7 @@ export class Webserver {
 
         // @todo: do not serve the server.js file for security reasons!
         // get the file and send it back to the client
-        let absolutePath = path.resolve(`./build/${file}`);
+        let absolutePath = path.resolve(`./dist/${file}`);
         response.sendFile(absolutePath);
     }
 

@@ -1,0 +1,32 @@
+{
+    "compilerOptions": {
+        "sourceMap": true,
+        "noImplicitAny": true,
+        "baseUrl": ".",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "noEmitOnError": true,
+        "target": "es5",
+        "lib": [
+            "es2015",
+            "dom"
+        ],
+        "types": [
+            "node"
+        ],
+        "typeRoots": [
+            "../../node_modules/@types"
+        ],
+        "paths": {
+            "@qhun-engine/client": [
+                "../../src/client"
+            ],
+            "@qhun-engine/shared": [
+                "../../src/shared"
+            ],
+            "@qhun-engine/server": [
+                "../../src/server"
+            ]
+        }
+    }
+}

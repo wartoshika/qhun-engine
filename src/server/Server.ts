@@ -8,7 +8,7 @@
 import { Webserver } from './web';
 import { NetworkServer } from './network';
 import { ServerConfig } from './ServerConfig';
-import { LogLevel, Log } from '../shared/log';
+import { LogLevel, Log } from '../shared';
 
 /**
  * the game server main class. loads all important things

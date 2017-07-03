@@ -1,5 +1,12 @@
 module.exports = [
-    require('./webpack.client.config.js'),
-    require('./webpack.server.config.js'),
-    require('./webpack.example.config.js')
+    // ########################
+    // # MAIN PROJECT FILES
+    // ########################
+    //require('./src/webpack.client.js'),
+    require('./src/webpack.server.js'),
+
+    // ########################
+    // # EXAMPLE FILES
+    // ########################
+    require('./example/example1/webpack.config.js')
 ]
