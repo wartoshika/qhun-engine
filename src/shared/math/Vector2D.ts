@@ -31,9 +31,9 @@ export class Vector2D<T extends number = number> extends Dimension {
      * @param x the x value
      * @param y the y value. if no y value is present, x and y will come from x
      */
-    public static from(x: number, y?: number): Vector2D {
+    public static from<T extends number = number>(x: T, y?: T): Vector2D<T> {
 
-        return new Vector2D(x, y !== undefined ? y : x);
+        return new Vector2D<T>(x, y !== undefined ? y : x);
     }
 
     /**
@@ -117,7 +117,7 @@ export class Vector2D<T extends number = number> extends Dimension {
     /**
      * get the current vector divided by 2
      */
-    public half(): Vector2D {
+    public half(): Vector2D<T> {
 
         return this.divide(new Vector2D(2, 2));
     }
@@ -125,16 +125,16 @@ export class Vector2D<T extends number = number> extends Dimension {
     /**
      * get the current vector multiply by 2
      */
-    public double(): Vector2D {
+    public double(): Vector2D<T> {
 
-        return this.multiply(new Vector2D(2, 2));
+        return this.multiply(new Vector2D<T>(<T>2, <T>2));
     }
 
     /**
      * Math.abs() on x and y
      */
-    public abs(): Vector2D {
+    public abs(): Vector2D<T> {
 
-        return new Vector2D(Math.abs(this.x), Math.abs(this.y));
+        return new Vector2D<T>(<T>Math.abs(this.x), <T>Math.abs(this.y));
     }
 }

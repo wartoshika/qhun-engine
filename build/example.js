@@ -79,9 +79,9 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(11));
-__export(__webpack_require__(38));
 __export(__webpack_require__(12));
+__export(__webpack_require__(38));
+__export(__webpack_require__(13));
 
 
 /***/ }),
@@ -100,7 +100,7 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(7));
+__export(__webpack_require__(8));
 __export(__webpack_require__(50));
 __export(__webpack_require__(51));
 __export(__webpack_require__(2));
@@ -149,7 +149,7 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(10));
+__export(__webpack_require__(11));
 __export(__webpack_require__(28));
 
 
@@ -171,7 +171,7 @@ function __export(m) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(__webpack_require__(29));
 __export(__webpack_require__(39));
-__export(__webpack_require__(13));
+__export(__webpack_require__(14));
 
 
 /***/ }),
@@ -266,6 +266,27 @@ __export(__webpack_require__(30));
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(16));
+__export(__webpack_require__(43));
+__export(__webpack_require__(17));
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -349,7 +370,7 @@ exports.Image = Image;
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -368,7 +389,7 @@ __export(__webpack_require__(49));
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -387,7 +408,7 @@ __export(__webpack_require__(27));
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -412,7 +433,7 @@ var LogLevel;
 
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -477,7 +498,7 @@ exports.Helper = Helper;
 
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -510,7 +531,7 @@ exports.Dimension = Dimension;
 
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -559,7 +580,7 @@ exports.File = File;
 
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -617,7 +638,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var helper_1 = __webpack_require__(4);
-var entity_1 = __webpack_require__(15);
+var entity_1 = __webpack_require__(7);
 var scene_1 = __webpack_require__(44);
 var world_1 = __webpack_require__(20);
 var log_1 = __webpack_require__(3);
@@ -777,27 +798,6 @@ var Game = (function (_super) {
     return Game;
 }(helper_1.Singleton));
 exports.Game = Game;
-
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(16));
-__export(__webpack_require__(43));
-__export(__webpack_require__(17));
 
 
 /***/ }),
@@ -1135,7 +1135,7 @@ var AssetType_1 = __webpack_require__(2);
 var helper_1 = __webpack_require__(4);
 var storage_1 = __webpack_require__(6);
 var log_1 = __webpack_require__(3);
-var network_1 = __webpack_require__(8);
+var network_1 = __webpack_require__(9);
 /**
  * a class that can handle asset loading such as images and audio
  */
@@ -1641,12 +1641,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var Client_1 = __webpack_require__(26);
-var render_1 = __webpack_require__(57);
-var environment_1 = __webpack_require__(60);
-var Game_1 = __webpack_require__(14);
+var render_1 = __webpack_require__(59);
+var environment_1 = __webpack_require__(62);
+var Game_1 = __webpack_require__(15);
 var asset_1 = __webpack_require__(1);
-var decorator_1 = __webpack_require__(9);
-var Link_1 = __webpack_require__(62);
+var decorator_1 = __webpack_require__(10);
+var Link_1 = __webpack_require__(64);
 var math_1 = __webpack_require__(0);
 var world_1 = __webpack_require__(20);
 var camera_1 = __webpack_require__(22);
@@ -1746,14 +1746,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var decorator_1 = __webpack_require__(9);
+var decorator_1 = __webpack_require__(10);
 var log_1 = __webpack_require__(3);
 var helper_1 = __webpack_require__(4);
-var Game_1 = __webpack_require__(14);
+var Game_1 = __webpack_require__(15);
 var storage_1 = __webpack_require__(6);
 var asset_1 = __webpack_require__(1);
 var input_1 = __webpack_require__(55);
-var collision_1 = __webpack_require__(65);
+var collision_1 = __webpack_require__(57);
 /**
  * the initiation class of the game client
  */
@@ -1905,7 +1905,7 @@ exports.logMethodCall = logMethodCall;
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-var LogLevel_1 = __webpack_require__(10);
+var LogLevel_1 = __webpack_require__(11);
 /**
  * a log wrapper to allow log levels and a more complex
  * logging structure
@@ -2094,7 +2094,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // the dependency to get the memory footprint ob stored objects
 var sizeof = __webpack_require__(31);
 var math_1 = __webpack_require__(0);
-var File_1 = __webpack_require__(13);
+var File_1 = __webpack_require__(14);
 /**
  * holds objects in the ram of the operating unit
  */
@@ -4325,8 +4325,8 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var Helper_1 = __webpack_require__(11);
-var Dimension_1 = __webpack_require__(12);
+var Helper_1 = __webpack_require__(12);
+var Dimension_1 = __webpack_require__(13);
 /**
  * represents a 2D vector with x and y coordinates.
  */
@@ -5210,9 +5210,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var AssetType_1 = __webpack_require__(2);
-var Image_1 = __webpack_require__(7);
+var Image_1 = __webpack_require__(8);
 var AbstractAsset_1 = __webpack_require__(5);
-var network_1 = __webpack_require__(8);
+var network_1 = __webpack_require__(9);
 var SPRITE_MAP_DELIMITER = ',';
 /**
  * an internal enum to index the correct array position for sprite maps
@@ -5439,8 +5439,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var AbstractAsset_1 = __webpack_require__(5);
 var AssetType_1 = __webpack_require__(2);
-var Image_1 = __webpack_require__(7);
-var network_1 = __webpack_require__(8);
+var Image_1 = __webpack_require__(8);
+var network_1 = __webpack_require__(9);
 var math_1 = __webpack_require__(0);
 /**
  * an asset class to load a tilemap as world
@@ -5848,11 +5848,110 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(__webpack_require__(58));
-__export(__webpack_require__(23));
 
 
 /***/ }),
 /* 58 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+var entity_1 = __webpack_require__(7);
+var math_1 = __webpack_require__(0);
+var CollisionDetection = (function () {
+    function CollisionDetection() {
+    }
+    /**
+     * checks if the given entities collides with the world
+     *
+     * @param entities the entities to test
+     * @param world the current world
+     */
+    CollisionDetection.entitiesWithWorld = function (entities, world, camera) {
+        // only take entities that can collide
+        entities.filter(function (entity) { return entity instanceof entity_1.CollidableEntity; }).forEach(function (entity) {
+            // calculate the entity position in every direction from its
+            // hitbox
+            var position = {};
+            // get the position of the entity
+            var entityPosition = entity.getPosition();
+            var tileDimension = world.getTileMap().getDimension();
+            var entityCollidesWithWorldBounds = entity.getWorldBoundCollision();
+            // calculate the tile position on the map
+            var tilePosition = entityPosition
+                .divide(camera.getScaneVector())
+                .divide(math_1.Vector2D.from(tileDimension.y, tileDimension.y))
+                .round(0);
+            // now the system should check if the entity can move
+            position[entity_1.Direction.Left] = tilePosition.add(math_1.Vector2D.from(-1, 0));
+            position[entity_1.Direction.Right] = tilePosition.add(math_1.Vector2D.from(1, 0));
+            position[entity_1.Direction.Up] = tilePosition.add(math_1.Vector2D.from(0, -1));
+            position[entity_1.Direction.Down] = tilePosition.add(math_1.Vector2D.from(0, 1));
+            // iterate the directions
+            Object.keys(position).forEach(function (key) {
+                var direction = parseInt(key);
+                var collision = false;
+                // get the tile numbers that are at the players point
+                var tileNumbers = world.getTileNumbersForPosition(position[direction]);
+                if (window.log === true) {
+                    if (direction === entity_1.Direction.Right) {
+                        console.log(tileNumbers);
+                        window.log = false;
+                    }
+                }
+                // on a collidable tile?
+                var collidableTileNumbers = world.getCollidableTileNumbers();
+                // test collision
+                tileNumbers.forEach(function (number) {
+                    // does the number exist?
+                    if (
+                    // collidable tile
+                    collidableTileNumbers.indexOf(number) !== -1
+                        ||
+                            // world bound
+                            (entityCollidesWithWorldBounds && number === -2)) {
+                        collision = true;
+                    }
+                });
+                // set the direction
+                entity.setDirectionBlocked(direction, collision);
+            });
+        });
+    };
+    return CollisionDetection;
+}());
+exports.CollisionDetection = CollisionDetection;
+
+
+/***/ }),
+/* 59 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(60));
+__export(__webpack_require__(23));
+
+
+/***/ }),
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5876,7 +5975,7 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var asset_1 = __webpack_require__(1);
 var BasicRenderer_1 = __webpack_require__(23);
-var CanvasWorldRenderer_1 = __webpack_require__(59);
+var CanvasWorldRenderer_1 = __webpack_require__(61);
 var CameraOffsetCalculator_1 = __webpack_require__(24);
 var FPS_OFFSET = 25;
 /**
@@ -6008,7 +6107,7 @@ exports.CanvasRenderer = CanvasRenderer;
 
 
 /***/ }),
-/* 59 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6085,7 +6184,7 @@ exports.CanvasWorldRenderer = CanvasWorldRenderer;
 
 
 /***/ }),
-/* 60 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6100,11 +6199,11 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(61));
+__export(__webpack_require__(63));
 
 
 /***/ }),
-/* 61 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6136,7 +6235,7 @@ exports.Viewport = Viewport;
 
 
 /***/ }),
-/* 62 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6158,9 +6257,9 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var entity_1 = __webpack_require__(15);
+var entity_1 = __webpack_require__(7);
 var math_1 = __webpack_require__(0);
-var collision_1 = __webpack_require__(63);
+var collision_1 = __webpack_require__(65);
 /**
  * the player entity
  */
@@ -6270,49 +6369,6 @@ exports.Link = Link;
 
 
 /***/ }),
-/* 63 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(64));
-
-
-/***/ }),
-/* 64 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * an enumeration for all available collision types
- */
-var CollisionType;
-(function (CollisionType) {
-    CollisionType[CollisionType["Circle"] = 0] = "Circle";
-    CollisionType[CollisionType["Rectangle"] = 1] = "Rectangle";
-    CollisionType[CollisionType["RotatedRectangle"] = 2] = "RotatedRectangle";
-})(CollisionType = exports.CollisionType || (exports.CollisionType = {}));
-
-
-/***/ }),
 /* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6344,71 +6400,15 @@ __export(__webpack_require__(66));
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-var entity_1 = __webpack_require__(15);
-var math_1 = __webpack_require__(0);
-var CollisionDetection = (function () {
-    function CollisionDetection() {
-    }
-    /**
-     * checks if the given entities collides with the world
-     *
-     * @param entities the entities to test
-     * @param world the current world
-     */
-    CollisionDetection.entitiesWithWorld = function (entities, world, camera) {
-        // only take entities that can collide
-        entities.filter(function (entity) { return entity instanceof entity_1.CollidableEntity; }).forEach(function (entity) {
-            // calculate the entity position in every direction from its
-            // hitbox
-            var position = {};
-            // get the position of the entity
-            var entityPosition = entity.getPosition();
-            var tileDimension = world.getTileMap().getDimension();
-            var entityCollidesWithWorldBounds = entity.getWorldBoundCollision();
-            // calculate the tile position on the map
-            var tilePosition = entityPosition
-                .divide(camera.getScaneVector())
-                .divide(math_1.Vector2D.from(tileDimension.y, tileDimension.y))
-                .round(0);
-            // now the system should check if the entity can move
-            position[entity_1.Direction.Left] = tilePosition.add(math_1.Vector2D.from(-1, 0));
-            position[entity_1.Direction.Right] = tilePosition.add(math_1.Vector2D.from(1, 0));
-            position[entity_1.Direction.Up] = tilePosition.add(math_1.Vector2D.from(0, -1));
-            position[entity_1.Direction.Down] = tilePosition.add(math_1.Vector2D.from(0, 1));
-            // iterate the directions
-            Object.keys(position).forEach(function (key) {
-                var direction = parseInt(key);
-                var collision = false;
-                // get the tile numbers that are at the players point
-                var tileNumbers = world.getTileNumbersForPosition(position[direction]);
-                if (window.log === true) {
-                    if (direction === entity_1.Direction.Right) {
-                        console.log(tileNumbers);
-                        window.log = false;
-                    }
-                }
-                // on a collidable tile?
-                var collidableTileNumbers = world.getCollidableTileNumbers();
-                // test collision
-                tileNumbers.forEach(function (number) {
-                    // does the number exist?
-                    if (
-                    // collidable tile
-                    collidableTileNumbers.indexOf(number) !== -1
-                        ||
-                            // world bound
-                            (entityCollidesWithWorldBounds && number === -2)) {
-                        collision = true;
-                    }
-                });
-                // set the direction
-                entity.setDirectionBlocked(direction, collision);
-            });
-        });
-    };
-    return CollisionDetection;
-}());
-exports.CollisionDetection = CollisionDetection;
+/**
+ * an enumeration for all available collision types
+ */
+var CollisionType;
+(function (CollisionType) {
+    CollisionType[CollisionType["Circle"] = 0] = "Circle";
+    CollisionType[CollisionType["Rectangle"] = 1] = "Rectangle";
+    CollisionType[CollisionType["RotatedRectangle"] = 2] = "RotatedRectangle";
+})(CollisionType = exports.CollisionType || (exports.CollisionType = {}));
 
 
 /***/ })

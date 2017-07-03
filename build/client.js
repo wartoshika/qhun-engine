@@ -60,11 +60,32 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 18);
+/******/ 	return __webpack_require__(__webpack_require__.s = 19);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(9));
+__export(__webpack_require__(32));
+__export(__webpack_require__(10));
+
+
+/***/ }),
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -89,26 +110,6 @@ var AssetType;
 
 
 /***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(8));
-__export(__webpack_require__(21));
-
-
-/***/ }),
 /* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -124,9 +125,8 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(9));
-__export(__webpack_require__(31));
-__export(__webpack_require__(10));
+__export(__webpack_require__(8));
+__export(__webpack_require__(22));
 
 
 /***/ }),
@@ -145,8 +145,8 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(22));
-__export(__webpack_require__(32));
+__export(__webpack_require__(23));
+__export(__webpack_require__(33));
 __export(__webpack_require__(11));
 
 
@@ -163,7 +163,7 @@ __export(__webpack_require__(11));
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-var AssetLoader_1 = __webpack_require__(17);
+var AssetLoader_1 = __webpack_require__(18);
 /**
  * a basic class for implementing the getter and setter function
  * of the required asset interface
@@ -227,7 +227,7 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(23));
+__export(__webpack_require__(24));
 
 
 /***/ }),
@@ -288,7 +288,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var AssetType_1 = __webpack_require__(0);
+var AssetType_1 = __webpack_require__(1);
 var AbstractAsset_1 = __webpack_require__(4);
 /**
  * the image class handles exactly one image
@@ -527,29 +527,13 @@ exports.File = File;
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
 Object.defineProperty(exports, "__esModule", { value: true });
-var AnimationEntity_1 = __webpack_require__(13);
-/**
- * the base class for all game entities
- */
-var Entity = (function (_super) {
-    __extends(Entity, _super);
-    function Entity() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    return Entity;
-}(AnimationEntity_1.AnimationEntity));
-exports.Entity = Entity;
+__export(__webpack_require__(13));
+__export(__webpack_require__(38));
+__export(__webpack_require__(14));
 
 
 /***/ }),
@@ -575,9 +559,46 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
+var AnimationEntity_1 = __webpack_require__(14);
+/**
+ * the base class for all game entities
+ */
+var Entity = (function (_super) {
+    __extends(Entity, _super);
+    function Entity() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return Entity;
+}(AnimationEntity_1.AnimationEntity));
+exports.Entity = Entity;
+
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var entity_1 = __webpack_require__(35);
 var Animation_1 = __webpack_require__(37);
-var log_1 = __webpack_require__(1);
+var log_1 = __webpack_require__(2);
 /**
  * a base class for animations on entities
  */
@@ -705,7 +726,7 @@ exports.AnimationEntity = AnimationEntity;
 
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -717,7 +738,7 @@ exports.AnimationEntity = AnimationEntity;
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-var math_1 = __webpack_require__(2);
+var math_1 = __webpack_require__(0);
 /**
  * the base class for all game entities
  */
@@ -746,7 +767,7 @@ exports.Entity = Entity;
 
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -770,7 +791,7 @@ exports.Scene = Scene;
 
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -788,13 +809,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __export(__webpack_require__(6));
 __export(__webpack_require__(46));
 __export(__webpack_require__(47));
-__export(__webpack_require__(0));
-__export(__webpack_require__(17));
+__export(__webpack_require__(1));
+__export(__webpack_require__(18));
 __export(__webpack_require__(48));
 
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -851,10 +872,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var AssetType_1 = __webpack_require__(0);
+var AssetType_1 = __webpack_require__(1);
 var helper_1 = __webpack_require__(3);
 var storage_1 = __webpack_require__(5);
-var log_1 = __webpack_require__(1);
+var log_1 = __webpack_require__(2);
 var network_1 = __webpack_require__(7);
 /**
  * a class that can handle asset loading such as images and audio
@@ -1060,7 +1081,7 @@ exports.AssetLoader = AssetLoader;
 
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1081,12 +1102,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var decorator_1 = __webpack_require__(19);
-var log_1 = __webpack_require__(1);
+var decorator_1 = __webpack_require__(20);
+var log_1 = __webpack_require__(2);
 var helper_1 = __webpack_require__(3);
-var Game_1 = __webpack_require__(33);
+var Game_1 = __webpack_require__(34);
 var storage_1 = __webpack_require__(5);
-var asset_1 = __webpack_require__(16);
+var asset_1 = __webpack_require__(17);
 var input_1 = __webpack_require__(52);
 var collision_1 = __webpack_require__(54);
 /**
@@ -1190,7 +1211,7 @@ exports.Client = Client;
 
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1205,11 +1226,11 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(20));
+__export(__webpack_require__(21));
 
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1221,7 +1242,7 @@ __export(__webpack_require__(20));
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-var log_1 = __webpack_require__(1);
+var log_1 = __webpack_require__(2);
 /**
  * a decorator for logging method calls to debug console
  *
@@ -1247,7 +1268,7 @@ exports.logMethodCall = logMethodCall;
 
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1378,7 +1399,7 @@ exports.Log = Log;
 
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1433,7 +1454,7 @@ exports.Singleton = Singleton;
 
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1446,8 +1467,8 @@ exports.Singleton = Singleton;
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 // the dependency to get the memory footprint ob stored objects
-var sizeof = __webpack_require__(24);
-var math_1 = __webpack_require__(2);
+var sizeof = __webpack_require__(25);
+var math_1 = __webpack_require__(0);
 var File_1 = __webpack_require__(11);
 /**
  * holds objects in the ram of the operating unit
@@ -1537,7 +1558,7 @@ if (typeof window !== 'undefined' && window) {
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1545,8 +1566,8 @@ if (typeof window !== 'undefined' && window) {
 
 
 
-var ECMA_SIZES  = __webpack_require__(25);
-var Buffer = __webpack_require__(26).Buffer;
+var ECMA_SIZES  = __webpack_require__(26);
+var Buffer = __webpack_require__(27).Buffer;
 
 /**
  * Main module's entry point
@@ -1595,7 +1616,7 @@ module.exports = sizeof;
 
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports) {
 
 /**
@@ -1611,7 +1632,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1625,9 +1646,9 @@ module.exports = {
 
 
 
-var base64 = __webpack_require__(28)
-var ieee754 = __webpack_require__(29)
-var isArray = __webpack_require__(30)
+var base64 = __webpack_require__(29)
+var ieee754 = __webpack_require__(30)
+var isArray = __webpack_require__(31)
 
 exports.Buffer = Buffer
 exports.SlowBuffer = SlowBuffer
@@ -3405,10 +3426,10 @@ function isnan (val) {
   return val !== val // eslint-disable-line no-self-compare
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(27)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(28)))
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports) {
 
 var g;
@@ -3435,7 +3456,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3556,7 +3577,7 @@ function fromByteArray (uint8) {
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports) {
 
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
@@ -3646,7 +3667,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports) {
 
 var toString = {}.toString;
@@ -3657,7 +3678,7 @@ module.exports = Array.isArray || function (arr) {
 
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3779,7 +3800,7 @@ exports.Vector2D = Vector2D;
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3827,7 +3848,7 @@ exports.Binary = Binary;
 
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3885,10 +3906,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var helper_1 = __webpack_require__(3);
-var entity_1 = __webpack_require__(34);
+var entity_1 = __webpack_require__(12);
 var scene_1 = __webpack_require__(39);
 var world_1 = __webpack_require__(41);
-var log_1 = __webpack_require__(1);
+var log_1 = __webpack_require__(2);
 var camera_1 = __webpack_require__(49);
 /**
  * a class that handles adding of entities, cameras, physics ...
@@ -4048,27 +4069,6 @@ exports.Game = Game;
 
 
 /***/ }),
-/* 34 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(12));
-__export(__webpack_require__(38));
-__export(__webpack_require__(13));
-
-
-/***/ }),
 /* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4084,7 +4084,7 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(14));
+__export(__webpack_require__(15));
 __export(__webpack_require__(36));
 
 
@@ -4111,7 +4111,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var Entity_1 = __webpack_require__(14);
+var Entity_1 = __webpack_require__(15);
 /**
  * an entity that can collide with other collidable entities
  */
@@ -4250,7 +4250,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var Entity_1 = __webpack_require__(12);
+var Entity_1 = __webpack_require__(13);
 /**
  * a helper type for eg. blocked directions
  */
@@ -4367,7 +4367,7 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(15));
+__export(__webpack_require__(16));
 __export(__webpack_require__(40));
 
 
@@ -4429,7 +4429,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var Scene_1 = __webpack_require__(15);
+var Scene_1 = __webpack_require__(16);
 /**
  * a basic loading screen scene
  */
@@ -4512,8 +4512,8 @@ __export(__webpack_require__(42));
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 var physic_1 = __webpack_require__(43);
-var math_1 = __webpack_require__(2);
-var asset_1 = __webpack_require__(16);
+var math_1 = __webpack_require__(0);
+var asset_1 = __webpack_require__(17);
 /**
  * a class to handle world spefific things
  */
@@ -4824,7 +4824,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var AssetType_1 = __webpack_require__(0);
+var AssetType_1 = __webpack_require__(1);
 var Image_1 = __webpack_require__(6);
 var AbstractAsset_1 = __webpack_require__(4);
 var network_1 = __webpack_require__(7);
@@ -4965,7 +4965,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var AssetType_1 = __webpack_require__(0);
+var AssetType_1 = __webpack_require__(1);
 var AbstractAsset_1 = __webpack_require__(4);
 var Sound = (function (_super) {
     __extends(Sound, _super);
@@ -5053,10 +5053,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var AbstractAsset_1 = __webpack_require__(4);
-var AssetType_1 = __webpack_require__(0);
+var AssetType_1 = __webpack_require__(1);
 var Image_1 = __webpack_require__(6);
 var network_1 = __webpack_require__(7);
-var math_1 = __webpack_require__(2);
+var math_1 = __webpack_require__(0);
 /**
  * an asset class to load a tilemap as world
  */
@@ -5247,7 +5247,7 @@ __export(__webpack_require__(50));
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 var CameraMode_1 = __webpack_require__(51);
-var math_1 = __webpack_require__(2);
+var math_1 = __webpack_require__(0);
 /**
  * the view for the player into the game
  */
@@ -5497,8 +5497,8 @@ __export(__webpack_require__(55));
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-var entity_1 = __webpack_require__(34);
-var math_1 = __webpack_require__(2);
+var entity_1 = __webpack_require__(12);
+var math_1 = __webpack_require__(0);
 var CollisionDetection = (function () {
     function CollisionDetection() {
     }

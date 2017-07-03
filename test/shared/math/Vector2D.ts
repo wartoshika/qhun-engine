@@ -83,4 +83,43 @@ describe('shared/math/Vector2D.ts', () => {
 
         expect(distance).to.be.closeTo(18.028, 0.001);
     });
+
+    it('static from() should instantiate a Vector2D class', () => {
+
+        // single param test
+        let v = Vector2D.from(1);
+        expect(v.x).to.eq(1);
+        expect(v.y).to.eq(1);
+
+        // multi param test
+        v = Vector2D.from(1, 2);
+        expect(v.x).to.eq(1);
+        expect(v.y).to.eq(2);
+    });
+
+    it('half() should work correctly', () => {
+
+        let v = Vector2D.from(4, 10);
+        let half = v.half();
+
+        expect(half.x).to.eq(2);
+        expect(half.y).to.eq(5);
+    });
+
+    it('double() should work correctly', () => {
+
+        let v = Vector2D.from(4, 10);
+        let double = v.double();
+
+        expect(double.x).to.eq(8);
+        expect(double.y).to.eq(20);
+    });
+
+    it('abs() should work correctly', () => {
+
+        let v = Vector2D.from(4, -10).abs();
+
+        expect(v.x).to.eq(4);
+        expect(v.y).to.eq(10);
+    });
 });
