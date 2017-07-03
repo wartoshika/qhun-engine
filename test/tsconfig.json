@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "sourceMap": true,
+        "noImplicitAny": true,
+        "rootDir": "../",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "noEmitOnError": true,
+        "target": "es6",
+        "module": "commonjs",
+        "types": [
+            "node"
+        ],
+        "typeRoots": [
+            "../node_modules/@types"
+        ]
+    }
+}
