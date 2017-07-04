@@ -18,7 +18,7 @@ import {
 export class AssetStorage extends Singleton {
 
     // the logger
-    private logger: Log = Log.getInstance<Log>();
+    private logger: Log = Log.getLogger(AssetStorage.name);
 
     /**
      * get an asset from the storage

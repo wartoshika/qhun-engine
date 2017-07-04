@@ -99,4 +99,32 @@ class Test {
         expect(this.assetStorage.getAssetAmount(AssetType.Json)).to.eq(0);
     }
 
+    @test "getAsset() should return the correct asset"() {
+
+        let asset = new AssetMock("test2", AssetType.Image);
+
+        // add example assets
+        this.assetStorage.addAsset(...[
+            new AssetMock("test1", AssetType.Image),
+            asset,
+            new AssetMock("test3", AssetType.Audio)
+        ]);
+
+        // expeting to get agget with name test2
+        expect(this.assetStorage.getAsset("test2", AssetType.Image)).to.eq(asset);
+    }
+
+    @test "getAsset() should error when a user try to load a non existing asset"() {
+
+        // set log level to have a clean output
+        let assetLogger = Log.getLogger(AssetStorage.name);
+        assetLogger.setLogLevel(LogLevel.None);
+
+        // set the expectations
+        expect(this.assetStorage.getAsset).to.throw();
+
+        // storage is empty so get an asset
+        this.assetStorage.getAsset("notExisting", AssetType.Image)
+    }
+
 }

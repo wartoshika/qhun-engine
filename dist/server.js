@@ -122,10 +122,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 var LogLevel;
 (function (LogLevel) {
-    LogLevel[LogLevel["Debug"] = 0] = "Debug";
-    LogLevel[LogLevel["Info"] = 1] = "Info";
-    LogLevel[LogLevel["Warning"] = 2] = "Warning";
-    LogLevel[LogLevel["Error"] = 3] = "Error";
+    LogLevel[LogLevel["None"] = 0] = "None";
+    LogLevel[LogLevel["Debug"] = 1] = "Debug";
+    LogLevel[LogLevel["Info"] = 2] = "Info";
+    LogLevel[LogLevel["Warning"] = 3] = "Warning";
+    LogLevel[LogLevel["Error"] = 4] = "Error";
 })(LogLevel = exports.LogLevel || (exports.LogLevel = {}));
 
 
@@ -614,7 +615,9 @@ class Log extends helper_1.Singleton {
      */
     log(level, ...params) {
         // log if the log level is ok
-        if (parseInt(level) >= parseInt(this.logLevel)) {
+        if (parseInt(level) >= parseInt(this.logLevel)
+            &&
+                this.logLevel !== LogLevel_1.LogLevel.None) {
             let prefix = "";
             if (this.prefix) {
                 prefix = `[${this.prefix}]`;
@@ -628,7 +631,7 @@ class Log extends helper_1.Singleton {
      * @param level the level to get the function from
      */
     getLogFunctionByLevel(level) {
-        let callback = () => { };
+        let callback;
         // go through the different log levels
         switch (level) {
             case LogLevel_1.LogLevel.Debug:

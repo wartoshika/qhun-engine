@@ -76,7 +76,11 @@ export class Log extends Singleton {
     public log(level: LogLevel, ...params: any[]): void {
 
         // log if the log level is ok
-        if (parseInt(<any>level) >= parseInt(<any>this.logLevel)) {
+        if (
+            parseInt(<any>level) >= parseInt(<any>this.logLevel)
+            &&
+            this.logLevel !== LogLevel.None
+        ) {
 
             let prefix = "";
             if (this.prefix) {
@@ -96,7 +100,7 @@ export class Log extends Singleton {
      */
     protected getLogFunctionByLevel(level: LogLevel): Function {
 
-        let callback = () => { };
+        let callback;
 
         // go through the different log levels
         switch (level) {

@@ -409,10 +409,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 var LogLevel;
 (function (LogLevel) {
-    LogLevel[LogLevel["Debug"] = 0] = "Debug";
-    LogLevel[LogLevel["Info"] = 1] = "Info";
-    LogLevel[LogLevel["Warning"] = 2] = "Warning";
-    LogLevel[LogLevel["Error"] = 3] = "Error";
+    LogLevel[LogLevel["None"] = 0] = "None";
+    LogLevel[LogLevel["Debug"] = 1] = "Debug";
+    LogLevel[LogLevel["Info"] = 2] = "Info";
+    LogLevel[LogLevel["Warning"] = 3] = "Warning";
+    LogLevel[LogLevel["Error"] = 4] = "Error";
 })(LogLevel = exports.LogLevel || (exports.LogLevel = {}));
 
 
@@ -3010,7 +3011,7 @@ var AssetStorage = (function (_super) {
     function AssetStorage() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         // the logger
-        _this.logger = shared_1.Log.getInstance();
+        _this.logger = shared_1.Log.getLogger(AssetStorage.name);
         return _this;
     }
     /**
@@ -3477,7 +3478,9 @@ var Log = (function (_super) {
             params[_i - 1] = arguments[_i];
         }
         // log if the log level is ok
-        if (parseInt(level) >= parseInt(this.logLevel)) {
+        if (parseInt(level) >= parseInt(this.logLevel)
+            &&
+                this.logLevel !== LogLevel_1.LogLevel.None) {
             var prefix = "";
             if (this.prefix) {
                 prefix = "[" + this.prefix + "]";
@@ -3491,7 +3494,7 @@ var Log = (function (_super) {
      * @param level the level to get the function from
      */
     Log.prototype.getLogFunctionByLevel = function (level) {
-        var callback = function () { };
+        var callback;
         // go through the different log levels
         switch (level) {
             case LogLevel_1.LogLevel.Debug:
