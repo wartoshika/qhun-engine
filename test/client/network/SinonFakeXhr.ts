@@ -7,9 +7,6 @@
 
 import * as sinon from 'sinon';
 
-// override the filereader for node
-(<any>global).FileReader = require('file-api').FileReader;
-
 /**
  * a wrapper class for sinon fake xhr because sinon can not respond with
  * a blob answer

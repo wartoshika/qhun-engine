@@ -1286,6 +1286,22 @@ class Binary {
         }
         return new Blob([new Uint8Array(buffer)]);
     }
+    /**
+     * converts a data uri to a buffer
+     *
+     * @param dataUri the given data uri
+     */
+    static dataUriToBuffer(dataUri) {
+        let binStr = atob(dataUri);
+        // create a uint8array to store the characters
+        let array = new Uint8Array(binStr.length);
+        // add each char from the binary string
+        for (let i = 0; i < binStr.length; i++) {
+            array[i] = binStr.charCodeAt(i);
+        }
+        // finally
+        return Buffer.from(array.buffer);
+    }
 }
 exports.Binary = Binary;
 

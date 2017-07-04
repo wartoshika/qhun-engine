@@ -54,7 +54,7 @@ export abstract class AbstractAsset implements Asset {
         return this.type;
     }
 
-    public getData(): any {
+    public getData(): Blob {
 
         return this.data;
     }

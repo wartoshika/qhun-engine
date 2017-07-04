@@ -5,6 +5,13 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { polyfill } from '../polyfill';
+
+polyfill(
+    { require: "atob", fills: "atob" },
+    { require: "w3c-blob", fills: "Blob" }
+);
+
 /**
  * a helper class for binary content
  */
@@ -64,5 +71,27 @@ export class Binary {
             buffer = Buffer.from(buffer);
         }
         return new Blob([new Uint8Array(buffer)]);
+    }
+
+    /**
+     * converts a data uri to a buffer
+     *
+     * @param dataUri the given data uri
+     */
+    public static dataUriToBuffer(dataUri: string): Buffer {
+
+        let binStr = atob(dataUri);
+
+        // create a uint8array to store the characters
+        let array = new Uint8Array(binStr.length);
+
+        // add each char from the binary string
+        for (let i = 0; i < binStr.length; i++) {
+
+            array[i] = binStr.charCodeAt(i);
+        }
+
+        // finally
+        return Buffer.from(array.buffer);
     }
 }

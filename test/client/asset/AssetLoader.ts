@@ -14,26 +14,33 @@ import * as sinon from 'sinon';
 
 import { AssetMock } from './AssetMock';
 import { SinonFakeXhr } from '../network/SinonFakeXhr';
+import { UnitTestContext } from '../../';
 
 // a simple test asset image
 let testImage: string = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
+let binaryTestImage: string = Binary.bufferToString(
+    Binary.dataUriToBuffer(testImage)
+);
 
 @suite("client/asset/AssetLoader")
 class Test {
 
-    @context static xhr: SinonFakeXhr;
+    context: UnitTestContext;
 
-    static before() {
+    before() {
+
+        // create new context
+        this.context = new UnitTestContext();
 
         // set up the request mock
-        Test.xhr = new SinonFakeXhr();
-        testImage = Binary.bufferToString(new Buffer(testImage, 'base64'));
+        this.context.add('xhr', new SinonFakeXhr());
+        this.context.get<SinonFakeXhr>('xhr').recordRequests();
     }
 
     afterEach() {
 
         // restore the faker
-        Test.xhr.recordRequests();
+        this.context.get<SinonFakeXhr>('xhr').restoreXhr();
     }
 
     @test "a mocked asset should be registed in the asset loader"(done: Function) {
@@ -46,17 +53,23 @@ class Test {
         AssetMock.register({
             name: name,
             path: path
-        }).then(() => {
+        }).then((registeredAssets) => {
 
-            // check the xhr call against the given path
-            //console.log(TestAssetLoader.requests);
+            // names should be equal
+            expect(registeredAssets.length).to.eq(1);
+            expect(registeredAssets[0].getName()).to.eq(name);
+
+            // blob should be shere
+            expect(registeredAssets[0].getData().size).to.eq(63);
+
             done();
-
         });
 
         // respond to the requests
-        Test.xhr.getRequests().forEach(
-            request => request.respond(200, [], testImage)
+        this.context.get<SinonFakeXhr>('xhr').getRequests().forEach(
+
+            // answer every request with the binary image
+            request => request.respond(200, [], binaryTestImage)
         );
     }
 

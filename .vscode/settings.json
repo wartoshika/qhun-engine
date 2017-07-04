@@ -4,5 +4,7 @@
     "licenser.author": "Oliver Warrings <dev@qhun.de>",
     "licenser.projectName": "Qhun-Engine",
     "licenser.useSingleLineStyle": false,
-    "typescript.tsdk": "./node_modules/typescript/lib"
+    "typescript.tsdk": "./node_modules/typescript/lib",
+    "code-runner.clearPreviousOutput": true,
+    "code-runner.customCommand": "cd test && node ../node_modules/ts-mocha/bin/ts-mocha -r tsconfig-paths/register $fullFileName"
 }

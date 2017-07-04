@@ -4,10 +4,9 @@
   "description": "A framework to build web games based on canvas rendering",
   "main": "build/server.js",
   "scripts": {
-    "test": "cd test && ts-mocha -r tsconfig-paths/register ./**/*.ts",
     "start": "node dist/server.js",
-    "test:coverage": "nyc npm t",
-    "test:watch": "ts-mocha --watch-extensions ts --watch test/**/*.ts"
+    "test": "cd test && ts-mocha -r tsconfig-paths/register ./**/*.ts",
+    "test:coverage": "nyc npm t"
   },
   "nyc": {
     "include": [

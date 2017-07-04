@@ -5,7 +5,9 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { AbstractAsset, InlineAsset, AssetType } from '@client';
+import {
+    AbstractAsset, InlineAsset, AssetType, Asset
+} from '@client';
 
 /**
  * a mock for a basic asset
@@ -18,7 +20,7 @@ export class AssetMock extends AbstractAsset {
         name?: string,
         type?: AssetType,
         path?: string,
-        data?: any
+        data?: Blob
     ) {
 
         super(name, path, type || AssetMock.currentAssetType, data);
@@ -29,7 +31,7 @@ export class AssetMock extends AbstractAsset {
      *
      * @param assets the assets to register
      */
-    public static async register(...assets: InlineAsset[]): Promise<any> {
+    public static async register(...assets: InlineAsset[]): Promise<Asset[]> {
 
         // add the asset type
         assets.forEach(asset => asset.assetType = AssetMock.currentAssetType);

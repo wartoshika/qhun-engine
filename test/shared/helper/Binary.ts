@@ -10,10 +10,6 @@ import { Binary } from '@shared';
 import { suite, test } from 'mocha-typescript';
 import { expect } from 'chai';
 
-// node atob and blob impl.
-(<any>global).atob = require('atob');
-(<any>global).Blob = require('w3c-blob');
-
 
 @suite("shared/helper/Binary")
 class TestBinary {
