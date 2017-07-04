@@ -31,7 +31,7 @@ export class Sprite extends AbstractAsset {
     constructor(
         name?: string,
         path?: string,
-        data?: string,
+        data?: Blob,
         public map?: string
     ) {
 

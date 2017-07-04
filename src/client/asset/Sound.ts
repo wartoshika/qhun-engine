@@ -14,7 +14,7 @@ export class Sound extends AbstractAsset {
     constructor(
         name?: string,
         path?: string,
-        data?: string
+        data?: Blob
     ) {
 
         super(name, path, AssetType.Audio, data);

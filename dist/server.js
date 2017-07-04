@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 8);
+/******/ 	return __webpack_require__(__webpack_require__.s = 9);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -80,7 +80,7 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(__webpack_require__(2));
-__export(__webpack_require__(16));
+__export(__webpack_require__(17));
 
 
 /***/ }),
@@ -99,9 +99,9 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(4));
-__export(__webpack_require__(26));
 __export(__webpack_require__(5));
+__export(__webpack_require__(20));
+__export(__webpack_require__(6));
 
 
 /***/ }),
@@ -142,34 +142,66 @@ var LogLevel;
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-const math_1 = __webpack_require__(1);
+const storage_1 = __webpack_require__(4);
 /**
- * the base class for all game entities
+ * a class to handle the singleton paradigmen
  */
-class Entity {
-    constructor(position = new math_1.Vector2D(0, 0)) {
-        this.position = position;
-    }
+class Singleton {
     /**
-     * get the current position of the entity ( top left )
-     */
-    getPosition() {
-        return this.position;
-    }
-    /**
-     * set the entities new position
+     * generates a storage name for the instance storing
      *
-     * @param position the new position
+     * @param className the class name
      */
-    setPosition(position) {
-        this.position = position;
+    static generateStorageName() {
+        return `singleton.instance.${this.name}`;
+    }
+    /**
+     * get the singleton instance
+     */
+    static getInstance() {
+        let instance = null;
+        if (!storage_1.RamStorage.has(this.generateStorageName())) {
+            // get the constructor and store an instance of the class at the ram storage
+            let constructor = this;
+            storage_1.RamStorage.add(this.generateStorageName(), new constructor());
+        }
+        // get the instance
+        return storage_1.RamStorage.get(this.generateStorageName());
+    }
+    /**
+     * bind the instance to the singleton storage
+     *
+     * @param instance the instance that should be bound
+     */
+    static bindInstance(instance) {
+        // save the instance
+        storage_1.RamStorage.add(this.generateStorageName(), instance);
     }
 }
-exports.Entity = Entity;
+exports.Singleton = Singleton;
 
 
 /***/ }),
 /* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(18));
+
+
+/***/ }),
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -230,7 +262,7 @@ exports.Helper = Helper;
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -257,25 +289,6 @@ class Dimension {
     }
 }
 exports.Dimension = Dimension;
-
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(30));
 
 
 /***/ }),
@@ -337,9 +350,48 @@ exports.File = File;
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-const web_1 = __webpack_require__(9);
-const network_1 = __webpack_require__(17);
-const shared_1 = __webpack_require__(20);
+const math_1 = __webpack_require__(1);
+/**
+ * the base class for all game entities
+ */
+class Entity {
+    constructor(position = new math_1.Vector2D(0, 0)) {
+        this.position = position;
+    }
+    /**
+     * get the current position of the entity ( top left )
+     */
+    getPosition() {
+        return this.position;
+    }
+    /**
+     * set the entities new position
+     *
+     * @param position the new position
+     */
+    setPosition(position) {
+        this.position = position;
+    }
+}
+exports.Entity = Entity;
+
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+const web_1 = __webpack_require__(10);
+const network_1 = __webpack_require__(21);
+const shared_1 = __webpack_require__(24);
 /**
  * the game server main class. loads all important things
  * and also provides a buildin webserver to serve the app
@@ -347,8 +399,12 @@ const shared_1 = __webpack_require__(20);
 class Server {
     constructor(serverConfig) {
         this.serverConfig = serverConfig;
+        /**
+         * logger instance
+         */
+        this.logger = shared_1.Log.getLogger(Server.name);
         // set the log level
-        shared_1.Log.setLogLevel(serverConfig.logLevel);
+        this.logger.setLogLevel(serverConfig.logLevel);
         // start the webserver
         this.webserver = new web_1.Webserver(serverConfig.webAdress, serverConfig.webPort);
         // start network
@@ -365,7 +421,7 @@ new Server({
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -380,11 +436,11 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(10));
+__export(__webpack_require__(11));
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -397,22 +453,26 @@ __export(__webpack_require__(10));
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 // need the index file in the build directory
-__webpack_require__(11);
-const http = __webpack_require__(12);
-const express = __webpack_require__(13);
-const path = __webpack_require__(14);
-const fs = __webpack_require__(15);
+__webpack_require__(12);
+const http = __webpack_require__(13);
+const express = __webpack_require__(14);
+const path = __webpack_require__(15);
+const fs = __webpack_require__(16);
 const log_1 = __webpack_require__(0);
 /**
  * the buildin webserver to serve the client
  */
 class Webserver {
     constructor(listenAdress = "127.0.0.1", port = 3000, app = express()) {
+        /**
+         * the logger instance
+         */
+        this.logger = log_1.Log.getLogger(Webserver.name);
         // setup server
         this.httpServer = http.createServer(app);
         // start listening
         this.httpServer.listen(port, listenAdress);
-        log_1.Log.info("Listening at ", `${listenAdress}:${port}`);
+        this.logger.info("Listening at ", `${listenAdress}:${port}`);
         // handle http calls
         app.get('/*', this.serveApplication.bind(this));
     }
@@ -451,157 +511,34 @@ exports.Webserver = Webserver;
 
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "index.html";
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports) {
 
 module.exports = require("http");
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports) {
 
 module.exports = require("express");
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports) {
 
 module.exports = require("path");
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports) {
 
 module.exports = require("fs");
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-const LogLevel_1 = __webpack_require__(2);
-const Singleton_1 = __webpack_require__(29);
-/**
- * a log wrapper to allow log levels and a more complex
- * logging structure
- */
-class Log extends Singleton_1.Singleton {
-    constructor() {
-        super(...arguments);
-        // the current loglevel
-        this.logLevel = LogLevel_1.LogLevel.Debug;
-        // the logger object
-        this.loggerObject = console;
-        this.Log = {};
-    }
-    /**
-     * sets the log level for the application environment
-     *
-     * @param level the new log level
-     */
-    setLogLevel(level) {
-        this.logLevel = level;
-    }
-    /**
-     * override the current logger object
-     *
-     * @param object the new logger object
-     */
-    overrideLoggerObject(object) {
-        this.loggerObject = object;
-    }
-    /**
-     * logs the given data
-     *
-     * @param level the level to log in
-     * @param params all params as vararg array
-     */
-    log(level, ...params) {
-        // log if the log level is ok
-        if (parseInt(level) >= parseInt(this.logLevel)) {
-            // level ok, log
-            this.getLogFunctionByLevel(level)(`[this.${LogLevel_1.LogLevel[level]}]`, ...params);
-        }
-    }
-    /**
-     * gets a callback function to log
-     *
-     * @param level the level to get the function from
-     */
-    getLogFunctionByLevel(level) {
-        let callback = () => { };
-        // go through the different log levels
-        switch (level) {
-            case LogLevel_1.LogLevel.Debug:
-                callback = this.loggerObject.debug;
-                break;
-            case LogLevel_1.LogLevel.Info:
-                callback = this.loggerObject.info;
-                break;
-            case LogLevel_1.LogLevel.Warning:
-                callback = this.loggerObject.warn;
-                break;
-            case LogLevel_1.LogLevel.Error:
-                callback = this.loggerObject.error;
-                break;
-        }
-        return callback;
-    }
-    /**
-     * get the current log level
-     */
-    getLogLevel() {
-        return this.logLevel;
-    }
-    /**
-     * logs as debug level
-     *
-     * @param params all params as vararg array
-     */
-    debug(...params) {
-        this.log(LogLevel_1.LogLevel.Debug, ...params);
-    }
-    /**
-     * logs as info level
-     *
-     * @param params all params as vararg array
-     */
-    info(...params) {
-        this.log(LogLevel_1.LogLevel.Info, ...params);
-    }
-    /**
-     * logs as warning level
-     *
-     * @param params all params as vararg array
-     */
-    warning(...params) {
-        this.log(LogLevel_1.LogLevel.Warning, ...params);
-    }
-    /**
-     * logs as error level
-     *
-     * @param params all params as vararg array
-     */
-    error(...params) {
-        this.log(LogLevel_1.LogLevel.Error, ...params);
-    }
-}
-exports.Log = Log;
-
 
 /***/ }),
 /* 17 */
@@ -615,11 +552,144 @@ exports.Log = Log;
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(18));
+const LogLevel_1 = __webpack_require__(2);
+const helper_1 = __webpack_require__(31);
+const storage_1 = __webpack_require__(4);
+/**
+ * a log wrapper to allow log levels and a more complex
+ * logging structure
+ */
+class Log extends helper_1.Singleton {
+    constructor() {
+        super(...arguments);
+        /**
+         * the current log prefix
+         */
+        this.prefix = "";
+        // the current loglevel
+        this.logLevel = LogLevel_1.LogLevel.Debug;
+    }
+    /**
+     * sets the log level for the application environment
+     *
+     * @param level the new log level
+     */
+    setLogLevel(level) {
+        this.logLevel = level;
+    }
+    /**
+     * get the logger instance with prefixing for better
+     * detection
+     *
+     * @param prefix the prefix string
+     */
+    static getLogger(prefix) {
+        let instance = null;
+        if (!storage_1.RamStorage.has(this.generateStorageName(prefix))) {
+            // get the constructor and store an instance of the class at the ram storage
+            let constructor = this;
+            let logger = new constructor();
+            logger.prefix = prefix;
+            storage_1.RamStorage.add(this.generateStorageName(prefix), logger);
+        }
+        // get the instance
+        return storage_1.RamStorage.get(this.generateStorageName(prefix));
+    }
+    /**
+     * override the generate storage name method to allow prefixing the
+     * log instance
+     *
+     * @param prefix the desired prefix
+     */
+    static generateStorageName(prefix) {
+        return `singleton.instance.${this.name}.${prefix}`;
+    }
+    /**
+     * logs the given data
+     *
+     * @param level the level to log in
+     * @param optionalPrefix the optional prefix
+     * @param params all params as vararg array
+     */
+    log(level, ...params) {
+        // log if the log level is ok
+        if (parseInt(level) >= parseInt(this.logLevel)) {
+            let prefix = "";
+            if (this.prefix) {
+                prefix = `[${this.prefix}]`;
+            }
+            this.getLogFunctionByLevel(level)(`[${this.constructor.name}.${LogLevel_1.LogLevel[level]}]${prefix}`, ...params);
+        }
+    }
+    /**
+     * gets a callback function to log
+     *
+     * @param level the level to get the function from
+     */
+    getLogFunctionByLevel(level) {
+        let callback = () => { };
+        // go through the different log levels
+        switch (level) {
+            case LogLevel_1.LogLevel.Debug:
+                callback = console.debug;
+                break;
+            case LogLevel_1.LogLevel.Info:
+                callback = console.info;
+                break;
+            case LogLevel_1.LogLevel.Warning:
+                callback = console.warn;
+                break;
+            case LogLevel_1.LogLevel.Error:
+                callback = console.error;
+                break;
+        }
+        return callback;
+    }
+    /**
+     * get the current log level
+     */
+    getLogLevel() {
+        return this.logLevel;
+    }
+    /**
+     * logs as debug level
+     *
+     * @param optionalPrefix if this is a constructor, the log will pre prefixed with its name. if not, the param will just printed
+     * @param params all params as vararg array
+     */
+    debug(...params) {
+        this.log(LogLevel_1.LogLevel.Debug, ...params);
+    }
+    /**
+     * logs as info level
+     *
+     * @param optionalPrefix if this is a constructor, the log will pre prefixed with its name. if not, the param will just printed
+     * @param params all params as vararg array
+     */
+    info(...params) {
+        this.log(LogLevel_1.LogLevel.Info, ...params);
+    }
+    /**
+     * logs as warning level
+     *
+     * @param optionalPrefix if this is a constructor, the log will pre prefixed with its name. if not, the param will just printed
+     * @param params all params as vararg array
+     */
+    warning(...params) {
+        this.log(LogLevel_1.LogLevel.Warning, ...params);
+    }
+    /**
+     * logs as error level
+     *
+     * @param optionalPrefix if this is a constructor, the log will pre prefixed with its name. if not, the param will just printed
+     * @param params all params as vararg array
+     */
+    error(...params) {
+        this.log(LogLevel_1.LogLevel.Error, ...params);
+    }
+}
+exports.Log = Log;
 
 
 /***/ }),
@@ -635,446 +705,8 @@ __export(__webpack_require__(18));
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-const socketio = __webpack_require__(19);
-const log_1 = __webpack_require__(0);
-/**
- * the network base to use a client-server based structure
- * with websocket as transport protocol
- */
-class NetworkServer {
-    /**
-     *
-     * @param application the application to bind the websocket
-     */
-    constructor(application) {
-        this.application = application;
-        this.bindWebsocketToApplication();
-    }
-    /**
-     * binds a websocket to the applications router
-     */
-    bindWebsocketToApplication() {
-        // init websocket and bind to application
-        this.socket = socketio(this.application);
-        log_1.Log.info("Websocket started");
-    }
-    /**
-     * binds a callback function to an event of socketio
-     *
-     * @param eventName the event name you choose between server and client
-     * @param callback a function executed on event occur
-     */
-    bindEvent(eventName, callback) {
-        // pass this to socketio
-        this.socket.on(eventName, callback);
-    }
-    /**
-     * bind a callback to a new connecting player
-     *
-     * @param callback the handler function
-     */
-    bindNewConnectionEvent(callback) {
-        // pass this event to socketio
-        this.socket.on("connection", callback);
-    }
-}
-exports.NetworkServer = NetworkServer;
-
-
-/***/ }),
-/* 19 */
-/***/ (function(module, exports) {
-
-module.exports = require("socket.io");
-
-/***/ }),
-/* 20 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(21));
-__export(__webpack_require__(23));
-__export(__webpack_require__(25));
-__export(__webpack_require__(28));
-__export(__webpack_require__(0));
-__export(__webpack_require__(1));
-__export(__webpack_require__(6));
-
-
-/***/ }),
-/* 21 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(22));
-
-
-/***/ }),
-/* 22 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * an enumeration for all available collision types
- */
-var CollisionType;
-(function (CollisionType) {
-    CollisionType[CollisionType["Circle"] = 0] = "Circle";
-    CollisionType[CollisionType["Rectangle"] = 1] = "Rectangle";
-    CollisionType[CollisionType["RotatedRectangle"] = 2] = "RotatedRectangle";
-})(CollisionType = exports.CollisionType || (exports.CollisionType = {}));
-
-
-/***/ }),
-/* 23 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(24));
-
-
-/***/ }),
-/* 24 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-const log_1 = __webpack_require__(0);
-/**
- * a decorator for logging method calls to debug console
- *
- * @param target
- * @param propertyKey
- * @param descriptor
- */
-function logMethodCall(target, key, descriptor) {
-    return {
-        value: function (...args) {
-            // log the call
-            log_1.Log.debug("@logMethodCall", `${target.constructor.name}:${key}()`);
-            // original method call
-            return descriptor.value.apply(this, args);
-        }
-    };
-}
-exports.logMethodCall = logMethodCall;
-
-
-/***/ }),
-/* 25 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(3));
-__export(__webpack_require__(27));
-
-
-/***/ }),
-/* 26 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-const Helper_1 = __webpack_require__(4);
-const Dimension_1 = __webpack_require__(5);
-/**
- * represents a 2D vector with x and y coordinates.
- */
-class Vector2D extends Dimension_1.Dimension {
-    /**
-     *
-     * @param x the x coordinate
-     * @param y the y coordinate
-     */
-    constructor(x = 0, y = 0) {
-        super(x, y);
-    }
-    /**
-     * helper method to get vector instances
-     *
-     * @param x the x value
-     * @param y the y value. if no y value is present, x and y will come from x
-     */
-    static from(x, y) {
-        return new Vector2D(x, y !== undefined ? y : x);
-    }
-    /**
-     * adds another vector
-     *
-     * @param vector the other vector
-     */
-    add(vector) {
-        return new Vector2D((this.x + vector.x), (this.y + vector.y));
-    }
-    /**
-     * substract another vector
-     *
-     * @param vector the other vector
-     */
-    substract(vector) {
-        return new Vector2D((this.x - vector.x), (this.y - vector.y));
-    }
-    /**
-     * divide another vector
-     *
-     * @param vector the other vector
-     */
-    divide(vector) {
-        return new Vector2D((this.x / vector.x), (this.y / vector.y));
-    }
-    /**
-     * multiply two vectors
-     *
-     * @param vector the other vector
-     */
-    multiply(vector) {
-        return new Vector2D((this.x * vector.x), (this.y * vector.y));
-    }
-    /**
-     * rounds the vector to a given precision
-     */
-    round(precision = 2) {
-        return new Vector2D((Helper_1.Helper.roundToPrecision(this.x, precision)), (Helper_1.Helper.roundToPrecision(this.y, precision)));
-    }
-    /**
-     * calculates the distance of two vector points
-     *
-     * @param otherVector the other vector calculate to
-     * @return the distance in pixel
-     */
-    distanceToVector(otherVector) {
-        return Math.sqrt(Math.pow((this.x - otherVector.x), 2)
-            +
-                Math.pow((this.y - otherVector.y), 2));
-    }
-    /**
-     * get the current vector divided by 2
-     */
-    half() {
-        return this.divide(new Vector2D(2, 2));
-    }
-    /**
-     * get the current vector multiply by 2
-     */
-    double() {
-        return this.multiply(new Vector2D(2, 2));
-    }
-    /**
-     * Math.abs() on x and y
-     */
-    abs() {
-        return new Vector2D(Math.abs(this.x), Math.abs(this.y));
-    }
-}
-exports.Vector2D = Vector2D;
-
-
-/***/ }),
-/* 27 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-const Entity_1 = __webpack_require__(3);
-const math_1 = __webpack_require__(1);
-/**
- * an entity that can collide with other collidable entities
- */
-class CollidableEntity extends Entity_1.Entity {
-    constructor(entityWidth, entityHeight, position = math_1.Vector2D.from(0, 0)) {
-        super(position);
-        this.entityWidth = entityWidth;
-        this.entityHeight = entityHeight;
-    }
-    /**
-     * get the width of the entity
-     */
-    getWidth() {
-        return this.entityWidth;
-    }
-    /**
-     * get the height of the entity
-     */
-    getHeight() {
-        return this.entityHeight;
-    }
-    /**
-     * get the width of the entity
-     */
-    setWidth(width) {
-        this.entityWidth = width;
-    }
-    /**
-     * get the height of the entity
-     */
-    setHeight(height) {
-        this.entityHeight = height;
-    }
-}
-exports.CollidableEntity = CollidableEntity;
-
-
-/***/ }),
-/* 28 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(29));
-__export(__webpack_require__(32));
-__export(__webpack_require__(7));
-
-
-/***/ }),
-/* 29 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-const storage_1 = __webpack_require__(6);
-/**
- * a class to handle the singleton paradigmen
- */
-class Singleton {
-    /**
-     * generates a storage name for the instance storing
-     *
-     * @param className the class name
-     */
-    static generateStorageName() {
-        return `singleton.instance.${this.name}`;
-    }
-    /**
-     * get the singleton instance
-     */
-    static getInstance() {
-        let instance = null;
-        if (!storage_1.RamStorage.has(this.generateStorageName())) {
-            // get the constructor and store an instance of the class at the ram storage
-            let constructor = this;
-            storage_1.RamStorage.add(this.generateStorageName(), new constructor());
-        }
-        // get the instance
-        return storage_1.RamStorage.get(this.generateStorageName());
-    }
-    /**
-     * bind the instance to the singleton storage
-     *
-     * @param instance the instance that should be bound
-     */
-    static bindInstance(instance) {
-        // save the instance
-        storage_1.RamStorage.add(this.generateStorageName(), instance);
-    }
-}
-exports.Singleton = Singleton;
-
-
-/***/ }),
-/* 30 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-Object.defineProperty(exports, "__esModule", { value: true });
 // the dependency to get the memory footprint ob stored objects
-let sizeof = __webpack_require__(31);
+let sizeof = __webpack_require__(19);
 const math_1 = __webpack_require__(1);
 const File_1 = __webpack_require__(7);
 /**
@@ -1174,10 +806,421 @@ exports.RamStorage = RamStorage;
 
 
 /***/ }),
-/* 31 */
+/* 19 */
 /***/ (function(module, exports) {
 
 module.exports = require("object-sizeof");
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+const Helper_1 = __webpack_require__(5);
+const Dimension_1 = __webpack_require__(6);
+/**
+ * represents a 2D vector with x and y coordinates.
+ */
+class Vector2D extends Dimension_1.Dimension {
+    /**
+     *
+     * @param x the x coordinate
+     * @param y the y coordinate
+     */
+    constructor(x = 0, y = 0) {
+        super(x, y);
+    }
+    /**
+     * helper method to get vector instances
+     *
+     * @param x the x value
+     * @param y the y value. if no y value is present, x and y will come from x
+     */
+    static from(x, y) {
+        return new Vector2D(x, y !== undefined ? y : x);
+    }
+    /**
+     * adds another vector
+     *
+     * @param vector the other vector
+     */
+    add(vector) {
+        return new Vector2D((this.x + vector.x), (this.y + vector.y));
+    }
+    /**
+     * substract another vector
+     *
+     * @param vector the other vector
+     */
+    substract(vector) {
+        return new Vector2D((this.x - vector.x), (this.y - vector.y));
+    }
+    /**
+     * divide another vector
+     *
+     * @param vector the other vector
+     */
+    divide(vector) {
+        return new Vector2D((this.x / vector.x), (this.y / vector.y));
+    }
+    /**
+     * multiply two vectors
+     *
+     * @param vector the other vector
+     */
+    multiply(vector) {
+        return new Vector2D((this.x * vector.x), (this.y * vector.y));
+    }
+    /**
+     * rounds the vector to a given precision
+     */
+    round(precision = 2) {
+        return new Vector2D((Helper_1.Helper.roundToPrecision(this.x, precision)), (Helper_1.Helper.roundToPrecision(this.y, precision)));
+    }
+    /**
+     * calculates the distance of two vector points
+     *
+     * @param otherVector the other vector calculate to
+     * @return the distance in pixel
+     */
+    distanceToVector(otherVector) {
+        return Math.sqrt(Math.pow((this.x - otherVector.x), 2)
+            +
+                Math.pow((this.y - otherVector.y), 2));
+    }
+    /**
+     * get the current vector divided by 2
+     */
+    half() {
+        return this.divide(new Vector2D(2, 2));
+    }
+    /**
+     * get the current vector multiply by 2
+     */
+    double() {
+        return this.multiply(new Vector2D(2, 2));
+    }
+    /**
+     * Math.abs() on x and y
+     */
+    abs() {
+        return new Vector2D(Math.abs(this.x), Math.abs(this.y));
+    }
+}
+exports.Vector2D = Vector2D;
+
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(22));
+
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+const socketio = __webpack_require__(23);
+const log_1 = __webpack_require__(0);
+/**
+ * the network base to use a client-server based structure
+ * with websocket as transport protocol
+ */
+class NetworkServer {
+    /**
+     *
+     * @param application the application to bind the websocket
+     */
+    constructor(application) {
+        this.application = application;
+        /**
+         * the logger instance
+         */
+        this.logger = log_1.Log.getLogger(NetworkServer.name);
+        this.bindWebsocketToApplication();
+    }
+    /**
+     * binds a websocket to the applications router
+     */
+    bindWebsocketToApplication() {
+        // init websocket and bind to application
+        this.socket = socketio(this.application);
+        this.logger.info("Websocket started");
+    }
+    /**
+     * binds a callback function to an event of socketio
+     *
+     * @param eventName the event name you choose between server and client
+     * @param callback a function executed on event occur
+     */
+    bindEvent(eventName, callback) {
+        // pass this to socketio
+        this.socket.on(eventName, callback);
+    }
+    /**
+     * bind a callback to a new connecting player
+     *
+     * @param callback the handler function
+     */
+    bindNewConnectionEvent(callback) {
+        // pass this event to socketio
+        this.socket.on("connection", callback);
+    }
+}
+exports.NetworkServer = NetworkServer;
+
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports) {
+
+module.exports = require("socket.io");
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(25));
+__export(__webpack_require__(27));
+__export(__webpack_require__(29));
+__export(__webpack_require__(31));
+__export(__webpack_require__(0));
+__export(__webpack_require__(1));
+__export(__webpack_require__(4));
+
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(26));
+
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * an enumeration for all available collision types
+ */
+var CollisionType;
+(function (CollisionType) {
+    CollisionType[CollisionType["Circle"] = 0] = "Circle";
+    CollisionType[CollisionType["Rectangle"] = 1] = "Rectangle";
+    CollisionType[CollisionType["RotatedRectangle"] = 2] = "RotatedRectangle";
+})(CollisionType = exports.CollisionType || (exports.CollisionType = {}));
+
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(28));
+
+
+/***/ }),
+/* 28 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+const log_1 = __webpack_require__(0);
+/**
+ * a decorator for logging method calls to debug console
+ *
+ * @param target
+ * @param propertyKey
+ * @param descriptor
+ */
+function logMethodCall(target, key, descriptor) {
+    // load the logger
+    const logger = log_1.Log.getInstance();
+    return {
+        value: function (...args) {
+            // log the call
+            logger.debug("@logMethodCall", `${target.constructor.name}:${key}()`);
+            // original method call
+            return descriptor.value.apply(this, args);
+        }
+    };
+}
+exports.logMethodCall = logMethodCall;
+
+
+/***/ }),
+/* 29 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(8));
+__export(__webpack_require__(30));
+
+
+/***/ }),
+/* 30 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+const Entity_1 = __webpack_require__(8);
+const math_1 = __webpack_require__(1);
+/**
+ * an entity that can collide with other collidable entities
+ */
+class CollidableEntity extends Entity_1.Entity {
+    constructor(entityWidth, entityHeight, position = math_1.Vector2D.from(0, 0)) {
+        super(position);
+        this.entityWidth = entityWidth;
+        this.entityHeight = entityHeight;
+    }
+    /**
+     * get the width of the entity
+     */
+    getWidth() {
+        return this.entityWidth;
+    }
+    /**
+     * get the height of the entity
+     */
+    getHeight() {
+        return this.entityHeight;
+    }
+    /**
+     * get the width of the entity
+     */
+    setWidth(width) {
+        this.entityWidth = width;
+    }
+    /**
+     * get the height of the entity
+     */
+    setHeight(height) {
+        this.entityHeight = height;
+    }
+}
+exports.CollidableEntity = CollidableEntity;
+
+
+/***/ }),
+/* 31 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(3));
+__export(__webpack_require__(32));
+__export(__webpack_require__(7));
+
 
 /***/ }),
 /* 32 */

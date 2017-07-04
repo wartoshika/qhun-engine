@@ -6,7 +6,7 @@
  */
 
 import { World } from '../world';
-import { AssetLoader, AssetType, Image } from '../asset';
+import { AssetStorage, AssetType, Image } from '../asset';
 import { Camera } from '../camera';
 import { CameraOffsetCalculator } from './CameraOffsetCalculator';
 import { Dimension } from '../../shared/math';
@@ -51,7 +51,7 @@ export class CanvasWorldRenderer {
             let verticalImageCount = mapLines.length - 1;
 
             // get the asset loader instance
-            let assetLoader = AssetLoader.getInstance<AssetLoader>();
+            let assetStorage = AssetStorage.getInstance<AssetStorage>();
             let tileDimension = this.world.getTileMap().getDimension();
 
             // iterate through all tiles
@@ -68,7 +68,7 @@ export class CanvasWorldRenderer {
 
                     // get the asset
                     // @todo: local asset caching meight be a performance improvement
-                    let tileImage = assetLoader.getAsset<Image>(
+                    let tileImage = assetStorage.getAsset<Image>(
                         `${this.world.getTileMap().getName()}[${tileNumber}]`,
                         AssetType.Image
                     );

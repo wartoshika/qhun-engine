@@ -12,7 +12,7 @@ import { FileSizeType } from '../shared/helper';
 import { Game } from './Game';
 import { RamStorage } from '../shared/storage';
 
-import { AssetLoader, AssetType } from './asset';
+import { AssetLoader, AssetType, AssetStorage } from './asset';
 import { Renderer } from './render';
 import { Input } from './input';
 import { CollisionDetection } from './collision';
@@ -36,6 +36,11 @@ export abstract class Client {
      * the input instance
      */
     private inputInstance: Input;
+
+    /**
+     * the logger instance
+     */
+    private logger: Log = Log.getLogger(Client.name);
 
     constructor(
         private clientConfig: ClientConfig
@@ -67,13 +72,14 @@ export abstract class Client {
 
         // get all promised from the preload phase and await them
         let assetLoader = AssetLoader.getInstance<AssetLoader>();
+        let assetStorage = AssetStorage.getInstance<AssetStorage>();
 
         // setup renderer
         this.renderer = new this.clientConfig.rederer();
         this.renderer.setup(this.clientConfig);
 
         // some logging
-        Log.info("Using", this.renderer.constructor.name, "as Renderer");
+        this.logger.info("Using", this.renderer.constructor.name, "as Renderer");
 
         // start the preload phase
         this.preload();
@@ -82,10 +88,10 @@ export abstract class Client {
         Promise.all(assetLoader.getUnresolvedPromised()).then(() => {
 
             // log the information about the registration process of assets
-            Log.info("Registered", assetLoader.getAssetAmount(AssetType.Image), "Images");
-            Log.info("Registered", assetLoader.getAssetAmount(AssetType.TileMap), "TileMaps");
-            Log.info("Registered", assetLoader.getAssetAmount(AssetType.Audio), "Sounds");
-            Log.info("Registered", assetLoader.getAssetAmount(AssetType.Json), "JSON Objects");
+            this.logger.info("Registered", assetStorage.getAssetAmount(AssetType.Image), "Images");
+            this.logger.info("Registered", assetStorage.getAssetAmount(AssetType.TileMap), "TileMaps");
+            this.logger.info("Registered", assetStorage.getAssetAmount(AssetType.Audio), "Sounds");
+            this.logger.info("Registered", assetStorage.getAssetAmount(AssetType.Json), "JSON Objects");
 
             // all assets loaded, continue startup
             this.gameInstance = new Game(this.renderer);
@@ -110,9 +116,9 @@ export abstract class Client {
         let overall = +(assets + misc).toFixed(2);
 
         // print current memory footprint
-        Log.info("Memory footprint:", overall, "MB");
-        Log.info("\t- Assets:\t", assets, "MB");
-        Log.info("\t- Misc:\t\t", misc, "MB");
+        this.logger.info("Memory footprint:", overall, "MB");
+        this.logger.info("\t- Assets:\t", assets, "MB");
+        this.logger.info("\t- Misc:\t\t", misc, "MB");
     }
 
     /**

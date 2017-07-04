@@ -42,6 +42,11 @@ export abstract class AnimationEntity extends Entity implements AnimationableEnt
     protected scaleFactor: number = 1;
 
     /**
+     * the logger instance
+     */
+    private logger = Log.getLogger(AnimationEntity.name);
+
+    /**
      * add one or many animations to the entity
      */
     public addAnimation(...animations: InlineAnimation[]): void {
@@ -71,7 +76,7 @@ export abstract class AnimationEntity extends Entity implements AnimationableEnt
         // check if the animation is valid
         if (!animation) {
 
-            Log.warning("Animation", name, "was not added to", this.constructor.name, ". Ignoring this animation.");
+            this.logger.warning("Animation", name, "was not added to", this.constructor.name, ". Ignoring this animation.");
             return;
         }
 
@@ -89,7 +94,7 @@ export abstract class AnimationEntity extends Entity implements AnimationableEnt
         if (!this.currentAnimation) {
 
             // log a warning
-            Log.warning("trying to stop an animation on", this.constructor.name, "but there is no active animation");
+            this.logger.warning("trying to stop an animation on", this.constructor.name, "but there is no active animation");
             return;
         }
 

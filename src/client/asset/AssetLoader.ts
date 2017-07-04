@@ -7,7 +7,6 @@
 
 import { AssetType } from './AssetType';
 import { Asset, InlineAsset } from './Asset';
-import { AbstractAsset } from './AbstractAsset';
 import { AssetStorage } from './AssetStorage';
 import { Request } from '../network';
 
@@ -23,12 +22,17 @@ export class AssetLoader extends Singleton {
     /**
      * the holder of all asset loads
      */
-    private assetLoaderPromiseStack: Promise<AbstractAsset>[] = [];
+    private assetLoaderPromiseStack: Promise<Asset>[] = [];
 
     /**
      * the asset storage instance
      */
     private assetStorage: AssetStorage = AssetStorage.getInstance<AssetStorage>();
+
+    /**
+     * the logger
+     */
+    private logger = Log.getLogger(AssetLoader.name);
 
     /**
      * register one or many assets to adress then later in the game
@@ -40,7 +44,7 @@ export class AssetLoader extends Singleton {
      */
     public async registerAsset(assetClass: new () => Asset, ...assets: InlineAsset[]): Promise<Asset[]> {
 
-        let outerPromise: Promise<AbstractAsset>[] = [];
+        let outerPromise: Promise<Asset>[] = [];
         let resourceStack: Asset[] = [];
 
         // iterate through all given assets
@@ -50,7 +54,7 @@ export class AssetLoader extends Singleton {
             if (this.assetStorage.hasAsset(asset.name, asset.assetType)) {
 
                 // log a warning that an asset has a double register
-                Log.warning("The given asset with the name", asset.name, "is allready registered.");
+                this.logger.warning("The given asset with the name", asset.name, "is allready registered.");
             }
 
             // add a promise to await its loading
@@ -130,7 +134,7 @@ export class AssetLoader extends Singleton {
     /**
      * get all unresolved assets from the register process
      */
-    public getUnresolvedPromised(): Promise<AbstractAsset>[] {
+    public getUnresolvedPromised(): Promise<Asset>[] {
 
         return this.assetLoaderPromiseStack;
     }

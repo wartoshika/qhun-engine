@@ -23,6 +23,11 @@ export class Webserver {
     private app: any;
     private httpServer: http.Server;
 
+    /**
+     * the logger instance
+     */
+    private logger = Log.getLogger(Webserver.name);
+
     constructor(
         listenAdress: string = "127.0.0.1",
         port: number = 3000,
@@ -33,7 +38,7 @@ export class Webserver {
 
         // start listening
         this.httpServer.listen(port, listenAdress);
-        Log.info("Listening at ", `${listenAdress}:${port}`);
+        this.logger.info("Listening at ", `${listenAdress}:${port}`);
 
         // handle http calls
         app.get('/*', this.serveApplication.bind(this));

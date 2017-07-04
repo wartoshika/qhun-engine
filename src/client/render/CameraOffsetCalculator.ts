@@ -6,7 +6,7 @@
  */
 
 import { Camera } from '../camera';
-import { AssetLoader, Image, AssetType } from '../asset';
+import { AssetStorage, Image, AssetType } from '../asset';
 import { RenderableEntity } from '../entity';
 import { Vector2D, Dimension } from '../../shared/math';
 
@@ -16,7 +16,7 @@ import { Vector2D, Dimension } from '../../shared/math';
  */
 export class CameraOffsetCalculator {
 
-    private static assetLoader: AssetLoader = AssetLoader.getInstance<AssetLoader>();
+    private static assetStorage: AssetStorage = AssetStorage.getInstance<AssetStorage>();
 
     /**
      * calculates the entity offset and scaleability of its image by using one
@@ -31,7 +31,7 @@ export class CameraOffsetCalculator {
         let scale = camera.getScale();
 
         // get the original image as ImageBitmap
-        let entityImage = <ImageBitmap>CameraOffsetCalculator.assetLoader.getAsset<Image>(
+        let entityImage = <ImageBitmap>CameraOffsetCalculator.assetStorage.getAsset<Image>(
             entity.getImage(), AssetType.Image
         ).getData();
 

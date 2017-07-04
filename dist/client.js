@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 24);
+/******/ 	return __webpack_require__(__webpack_require__.s = 27);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -79,9 +79,9 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(10));
-__export(__webpack_require__(36));
-__export(__webpack_require__(11));
+__export(__webpack_require__(13));
+__export(__webpack_require__(37));
+__export(__webpack_require__(14));
 
 
 /***/ }),
@@ -121,28 +121,8 @@ var AssetType;
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(9));
-__export(__webpack_require__(26));
-
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-var AssetLoader_1 = __webpack_require__(20);
+var AssetLoader_1 = __webpack_require__(23);
 /**
  * a basic class for implementing the getter and setter function
  * of the required asset interface
@@ -195,6 +175,26 @@ exports.AbstractAsset = AbstractAsset;
 
 
 /***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(10));
+__export(__webpack_require__(29));
+
+
+/***/ }),
 /* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -210,9 +210,13 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(27));
-__export(__webpack_require__(37));
-__export(__webpack_require__(12));
+__export(__webpack_require__(49));
+__export(__webpack_require__(9));
+__export(__webpack_require__(19));
+__export(__webpack_require__(6));
+__export(__webpack_require__(3));
+__export(__webpack_require__(0));
+__export(__webpack_require__(5));
 
 
 /***/ }),
@@ -231,11 +235,32 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(28));
+__export(__webpack_require__(30));
 
 
 /***/ }),
 /* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(11));
+__export(__webpack_require__(38));
+__export(__webpack_require__(15));
+
+
+/***/ }),
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -293,7 +318,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var AssetType_1 = __webpack_require__(1);
-var AbstractAsset_1 = __webpack_require__(3);
+var AbstractAsset_1 = __webpack_require__(2);
 /**
  * the image class handles exactly one image
  */
@@ -329,25 +354,6 @@ exports.Image = Image;
 
 
 /***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(48));
-
-
-/***/ }),
 /* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -363,11 +369,30 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(25));
+__export(__webpack_require__(51));
 
 
 /***/ }),
 /* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(28));
+
+
+/***/ }),
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -392,1178 +417,7 @@ var LogLevel;
 
 
 /***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * simple math helper class
- */
-var Helper = (function () {
-    function Helper() {
-    }
-    /**
-     * calculates a random degree
-     */
-    Helper.randomDegree = function () {
-        return Math.floor(Math.random() * 359) + 1;
-    };
-    /**
-     * transforms a degree number to radian number
-     *
-     * @param degree the given degree
-     */
-    Helper.degreeToRadian = function (degree) {
-        return degree * Math.PI / 180;
-    };
-    /**
-     * transforms a radian number to degree
-     *
-     * @param radian the radian value
-     */
-    Helper.radianToDegree = function (radian) {
-        return radian * (180 / Math.PI);
-    };
-    /**
-     * rounds to a given precision
-     *
-     * @param number the number to round
-     * @param precision the precision
-     */
-    Helper.roundToPrecision = function (number, precision) {
-        if (precision === void 0) { precision = 2; }
-        return +number.toFixed(precision);
-    };
-    /**
-     * converts mass to newtons based on a given force
-     *
-     * @param mass the mass of the object
-     * @param force the gravity force
-     */
-    Helper.massToWeight = function (mass, force) {
-        return mass * force;
-    };
-    return Helper;
-}());
-exports.Helper = Helper;
-
-
-/***/ }),
 /* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * a basic holder of x and y values as one datatype
- */
-var Dimension = (function () {
-    /**
-     *
-     * @param x the x coordinate
-     * @param y the y coordinate
-     */
-    function Dimension(x, y) {
-        if (x === void 0) { x = 0; }
-        if (y === void 0) { y = 0; }
-        this.x = x;
-        this.y = y;
-    }
-    return Dimension;
-}());
-exports.Dimension = Dimension;
-
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-var FileSizeType;
-(function (FileSizeType) {
-    FileSizeType[FileSizeType["Byte"] = 0] = "Byte";
-    FileSizeType[FileSizeType["Kilobyte"] = 1] = "Kilobyte";
-    FileSizeType[FileSizeType["Megabyte"] = 2] = "Megabyte";
-    FileSizeType[FileSizeType["Gigabyte"] = 3] = "Gigabyte";
-    FileSizeType[FileSizeType["Terrabyte"] = 4] = "Terrabyte";
-})(FileSizeType = exports.FileSizeType || (exports.FileSizeType = {}));
-/**
- * a helper class for file and path things
- */
-var File = (function () {
-    function File() {
-    }
-    /**
-     * get the file extension of a path
-     *
-     * @param path the path to the file
-     */
-    File.getFileExtension = function (path) {
-        return path.split('.').pop();
-    };
-    /**
-     * converts a byle number to a given superset
-     *
-     * @param bytes the base byte number
-     * @param type the wanted type
-     */
-    File.byteToSize = function (bytes, type) {
-        return bytes / Math.pow(1024, type);
-    };
-    return File;
-}());
-exports.File = File;
-
-
-/***/ }),
-/* 13 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(14));
-__export(__webpack_require__(41));
-__export(__webpack_require__(15));
-
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-var AnimationEntity_1 = __webpack_require__(15);
-/**
- * the base class for all game entities
- */
-var Entity = (function (_super) {
-    __extends(Entity, _super);
-    function Entity() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    return Entity;
-}(AnimationEntity_1.AnimationEntity));
-exports.Entity = Entity;
-
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-var entity_1 = __webpack_require__(16);
-var Animation_1 = __webpack_require__(40);
-var log_1 = __webpack_require__(2);
-/**
- * a base class for animations on entities
- */
-var AnimationEntity = (function (_super) {
-    __extends(AnimationEntity, _super);
-    function AnimationEntity() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        /**
-         * all animations of the entity
-         */
-        _this.animationStack = [];
-        /**
-         * the visibility flag
-         */
-        _this.visible = true;
-        /**
-         * the current scale factor
-         */
-        _this.scaleFactor = 1;
-        return _this;
-    }
-    /**
-     * add one or many animations to the entity
-     */
-    AnimationEntity.prototype.addAnimation = function () {
-        var animations = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            animations[_i] = arguments[_i];
-        }
-        (_a = this.animationStack).push.apply(_a, animations);
-        var _a;
-    };
-    /**
-     * play the given animation
-     * @todo: possible observable return type to let the user know when an animation changes it's state
-     */
-    AnimationEntity.prototype.playAnimation = function (name, loop) {
-        if (loop === void 0) { loop = false; }
-        // if there is allready a running animation, stop it
-        if (this.currentAnimation) {
-            // if the animation name is the same, ignore the call
-            if (this.currentAnimation.getName() === name)
-                return;
-            // stop and play the new animation
-            this.currentAnimation.stopAndRestore();
-        }
-        // get the animation player
-        var animation = this.animationStack.find(function (a) { return a.name === name; });
-        // check if the animation is valid
-        if (!animation) {
-            log_1.Log.warning("Animation", name, "was not added to", this.constructor.name, ". Ignoring this animation.");
-            return;
-        }
-        // play!
-        this.currentAnimation = new Animation_1.Animation(animation, this, loop);
-        this.currentAnimation.play();
-    };
-    /**
-     * stops the currently playing animation
-     */
-    AnimationEntity.prototype.stopAnimation = function () {
-        // currently playing an animation?
-        if (!this.currentAnimation) {
-            // log a warning
-            log_1.Log.warning("trying to stop an animation on", this.constructor.name, "but there is no active animation");
-            return;
-        }
-        // stops the animation
-        this.currentAnimation.stopAndRestore();
-        this.currentAnimation = null;
-    };
-    /**
-     * check if any or a spefific animation is running
-     *
-     * @param name the name or nothing
-     */
-    AnimationEntity.prototype.isAnimationRunning = function (name) {
-        return (!name && !!this.currentAnimation)
-            ||
-                (name && this.currentAnimation && this.currentAnimation.getName() === name);
-    };
-    /**
-     * get the image asset that displays the current entity
-     */
-    AnimationEntity.prototype.getImage = function () {
-        return this.currentTemplate;
-    };
-    /**
-     * set the new image for this entity
-     *
-     * @param image the current image that should represent this entity during rendering
-     */
-    AnimationEntity.prototype.setImage = function (image) {
-        this.currentTemplate = image;
-    };
-    /**
-     * is the entity visible? if not, the renderer will not render this entity
-     */
-    AnimationEntity.prototype.isVisible = function () {
-        return this.visible;
-    };
-    /**
-     * sets the visibility of the entity
-     */
-    AnimationEntity.prototype.setVisible = function (visible) {
-        this.visible = visible;
-    };
-    /**
-     * get the current scale
-     */
-    AnimationEntity.prototype.getScale = function () {
-        return this.scaleFactor;
-    };
-    /**
-     * set the current local entity scale
-     *
-     * @param scale the new scale
-     */
-    AnimationEntity.prototype.setScale = function (scale) {
-        this.scaleFactor = scale;
-    };
-    return AnimationEntity;
-}(entity_1.Entity));
-exports.AnimationEntity = AnimationEntity;
-
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(17));
-__export(__webpack_require__(39));
-
-
-/***/ }),
-/* 17 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-var math_1 = __webpack_require__(0);
-/**
- * the base class for all game entities
- */
-var Entity = (function () {
-    function Entity(position) {
-        if (position === void 0) { position = new math_1.Vector2D(0, 0); }
-        this.position = position;
-    }
-    /**
-     * get the current position of the entity ( top left )
-     */
-    Entity.prototype.getPosition = function () {
-        return this.position;
-    };
-    /**
-     * set the entities new position
-     *
-     * @param position the new position
-     */
-    Entity.prototype.setPosition = function (position) {
-        this.position = position;
-    };
-    return Entity;
-}());
-exports.Entity = Entity;
-
-
-/***/ }),
-/* 18 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * a basic scene
- */
-var Scene = (function () {
-    function Scene() {
-    }
-    return Scene;
-}());
-exports.Scene = Scene;
-
-
-/***/ }),
-/* 19 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(6));
-__export(__webpack_require__(49));
-__export(__webpack_require__(50));
-__export(__webpack_require__(1));
-__export(__webpack_require__(20));
-__export(__webpack_require__(51));
-__export(__webpack_require__(3));
-__export(__webpack_require__(60));
-
-
-/***/ }),
-/* 20 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [0, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var AssetType_1 = __webpack_require__(1);
-var AssetStorage_1 = __webpack_require__(60);
-var network_1 = __webpack_require__(7);
-var shared_1 = __webpack_require__(22);
-/**
- * this class handles the loading of assets
- */
-var AssetLoader = (function (_super) {
-    __extends(AssetLoader, _super);
-    function AssetLoader() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        /**
-         * the holder of all asset loads
-         */
-        _this.assetLoaderPromiseStack = [];
-        /**
-         * the asset storage instance
-         */
-        _this.assetStorage = AssetStorage_1.AssetStorage.getInstance();
-        return _this;
-    }
-    /**
-     * register one or many assets to adress then later in the game
-     * an asset name should allways be unique, event if the asset type
-     * is different
-     *
-     * @param assetClass the class of the asset
-     * @param assets the asset to register
-     */
-    AssetLoader.prototype.registerAsset = function (assetClass) {
-        var assets = [];
-        for (var _i = 1; _i < arguments.length; _i++) {
-            assets[_i - 1] = arguments[_i];
-        }
-        return __awaiter(this, void 0, void 0, function () {
-            var _this = this;
-            var outerPromise, resourceStack, _a;
-            return __generator(this, function (_b) {
-                outerPromise = [];
-                resourceStack = [];
-                // iterate through all given assets
-                assets.forEach(function (asset) {
-                    // check if the asset exists
-                    if (_this.assetStorage.hasAsset(asset.name, asset.assetType)) {
-                        // log a warning that an asset has a double register
-                        shared_1.Log.warning("The given asset with the name", asset.name, "is allready registered.");
-                    }
-                    // add a promise to await its loading
-                    outerPromise.push(new Promise(function (resolve) {
-                        // construct an instance of the asset
-                        var instance = new assetClass();
-                        instance.setName(asset.name);
-                        // fill the instance
-                        _this.loadAsset(instance, asset.path).then(function (resource) {
-                            // store the asset
-                            resourceStack.push(resource);
-                            // resolve the promise
-                            resolve(resource);
-                        });
-                    }));
-                });
-                // stack all loading promises to the asset loading process
-                (_a = this.assetLoaderPromiseStack).push.apply(_a, outerPromise);
-                // return the promise
-                return [2 /*return*/, Promise.all(outerPromise).then(function () {
-                        // store all assets
-                        (_a = _this.assetStorage).addAsset.apply(_a, resourceStack);
-                        // resolve the promise
-                        return resourceStack;
-                        var _a;
-                    })];
-            });
-        });
-    };
-    /**
-     * loads one asset
-     *
-     * @param instance the instance to be loaded
-     * @param path the path where to load the asset from
-     */
-    AssetLoader.prototype.loadAsset = function (instance, path) {
-        return __awaiter(this, void 0, void 0, function () {
-            var callback;
-            return __generator(this, function (_a) {
-                // check if the path is a local data uri
-                if (path.indexOf('data:') === 0) {
-                    return [2 /*return*/, new Promise(function (resolve) {
-                            // set the blob for the asset
-                            instance.setData(shared_1.Binary.dataUriToBlob(path));
-                            resolve(instance);
-                        })];
-                }
-                switch (instance.getType()) {
-                    case AssetType_1.AssetType.Image:
-                    case AssetType_1.AssetType.TileMap:
-                        callback = this.loadImage.bind(this);
-                        break;
-                    default:
-                        throw "Asset type " + AssetType_1.AssetType[instance.getType()] + " is not implemented";
-                }
-                // load the resource
-                return [2 /*return*/, callback(path).then(function (resource) {
-                        // set the resource data to the asset instance
-                        instance.setData(resource);
-                        return instance;
-                    })];
-            });
-        });
-    };
-    /**
-     * get all unresolved assets from the register process
-     */
-    AssetLoader.prototype.getUnresolvedPromised = function () {
-        return this.assetLoaderPromiseStack;
-    };
-    /**
-     * add promises to the asset loader. this can be used to delay the game
-     * startup until all assets are loaded.
-     *
-     * @param promises the promises to add
-     */
-    AssetLoader.prototype.addAssetLoaderPromise = function () {
-        var promises = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            promises[_i] = arguments[_i];
-        }
-        (_a = this.assetLoaderPromiseStack).push.apply(_a, promises);
-        return promises;
-        var _a;
-    };
-    /**
-     * load an image
-     *
-     * @param path the path to the image
-     */
-    AssetLoader.prototype.loadImage = function (path) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                // make an xhr call to the file
-                return [2 /*return*/, network_1.Request.getBinary(path).then(function (image) {
-                        // create the image bitmap for the blob
-                        return shared_1.Binary.bufferToBlob(image);
-                    })];
-            });
-        });
-    };
-    /**
-     * load an audio file
-     *
-     * @param path the path to the audio file
-     */
-    AssetLoader.prototype.loadAudio = function (path) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                return [2 /*return*/];
-            });
-        });
-    };
-    /**
-     * load a json file and parse its body
-     *
-     * @param path the path to the json file
-     */
-    AssetLoader.prototype.loadJSON = function (path) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                return [2 /*return*/];
-            });
-        });
-    };
-    return AssetLoader;
-}(shared_1.Singleton));
-exports.AssetLoader = AssetLoader;
-
-
-/***/ }),
-/* 21 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-var shared_1 = __webpack_require__(22);
-/**
- * the view for the player into the game
- */
-var BaseCamera = (function () {
-    /**
-     *
-     * @param scale the scale of the world. 1 means that a tile of 32x32 will renderes on 32x32 pixel. scane 5 means that a tile of 32x32 will be rendered as (32*5)x(32*5) pixel...
-     * @param mode the camera mode
-     */
-    function BaseCamera(scale) {
-        if (scale === void 0) { scale = 1; }
-        this.scale = scale;
-        /**
-         * the entitiy which the camera should follow
-         */
-        this.followingEntity = null;
-        /**
-         * the current camera world bounds
-         */
-        this.worldBounds = null;
-    }
-    /**
-     * get the camera mode
-     */
-    BaseCamera.prototype.getMode = function () {
-        return this.mode;
-    };
-    /**
-     * get the current world scale modificator
-     */
-    BaseCamera.prototype.getScale = function () {
-        return this.scale;
-    };
-    /**
-     * get the camera scale as vector
-     */
-    BaseCamera.prototype.getScaleVector = function () {
-        return new shared_1.Vector2D(this.scale, this.scale);
-    };
-    /**
-     * set the current world scale modificator
-     */
-    BaseCamera.prototype.setScale = function (scale) {
-        this.scale = scale;
-    };
-    /**
-     * follows one entity
-     *
-     * @param entity the entity to follow
-     */
-    BaseCamera.prototype.followEntity = function (entity) {
-        this.followingEntity = entity;
-    };
-    /**
-     * get the current entity the camera follows.
-     * can be undefined is the camera is not following an entity
-     */
-    BaseCamera.prototype.getFollowingEntity = function () {
-        return this.followingEntity;
-    };
-    /**
-     * if the camera should be allways within the world, set the world
-     * bounds to the current active world
-     */
-    BaseCamera.prototype.setWorldBounds = function (world) {
-        var dimension = world.getWorldDimension();
-        this.worldBounds = new shared_1.Vector2D(dimension.x, dimension.y);
-    };
-    /**
-     * get the current world bounds.
-     *
-     * @warning return value can be null if no bounds are available!
-     */
-    BaseCamera.prototype.getWorldBounds = function () {
-        var wb = this.worldBounds;
-        if (!wb)
-            return wb;
-        // add the current camera scale
-        return wb.multiply(new shared_1.Vector2D(this.getScale(), this.getScale()));
-    };
-    return BaseCamera;
-}());
-exports.BaseCamera = BaseCamera;
-
-
-/***/ }),
-/* 22 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(53));
-__export(__webpack_require__(8));
-__export(__webpack_require__(16));
-__export(__webpack_require__(4));
-__export(__webpack_require__(2));
-__export(__webpack_require__(0));
-__export(__webpack_require__(5));
-
-
-/***/ }),
-/* 23 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * the currently supported camera modes
- */
-var CameraMode;
-(function (CameraMode) {
-    CameraMode[CameraMode["Orthogonal"] = 0] = "Orthogonal";
-})(CameraMode = exports.CameraMode || (exports.CameraMode = {}));
-
-
-/***/ }),
-/* 24 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var decorator_1 = __webpack_require__(8);
-var log_1 = __webpack_require__(2);
-var helper_1 = __webpack_require__(4);
-var Game_1 = __webpack_require__(38);
-var storage_1 = __webpack_require__(5);
-var asset_1 = __webpack_require__(19);
-var input_1 = __webpack_require__(56);
-var collision_1 = __webpack_require__(58);
-/**
- * the initiation class of the game client
- */
-var Client = (function () {
-    function Client(clientConfig) {
-        this.clientConfig = clientConfig;
-        // print package and version info
-        console.info("%c -= Qhun-Engine v1.0.0 =- [ http://engine.qhun.de ]", "background: green; font-color: white;");
-        // step by step setup of the game
-        this.bindLoadEvent();
-    }
-    /**
-     * bind window events to let the start of the engine pause
-     * until the javascript dom is ready
-     */
-    Client.prototype.bindLoadEvent = function () {
-        // at window load, start the internal setup
-        window.addEventListener('load', this.internalSetup.bind(this));
-    };
-    /**
-     * internal setup phase
-     */
-    Client.prototype.internalSetup = function () {
-        var _this = this;
-        // get all promised from the preload phase and await them
-        var assetLoader = asset_1.AssetLoader.getInstance();
-        // setup renderer
-        this.renderer = new this.clientConfig.rederer();
-        this.renderer.setup(this.clientConfig);
-        // some logging
-        log_1.Log.info("Using", this.renderer.constructor.name, "as Renderer");
-        // start the preload phase
-        this.preload();
-        // await the asset loading
-        Promise.all(assetLoader.getUnresolvedPromised()).then(function () {
-            // log the information about the registration process of assets
-            log_1.Log.info("Registered", assetLoader.getAssetAmount(asset_1.AssetType.Image), "Images");
-            log_1.Log.info("Registered", assetLoader.getAssetAmount(asset_1.AssetType.TileMap), "TileMaps");
-            log_1.Log.info("Registered", assetLoader.getAssetAmount(asset_1.AssetType.Audio), "Sounds");
-            log_1.Log.info("Registered", assetLoader.getAssetAmount(asset_1.AssetType.Json), "JSON Objects");
-            // all assets loaded, continue startup
-            _this.gameInstance = new Game_1.Game(_this.renderer);
-            _this.inputInstance = new input_1.Input();
-            // fire loaded event
-            _this.loaded(_this.gameInstance);
-            _this.printMemoryFootprint();
-            // init the game loop
-            _this.gameLoop();
-        });
-    };
-    /**
-     * logs the current memory footprint to the console
-     */
-    Client.prototype.printMemoryFootprint = function () {
-        var assets = storage_1.RamStorage.getSize("assetloader", helper_1.FileSizeType.Megabyte);
-        var misc = storage_1.RamStorage.getSize("singleton", helper_1.FileSizeType.Megabyte);
-        var overall = +(assets + misc).toFixed(2);
-        // print current memory footprint
-        log_1.Log.info("Memory footprint:", overall, "MB");
-        log_1.Log.info("\t- Assets:\t", assets, "MB");
-        log_1.Log.info("\t- Misc:\t\t", misc, "MB");
-    };
-    /**
-     * the game loop where all things come together
-     */
-    Client.prototype.gameLoop = function () {
-        // call update method
-        this.update(this.gameInstance, this.inputInstance);
-        // run collision detection
-        collision_1.CollisionDetection.entitiesWithWorld(this.gameInstance.getCurrentEntities(), this.renderer.getWorld(), this.gameInstance.getCurrentCamera());
-        // call the scene update
-        var scene = this.gameInstance.getCurrentScene();
-        if (scene)
-            scene.update(this.gameInstance);
-        // render the game
-        if (typeof this.renderer.preRender === 'function')
-            this.renderer.preRender();
-        this.renderer.render();
-        if (typeof this.renderer.postRender === 'function')
-            this.renderer.postRender();
-        // request the next game frame
-        window.requestAnimationFrame(this.gameLoop.bind(this));
-    };
-    __decorate([
-        decorator_1.logMethodCall,
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", []),
-        __metadata("design:returntype", void 0)
-    ], Client.prototype, "bindLoadEvent", null);
-    __decorate([
-        decorator_1.logMethodCall,
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", []),
-        __metadata("design:returntype", void 0)
-    ], Client.prototype, "internalSetup", null);
-    return Client;
-}());
-exports.Client = Client;
-
-
-/***/ }),
-/* 25 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-var log_1 = __webpack_require__(2);
-/**
- * a decorator for logging method calls to debug console
- *
- * @param target
- * @param propertyKey
- * @param descriptor
- */
-function logMethodCall(target, key, descriptor) {
-    return {
-        value: function () {
-            var args = [];
-            for (var _i = 0; _i < arguments.length; _i++) {
-                args[_i] = arguments[_i];
-            }
-            // log the call
-            log_1.Log.debug("@logMethodCall", target.constructor.name + ":" + key + "()");
-            // original method call
-            return descriptor.value.apply(this, args);
-        }
-    };
-}
-exports.logMethodCall = logMethodCall;
-
-
-/***/ }),
-/* 26 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-var LogLevel_1 = __webpack_require__(9);
-var Singleton_1 = __webpack_require__(27);
-/**
- * a log wrapper to allow log levels and a more complex
- * logging structure
- */
-var Log = (function (_super) {
-    __extends(Log, _super);
-    function Log() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        // the current loglevel
-        _this.logLevel = LogLevel_1.LogLevel.Debug;
-        // the logger object
-        _this.loggerObject = console;
-        _this.Log = {};
-        return _this;
-    }
-    /**
-     * sets the log level for the application environment
-     *
-     * @param level the new log level
-     */
-    Log.prototype.setLogLevel = function (level) {
-        this.logLevel = level;
-    };
-    /**
-     * override the current logger object
-     *
-     * @param object the new logger object
-     */
-    Log.prototype.overrideLoggerObject = function (object) {
-        this.loggerObject = object;
-    };
-    /**
-     * logs the given data
-     *
-     * @param level the level to log in
-     * @param params all params as vararg array
-     */
-    Log.prototype.log = function (level) {
-        var params = [];
-        for (var _i = 1; _i < arguments.length; _i++) {
-            params[_i - 1] = arguments[_i];
-        }
-        // log if the log level is ok
-        if (parseInt(level) >= parseInt(this.logLevel)) {
-            // level ok, log
-            this.getLogFunctionByLevel(level).apply(void 0, ["[this." + LogLevel_1.LogLevel[level] + "]"].concat(params));
-        }
-    };
-    /**
-     * gets a callback function to log
-     *
-     * @param level the level to get the function from
-     */
-    Log.prototype.getLogFunctionByLevel = function (level) {
-        var callback = function () { };
-        // go through the different log levels
-        switch (level) {
-            case LogLevel_1.LogLevel.Debug:
-                callback = this.loggerObject.debug;
-                break;
-            case LogLevel_1.LogLevel.Info:
-                callback = this.loggerObject.info;
-                break;
-            case LogLevel_1.LogLevel.Warning:
-                callback = this.loggerObject.warn;
-                break;
-            case LogLevel_1.LogLevel.Error:
-                callback = this.loggerObject.error;
-                break;
-        }
-        return callback;
-    };
-    /**
-     * get the current log level
-     */
-    Log.prototype.getLogLevel = function () {
-        return this.logLevel;
-    };
-    /**
-     * logs as debug level
-     *
-     * @param params all params as vararg array
-     */
-    Log.prototype.debug = function () {
-        var params = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            params[_i] = arguments[_i];
-        }
-        this.log.apply(this, [LogLevel_1.LogLevel.Debug].concat(params));
-    };
-    /**
-     * logs as info level
-     *
-     * @param params all params as vararg array
-     */
-    Log.prototype.info = function () {
-        var params = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            params[_i] = arguments[_i];
-        }
-        this.log.apply(this, [LogLevel_1.LogLevel.Info].concat(params));
-    };
-    /**
-     * logs as warning level
-     *
-     * @param params all params as vararg array
-     */
-    Log.prototype.warning = function () {
-        var params = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            params[_i] = arguments[_i];
-        }
-        this.log.apply(this, [LogLevel_1.LogLevel.Warning].concat(params));
-    };
-    /**
-     * logs as error level
-     *
-     * @param params all params as vararg array
-     */
-    Log.prototype.error = function () {
-        var params = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            params[_i] = arguments[_i];
-        }
-        this.log.apply(this, [LogLevel_1.LogLevel.Error].concat(params));
-    };
-    return Log;
-}(Singleton_1.Singleton));
-exports.Log = Log;
-
-
-/***/ }),
-/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1618,199 +472,7 @@ exports.Singleton = Singleton;
 
 
 /***/ }),
-/* 28 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-// the dependency to get the memory footprint ob stored objects
-var sizeof = __webpack_require__(29);
-var math_1 = __webpack_require__(0);
-var File_1 = __webpack_require__(12);
-/**
- * holds objects in the ram of the operating unit
- */
-var RamStorage = (function () {
-    function RamStorage() {
-    }
-    /**
-     * adds an elemement to the cache
-     *
-     * @param path the path to the object. dots can be used to structure
-     * @param elemement the element to store
-     */
-    RamStorage.add = function (path, elemement) {
-        RamStorage.cache[path] = elemement;
-    };
-    /**
-     * removes an element from the cache
-     *
-     * @param path the path to the object. dots can be used to structure
-     */
-    RamStorage.remove = function (path) {
-        delete RamStorage.cache[path];
-    };
-    /**
-     * reset the complete storage!
-     */
-    RamStorage.clear = function () {
-        this.cache = {};
-    };
-    /**
-     * removes all entires in the given path
-     *
-     * @param path the path to clear
-     * @return the amount of deleted objects
-     */
-    RamStorage.clearPath = function (path) {
-        var counter = 0;
-        Object.keys(RamStorage.cache).forEach(function (key) {
-            // if the path is present
-            if (key.indexOf(path) === 0) {
-                // remove the part
-                delete RamStorage.cache[key];
-                counter++;
-            }
-        });
-        return counter;
-    };
-    /**
-     * get an element from the cache
-     *
-     * @param path the path to the object. dots can be used to structure
-     */
-    RamStorage.get = function (path) {
-        return RamStorage.cache[path];
-    };
-    /**
-     * checks if an object exists in the cache
-     *
-     * @param path the path to the object. dots can be used to structure
-     */
-    RamStorage.has = function (path) {
-        return RamStorage.get(path) !== undefined;
-    };
-    /**
-     * the path to one or many objects in the storage
-     *
-     * @param path the path to the object. dots can be used to structure
-     */
-    RamStorage.amount = function (path) {
-        var counter = 0;
-        Object.keys(RamStorage.cache).forEach(function (key) {
-            // if the path is present, update counter
-            if (key.indexOf(path) === 0)
-                counter++;
-        });
-        return counter;
-    };
-    /**
-     * calculates the used memory for the selected objects in the storage.
-     *
-     * @param path the path to the object. dots can be used to structure
-     */
-    RamStorage.getSize = function (path, type) {
-        if (path === void 0) { path = ""; }
-        if (type === void 0) { type = File_1.FileSizeType.Byte; }
-        var byteCounter = 0;
-        Object.keys(RamStorage.cache).forEach(function (key) {
-            // if the path is present, update counter
-            if (key.indexOf(path) === 0)
-                byteCounter += sizeof(RamStorage.cache[key]);
-        });
-        var bytes = File_1.File.byteToSize(byteCounter, type);
-        return math_1.Helper.roundToPrecision(bytes, 2);
-    };
-    // the private cache object
-    RamStorage.cache = {};
-    return RamStorage;
-}());
-exports.RamStorage = RamStorage;
-
-
-/***/ }),
-/* 29 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-// Copyright 2014 Andrei Karpushonak
-
-
-
-var ECMA_SIZES  = __webpack_require__(30);
-var Buffer = __webpack_require__(31).Buffer;
-
-/**
- * Main module's entry point
- * Calculates Bytes for the provided parameter
- * @param object - handles object/string/boolean/buffer
- * @returns {*}
- */
-function sizeof(object) {
-    if (object !== null && typeof (object) === 'object') {
-      if (Buffer.isBuffer(object)) {
-        return object.length;
-      }
-      else {
-        var bytes = 0;
-        for (var key in object) {
-
-          if(!Object.hasOwnProperty.call(object, key)) {
-            continue;
-          }
-
-          bytes += sizeof(key);
-          try {
-            bytes += sizeof(object[key]);
-          } catch (ex) {
-            if(ex instanceof RangeError) {
-              // circular reference detected, final result might be incorrect
-              // let's be nice and not throw an exception
-              bytes = 0;
-            }
-          }
-        }
-        return bytes;
-      }
-    } else if (typeof (object) === 'string') {
-      return object.length * ECMA_SIZES.STRING;
-    } else if (typeof (object) === 'boolean') {
-      return ECMA_SIZES.BOOLEAN;
-    } else if (typeof (object) === 'number') {
-      return ECMA_SIZES.NUMBER;
-    } else {
-      return 0;
-    }
-}
-
-module.exports = sizeof;
-
-
-/***/ }),
-/* 30 */
-/***/ (function(module, exports) {
-
-/**
- * Byte sizes are taken from ECMAScript Language Specification
- * http://www.ecma-international.org/ecma-262/5.1/
- * http://bclary.com/2004/11/07/#a-4.3.16
- */
-
-module.exports = {
-    STRING: 2,
-    BOOLEAN: 4,
-    NUMBER: 8
-};
-
-/***/ }),
-/* 31 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1824,9 +486,9 @@ module.exports = {
 
 
 
-var base64 = __webpack_require__(33)
-var ieee754 = __webpack_require__(34)
-var isArray = __webpack_require__(35)
+var base64 = __webpack_require__(34)
+var ieee754 = __webpack_require__(35)
+var isArray = __webpack_require__(36)
 
 exports.Buffer = Buffer
 exports.SlowBuffer = SlowBuffer
@@ -3604,10 +2266,1506 @@ function isnan (val) {
   return val !== val // eslint-disable-line no-self-compare
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * simple math helper class
+ */
+var Helper = (function () {
+    function Helper() {
+    }
+    /**
+     * calculates a random degree
+     */
+    Helper.randomDegree = function () {
+        return Math.floor(Math.random() * 359) + 1;
+    };
+    /**
+     * transforms a degree number to radian number
+     *
+     * @param degree the given degree
+     */
+    Helper.degreeToRadian = function (degree) {
+        return degree * Math.PI / 180;
+    };
+    /**
+     * transforms a radian number to degree
+     *
+     * @param radian the radian value
+     */
+    Helper.radianToDegree = function (radian) {
+        return radian * (180 / Math.PI);
+    };
+    /**
+     * rounds to a given precision
+     *
+     * @param number the number to round
+     * @param precision the precision
+     */
+    Helper.roundToPrecision = function (number, precision) {
+        if (precision === void 0) { precision = 2; }
+        return +number.toFixed(precision);
+    };
+    /**
+     * converts mass to newtons based on a given force
+     *
+     * @param mass the mass of the object
+     * @param force the gravity force
+     */
+    Helper.massToWeight = function (mass, force) {
+        return mass * force;
+    };
+    return Helper;
+}());
+exports.Helper = Helper;
+
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * a basic holder of x and y values as one datatype
+ */
+var Dimension = (function () {
+    /**
+     *
+     * @param x the x coordinate
+     * @param y the y coordinate
+     */
+    function Dimension(x, y) {
+        if (x === void 0) { x = 0; }
+        if (y === void 0) { y = 0; }
+        this.x = x;
+        this.y = y;
+    }
+    return Dimension;
+}());
+exports.Dimension = Dimension;
+
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+var FileSizeType;
+(function (FileSizeType) {
+    FileSizeType[FileSizeType["Byte"] = 0] = "Byte";
+    FileSizeType[FileSizeType["Kilobyte"] = 1] = "Kilobyte";
+    FileSizeType[FileSizeType["Megabyte"] = 2] = "Megabyte";
+    FileSizeType[FileSizeType["Gigabyte"] = 3] = "Gigabyte";
+    FileSizeType[FileSizeType["Terrabyte"] = 4] = "Terrabyte";
+})(FileSizeType = exports.FileSizeType || (exports.FileSizeType = {}));
+/**
+ * a helper class for file and path things
+ */
+var File = (function () {
+    function File() {
+    }
+    /**
+     * get the file extension of a path
+     *
+     * @param path the path to the file
+     */
+    File.getFileExtension = function (path) {
+        return path.split('.').pop();
+    };
+    /**
+     * converts a byle number to a given superset
+     *
+     * @param bytes the base byte number
+     * @param type the wanted type
+     */
+    File.byteToSize = function (bytes, type) {
+        return bytes / Math.pow(1024, type);
+    };
+    return File;
+}());
+exports.File = File;
+
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(17));
+__export(__webpack_require__(42));
+__export(__webpack_require__(18));
+
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var AnimationEntity_1 = __webpack_require__(18);
+/**
+ * the base class for all game entities
+ */
+var Entity = (function (_super) {
+    __extends(Entity, _super);
+    function Entity() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return Entity;
+}(AnimationEntity_1.AnimationEntity));
+exports.Entity = Entity;
+
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var entity_1 = __webpack_require__(19);
+var Animation_1 = __webpack_require__(41);
+var log_1 = __webpack_require__(3);
+/**
+ * a base class for animations on entities
+ */
+var AnimationEntity = (function (_super) {
+    __extends(AnimationEntity, _super);
+    function AnimationEntity() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        /**
+         * all animations of the entity
+         */
+        _this.animationStack = [];
+        /**
+         * the visibility flag
+         */
+        _this.visible = true;
+        /**
+         * the current scale factor
+         */
+        _this.scaleFactor = 1;
+        /**
+         * the logger instance
+         */
+        _this.logger = log_1.Log.getLogger(AnimationEntity.name);
+        return _this;
+    }
+    /**
+     * add one or many animations to the entity
+     */
+    AnimationEntity.prototype.addAnimation = function () {
+        var animations = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            animations[_i] = arguments[_i];
+        }
+        (_a = this.animationStack).push.apply(_a, animations);
+        var _a;
+    };
+    /**
+     * play the given animation
+     * @todo: possible observable return type to let the user know when an animation changes it's state
+     */
+    AnimationEntity.prototype.playAnimation = function (name, loop) {
+        if (loop === void 0) { loop = false; }
+        // if there is allready a running animation, stop it
+        if (this.currentAnimation) {
+            // if the animation name is the same, ignore the call
+            if (this.currentAnimation.getName() === name)
+                return;
+            // stop and play the new animation
+            this.currentAnimation.stopAndRestore();
+        }
+        // get the animation player
+        var animation = this.animationStack.find(function (a) { return a.name === name; });
+        // check if the animation is valid
+        if (!animation) {
+            this.logger.warning("Animation", name, "was not added to", this.constructor.name, ". Ignoring this animation.");
+            return;
+        }
+        // play!
+        this.currentAnimation = new Animation_1.Animation(animation, this, loop);
+        this.currentAnimation.play();
+    };
+    /**
+     * stops the currently playing animation
+     */
+    AnimationEntity.prototype.stopAnimation = function () {
+        // currently playing an animation?
+        if (!this.currentAnimation) {
+            // log a warning
+            this.logger.warning("trying to stop an animation on", this.constructor.name, "but there is no active animation");
+            return;
+        }
+        // stops the animation
+        this.currentAnimation.stopAndRestore();
+        this.currentAnimation = null;
+    };
+    /**
+     * check if any or a spefific animation is running
+     *
+     * @param name the name or nothing
+     */
+    AnimationEntity.prototype.isAnimationRunning = function (name) {
+        return (!name && !!this.currentAnimation)
+            ||
+                (name && this.currentAnimation && this.currentAnimation.getName() === name);
+    };
+    /**
+     * get the image asset that displays the current entity
+     */
+    AnimationEntity.prototype.getImage = function () {
+        return this.currentTemplate;
+    };
+    /**
+     * set the new image for this entity
+     *
+     * @param image the current image that should represent this entity during rendering
+     */
+    AnimationEntity.prototype.setImage = function (image) {
+        this.currentTemplate = image;
+    };
+    /**
+     * is the entity visible? if not, the renderer will not render this entity
+     */
+    AnimationEntity.prototype.isVisible = function () {
+        return this.visible;
+    };
+    /**
+     * sets the visibility of the entity
+     */
+    AnimationEntity.prototype.setVisible = function (visible) {
+        this.visible = visible;
+    };
+    /**
+     * get the current scale
+     */
+    AnimationEntity.prototype.getScale = function () {
+        return this.scaleFactor;
+    };
+    /**
+     * set the current local entity scale
+     *
+     * @param scale the new scale
+     */
+    AnimationEntity.prototype.setScale = function (scale) {
+        this.scaleFactor = scale;
+    };
+    return AnimationEntity;
+}(entity_1.Entity));
+exports.AnimationEntity = AnimationEntity;
+
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(20));
+__export(__webpack_require__(40));
+
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+var math_1 = __webpack_require__(0);
+/**
+ * the base class for all game entities
+ */
+var Entity = (function () {
+    function Entity(position) {
+        if (position === void 0) { position = new math_1.Vector2D(0, 0); }
+        this.position = position;
+    }
+    /**
+     * get the current position of the entity ( top left )
+     */
+    Entity.prototype.getPosition = function () {
+        return this.position;
+    };
+    /**
+     * set the entities new position
+     *
+     * @param position the new position
+     */
+    Entity.prototype.setPosition = function (position) {
+        this.position = position;
+    };
+    return Entity;
+}());
+exports.Entity = Entity;
+
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * a basic scene
+ */
+var Scene = (function () {
+    function Scene() {
+    }
+    return Scene;
+}());
+exports.Scene = Scene;
+
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(7));
+__export(__webpack_require__(52));
+__export(__webpack_require__(53));
+__export(__webpack_require__(1));
+__export(__webpack_require__(23));
+__export(__webpack_require__(54));
+__export(__webpack_require__(2));
+__export(__webpack_require__(24));
+
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [0, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var AssetType_1 = __webpack_require__(1);
+var AssetStorage_1 = __webpack_require__(24);
+var network_1 = __webpack_require__(8);
+var shared_1 = __webpack_require__(4);
+/**
+ * this class handles the loading of assets
+ */
+var AssetLoader = (function (_super) {
+    __extends(AssetLoader, _super);
+    function AssetLoader() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        /**
+         * the holder of all asset loads
+         */
+        _this.assetLoaderPromiseStack = [];
+        /**
+         * the asset storage instance
+         */
+        _this.assetStorage = AssetStorage_1.AssetStorage.getInstance();
+        /**
+         * the logger
+         */
+        _this.logger = shared_1.Log.getLogger(AssetLoader.name);
+        return _this;
+    }
+    /**
+     * register one or many assets to adress then later in the game
+     * an asset name should allways be unique, event if the asset type
+     * is different
+     *
+     * @param assetClass the class of the asset
+     * @param assets the asset to register
+     */
+    AssetLoader.prototype.registerAsset = function (assetClass) {
+        var assets = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            assets[_i - 1] = arguments[_i];
+        }
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            var outerPromise, resourceStack, _a;
+            return __generator(this, function (_b) {
+                outerPromise = [];
+                resourceStack = [];
+                // iterate through all given assets
+                assets.forEach(function (asset) {
+                    // check if the asset exists
+                    if (_this.assetStorage.hasAsset(asset.name, asset.assetType)) {
+                        // log a warning that an asset has a double register
+                        _this.logger.warning("The given asset with the name", asset.name, "is allready registered.");
+                    }
+                    // add a promise to await its loading
+                    outerPromise.push(new Promise(function (resolve) {
+                        // construct an instance of the asset
+                        var instance = new assetClass();
+                        instance.setName(asset.name);
+                        // fill the instance
+                        _this.loadAsset(instance, asset.path).then(function (resource) {
+                            // store the asset
+                            resourceStack.push(resource);
+                            // resolve the promise
+                            resolve(resource);
+                        });
+                    }));
+                });
+                // stack all loading promises to the asset loading process
+                (_a = this.assetLoaderPromiseStack).push.apply(_a, outerPromise);
+                // return the promise
+                return [2 /*return*/, Promise.all(outerPromise).then(function () {
+                        // store all assets
+                        (_a = _this.assetStorage).addAsset.apply(_a, resourceStack);
+                        // resolve the promise
+                        return resourceStack;
+                        var _a;
+                    })];
+            });
+        });
+    };
+    /**
+     * loads one asset
+     *
+     * @param instance the instance to be loaded
+     * @param path the path where to load the asset from
+     */
+    AssetLoader.prototype.loadAsset = function (instance, path) {
+        return __awaiter(this, void 0, void 0, function () {
+            var callback;
+            return __generator(this, function (_a) {
+                // check if the path is a local data uri
+                if (path.indexOf('data:') === 0) {
+                    return [2 /*return*/, new Promise(function (resolve) {
+                            // set the blob for the asset
+                            instance.setData(shared_1.Binary.dataUriToBlob(path));
+                            resolve(instance);
+                        })];
+                }
+                switch (instance.getType()) {
+                    case AssetType_1.AssetType.Image:
+                    case AssetType_1.AssetType.TileMap:
+                        callback = this.loadImage.bind(this);
+                        break;
+                    default:
+                        throw "Asset type " + AssetType_1.AssetType[instance.getType()] + " is not implemented";
+                }
+                // load the resource
+                return [2 /*return*/, callback(path).then(function (resource) {
+                        // set the resource data to the asset instance
+                        instance.setData(resource);
+                        return instance;
+                    })];
+            });
+        });
+    };
+    /**
+     * get all unresolved assets from the register process
+     */
+    AssetLoader.prototype.getUnresolvedPromised = function () {
+        return this.assetLoaderPromiseStack;
+    };
+    /**
+     * add promises to the asset loader. this can be used to delay the game
+     * startup until all assets are loaded.
+     *
+     * @param promises the promises to add
+     */
+    AssetLoader.prototype.addAssetLoaderPromise = function () {
+        var promises = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            promises[_i] = arguments[_i];
+        }
+        (_a = this.assetLoaderPromiseStack).push.apply(_a, promises);
+        return promises;
+        var _a;
+    };
+    /**
+     * load an image
+     *
+     * @param path the path to the image
+     */
+    AssetLoader.prototype.loadImage = function (path) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                // make an xhr call to the file
+                return [2 /*return*/, network_1.Request.getBinary(path).then(function (image) {
+                        // create the image bitmap for the blob
+                        return shared_1.Binary.bufferToBlob(image);
+                    })];
+            });
+        });
+    };
+    /**
+     * load an audio file
+     *
+     * @param path the path to the audio file
+     */
+    AssetLoader.prototype.loadAudio = function (path) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/];
+            });
+        });
+    };
+    /**
+     * load a json file and parse its body
+     *
+     * @param path the path to the json file
+     */
+    AssetLoader.prototype.loadJSON = function (path) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/];
+            });
+        });
+    };
+    return AssetLoader;
+}(shared_1.Singleton));
+exports.AssetLoader = AssetLoader;
+
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var AssetType_1 = __webpack_require__(1);
+var shared_1 = __webpack_require__(4);
+/**
+ * a class that handles asset storing and getting
+ */
+var AssetStorage = (function (_super) {
+    __extends(AssetStorage, _super);
+    function AssetStorage() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        // the logger
+        _this.logger = shared_1.Log.getInstance();
+        return _this;
+    }
+    /**
+     * get an asset from the storage
+     *
+     * @param name the name of the asset
+     */
+    AssetStorage.prototype.getAsset = function (name, type) {
+        // check if the asset is available
+        if (!shared_1.RamStorage.has(this.getAssetStorageName(name, type))) {
+            // print error
+            this.logger.error("Trying to load not existing asset", name, "with type", AssetType_1.AssetType[type]);
+            return;
+        }
+        // ask the ram storage for the asset
+        return shared_1.RamStorage.get(this.getAssetStorageName(name, type));
+    };
+    /**
+     * check if the storage has the given asset
+     *
+     * @param name the name of the asset
+     * @param type the type of the asset
+     */
+    AssetStorage.prototype.hasAsset = function (name, type) {
+        // ask the ram storage
+        return shared_1.RamStorage.has(this.getAssetStorageName(name, type));
+    };
+    /**
+     * get the amount of currently registered assets of the given type
+     *
+     * @param type the asset type
+     */
+    AssetStorage.prototype.getAssetAmount = function (type) {
+        return shared_1.RamStorage.amount(this.getAssetStorageName('', type));
+    };
+    /**
+     * adds the given assets to the storage
+     *
+     * @param asset the assets to add
+     */
+    AssetStorage.prototype.addAsset = function () {
+        var _this = this;
+        var assets = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            assets[_i] = arguments[_i];
+        }
+        // iterate all assets
+        assets.forEach(function (asset) {
+            // if the asset is allready there, write a warning
+            if (_this.hasAsset(asset.getName(), asset.getType())) {
+                _this.logger.warning("Asset with name", asset.getName(), "and type", AssetType_1.AssetType[asset.getType()], "allready exists. The asser will be overwritten!");
+            }
+            // now add the asset
+            shared_1.RamStorage.add(_this.getAssetStorageName(asset.getName(), asset.getType()), asset);
+        });
+    };
+    /**
+     * removes all assets from the storage
+     */
+    AssetStorage.prototype.clearStorage = function (type) {
+        shared_1.RamStorage.clearPath(this.getAssetStorageName("", type));
+    };
+    /**
+     * get the storage asset name
+     *
+     * @param name the name of the asset
+     */
+    AssetStorage.prototype.getAssetStorageName = function (name, type) {
+        var path = "assetloader";
+        if (type !== undefined)
+            path += "." + type;
+        if (name)
+            path += "." + name;
+        return path;
+    };
+    return AssetStorage;
+}(shared_1.Singleton));
+exports.AssetStorage = AssetStorage;
+
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+var shared_1 = __webpack_require__(4);
+/**
+ * the view for the player into the game
+ */
+var BaseCamera = (function () {
+    /**
+     *
+     * @param scale the scale of the world. 1 means that a tile of 32x32 will renderes on 32x32 pixel. scane 5 means that a tile of 32x32 will be rendered as (32*5)x(32*5) pixel...
+     * @param mode the camera mode
+     */
+    function BaseCamera(scale) {
+        if (scale === void 0) { scale = 1; }
+        this.scale = scale;
+        /**
+         * the entitiy which the camera should follow
+         */
+        this.followingEntity = null;
+        /**
+         * the current camera world bounds
+         */
+        this.worldBounds = null;
+    }
+    /**
+     * get the camera mode
+     */
+    BaseCamera.prototype.getMode = function () {
+        return this.mode;
+    };
+    /**
+     * get the current world scale modificator
+     */
+    BaseCamera.prototype.getScale = function () {
+        return this.scale;
+    };
+    /**
+     * get the camera scale as vector
+     */
+    BaseCamera.prototype.getScaleVector = function () {
+        return new shared_1.Vector2D(this.scale, this.scale);
+    };
+    /**
+     * set the current world scale modificator
+     */
+    BaseCamera.prototype.setScale = function (scale) {
+        this.scale = scale;
+    };
+    /**
+     * follows one entity
+     *
+     * @param entity the entity to follow
+     */
+    BaseCamera.prototype.followEntity = function (entity) {
+        this.followingEntity = entity;
+    };
+    /**
+     * get the current entity the camera follows.
+     * can be undefined is the camera is not following an entity
+     */
+    BaseCamera.prototype.getFollowingEntity = function () {
+        return this.followingEntity;
+    };
+    /**
+     * if the camera should be allways within the world, set the world
+     * bounds to the current active world
+     */
+    BaseCamera.prototype.setWorldBounds = function (world) {
+        var dimension = world.getWorldDimension();
+        this.worldBounds = new shared_1.Vector2D(dimension.x, dimension.y);
+    };
+    /**
+     * get the current world bounds.
+     *
+     * @warning return value can be null if no bounds are available!
+     */
+    BaseCamera.prototype.getWorldBounds = function () {
+        var wb = this.worldBounds;
+        if (!wb)
+            return wb;
+        // add the current camera scale
+        return wb.multiply(new shared_1.Vector2D(this.getScale(), this.getScale()));
+    };
+    return BaseCamera;
+}());
+exports.BaseCamera = BaseCamera;
+
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * the currently supported camera modes
+ */
+var CameraMode;
+(function (CameraMode) {
+    CameraMode[CameraMode["Orthogonal"] = 0] = "Orthogonal";
+})(CameraMode = exports.CameraMode || (exports.CameraMode = {}));
+
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var decorator_1 = __webpack_require__(9);
+var log_1 = __webpack_require__(3);
+var helper_1 = __webpack_require__(6);
+var Game_1 = __webpack_require__(39);
+var storage_1 = __webpack_require__(5);
+var asset_1 = __webpack_require__(22);
+var input_1 = __webpack_require__(57);
+var collision_1 = __webpack_require__(59);
+/**
+ * the initiation class of the game client
+ */
+var Client = (function () {
+    function Client(clientConfig) {
+        this.clientConfig = clientConfig;
+        /**
+         * the logger instance
+         */
+        this.logger = log_1.Log.getLogger(Client.name);
+        // print package and version info
+        console.info("%c -= Qhun-Engine v1.0.0 =- [ http://engine.qhun.de ]", "background: green; font-color: white;");
+        // step by step setup of the game
+        this.bindLoadEvent();
+    }
+    /**
+     * bind window events to let the start of the engine pause
+     * until the javascript dom is ready
+     */
+    Client.prototype.bindLoadEvent = function () {
+        // at window load, start the internal setup
+        window.addEventListener('load', this.internalSetup.bind(this));
+    };
+    /**
+     * internal setup phase
+     */
+    Client.prototype.internalSetup = function () {
+        var _this = this;
+        // get all promised from the preload phase and await them
+        var assetLoader = asset_1.AssetLoader.getInstance();
+        var assetStorage = asset_1.AssetStorage.getInstance();
+        // setup renderer
+        this.renderer = new this.clientConfig.rederer();
+        this.renderer.setup(this.clientConfig);
+        // some logging
+        this.logger.info("Using", this.renderer.constructor.name, "as Renderer");
+        // start the preload phase
+        this.preload();
+        // await the asset loading
+        Promise.all(assetLoader.getUnresolvedPromised()).then(function () {
+            // log the information about the registration process of assets
+            _this.logger.info("Registered", assetStorage.getAssetAmount(asset_1.AssetType.Image), "Images");
+            _this.logger.info("Registered", assetStorage.getAssetAmount(asset_1.AssetType.TileMap), "TileMaps");
+            _this.logger.info("Registered", assetStorage.getAssetAmount(asset_1.AssetType.Audio), "Sounds");
+            _this.logger.info("Registered", assetStorage.getAssetAmount(asset_1.AssetType.Json), "JSON Objects");
+            // all assets loaded, continue startup
+            _this.gameInstance = new Game_1.Game(_this.renderer);
+            _this.inputInstance = new input_1.Input();
+            // fire loaded event
+            _this.loaded(_this.gameInstance);
+            _this.printMemoryFootprint();
+            // init the game loop
+            _this.gameLoop();
+        });
+    };
+    /**
+     * logs the current memory footprint to the console
+     */
+    Client.prototype.printMemoryFootprint = function () {
+        var assets = storage_1.RamStorage.getSize("assetloader", helper_1.FileSizeType.Megabyte);
+        var misc = storage_1.RamStorage.getSize("singleton", helper_1.FileSizeType.Megabyte);
+        var overall = +(assets + misc).toFixed(2);
+        // print current memory footprint
+        this.logger.info("Memory footprint:", overall, "MB");
+        this.logger.info("\t- Assets:\t", assets, "MB");
+        this.logger.info("\t- Misc:\t\t", misc, "MB");
+    };
+    /**
+     * the game loop where all things come together
+     */
+    Client.prototype.gameLoop = function () {
+        // call update method
+        this.update(this.gameInstance, this.inputInstance);
+        // run collision detection
+        collision_1.CollisionDetection.entitiesWithWorld(this.gameInstance.getCurrentEntities(), this.renderer.getWorld(), this.gameInstance.getCurrentCamera());
+        // call the scene update
+        var scene = this.gameInstance.getCurrentScene();
+        if (scene)
+            scene.update(this.gameInstance);
+        // render the game
+        if (typeof this.renderer.preRender === 'function')
+            this.renderer.preRender();
+        this.renderer.render();
+        if (typeof this.renderer.postRender === 'function')
+            this.renderer.postRender();
+        // request the next game frame
+        window.requestAnimationFrame(this.gameLoop.bind(this));
+    };
+    __decorate([
+        decorator_1.logMethodCall,
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", []),
+        __metadata("design:returntype", void 0)
+    ], Client.prototype, "bindLoadEvent", null);
+    __decorate([
+        decorator_1.logMethodCall,
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", []),
+        __metadata("design:returntype", void 0)
+    ], Client.prototype, "internalSetup", null);
+    return Client;
+}());
+exports.Client = Client;
+
+
+/***/ }),
+/* 28 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+var log_1 = __webpack_require__(3);
+/**
+ * a decorator for logging method calls to debug console
+ *
+ * @param target
+ * @param propertyKey
+ * @param descriptor
+ */
+function logMethodCall(target, key, descriptor) {
+    // load the logger
+    var logger = log_1.Log.getInstance();
+    return {
+        value: function () {
+            var args = [];
+            for (var _i = 0; _i < arguments.length; _i++) {
+                args[_i] = arguments[_i];
+            }
+            // log the call
+            logger.debug("@logMethodCall", target.constructor.name + ":" + key + "()");
+            // original method call
+            return descriptor.value.apply(this, args);
+        }
+    };
+}
+exports.logMethodCall = logMethodCall;
+
+
+/***/ }),
+/* 29 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var LogLevel_1 = __webpack_require__(10);
+var helper_1 = __webpack_require__(6);
+var storage_1 = __webpack_require__(5);
+/**
+ * a log wrapper to allow log levels and a more complex
+ * logging structure
+ */
+var Log = (function (_super) {
+    __extends(Log, _super);
+    function Log() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        /**
+         * the current log prefix
+         */
+        _this.prefix = "";
+        // the current loglevel
+        _this.logLevel = LogLevel_1.LogLevel.Debug;
+        return _this;
+    }
+    /**
+     * sets the log level for the application environment
+     *
+     * @param level the new log level
+     */
+    Log.prototype.setLogLevel = function (level) {
+        this.logLevel = level;
+    };
+    /**
+     * get the logger instance with prefixing for better
+     * detection
+     *
+     * @param prefix the prefix string
+     */
+    Log.getLogger = function (prefix) {
+        var instance = null;
+        if (!storage_1.RamStorage.has(this.generateStorageName(prefix))) {
+            // get the constructor and store an instance of the class at the ram storage
+            var constructor = this;
+            var logger = new constructor();
+            logger.prefix = prefix;
+            storage_1.RamStorage.add(this.generateStorageName(prefix), logger);
+        }
+        // get the instance
+        return storage_1.RamStorage.get(this.generateStorageName(prefix));
+    };
+    /**
+     * override the generate storage name method to allow prefixing the
+     * log instance
+     *
+     * @param prefix the desired prefix
+     */
+    Log.generateStorageName = function (prefix) {
+        return "singleton.instance." + this.name + "." + prefix;
+    };
+    /**
+     * logs the given data
+     *
+     * @param level the level to log in
+     * @param optionalPrefix the optional prefix
+     * @param params all params as vararg array
+     */
+    Log.prototype.log = function (level) {
+        var params = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            params[_i - 1] = arguments[_i];
+        }
+        // log if the log level is ok
+        if (parseInt(level) >= parseInt(this.logLevel)) {
+            var prefix = "";
+            if (this.prefix) {
+                prefix = "[" + this.prefix + "]";
+            }
+            this.getLogFunctionByLevel(level).apply(void 0, ["[" + this.constructor.name + "." + LogLevel_1.LogLevel[level] + "]" + prefix].concat(params));
+        }
+    };
+    /**
+     * gets a callback function to log
+     *
+     * @param level the level to get the function from
+     */
+    Log.prototype.getLogFunctionByLevel = function (level) {
+        var callback = function () { };
+        // go through the different log levels
+        switch (level) {
+            case LogLevel_1.LogLevel.Debug:
+                callback = console.debug;
+                break;
+            case LogLevel_1.LogLevel.Info:
+                callback = console.info;
+                break;
+            case LogLevel_1.LogLevel.Warning:
+                callback = console.warn;
+                break;
+            case LogLevel_1.LogLevel.Error:
+                callback = console.error;
+                break;
+        }
+        return callback;
+    };
+    /**
+     * get the current log level
+     */
+    Log.prototype.getLogLevel = function () {
+        return this.logLevel;
+    };
+    /**
+     * logs as debug level
+     *
+     * @param optionalPrefix if this is a constructor, the log will pre prefixed with its name. if not, the param will just printed
+     * @param params all params as vararg array
+     */
+    Log.prototype.debug = function () {
+        var params = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            params[_i] = arguments[_i];
+        }
+        this.log.apply(this, [LogLevel_1.LogLevel.Debug].concat(params));
+    };
+    /**
+     * logs as info level
+     *
+     * @param optionalPrefix if this is a constructor, the log will pre prefixed with its name. if not, the param will just printed
+     * @param params all params as vararg array
+     */
+    Log.prototype.info = function () {
+        var params = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            params[_i] = arguments[_i];
+        }
+        this.log.apply(this, [LogLevel_1.LogLevel.Info].concat(params));
+    };
+    /**
+     * logs as warning level
+     *
+     * @param optionalPrefix if this is a constructor, the log will pre prefixed with its name. if not, the param will just printed
+     * @param params all params as vararg array
+     */
+    Log.prototype.warning = function () {
+        var params = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            params[_i] = arguments[_i];
+        }
+        this.log.apply(this, [LogLevel_1.LogLevel.Warning].concat(params));
+    };
+    /**
+     * logs as error level
+     *
+     * @param optionalPrefix if this is a constructor, the log will pre prefixed with its name. if not, the param will just printed
+     * @param params all params as vararg array
+     */
+    Log.prototype.error = function () {
+        var params = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            params[_i] = arguments[_i];
+        }
+        this.log.apply(this, [LogLevel_1.LogLevel.Error].concat(params));
+    };
+    return Log;
+}(helper_1.Singleton));
+exports.Log = Log;
+
+
+/***/ }),
+/* 30 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+// the dependency to get the memory footprint ob stored objects
+var sizeof = __webpack_require__(31);
+var math_1 = __webpack_require__(0);
+var File_1 = __webpack_require__(15);
+/**
+ * holds objects in the ram of the operating unit
+ */
+var RamStorage = (function () {
+    function RamStorage() {
+    }
+    /**
+     * adds an elemement to the cache
+     *
+     * @param path the path to the object. dots can be used to structure
+     * @param elemement the element to store
+     */
+    RamStorage.add = function (path, elemement) {
+        RamStorage.cache[path] = elemement;
+    };
+    /**
+     * removes an element from the cache
+     *
+     * @param path the path to the object. dots can be used to structure
+     */
+    RamStorage.remove = function (path) {
+        delete RamStorage.cache[path];
+    };
+    /**
+     * reset the complete storage!
+     */
+    RamStorage.clear = function () {
+        this.cache = {};
+    };
+    /**
+     * removes all entires in the given path
+     *
+     * @param path the path to clear
+     * @return the amount of deleted objects
+     */
+    RamStorage.clearPath = function (path) {
+        var counter = 0;
+        Object.keys(RamStorage.cache).forEach(function (key) {
+            // if the path is present
+            if (key.indexOf(path) === 0) {
+                // remove the part
+                delete RamStorage.cache[key];
+                counter++;
+            }
+        });
+        return counter;
+    };
+    /**
+     * get an element from the cache
+     *
+     * @param path the path to the object. dots can be used to structure
+     */
+    RamStorage.get = function (path) {
+        return RamStorage.cache[path];
+    };
+    /**
+     * checks if an object exists in the cache
+     *
+     * @param path the path to the object. dots can be used to structure
+     */
+    RamStorage.has = function (path) {
+        return RamStorage.get(path) !== undefined;
+    };
+    /**
+     * the path to one or many objects in the storage
+     *
+     * @param path the path to the object. dots can be used to structure
+     */
+    RamStorage.amount = function (path) {
+        var counter = 0;
+        Object.keys(RamStorage.cache).forEach(function (key) {
+            // if the path is present, update counter
+            if (key.indexOf(path) === 0)
+                counter++;
+        });
+        return counter;
+    };
+    /**
+     * calculates the used memory for the selected objects in the storage.
+     *
+     * @param path the path to the object. dots can be used to structure
+     */
+    RamStorage.getSize = function (path, type) {
+        if (path === void 0) { path = ""; }
+        if (type === void 0) { type = File_1.FileSizeType.Byte; }
+        var byteCounter = 0;
+        Object.keys(RamStorage.cache).forEach(function (key) {
+            // if the path is present, update counter
+            if (key.indexOf(path) === 0)
+                byteCounter += sizeof(RamStorage.cache[key]);
+        });
+        var bytes = File_1.File.byteToSize(byteCounter, type);
+        return math_1.Helper.roundToPrecision(bytes, 2);
+    };
+    // the private cache object
+    RamStorage.cache = {};
+    return RamStorage;
+}());
+exports.RamStorage = RamStorage;
+
+
+/***/ }),
+/* 31 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+// Copyright 2014 Andrei Karpushonak
+
+
+
+var ECMA_SIZES  = __webpack_require__(32);
+var Buffer = __webpack_require__(12).Buffer;
+
+/**
+ * Main module's entry point
+ * Calculates Bytes for the provided parameter
+ * @param object - handles object/string/boolean/buffer
+ * @returns {*}
+ */
+function sizeof(object) {
+    if (object !== null && typeof (object) === 'object') {
+      if (Buffer.isBuffer(object)) {
+        return object.length;
+      }
+      else {
+        var bytes = 0;
+        for (var key in object) {
+
+          if(!Object.hasOwnProperty.call(object, key)) {
+            continue;
+          }
+
+          bytes += sizeof(key);
+          try {
+            bytes += sizeof(object[key]);
+          } catch (ex) {
+            if(ex instanceof RangeError) {
+              // circular reference detected, final result might be incorrect
+              // let's be nice and not throw an exception
+              bytes = 0;
+            }
+          }
+        }
+        return bytes;
+      }
+    } else if (typeof (object) === 'string') {
+      return object.length * ECMA_SIZES.STRING;
+    } else if (typeof (object) === 'boolean') {
+      return ECMA_SIZES.BOOLEAN;
+    } else if (typeof (object) === 'number') {
+      return ECMA_SIZES.NUMBER;
+    } else {
+      return 0;
+    }
+}
+
+module.exports = sizeof;
+
 
 /***/ }),
 /* 32 */
+/***/ (function(module, exports) {
+
+/**
+ * Byte sizes are taken from ECMAScript Language Specification
+ * http://www.ecma-international.org/ecma-262/5.1/
+ * http://bclary.com/2004/11/07/#a-4.3.16
+ */
+
+module.exports = {
+    STRING: 2,
+    BOOLEAN: 4,
+    NUMBER: 8
+};
+
+/***/ }),
+/* 33 */
 /***/ (function(module, exports) {
 
 var g;
@@ -3634,7 +3792,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3755,7 +3913,7 @@ function fromByteArray (uint8) {
 
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports) {
 
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
@@ -3845,7 +4003,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports) {
 
 var toString = {}.toString;
@@ -3856,7 +4014,7 @@ module.exports = Array.isArray || function (arr) {
 
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3878,8 +4036,8 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var Helper_1 = __webpack_require__(10);
-var Dimension_1 = __webpack_require__(11);
+var Helper_1 = __webpack_require__(13);
+var Dimension_1 = __webpack_require__(14);
 /**
  * represents a 2D vector with x and y coordinates.
  */
@@ -3978,7 +4136,7 @@ exports.Vector2D = Vector2D;
 
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4044,10 +4202,10 @@ var Binary = (function () {
 }());
 exports.Binary = Binary;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(31).Buffer))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12).Buffer))
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4104,11 +4262,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var entity_1 = __webpack_require__(13);
-var scene_1 = __webpack_require__(42);
-var world_1 = __webpack_require__(44);
-var camera_1 = __webpack_require__(52);
-var shared_1 = __webpack_require__(22);
+var entity_1 = __webpack_require__(16);
+var scene_1 = __webpack_require__(43);
+var world_1 = __webpack_require__(45);
+var camera_1 = __webpack_require__(55);
+var shared_1 = __webpack_require__(4);
 /**
  * a class that handles adding of entities, cameras, physics ...
  */
@@ -4125,6 +4283,10 @@ var Game = (function (_super) {
          * holder of the registered worlds
          */
         _this.worldStack = {};
+        /**
+         * logger instance
+         */
+        _this.logger = shared_1.Log.getLogger(Game.name);
         // bind singleton
         Game.bindInstance(_this);
         return _this;
@@ -4243,7 +4405,7 @@ var Game = (function (_super) {
         // does the world exists?
         if (!(world in this.worldStack)) {
             // print error
-            shared_1.Log.error("Trying to load", world, "but this world does not exists");
+            this.logger.error("Trying to load", world, "but this world does not exists");
             return;
         }
         // set the world in the renderer
@@ -4267,7 +4429,7 @@ exports.Game = Game;
 
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4289,7 +4451,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var Entity_1 = __webpack_require__(17);
+var Entity_1 = __webpack_require__(20);
 var math_1 = __webpack_require__(0);
 /**
  * an entity that can collide with other collidable entities
@@ -4333,7 +4495,7 @@ exports.CollidableEntity = CollidableEntity;
 
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4420,7 +4582,7 @@ exports.Animation = Animation;
 
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4442,7 +4604,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var Entity_1 = __webpack_require__(14);
+var Entity_1 = __webpack_require__(17);
 /**
  * a helper type for eg. blocked directions
  */
@@ -4544,7 +4706,7 @@ exports.CollidableEntity = CollidableEntity;
 
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4559,12 +4721,12 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(18));
-__export(__webpack_require__(43));
+__export(__webpack_require__(21));
+__export(__webpack_require__(44));
 
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4621,7 +4783,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var Scene_1 = __webpack_require__(18);
+var Scene_1 = __webpack_require__(21);
 /**
  * a basic loading screen scene
  */
@@ -4672,7 +4834,7 @@ exports.LoadingScreenScene = LoadingScreenScene;
 
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4687,11 +4849,11 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(45));
+__export(__webpack_require__(46));
 
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4703,9 +4865,9 @@ __export(__webpack_require__(45));
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-var physic_1 = __webpack_require__(46);
+var physic_1 = __webpack_require__(47);
 var math_1 = __webpack_require__(0);
-var asset_1 = __webpack_require__(19);
+var asset_1 = __webpack_require__(22);
 /**
  * a class to handle world spefific things
  */
@@ -4723,7 +4885,7 @@ var World = (function () {
          */
         this.collisionTiles = [];
         // get the tilemap from the asset loader
-        this.map = asset_1.AssetLoader.getInstance()
+        this.map = asset_1.AssetStorage.getInstance()
             .getAsset(map, asset_1.AssetType.TileMap);
     }
     /**
@@ -4809,7 +4971,7 @@ exports.World = World;
 
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4824,11 +4986,11 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(47));
+__export(__webpack_require__(48));
 
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4852,7 +5014,50 @@ var GravityForce;
 
 
 /***/ }),
-/* 48 */
+/* 49 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(50));
+
+
+/***/ }),
+/* 50 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * an enumeration for all available collision types
+ */
+var CollisionType;
+(function (CollisionType) {
+    CollisionType[CollisionType["Circle"] = 0] = "Circle";
+    CollisionType[CollisionType["Rectangle"] = 1] = "Rectangle";
+    CollisionType[CollisionType["RotatedRectangle"] = 2] = "RotatedRectangle";
+})(CollisionType = exports.CollisionType || (exports.CollisionType = {}));
+
+
+/***/ }),
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4958,7 +5163,7 @@ exports.Request = Request;
 
 
 /***/ }),
-/* 49 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5016,9 +5221,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var AssetType_1 = __webpack_require__(1);
-var Image_1 = __webpack_require__(6);
-var AbstractAsset_1 = __webpack_require__(3);
-var network_1 = __webpack_require__(7);
+var Image_1 = __webpack_require__(7);
+var AbstractAsset_1 = __webpack_require__(2);
+var network_1 = __webpack_require__(8);
 var SPRITE_MAP_DELIMITER = ',';
 /**
  * an internal enum to index the correct array position for sprite maps
@@ -5134,7 +5339,7 @@ exports.Sprite = Sprite;
 
 
 /***/ }),
-/* 50 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5157,7 +5362,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var AssetType_1 = __webpack_require__(1);
-var AbstractAsset_1 = __webpack_require__(3);
+var AbstractAsset_1 = __webpack_require__(2);
 var Sound = (function (_super) {
     __extends(Sound, _super);
     function Sound(name, path, data) {
@@ -5186,7 +5391,7 @@ exports.Sound = Sound;
 
 
 /***/ }),
-/* 51 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5243,10 +5448,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var AbstractAsset_1 = __webpack_require__(3);
+var AbstractAsset_1 = __webpack_require__(2);
 var AssetType_1 = __webpack_require__(1);
-var Image_1 = __webpack_require__(6);
-var network_1 = __webpack_require__(7);
+var Image_1 = __webpack_require__(7);
+var network_1 = __webpack_require__(8);
 var math_1 = __webpack_require__(0);
 /**
  * an asset class to load a tilemap as world
@@ -5406,71 +5611,28 @@ exports.TileMap = TileMap;
 
 
 /***/ }),
-/* 52 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(21));
-__export(__webpack_require__(55));
-__export(__webpack_require__(23));
-
-
-/***/ }),
-/* 53 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(54));
-
-
-/***/ }),
-/* 54 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * an enumeration for all available collision types
- */
-var CollisionType;
-(function (CollisionType) {
-    CollisionType[CollisionType["Circle"] = 0] = "Circle";
-    CollisionType[CollisionType["Rectangle"] = 1] = "Rectangle";
-    CollisionType[CollisionType["RotatedRectangle"] = 2] = "RotatedRectangle";
-})(CollisionType = exports.CollisionType || (exports.CollisionType = {}));
-
-
-/***/ }),
 /* 55 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(25));
+__export(__webpack_require__(56));
+__export(__webpack_require__(26));
+
+
+/***/ }),
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5492,8 +5654,8 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var BaseCamera_1 = __webpack_require__(21);
-var CameraMode_1 = __webpack_require__(23);
+var BaseCamera_1 = __webpack_require__(25);
+var CameraMode_1 = __webpack_require__(26);
 /**
  * an orthogonal camera for the view of the player
  */
@@ -5513,7 +5675,7 @@ exports.OrthogonalCamera = OrthogonalCamera;
 
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5528,11 +5690,11 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(57));
+__export(__webpack_require__(58));
 
 
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5554,7 +5716,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var helper_1 = __webpack_require__(4);
+var helper_1 = __webpack_require__(6);
 /**
  * a basic class to get user input like keybord or mouse data
  */
@@ -5621,7 +5783,7 @@ exports.Input = Input;
 
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5636,11 +5798,11 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(59));
+__export(__webpack_require__(60));
 
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5652,7 +5814,7 @@ __export(__webpack_require__(59));
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-var entity_1 = __webpack_require__(13);
+var entity_1 = __webpack_require__(16);
 var math_1 = __webpack_require__(0);
 var CollisionDetection = (function () {
     function CollisionDetection() {
@@ -5711,120 +5873,6 @@ var CollisionDetection = (function () {
     return CollisionDetection;
 }());
 exports.CollisionDetection = CollisionDetection;
-
-
-/***/ }),
-/* 60 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-var AssetType_1 = __webpack_require__(1);
-var shared_1 = __webpack_require__(22);
-/**
- * a class that handles asset storing and getting
- */
-var AssetStorage = (function (_super) {
-    __extends(AssetStorage, _super);
-    function AssetStorage() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        // the logger
-        _this.logger = shared_1.Log.getInstance();
-        return _this;
-    }
-    /**
-     * get an asset from the storage
-     *
-     * @param name the name of the asset
-     */
-    AssetStorage.prototype.getAsset = function (name, type) {
-        // check if the asset is available
-        if (!shared_1.RamStorage.has(this.getAssetStorageName(name, type))) {
-            // print error
-            shared_1.Log.error("Trying to load not existing asset", name, "with type", AssetType_1.AssetType[type]);
-            return;
-        }
-        // ask the ram storage for the asset
-        return shared_1.RamStorage.get(this.getAssetStorageName(name, type));
-    };
-    /**
-     * check if the storage has the given asset
-     *
-     * @param name the name of the asset
-     * @param type the type of the asset
-     */
-    AssetStorage.prototype.hasAsset = function (name, type) {
-        // ask the ram storage
-        return shared_1.RamStorage.has(this.getAssetStorageName(name, type));
-    };
-    /**
-     * get the amount of currently registered assets of the given type
-     *
-     * @param type the asset type
-     */
-    AssetStorage.prototype.getAssetAmount = function (type) {
-        return shared_1.RamStorage.amount(this.getAssetStorageName('', type));
-    };
-    /**
-     * adds the given assets to the storage
-     *
-     * @param asset the assets to add
-     */
-    AssetStorage.prototype.addAsset = function () {
-        var _this = this;
-        var assets = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            assets[_i] = arguments[_i];
-        }
-        // iterate all assets
-        assets.forEach(function (asset) {
-            // if the asset is allready there, write a warning
-            if (_this.hasAsset(asset.getName(), asset.getType())) {
-                shared_1.Log.warning("Asset with name", asset.getName(), "and type", AssetType_1.AssetType[asset.getType()], "allready exists. The asser will be overwritten!");
-            }
-            // now add the asset
-            shared_1.RamStorage.add(_this.getAssetStorageName(asset.getName(), asset.getType()), asset);
-        });
-    };
-    /**
-     * removes all assets from the storage
-     */
-    AssetStorage.prototype.clearStorage = function (type) {
-        shared_1.RamStorage.clearPath(this.getAssetStorageName("", type));
-    };
-    /**
-     * get the storage asset name
-     *
-     * @param name the name of the asset
-     */
-    AssetStorage.prototype.getAssetStorageName = function (name, type) {
-        var path = "assetloader";
-        if (type !== undefined)
-            path += "." + type;
-        if (name)
-            path += "." + name;
-        return path;
-    };
-    return AssetStorage;
-}(shared_1.Singleton));
-exports.AssetStorage = AssetStorage;
 
 
 /***/ })

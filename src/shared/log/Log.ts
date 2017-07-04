@@ -6,13 +6,19 @@
  */
 
 import { LogLevel } from './LogLevel';
-import { Singleton } from '../helper/Singleton';
+import { Singleton } from '../helper';
+import { RamStorage } from '../storage';
 
 /**
  * a log wrapper to allow log levels and a more complex
  * logging structure
  */
 export class Log extends Singleton {
+
+    /**
+     * the current log prefix
+     */
+    private prefix: string = "";
 
     // the current loglevel
     protected logLevel: LogLevel = LogLevel.Debug;
@@ -28,29 +34,53 @@ export class Log extends Singleton {
     }
 
     /**
+     * get the logger instance with prefixing for better
+     * detection
+     *
+     * @param prefix the prefix string
+     */
+    public static getLogger(prefix?: string): Log {
+
+        let instance = null;
+        if (!RamStorage.has(this.generateStorageName(prefix))) {
+
+            // get the constructor and store an instance of the class at the ram storage
+            let constructor = <{ new (): Log }><any>this;
+            let logger = new constructor();
+            logger.prefix = prefix;
+            RamStorage.add(this.generateStorageName(prefix), logger);
+        }
+
+        // get the instance
+        return RamStorage.get<Log>(this.generateStorageName(prefix));
+    }
+
+    /**
+     * override the generate storage name method to allow prefixing the
+     * log instance
+     *
+     * @param prefix the desired prefix
+     */
+    protected static generateStorageName(prefix?: string): string {
+
+        return `singleton.instance.${this.name}.${prefix}`;
+    }
+
+    /**
      * logs the given data
      *
      * @param level the level to log in
      * @param optionalPrefix the optional prefix
      * @param params all params as vararg array
      */
-    public log(level: LogLevel, optionalPrefix: new () => any | any, ...params: any[]): void {
+    public log(level: LogLevel, ...params: any[]): void {
 
         // log if the log level is ok
         if (parseInt(<any>level) >= parseInt(<any>this.logLevel)) {
 
-            // empty prefix
             let prefix = "";
-
-            // level ok, now check if there should be a prefix
-            if (typeof optionalPrefix === 'function' && optionalPrefix.name !== 'function') {
-
-                // set the prefix
-                prefix = "[" + optionalPrefix.name + "]";
-            } else {
-
-                // add this param to the normal param stack
-                params.push(optionalPrefix);
+            if (this.prefix) {
+                prefix = `[${this.prefix}]`;
             }
 
             this.getLogFunctionByLevel(level)(
@@ -94,9 +124,9 @@ export class Log extends Singleton {
      * @param optionalPrefix if this is a constructor, the log will pre prefixed with its name. if not, the param will just printed
      * @param params all params as vararg array
      */
-    public debug(optionalPrefix?: any, ...params: any[]): void {
+    public debug(...params: any[]): void {
 
-        this.log(LogLevel.Debug, optionalPrefix, ...params);
+        this.log(LogLevel.Debug, ...params);
     }
 
     /**
@@ -105,9 +135,9 @@ export class Log extends Singleton {
      * @param optionalPrefix if this is a constructor, the log will pre prefixed with its name. if not, the param will just printed
      * @param params all params as vararg array
      */
-    public info(optionalPrefix?: any, ...params: any[]): void {
+    public info(...params: any[]): void {
 
-        this.log(LogLevel.Info, optionalPrefix, ...params);
+        this.log(LogLevel.Info, ...params);
     }
 
     /**
@@ -116,9 +146,9 @@ export class Log extends Singleton {
      * @param optionalPrefix if this is a constructor, the log will pre prefixed with its name. if not, the param will just printed
      * @param params all params as vararg array
      */
-    public warning(optionalPrefix?: any, ...params: any[]): void {
+    public warning(...params: any[]): void {
 
-        this.log(LogLevel.Warning, optionalPrefix, ...params);
+        this.log(LogLevel.Warning, ...params);
     }
 
     /**
@@ -127,8 +157,8 @@ export class Log extends Singleton {
      * @param optionalPrefix if this is a constructor, the log will pre prefixed with its name. if not, the param will just printed
      * @param params all params as vararg array
      */
-    public error(optionalPrefix?: any, ...params: any[]): void {
+    public error(...params: any[]): void {
 
-        this.log(LogLevel.Error, optionalPrefix, ...params);
+        this.log(LogLevel.Error, ...params);
     }
 }

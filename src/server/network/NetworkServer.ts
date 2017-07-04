@@ -22,6 +22,11 @@ export class NetworkServer {
     private socket: SocketIO.Server;
 
     /**
+     * the logger instance
+     */
+    private logger = Log.getLogger(NetworkServer.name);
+
+    /**
      *
      * @param application the application to bind the websocket
      */
@@ -40,7 +45,7 @@ export class NetworkServer {
 
         // init websocket and bind to application
         this.socket = socketio(this.application);
-        Log.info("Websocket started");
+        this.logger.info("Websocket started");
     }
 
     /**

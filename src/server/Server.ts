@@ -19,12 +19,17 @@ export class Server {
     private webserver: Webserver;
     private network: NetworkServer;
 
+    /**
+     * logger instance
+     */
+    private logger = Log.getLogger(Server.name);
+
     constructor(
         private serverConfig: ServerConfig
     ) {
 
         // set the log level
-        Log.setLogLevel(serverConfig.logLevel);
+        this.logger.setLogLevel(serverConfig.logLevel);
 
         // start the webserver
         this.webserver = new Webserver(

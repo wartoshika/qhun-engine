@@ -34,7 +34,7 @@ export class TileMap extends AbstractAsset {
     constructor(
         name?: string,
         path?: string,
-        data?: string,
+        data?: Blob,
         public map?: string[],
         public dimension?: Dimension,
         public layerCount?: number

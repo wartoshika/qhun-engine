@@ -42,6 +42,11 @@ export class Game extends Singleton {
      */
     protected worldStack: { [worldName: string]: World } = {};
 
+    /**
+     * logger instance
+     */
+    private logger = Log.getLogger(Game.name);
+
     constructor(
         private renderer: Renderer
     ) {
@@ -171,7 +176,7 @@ export class Game extends Singleton {
         if (!(world in this.worldStack)) {
 
             // print error
-            Log.error("Trying to load", world, "but this world does not exists");
+            this.logger.error("Trying to load", world, "but this world does not exists");
             return;
         }
 

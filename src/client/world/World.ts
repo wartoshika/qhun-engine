@@ -7,7 +7,7 @@
 
 import { GravityForce } from '../physic';
 import { Vector2D, Dimension } from '../../shared/math';
-import { TileMap, AssetLoader, AssetType } from '../asset';
+import { TileMap, AssetStorage, AssetType } from '../asset';
 import { Camera } from '../camera';
 import { Game } from '../Game';
 
@@ -41,7 +41,7 @@ export class World {
     ) {
 
         // get the tilemap from the asset loader
-        this.map = AssetLoader.getInstance<AssetLoader>()
+        this.map = AssetStorage.getInstance<AssetStorage>()
             .getAsset<TileMap>(map, AssetType.TileMap);
     }
 

@@ -23,7 +23,7 @@ class Test {
     before() {
 
         // prepare the test
-        let logger = Log.getInstance<Log>();
+        let logger = Log.getLogger(TestPrefixClass.name);
         logger.setLogLevel(LogLevel.Debug);
 
         // create context
@@ -125,18 +125,11 @@ class Test {
 
     @test "prefixing should work"() {
 
-        // test a log without prefixing
+        // test a log prefixing
         let log = this.context.get<Log>('logger');
-        log.info("infoText");
-
-        // spy should be called
-        sinon.assert.calledWithExactly(this.context.getSpy(console, 'info'), ...[
-            `[${log.constructor.name}.Info]`,
-            "infoText"
-        ]);
 
         // log with prefix
-        log.warning(TestPrefixClass, "test1", "test2");
+        log.warning("test1", "test2");
 
         // check spy
         sinon.assert.calledWithExactly(this.context.getSpy(console, 'warn'), ...[
@@ -144,5 +137,13 @@ class Test {
             "test1", "test2"
         ]);
 
+        // test log without prefixing
+        let normalLogger = Log.getInstance<Log>();
+        normalLogger.info("test1", "test2");
+
+        // check the spy
+        sinon.assert.calledWithExactly(this.context.getSpy(console, 'info'), ...[
+            `[${log.constructor.name}.Info]`, "test1", "test2"
+        ]);
     }
 }

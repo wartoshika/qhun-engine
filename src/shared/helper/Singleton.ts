@@ -16,7 +16,7 @@ export abstract class Singleton {
      *
      * @param className the class name
      */
-    private static generateStorageName(): string {
+    protected static generateStorageName(): string {
 
         return `singleton.instance.${this.name}`;
     }
