@@ -18,11 +18,14 @@ export function logMethodCall(
     target: Object, key: string | symbol, descriptor: TypedPropertyDescriptor<Function>
 ) {
 
+    // load the logger
+    const logger = Log.getInstance<Log>();
+
     return {
         value: function (...args: any[]) {
 
             // log the call
-            Log.debug("@logMethodCall", `${target.constructor.name}:${key}()`);
+            logger.debug("@logMethodCall", `${target.constructor.name}:${key}()`);
 
             // original method call
             return descriptor.value.apply(this, args);

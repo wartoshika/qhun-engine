@@ -5,33 +5,33 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { Binary } from '../../shared';
+
+/**
+ * a xhr network class to perform http requests
+ */
 export class Request {
 
     /**
      * make an asynchronus get request to the given url
-     * and returns a blob instance
+     * and returns a array buffer
      *
      * @param path the url
      */
-    public static async getBinary(path: string): Promise<string> {
+    public static async getBinary(path: string): Promise<ArrayBuffer> {
 
-        return new Promise<string>(resolve => {
+        return new Promise<ArrayBuffer>(resolve => {
 
             // create xhr instance and set properties
             let xhr = new XMLHttpRequest();
-            xhr.responseType = 'blob';
+            xhr.responseType = 'arraybuffer';
             xhr.open('GET', path);
 
             // register finish event
             xhr.onload = () => {
 
-                // create the blob reader
-                let reader = new FileReader();
-                reader.onloadend = () => {
-
-                    resolve(reader.result);
-                }
-                reader.readAsDataURL(xhr.response);
+                // resolve the promise with a
+                resolve(<ArrayBuffer>xhr.response);
             };
 
             // send the request

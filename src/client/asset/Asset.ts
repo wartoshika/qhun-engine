@@ -10,13 +10,11 @@ import { AssetType } from './AssetType';
 export interface Asset {
 
     getName(): string;
-    getPath(): string;
-    getAssetType(): AssetType;
+    getType(): AssetType;
     getData(): string;
 
     setName(name: string): void;
-    setPath(path: string): void;
-    setData(data: string): void;
+    setData(data: Blob): void;
 }
 
 export interface InlineAsset {
@@ -24,5 +22,5 @@ export interface InlineAsset {
     name: string;
     path: string;
     assetType?: AssetType;
-    data?: string;
+    data?: Blob;
 }

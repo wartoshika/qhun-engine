@@ -12,3 +12,5 @@ export * from './AssetType';
 export * from './AssetLoader';
 export * from './Asset';
 export * from './TileMap';
+export * from './AbstractAsset';
+export * from './AssetStorage';

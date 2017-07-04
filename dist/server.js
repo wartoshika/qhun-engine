@@ -80,7 +80,7 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(__webpack_require__(2));
-__export(__webpack_require__(15));
+__export(__webpack_require__(16));
 
 
 /***/ }),
@@ -338,8 +338,8 @@ exports.File = File;
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 const web_1 = __webpack_require__(9);
-const network_1 = __webpack_require__(16);
-const shared_1 = __webpack_require__(19);
+const network_1 = __webpack_require__(17);
+const shared_1 = __webpack_require__(20);
 /**
  * the game server main class. loads all important things
  * and also provides a buildin webserver to serve the app
@@ -401,6 +401,7 @@ __webpack_require__(11);
 const http = __webpack_require__(12);
 const express = __webpack_require__(13);
 const path = __webpack_require__(14);
+const fs = __webpack_require__(15);
 const log_1 = __webpack_require__(0);
 /**
  * the buildin webserver to serve the client
@@ -429,7 +430,13 @@ class Webserver {
         // @todo: do not serve the server.js file for security reasons!
         // get the file and send it back to the client
         let absolutePath = path.resolve(`./dist/${file}`);
-        response.sendFile(absolutePath);
+        try {
+            response.type(file.split('.').pop());
+            response.send(fs.readFileSync(absolutePath));
+        }
+        catch (e) {
+            response.sendStatus(404);
+        }
     }
     /**
      * gets the current express application
@@ -469,121 +476,9 @@ module.exports = require("path");
 
 /***/ }),
 /* 15 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-const LogLevel_1 = __webpack_require__(2);
-/**
- * a log wrapper to allow log levels and a more complex
- * logging structure
- */
-class Log {
-    /**
-     * sets the log level for the application environment
-     *
-     * @param level the new log level
-     */
-    static setLogLevel(level) {
-        Log.logLevel = level;
-    }
-    /**
-     * override the current logger object
-     *
-     * @param object the new logger object
-     */
-    static overrideLoggerObject(object) {
-        Log.loggerObject = object;
-    }
-    /**
-     * logs the given data
-     *
-     * @param level the level to log in
-     * @param params all params as vararg array
-     */
-    static log(level, ...params) {
-        // log if the log level is ok
-        if (parseInt(level) >= parseInt(Log.logLevel)) {
-            // level ok, log
-            Log.getLogFunctionByLevel(level)(`[Log.${LogLevel_1.LogLevel[level]}]`, ...params);
-        }
-    }
-    /**
-     * gets a callback function to log
-     *
-     * @param level the level to get the function from
-     */
-    static getLogFunctionByLevel(level) {
-        let callback = () => { };
-        // go through the different log levels
-        switch (level) {
-            case LogLevel_1.LogLevel.Debug:
-                callback = Log.loggerObject.debug;
-                break;
-            case LogLevel_1.LogLevel.Info:
-                callback = Log.loggerObject.info;
-                break;
-            case LogLevel_1.LogLevel.Warning:
-                callback = Log.loggerObject.warn;
-                break;
-            case LogLevel_1.LogLevel.Error:
-                callback = Log.loggerObject.error;
-                break;
-        }
-        return callback;
-    }
-    /**
-     * get the current log level
-     */
-    static getLogLevel() {
-        return Log.logLevel;
-    }
-    /**
-     * logs as debug level
-     *
-     * @param params all params as vararg array
-     */
-    static debug(...params) {
-        Log.log(LogLevel_1.LogLevel.Debug, ...params);
-    }
-    /**
-     * logs as info level
-     *
-     * @param params all params as vararg array
-     */
-    static info(...params) {
-        Log.log(LogLevel_1.LogLevel.Info, ...params);
-    }
-    /**
-     * logs as warning level
-     *
-     * @param params all params as vararg array
-     */
-    static warning(...params) {
-        Log.log(LogLevel_1.LogLevel.Warning, ...params);
-    }
-    /**
-     * logs as error level
-     *
-     * @param params all params as vararg array
-     */
-    static error(...params) {
-        Log.log(LogLevel_1.LogLevel.Error, ...params);
-    }
-}
-// the current loglevel
-Log.logLevel = LogLevel_1.LogLevel.Debug;
-// the logger object
-Log.loggerObject = console;
-exports.Log = Log;
-
+module.exports = require("fs");
 
 /***/ }),
 /* 16 */
@@ -597,11 +492,115 @@ exports.Log = Log;
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(17));
+const LogLevel_1 = __webpack_require__(2);
+const Singleton_1 = __webpack_require__(29);
+/**
+ * a log wrapper to allow log levels and a more complex
+ * logging structure
+ */
+class Log extends Singleton_1.Singleton {
+    constructor() {
+        super(...arguments);
+        // the current loglevel
+        this.logLevel = LogLevel_1.LogLevel.Debug;
+        // the logger object
+        this.loggerObject = console;
+        this.Log = {};
+    }
+    /**
+     * sets the log level for the application environment
+     *
+     * @param level the new log level
+     */
+    setLogLevel(level) {
+        this.logLevel = level;
+    }
+    /**
+     * override the current logger object
+     *
+     * @param object the new logger object
+     */
+    overrideLoggerObject(object) {
+        this.loggerObject = object;
+    }
+    /**
+     * logs the given data
+     *
+     * @param level the level to log in
+     * @param params all params as vararg array
+     */
+    log(level, ...params) {
+        // log if the log level is ok
+        if (parseInt(level) >= parseInt(this.logLevel)) {
+            // level ok, log
+            this.getLogFunctionByLevel(level)(`[this.${LogLevel_1.LogLevel[level]}]`, ...params);
+        }
+    }
+    /**
+     * gets a callback function to log
+     *
+     * @param level the level to get the function from
+     */
+    getLogFunctionByLevel(level) {
+        let callback = () => { };
+        // go through the different log levels
+        switch (level) {
+            case LogLevel_1.LogLevel.Debug:
+                callback = this.loggerObject.debug;
+                break;
+            case LogLevel_1.LogLevel.Info:
+                callback = this.loggerObject.info;
+                break;
+            case LogLevel_1.LogLevel.Warning:
+                callback = this.loggerObject.warn;
+                break;
+            case LogLevel_1.LogLevel.Error:
+                callback = this.loggerObject.error;
+                break;
+        }
+        return callback;
+    }
+    /**
+     * get the current log level
+     */
+    getLogLevel() {
+        return this.logLevel;
+    }
+    /**
+     * logs as debug level
+     *
+     * @param params all params as vararg array
+     */
+    debug(...params) {
+        this.log(LogLevel_1.LogLevel.Debug, ...params);
+    }
+    /**
+     * logs as info level
+     *
+     * @param params all params as vararg array
+     */
+    info(...params) {
+        this.log(LogLevel_1.LogLevel.Info, ...params);
+    }
+    /**
+     * logs as warning level
+     *
+     * @param params all params as vararg array
+     */
+    warning(...params) {
+        this.log(LogLevel_1.LogLevel.Warning, ...params);
+    }
+    /**
+     * logs as error level
+     *
+     * @param params all params as vararg array
+     */
+    error(...params) {
+        this.log(LogLevel_1.LogLevel.Error, ...params);
+    }
+}
+exports.Log = Log;
 
 
 /***/ }),
@@ -616,8 +615,27 @@ __export(__webpack_require__(17));
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
 Object.defineProperty(exports, "__esModule", { value: true });
-const socketio = __webpack_require__(18);
+__export(__webpack_require__(18));
+
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+const socketio = __webpack_require__(19);
 const log_1 = __webpack_require__(0);
 /**
  * the network base to use a client-server based structure
@@ -664,35 +682,10 @@ exports.NetworkServer = NetworkServer;
 
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports) {
 
 module.exports = require("socket.io");
-
-/***/ }),
-/* 19 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(20));
-__export(__webpack_require__(23));
-__export(__webpack_require__(25));
-__export(__webpack_require__(28));
-__export(__webpack_require__(0));
-__export(__webpack_require__(1));
-__export(__webpack_require__(6));
-
 
 /***/ }),
 /* 20 */
@@ -711,10 +704,35 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(__webpack_require__(21));
+__export(__webpack_require__(23));
+__export(__webpack_require__(25));
+__export(__webpack_require__(28));
+__export(__webpack_require__(0));
+__export(__webpack_require__(1));
+__export(__webpack_require__(6));
 
 
 /***/ }),
 /* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(22));
+
+
+/***/ }),
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -738,7 +756,6 @@ var CollisionType;
 
 
 /***/ }),
-/* 22 */,
 /* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1088,6 +1105,24 @@ class RamStorage {
         this.cache = {};
     }
     /**
+     * removes all entires in the given path
+     *
+     * @param path the path to clear
+     * @return the amount of deleted objects
+     */
+    static clearPath(path) {
+        let counter = 0;
+        Object.keys(RamStorage.cache).forEach(key => {
+            // if the path is present
+            if (key.indexOf(path) === 0) {
+                // remove the part
+                delete RamStorage.cache[key];
+                counter++;
+            }
+        });
+        return counter;
+    }
+    /**
      * get an element from the cache
      *
      * @param path the path to the object. dots can be used to structure
@@ -1184,6 +1219,26 @@ class Binary {
         // write the ArrayBuffer to a blob, and you're done
         let blob = new Blob([ab], { type: mimeString });
         return blob;
+    }
+    /**
+     * converts a binary buffer into a string
+     *
+     * @param buffer the binary content
+     */
+    static bufferToString(buffer) {
+        return String.fromCharCode.apply(null, new Uint8Array(buffer));
+    }
+    /**
+     * converts a buffer to a blob instance
+     *
+     * @param buffer the buffer
+     */
+    static bufferToBlob(buffer) {
+        if (buffer instanceof ArrayBuffer) {
+            // cast to buffer
+            buffer = Buffer.from(buffer);
+        }
+        return new Blob([new Uint8Array(buffer)]);
     }
 }
 exports.Binary = Binary;

@@ -5,13 +5,13 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { logMethodCall, Log } from '@shared';
+import { logMethodCall, Log, LogLevel } from '@shared';
 
 import { suite, test, context } from 'mocha-typescript';
 import { expect } from 'chai';
 import * as sinon from 'sinon';
 
-import { LoggerObjectMock } from '../log/LoggerObjectMock';
+import { UnitTestContext } from '../../';
 
 // stub class
 class StubClass {
@@ -21,25 +21,29 @@ class StubClass {
 }
 
 @suite("shared/decorator/logMethodCall")
-class TestLogMethodCall {
+class Test {
 
-    @context static callSpy: sinon.SinonSpy;
+    context: UnitTestContext;
 
     // set up a spy
-    static before() {
+    before() {
 
-        // set the mock
-        let mock = new LoggerObjectMock();
-        Log.overrideLoggerObject(mock);
+        // prepare the suite
+        this.context = new UnitTestContext();
+        let logger = Log.getInstance<Log>();
+        logger.setLogLevel(LogLevel.Debug);
 
-        // debug log should be printed
-        TestLogMethodCall.callSpy = sinon.spy(mock, 'debug');
+        // bind context
+        this.context.add('logger', logger);
+
+        // add the spies
+        this.context.addSpy(console, 'debug');
     }
 
     after() {
 
         // restore the spy
-        TestLogMethodCall.callSpy.restore();
+        this.context.removeAllSpies();
     }
 
     @test "@logMethodCall() should log the call"() {
@@ -48,12 +52,12 @@ class TestLogMethodCall {
         let stub = new StubClass();
 
         // log should not occured here
-        expect(TestLogMethodCall.callSpy.notCalled)
+        sinon.assert.notCalled(this.context.getSpy(console, 'debug'));
 
         // call the decorated method
         stub.test();
 
         // log should be done
-        expect(TestLogMethodCall.callSpy.called);
+        sinon.assert.called(this.context.getSpy(console, 'debug'));
     }
 }

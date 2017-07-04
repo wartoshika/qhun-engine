@@ -40,4 +40,29 @@ export class Binary {
         let blob = new Blob([ab], { type: mimeString });
         return blob;
     }
+
+    /**
+     * converts a binary buffer into a string
+     *
+     * @param buffer the binary content
+     */
+    public static bufferToString(buffer: Buffer): string {
+
+        return String.fromCharCode.apply(null, new Uint8Array(buffer));
+    }
+
+    /**
+     * converts a buffer to a blob instance
+     *
+     * @param buffer the buffer
+     */
+    public static bufferToBlob(buffer: Buffer | ArrayBuffer): Blob {
+
+        if (buffer instanceof ArrayBuffer) {
+
+            // cast to buffer
+            buffer = Buffer.from(buffer);
+        }
+        return new Blob([new Uint8Array(buffer)]);
+    }
 }

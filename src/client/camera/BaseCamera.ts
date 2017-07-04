@@ -32,7 +32,7 @@ export abstract class BaseCamera implements Camera {
     /**
      * the camera mode
      */
-    protected readonly mode: CameraMode = CameraMode.Orthogonal;
+    protected abstract readonly mode: CameraMode;
 
     /**
      *

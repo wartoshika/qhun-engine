@@ -25,7 +25,7 @@ class StubEntity extends CollidableEntity {
     onCollision(entity: CollidableEntity): void { }
 }
 
-@suite("shared/entity/Entity")
+@suite("shared/entity/CollidableEntity")
 class TestEntity {
 
     @test "default entity position should allways be (0,0)"() {

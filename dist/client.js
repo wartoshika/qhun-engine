@@ -141,51 +141,15 @@ __export(__webpack_require__(26));
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(27));
-__export(__webpack_require__(37));
-__export(__webpack_require__(12));
-
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(28));
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
 Object.defineProperty(exports, "__esModule", { value: true });
 var AssetLoader_1 = __webpack_require__(20);
 /**
  * a basic class for implementing the getter and setter function
  * of the required asset interface
+ *
+ * be sure to implement the folling needed functions
+ * @need public static async register(...images: InlineAsset[]): Promise<any>
+ * @need constructor(name?: string, path?: string, data?: any): Asset
  */
 var AbstractAsset = (function () {
     function AbstractAsset(name, path, type, data) {
@@ -206,7 +170,7 @@ var AbstractAsset = (function () {
     AbstractAsset.prototype.getPath = function () {
         return this.path;
     };
-    AbstractAsset.prototype.getAssetType = function () {
+    AbstractAsset.prototype.getType = function () {
         return this.type;
     };
     AbstractAsset.prototype.getData = function () {
@@ -228,6 +192,46 @@ var AbstractAsset = (function () {
     return AbstractAsset;
 }());
 exports.AbstractAsset = AbstractAsset;
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(27));
+__export(__webpack_require__(37));
+__export(__webpack_require__(12));
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(28));
 
 
 /***/ }),
@@ -289,7 +293,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var AssetType_1 = __webpack_require__(1);
-var AbstractAsset_1 = __webpack_require__(5);
+var AbstractAsset_1 = __webpack_require__(3);
 /**
  * the image class handles exactly one image
  */
@@ -851,6 +855,8 @@ __export(__webpack_require__(50));
 __export(__webpack_require__(1));
 __export(__webpack_require__(20));
 __export(__webpack_require__(51));
+__export(__webpack_require__(3));
+__export(__webpack_require__(60));
 
 
 /***/ }),
@@ -912,12 +918,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var AssetType_1 = __webpack_require__(1);
-var helper_1 = __webpack_require__(3);
-var storage_1 = __webpack_require__(4);
-var log_1 = __webpack_require__(2);
+var AssetStorage_1 = __webpack_require__(60);
 var network_1 = __webpack_require__(7);
+var shared_1 = __webpack_require__(22);
 /**
- * a class that can handle asset loading such as images and audio
+ * this class handles the loading of assets
  */
 var AssetLoader = (function (_super) {
     __extends(AssetLoader, _super);
@@ -927,6 +932,10 @@ var AssetLoader = (function (_super) {
          * the holder of all asset loads
          */
         _this.assetLoaderPromiseStack = [];
+        /**
+         * the asset storage instance
+         */
+        _this.assetStorage = AssetStorage_1.AssetStorage.getInstance();
         return _this;
     }
     /**
@@ -951,20 +960,18 @@ var AssetLoader = (function (_super) {
                 // iterate through all given assets
                 assets.forEach(function (asset) {
                     // check if the asset exists
-                    if (storage_1.RamStorage.has(_this.getAssetStorageName(asset.name, asset.assetType))) {
+                    if (_this.assetStorage.hasAsset(asset.name, asset.assetType)) {
                         // log a warning that an asset has a double register
-                        log_1.Log.warning("The given asset with the name", asset.name, "is allready registered.");
+                        shared_1.Log.warning("The given asset with the name", asset.name, "is allready registered.");
                     }
                     // add a promise to await its loading
                     outerPromise.push(new Promise(function (resolve) {
                         // construct an instance of the asset
                         var instance = new assetClass();
                         instance.setName(asset.name);
-                        instance.setPath(asset.path);
                         // fill the instance
-                        _this.loadAsset(instance).then(function (resource) {
+                        _this.loadAsset(instance, asset.path).then(function (resource) {
                             // store the asset
-                            storage_1.RamStorage.add(_this.getAssetStorageName(asset.name, asset.assetType), resource);
                             resourceStack.push(resource);
                             // resolve the promise
                             resolve(resource);
@@ -974,7 +981,13 @@ var AssetLoader = (function (_super) {
                 // stack all loading promises to the asset loading process
                 (_a = this.assetLoaderPromiseStack).push.apply(_a, outerPromise);
                 // return the promise
-                return [2 /*return*/, Promise.all(outerPromise).then(function () { return resourceStack; })];
+                return [2 /*return*/, Promise.all(outerPromise).then(function () {
+                        // store all assets
+                        (_a = _this.assetStorage).addAsset.apply(_a, resourceStack);
+                        // resolve the promise
+                        return resourceStack;
+                        var _a;
+                    })];
             });
         });
     };
@@ -982,50 +995,36 @@ var AssetLoader = (function (_super) {
      * loads one asset
      *
      * @param instance the instance to be loaded
+     * @param path the path where to load the asset from
      */
-    AssetLoader.prototype.loadAsset = function (instance) {
+    AssetLoader.prototype.loadAsset = function (instance, path) {
         return __awaiter(this, void 0, void 0, function () {
             var callback;
             return __generator(this, function (_a) {
-                switch (instance.getAssetType()) {
+                // check if the path is a local data uri
+                if (path.indexOf('data:') === 0) {
+                    return [2 /*return*/, new Promise(function (resolve) {
+                            // set the blob for the asset
+                            instance.setData(shared_1.Binary.dataUriToBlob(path));
+                            resolve(instance);
+                        })];
+                }
+                switch (instance.getType()) {
                     case AssetType_1.AssetType.Image:
                     case AssetType_1.AssetType.TileMap:
                         callback = this.loadImage.bind(this);
                         break;
                     default:
-                        throw "Asset type " + instance.getAssetType() + " is not implemented";
+                        throw "Asset type " + AssetType_1.AssetType[instance.getType()] + " is not implemented";
                 }
                 // load the resource
-                return [2 /*return*/, callback(instance.getPath()).then(function (resource) {
+                return [2 /*return*/, callback(path).then(function (resource) {
                         // set the resource data to the asset instance
                         instance.setData(resource);
                         return instance;
                     })];
             });
         });
-    };
-    /**
-     * get an asset from the storage
-     *
-     * @param name the name of the asset
-     */
-    AssetLoader.prototype.getAsset = function (name, type) {
-        // check if the asset is available
-        if (!storage_1.RamStorage.has(this.getAssetStorageName(name, type))) {
-            // print error
-            log_1.Log.error("Trying to load not existing asset", name, "with type", AssetType_1.AssetType[type]);
-            return;
-        }
-        // ask the ram storage for the asset
-        return storage_1.RamStorage.get(this.getAssetStorageName(name, type));
-    };
-    /**
-     * get the amount of currently registered assets of the given type
-     *
-     * @param type the asset type
-     */
-    AssetLoader.prototype.getAssetAmount = function (type) {
-        return storage_1.RamStorage.amount(this.getAssetStorageName('', type));
     };
     /**
      * get all unresolved assets from the register process
@@ -1049,17 +1048,6 @@ var AssetLoader = (function (_super) {
         var _a;
     };
     /**
-     * get the storage asset name
-     *
-     * @param name the name of the asset
-     */
-    AssetLoader.prototype.getAssetStorageName = function (name, type) {
-        var path = "assetloader." + type;
-        if (name)
-            path += "." + name;
-        return path;
-    };
-    /**
      * load an image
      *
      * @param path the path to the image
@@ -1067,16 +1055,10 @@ var AssetLoader = (function (_super) {
     AssetLoader.prototype.loadImage = function (path) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                // if the path is a data uri, return this instantly
-                if (path.indexOf('data:image/') === 0) {
-                    return [2 /*return*/, new Promise(function (resolve) {
-                            resolve(createImageBitmap(helper_1.Binary.dataUriToBlob(path)));
-                        })];
-                }
                 // make an xhr call to the file
                 return [2 /*return*/, network_1.Request.getBinary(path).then(function (image) {
                         // create the image bitmap for the blob
-                        return createImageBitmap(helper_1.Binary.dataUriToBlob(image));
+                        return shared_1.Binary.bufferToBlob(image);
                     })];
             });
         });
@@ -1105,17 +1087,8 @@ var AssetLoader = (function (_super) {
             });
         });
     };
-    /**
-     * creates an html element at the dom to load assets
-     *
-     * @param tagName the tagname of the new element
-     */
-    AssetLoader.prototype.createDomElement = function (tagName) {
-        // return the created element
-        return document.createElement(tagName);
-    };
     return AssetLoader;
-}(helper_1.Singleton));
+}(shared_1.Singleton));
 exports.AssetLoader = AssetLoader;
 
 
@@ -1132,8 +1105,7 @@ exports.AssetLoader = AssetLoader;
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-var CameraMode_1 = __webpack_require__(22);
-var shared_1 = __webpack_require__(23);
+var shared_1 = __webpack_require__(22);
 /**
  * the view for the player into the game
  */
@@ -1154,10 +1126,6 @@ var BaseCamera = (function () {
          * the current camera world bounds
          */
         this.worldBounds = null;
-        /**
-         * the camera mode
-         */
-        this.mode = CameraMode_1.CameraMode.Orthogonal;
     }
     /**
      * get the camera mode
@@ -1235,14 +1203,17 @@ exports.BaseCamera = BaseCamera;
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
 Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * the currently supported camera modes
- */
-var CameraMode;
-(function (CameraMode) {
-    CameraMode[CameraMode["Orthogonal"] = 0] = "Orthogonal";
-})(CameraMode = exports.CameraMode || (exports.CameraMode = {}));
+__export(__webpack_require__(53));
+__export(__webpack_require__(8));
+__export(__webpack_require__(16));
+__export(__webpack_require__(4));
+__export(__webpack_require__(2));
+__export(__webpack_require__(0));
+__export(__webpack_require__(5));
 
 
 /***/ }),
@@ -1257,17 +1228,14 @@ var CameraMode;
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(53));
-__export(__webpack_require__(8));
-__export(__webpack_require__(16));
-__export(__webpack_require__(3));
-__export(__webpack_require__(2));
-__export(__webpack_require__(0));
-__export(__webpack_require__(4));
+/**
+ * the currently supported camera modes
+ */
+var CameraMode;
+(function (CameraMode) {
+    CameraMode[CameraMode["Orthogonal"] = 0] = "Orthogonal";
+})(CameraMode = exports.CameraMode || (exports.CameraMode = {}));
 
 
 /***/ }),
@@ -1294,12 +1262,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var decorator_1 = __webpack_require__(8);
 var log_1 = __webpack_require__(2);
-var helper_1 = __webpack_require__(3);
+var helper_1 = __webpack_require__(4);
 var Game_1 = __webpack_require__(38);
-var storage_1 = __webpack_require__(4);
+var storage_1 = __webpack_require__(5);
 var asset_1 = __webpack_require__(19);
-var input_1 = __webpack_require__(57);
-var collision_1 = __webpack_require__(59);
+var input_1 = __webpack_require__(56);
+var collision_1 = __webpack_require__(58);
 /**
  * the initiation class of the game client
  */
@@ -1450,30 +1418,49 @@ exports.logMethodCall = logMethodCall;
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 Object.defineProperty(exports, "__esModule", { value: true });
 var LogLevel_1 = __webpack_require__(9);
+var Singleton_1 = __webpack_require__(27);
 /**
  * a log wrapper to allow log levels and a more complex
  * logging structure
  */
-var Log = (function () {
+var Log = (function (_super) {
+    __extends(Log, _super);
     function Log() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        // the current loglevel
+        _this.logLevel = LogLevel_1.LogLevel.Debug;
+        // the logger object
+        _this.loggerObject = console;
+        _this.Log = {};
+        return _this;
     }
     /**
      * sets the log level for the application environment
      *
      * @param level the new log level
      */
-    Log.setLogLevel = function (level) {
-        Log.logLevel = level;
+    Log.prototype.setLogLevel = function (level) {
+        this.logLevel = level;
     };
     /**
      * override the current logger object
      *
      * @param object the new logger object
      */
-    Log.overrideLoggerObject = function (object) {
-        Log.loggerObject = object;
+    Log.prototype.overrideLoggerObject = function (object) {
+        this.loggerObject = object;
     };
     /**
      * logs the given data
@@ -1481,15 +1468,15 @@ var Log = (function () {
      * @param level the level to log in
      * @param params all params as vararg array
      */
-    Log.log = function (level) {
+    Log.prototype.log = function (level) {
         var params = [];
         for (var _i = 1; _i < arguments.length; _i++) {
             params[_i - 1] = arguments[_i];
         }
         // log if the log level is ok
-        if (parseInt(level) >= parseInt(Log.logLevel)) {
+        if (parseInt(level) >= parseInt(this.logLevel)) {
             // level ok, log
-            Log.getLogFunctionByLevel(level).apply(void 0, ["[Log." + LogLevel_1.LogLevel[level] + "]"].concat(params));
+            this.getLogFunctionByLevel(level).apply(void 0, ["[this." + LogLevel_1.LogLevel[level] + "]"].concat(params));
         }
     };
     /**
@@ -1497,21 +1484,21 @@ var Log = (function () {
      *
      * @param level the level to get the function from
      */
-    Log.getLogFunctionByLevel = function (level) {
+    Log.prototype.getLogFunctionByLevel = function (level) {
         var callback = function () { };
         // go through the different log levels
         switch (level) {
             case LogLevel_1.LogLevel.Debug:
-                callback = Log.loggerObject.debug;
+                callback = this.loggerObject.debug;
                 break;
             case LogLevel_1.LogLevel.Info:
-                callback = Log.loggerObject.info;
+                callback = this.loggerObject.info;
                 break;
             case LogLevel_1.LogLevel.Warning:
-                callback = Log.loggerObject.warn;
+                callback = this.loggerObject.warn;
                 break;
             case LogLevel_1.LogLevel.Error:
-                callback = Log.loggerObject.error;
+                callback = this.loggerObject.error;
                 break;
         }
         return callback;
@@ -1519,63 +1506,59 @@ var Log = (function () {
     /**
      * get the current log level
      */
-    Log.getLogLevel = function () {
-        return Log.logLevel;
+    Log.prototype.getLogLevel = function () {
+        return this.logLevel;
     };
     /**
      * logs as debug level
      *
      * @param params all params as vararg array
      */
-    Log.debug = function () {
+    Log.prototype.debug = function () {
         var params = [];
         for (var _i = 0; _i < arguments.length; _i++) {
             params[_i] = arguments[_i];
         }
-        Log.log.apply(Log, [LogLevel_1.LogLevel.Debug].concat(params));
+        this.log.apply(this, [LogLevel_1.LogLevel.Debug].concat(params));
     };
     /**
      * logs as info level
      *
      * @param params all params as vararg array
      */
-    Log.info = function () {
+    Log.prototype.info = function () {
         var params = [];
         for (var _i = 0; _i < arguments.length; _i++) {
             params[_i] = arguments[_i];
         }
-        Log.log.apply(Log, [LogLevel_1.LogLevel.Info].concat(params));
+        this.log.apply(this, [LogLevel_1.LogLevel.Info].concat(params));
     };
     /**
      * logs as warning level
      *
      * @param params all params as vararg array
      */
-    Log.warning = function () {
+    Log.prototype.warning = function () {
         var params = [];
         for (var _i = 0; _i < arguments.length; _i++) {
             params[_i] = arguments[_i];
         }
-        Log.log.apply(Log, [LogLevel_1.LogLevel.Warning].concat(params));
+        this.log.apply(this, [LogLevel_1.LogLevel.Warning].concat(params));
     };
     /**
      * logs as error level
      *
      * @param params all params as vararg array
      */
-    Log.error = function () {
+    Log.prototype.error = function () {
         var params = [];
         for (var _i = 0; _i < arguments.length; _i++) {
             params[_i] = arguments[_i];
         }
-        Log.log.apply(Log, [LogLevel_1.LogLevel.Error].concat(params));
+        this.log.apply(this, [LogLevel_1.LogLevel.Error].concat(params));
     };
-    // the current loglevel
-    Log.logLevel = LogLevel_1.LogLevel.Debug;
-    // the logger object
-    Log.loggerObject = console;
     return Log;
-}());
+}(Singleton_1.Singleton));
 exports.Log = Log;
 
 
@@ -1592,7 +1575,7 @@ exports.Log = Log;
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-var storage_1 = __webpack_require__(4);
+var storage_1 = __webpack_require__(5);
 /**
  * a class to handle the singleton paradigmen
  */
@@ -1679,6 +1662,24 @@ var RamStorage = (function () {
      */
     RamStorage.clear = function () {
         this.cache = {};
+    };
+    /**
+     * removes all entires in the given path
+     *
+     * @param path the path to clear
+     * @return the amount of deleted objects
+     */
+    RamStorage.clearPath = function (path) {
+        var counter = 0;
+        Object.keys(RamStorage.cache).forEach(function (key) {
+            // if the path is present
+            if (key.indexOf(path) === 0) {
+                // remove the part
+                delete RamStorage.cache[key];
+                counter++;
+            }
+        });
+        return counter;
     };
     /**
      * get an element from the cache
@@ -3981,7 +3982,7 @@ exports.Vector2D = Vector2D;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
+/* WEBPACK VAR INJECTION */(function(Buffer) {
 /**
  * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
  *
@@ -4019,10 +4020,31 @@ var Binary = (function () {
         var blob = new Blob([ab], { type: mimeString });
         return blob;
     };
+    /**
+     * converts a binary buffer into a string
+     *
+     * @param buffer the binary content
+     */
+    Binary.bufferToString = function (buffer) {
+        return String.fromCharCode.apply(null, new Uint8Array(buffer));
+    };
+    /**
+     * converts a buffer to a blob instance
+     *
+     * @param buffer the buffer
+     */
+    Binary.bufferToBlob = function (buffer) {
+        if (buffer instanceof ArrayBuffer) {
+            // cast to buffer
+            buffer = Buffer.from(buffer);
+        }
+        return new Blob([new Uint8Array(buffer)]);
+    };
     return Binary;
 }());
 exports.Binary = Binary;
 
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(31).Buffer))
 
 /***/ }),
 /* 38 */
@@ -4086,7 +4108,7 @@ var entity_1 = __webpack_require__(13);
 var scene_1 = __webpack_require__(42);
 var world_1 = __webpack_require__(44);
 var camera_1 = __webpack_require__(52);
-var shared_1 = __webpack_require__(23);
+var shared_1 = __webpack_require__(22);
 /**
  * a class that handles adding of entities, cameras, physics ...
  */
@@ -4877,12 +4899,15 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * a xhr network class to perform http requests
+ */
 var Request = (function () {
     function Request() {
     }
     /**
      * make an asynchronus get request to the given url
-     * and returns a blob instance
+     * and returns a array buffer
      *
      * @param path the url
      */
@@ -4892,16 +4917,12 @@ var Request = (function () {
                 return [2 /*return*/, new Promise(function (resolve) {
                         // create xhr instance and set properties
                         var xhr = new XMLHttpRequest();
-                        xhr.responseType = 'blob';
+                        xhr.responseType = 'arraybuffer';
                         xhr.open('GET', path);
                         // register finish event
                         xhr.onload = function () {
-                            // create the blob reader
-                            var reader = new FileReader();
-                            reader.onloadend = function () {
-                                resolve(reader.result);
-                            };
-                            reader.readAsDataURL(xhr.response);
+                            // resolve the promise with a
+                            resolve(xhr.response);
                         };
                         // send the request
                         xhr.send();
@@ -4996,7 +5017,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var AssetType_1 = __webpack_require__(1);
 var Image_1 = __webpack_require__(6);
-var AbstractAsset_1 = __webpack_require__(5);
+var AbstractAsset_1 = __webpack_require__(3);
 var network_1 = __webpack_require__(7);
 var SPRITE_MAP_DELIMITER = ',';
 /**
@@ -5136,7 +5157,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var AssetType_1 = __webpack_require__(1);
-var AbstractAsset_1 = __webpack_require__(5);
+var AbstractAsset_1 = __webpack_require__(3);
 var Sound = (function (_super) {
     __extends(Sound, _super);
     function Sound(name, path, data) {
@@ -5222,7 +5243,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var AbstractAsset_1 = __webpack_require__(5);
+var AbstractAsset_1 = __webpack_require__(3);
 var AssetType_1 = __webpack_require__(1);
 var Image_1 = __webpack_require__(6);
 var network_1 = __webpack_require__(7);
@@ -5401,8 +5422,8 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(__webpack_require__(21));
-__export(__webpack_require__(56));
-__export(__webpack_require__(22));
+__export(__webpack_require__(55));
+__export(__webpack_require__(23));
 
 
 /***/ }),
@@ -5449,8 +5470,7 @@ var CollisionType;
 
 
 /***/ }),
-/* 55 */,
-/* 56 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5473,13 +5493,19 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var BaseCamera_1 = __webpack_require__(21);
+var CameraMode_1 = __webpack_require__(23);
 /**
  * an orthogonal camera for the view of the player
  */
 var OrthogonalCamera = (function (_super) {
     __extends(OrthogonalCamera, _super);
     function OrthogonalCamera() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        /**
+         * the camera mode
+         */
+        _this.mode = CameraMode_1.CameraMode.Orthogonal;
+        return _this;
     }
     return OrthogonalCamera;
 }(BaseCamera_1.BaseCamera));
@@ -5487,7 +5513,7 @@ exports.OrthogonalCamera = OrthogonalCamera;
 
 
 /***/ }),
-/* 57 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5502,11 +5528,11 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(58));
+__export(__webpack_require__(57));
 
 
 /***/ }),
-/* 58 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5528,7 +5554,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var helper_1 = __webpack_require__(3);
+var helper_1 = __webpack_require__(4);
 /**
  * a basic class to get user input like keybord or mouse data
  */
@@ -5595,7 +5621,7 @@ exports.Input = Input;
 
 
 /***/ }),
-/* 59 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5610,11 +5636,11 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(60));
+__export(__webpack_require__(59));
 
 
 /***/ }),
-/* 60 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5641,7 +5667,7 @@ var CollisionDetection = (function () {
         // only take entities that can collide
         entities.filter(function (entity) { return entity instanceof entity_1.CollidableEntity; }).forEach(function (entity) {
             // calculate the entity position in every direction from its
-            // hitbox
+            // current position
             var position = {};
             // get the position of the entity
             var entityPosition = entity.getPosition();
@@ -5663,12 +5689,6 @@ var CollisionDetection = (function () {
                 var collision = false;
                 // get the tile numbers that are at the players point
                 var tileNumbers = world.getTileNumbersForPosition(position[direction]);
-                if (window.log === true) {
-                    if (direction === entity_1.Direction.Right) {
-                        console.log(tileNumbers);
-                        window.log = false;
-                    }
-                }
                 // on a collidable tile?
                 var collidableTileNumbers = world.getCollidableTileNumbers();
                 // test collision
@@ -5691,6 +5711,120 @@ var CollisionDetection = (function () {
     return CollisionDetection;
 }());
 exports.CollisionDetection = CollisionDetection;
+
+
+/***/ }),
+/* 60 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var AssetType_1 = __webpack_require__(1);
+var shared_1 = __webpack_require__(22);
+/**
+ * a class that handles asset storing and getting
+ */
+var AssetStorage = (function (_super) {
+    __extends(AssetStorage, _super);
+    function AssetStorage() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        // the logger
+        _this.logger = shared_1.Log.getInstance();
+        return _this;
+    }
+    /**
+     * get an asset from the storage
+     *
+     * @param name the name of the asset
+     */
+    AssetStorage.prototype.getAsset = function (name, type) {
+        // check if the asset is available
+        if (!shared_1.RamStorage.has(this.getAssetStorageName(name, type))) {
+            // print error
+            shared_1.Log.error("Trying to load not existing asset", name, "with type", AssetType_1.AssetType[type]);
+            return;
+        }
+        // ask the ram storage for the asset
+        return shared_1.RamStorage.get(this.getAssetStorageName(name, type));
+    };
+    /**
+     * check if the storage has the given asset
+     *
+     * @param name the name of the asset
+     * @param type the type of the asset
+     */
+    AssetStorage.prototype.hasAsset = function (name, type) {
+        // ask the ram storage
+        return shared_1.RamStorage.has(this.getAssetStorageName(name, type));
+    };
+    /**
+     * get the amount of currently registered assets of the given type
+     *
+     * @param type the asset type
+     */
+    AssetStorage.prototype.getAssetAmount = function (type) {
+        return shared_1.RamStorage.amount(this.getAssetStorageName('', type));
+    };
+    /**
+     * adds the given assets to the storage
+     *
+     * @param asset the assets to add
+     */
+    AssetStorage.prototype.addAsset = function () {
+        var _this = this;
+        var assets = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            assets[_i] = arguments[_i];
+        }
+        // iterate all assets
+        assets.forEach(function (asset) {
+            // if the asset is allready there, write a warning
+            if (_this.hasAsset(asset.getName(), asset.getType())) {
+                shared_1.Log.warning("Asset with name", asset.getName(), "and type", AssetType_1.AssetType[asset.getType()], "allready exists. The asser will be overwritten!");
+            }
+            // now add the asset
+            shared_1.RamStorage.add(_this.getAssetStorageName(asset.getName(), asset.getType()), asset);
+        });
+    };
+    /**
+     * removes all assets from the storage
+     */
+    AssetStorage.prototype.clearStorage = function (type) {
+        shared_1.RamStorage.clearPath(this.getAssetStorageName("", type));
+    };
+    /**
+     * get the storage asset name
+     *
+     * @param name the name of the asset
+     */
+    AssetStorage.prototype.getAssetStorageName = function (name, type) {
+        var path = "assetloader";
+        if (type !== undefined)
+            path += "." + type;
+        if (name)
+            path += "." + name;
+        return path;
+    };
+    return AssetStorage;
+}(shared_1.Singleton));
+exports.AssetStorage = AssetStorage;
 
 
 /***/ })

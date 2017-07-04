@@ -6,64 +6,55 @@
  */
 
 import { LogLevel } from './LogLevel';
-
-/**
- * a generic logger object
- */
-export interface LoggerObject {
-
-    debug: (...args: any[]) => void;
-    info: (...args: any[]) => void;
-    warn: (...args: any[]) => void;
-    error: (...args: any[]) => void;
-}
+import { Singleton } from '../helper/Singleton';
 
 /**
  * a log wrapper to allow log levels and a more complex
  * logging structure
  */
-export class Log {
+export class Log extends Singleton {
 
     // the current loglevel
-    private static logLevel: LogLevel = LogLevel.Debug;
-
-    // the logger object
-    private static loggerObject: LoggerObject = console;
+    protected logLevel: LogLevel = LogLevel.Debug;
 
     /**
      * sets the log level for the application environment
      *
      * @param level the new log level
      */
-    public static setLogLevel(level: LogLevel): void {
+    public setLogLevel(level: LogLevel): void {
 
-        Log.logLevel = level;
-    }
-
-    /**
-     * override the current logger object
-     *
-     * @param object the new logger object
-     */
-    public static overrideLoggerObject(object: LoggerObject): void {
-
-        Log.loggerObject = object;
+        this.logLevel = level;
     }
 
     /**
      * logs the given data
      *
      * @param level the level to log in
+     * @param optionalPrefix the optional prefix
      * @param params all params as vararg array
      */
-    public static log(level: LogLevel, ...params: any[]): void {
+    public log(level: LogLevel, optionalPrefix: new () => any | any, ...params: any[]): void {
 
         // log if the log level is ok
-        if (parseInt(<any>level) >= parseInt(<any>Log.logLevel)) {
+        if (parseInt(<any>level) >= parseInt(<any>this.logLevel)) {
 
-            // level ok, log
-            Log.getLogFunctionByLevel(level)(
-                `[Log.${LogLevel[level]}]`, ...params
+            // empty prefix
+            let prefix = "";
+
+            // level ok, now check if there should be a prefix
+            if (typeof optionalPrefix === 'function' && optionalPrefix.name !== 'function') {
+
+                // set the prefix
+                prefix = "[" + optionalPrefix.name + "]";
+            } else {
+
+                // add this param to the normal param stack
+                params.push(optionalPrefix);
+            }
+
+            this.getLogFunctionByLevel(level)(
+                `[${this.constructor.name}.${LogLevel[level]}]${prefix}`, ...params
             );
         }
     }
@@ -73,17 +64,17 @@ export class Log {
      *
      * @param level the level to get the function from
      */
-    private static getLogFunctionByLevel(level: LogLevel): Function {
+    protected getLogFunctionByLevel(level: LogLevel): Function {
 
         let callback = () => { };
 
         // go through the different log levels
         switch (level) {
 
-            case LogLevel.Debug: callback = Log.loggerObject.debug; break;
-            case LogLevel.Info: callback = Log.loggerObject.info; break;
-            case LogLevel.Warning: callback = Log.loggerObject.warn; break;
-            case LogLevel.Error: callback = Log.loggerObject.error; break;
+            case LogLevel.Debug: callback = console.debug; break;
+            case LogLevel.Info: callback = console.info; break;
+            case LogLevel.Warning: callback = console.warn; break;
+            case LogLevel.Error: callback = console.error; break;
         }
 
         return callback;
@@ -92,48 +83,52 @@ export class Log {
     /**
      * get the current log level
      */
-    public static getLogLevel(): LogLevel {
+    public getLogLevel(): LogLevel {
 
-        return Log.logLevel;
+        return this.logLevel;
     }
 
     /**
      * logs as debug level
      *
+     * @param optionalPrefix if this is a constructor, the log will pre prefixed with its name. if not, the param will just printed
      * @param params all params as vararg array
      */
-    public static debug(...params: any[]): void {
+    public debug(optionalPrefix?: any, ...params: any[]): void {
 
-        Log.log(LogLevel.Debug, ...params);
+        this.log(LogLevel.Debug, optionalPrefix, ...params);
     }
 
     /**
      * logs as info level
      *
+     * @param optionalPrefix if this is a constructor, the log will pre prefixed with its name. if not, the param will just printed
      * @param params all params as vararg array
      */
-    public static info(...params: any[]): void {
+    public info(optionalPrefix?: any, ...params: any[]): void {
 
-        Log.log(LogLevel.Info, ...params);
+        this.log(LogLevel.Info, optionalPrefix, ...params);
     }
 
     /**
      * logs as warning level
      *
+     * @param optionalPrefix if this is a constructor, the log will pre prefixed with its name. if not, the param will just printed
      * @param params all params as vararg array
      */
-    public static warning(...params: any[]): void {
+    public warning(optionalPrefix?: any, ...params: any[]): void {
 
-        Log.log(LogLevel.Warning, ...params);
+        this.log(LogLevel.Warning, optionalPrefix, ...params);
     }
 
     /**
      * logs as error level
      *
+     * @param optionalPrefix if this is a constructor, the log will pre prefixed with its name. if not, the param will just printed
      * @param params all params as vararg array
      */
-    public static error(...params: any[]): void {
+    public error(optionalPrefix?: any, ...params: any[]): void {
 
-        Log.log(LogLevel.Error, ...params);
+        this.log(LogLevel.Error, optionalPrefix, ...params);
     }
 }

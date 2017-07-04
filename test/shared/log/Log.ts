@@ -5,100 +5,144 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { Log, LogLevel, LoggerObject } from '@shared';
+import { Log, LogLevel } from '@shared';
 
 import { suite, test, context } from 'mocha-typescript';
 import { expect } from 'chai';
 import * as sinon from 'sinon';
 
-import { LoggerObjectMock } from './LoggerObjectMock';
+import { UnitTestContext } from '../../';
+
+class TestPrefixClass { }
 
 @suite("shared/log/Log")
-class TestLog {
+class Test {
 
-    @context static debugSpy: sinon.SinonSpy;
-    @context static infoSpy: sinon.SinonSpy;
-    @context static warningSpy: sinon.SinonSpy;
-    @context static errorSpy: sinon.SinonSpy;
+    context = new UnitTestContext();
 
-    // before all
-    static before() {
+    before() {
 
-        // debug level
-        Log.setLogLevel(LogLevel.Debug);
+        // prepare the test
+        let logger = Log.getInstance<Log>();
+        logger.setLogLevel(LogLevel.Debug);
 
-        // set the mock
-        let mock = new LoggerObjectMock();
-        Log.overrideLoggerObject(mock);
+        // create context
+        this.context = new UnitTestContext();
 
-        // set up the spies on the mock
-        TestLog.debugSpy = sinon.spy(mock, 'debug');
-        TestLog.infoSpy = sinon.spy(mock, 'info');
-        TestLog.warningSpy = sinon.spy(mock, 'warn');
-        TestLog.errorSpy = sinon.spy(mock, 'error');
+        // add the spies
+        this.context.addSpy(console, 'debug');
+        this.context.addSpy(console, 'info');
+        this.context.addSpy(console, 'warn');
+        this.context.addSpy(console, 'error');
+
+        // add the logger
+        this.context.add('logger', logger);
     }
 
     // after each
     after() {
 
-        TestLog.debugSpy.restore();
-        TestLog.infoSpy.restore();
-        TestLog.warningSpy.restore();
-        TestLog.errorSpy.restore();
+        // reset log level
+        this.context.get<Log>('logger').setLogLevel(LogLevel.Debug);
+
+        // remove all spies
+        this.context.removeAllSpies();
     }
 
     @test "setLogLevel() should work correctly"() {
 
-        Log.setLogLevel(LogLevel.Debug);
-        expect(Log.getLogLevel()).to.eq(LogLevel.Debug);
+        let log = this.context.get<Log>('logger');
+
+        log.setLogLevel(LogLevel.Debug);
+        expect(log.getLogLevel()).to.eq(LogLevel.Debug);
     }
 
     @test "debug() should log at debug level"() {
 
-        Log.debug("test");
-        expect(TestLog.debugSpy.called, "debug message was not printed");
+        // make a test log
+        let log = this.context.get<Log>('logger');
+        log.debug("test debug call");
 
-        expect(TestLog.infoSpy.notCalled);
-        expect(TestLog.warningSpy.notCalled);
-        expect(TestLog.errorSpy.notCalled);
+        // spy should be called
+        sinon.assert.called(this.context.getSpy(console, 'debug'));
+        sinon.assert.notCalled(this.context.getSpy(console, 'info'));
+        sinon.assert.notCalled(this.context.getSpy(console, 'warn'));
+        sinon.assert.notCalled(this.context.getSpy(console, 'error'));
     }
+
 
     @test "info() should log at info level"() {
 
-        Log.info("test");
-        expect(TestLog.infoSpy.called, "info message was not printed");
+        // make a test log
+        let log = this.context.get<Log>('logger');
+        log.info("test info call");
 
-        expect(TestLog.debugSpy.notCalled);
-        expect(TestLog.warningSpy.notCalled);
-        expect(TestLog.errorSpy.notCalled);
+        // spy should be called
+        sinon.assert.called(this.context.getSpy(console, 'info'));
+        sinon.assert.notCalled(this.context.getSpy(console, 'debug'));
+        sinon.assert.notCalled(this.context.getSpy(console, 'warn'));
+        sinon.assert.notCalled(this.context.getSpy(console, 'error'));
     }
 
     @test "warning() should log at warning level"() {
 
-        Log.warning("test");
-        expect(TestLog.warningSpy.called, "warning message was not printed");
+        // make a test log
+        let log = this.context.get<Log>('logger');
+        log.warning("test info call");
 
-        expect(TestLog.debugSpy.notCalled);
-        expect(TestLog.infoSpy.notCalled);
-        expect(TestLog.errorSpy.notCalled);
+        // spy should be called
+        sinon.assert.called(this.context.getSpy(console, 'warn'));
+        sinon.assert.notCalled(this.context.getSpy(console, 'debug'));
+        sinon.assert.notCalled(this.context.getSpy(console, 'info'));
+        sinon.assert.notCalled(this.context.getSpy(console, 'error'));
     }
 
     @test "error() should log at error level"() {
 
-        Log.error("test");
-        expect(TestLog.errorSpy.called, "error message was not printed");
+        // make a test log
+        let log = this.context.get<Log>('logger');
+        log.error("test info call");
 
-        expect(TestLog.debugSpy.notCalled);
-        expect(TestLog.infoSpy.notCalled);
-        expect(TestLog.warningSpy.notCalled);
+        // spy should be called
+        sinon.assert.called(this.context.getSpy(console, 'error'));
+        sinon.assert.notCalled(this.context.getSpy(console, 'debug'));
+        sinon.assert.notCalled(this.context.getSpy(console, 'info'));
+        sinon.assert.notCalled(this.context.getSpy(console, 'warn'));
     }
 
     @test "higher loglevel should not print lower level"() {
 
         // set higher log level
-        Log.setLogLevel(LogLevel.Info);
+        let log = this.context.get<Log>('logger');
+        log.setLogLevel(LogLevel.Info);
 
-        Log.debug("test");
-        expect(TestLog.debugSpy.notCalled, "debug called but there is a higher loglevel");
+        // test call
+        log.debug("test");
+
+        // spy should not be called
+        sinon.assert.notCalled(this.context.getSpy(console, 'debug'));
+    }
+
+    @test "prefixing should work"() {
+
+        // test a log without prefixing
+        let log = this.context.get<Log>('logger');
+        log.info("infoText");
+
+        // spy should be called
+        sinon.assert.calledWithExactly(this.context.getSpy(console, 'info'), ...[
+            `[${log.constructor.name}.Info]`,
+            "infoText"
+        ]);
+
+        // log with prefix
+        log.warning(TestPrefixClass, "test1", "test2");
+
+        // check spy
+        sinon.assert.calledWithExactly(this.context.getSpy(console, 'warn'), ...[
+            `[${log.constructor.name}.Warning][${TestPrefixClass.name}]`,
+            "test1", "test2"
+        ]);
+
     }
 }

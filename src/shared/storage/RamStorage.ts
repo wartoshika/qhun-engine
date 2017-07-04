@@ -51,6 +51,30 @@ export class RamStorage {
     }
 
     /**
+     * removes all entires in the given path
+     *
+     * @param path the path to clear
+     * @return the amount of deleted objects
+     */
+    public static clearPath(path: string): number {
+
+        let counter = 0;
+
+        Object.keys(RamStorage.cache).forEach(key => {
+
+            // if the path is present
+            if (key.indexOf(path) === 0) {
+
+                // remove the part
+                delete RamStorage.cache[key];
+                counter++;
+            }
+        });
+
+        return counter;
+    }
+
+    /**
      * get an element from the cache
      *
      * @param path the path to the object. dots can be used to structure

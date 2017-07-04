@@ -26,7 +26,7 @@ export class CollisionDetection {
         entities.filter(entity => entity instanceof CollidableEntity).forEach((entity: CollidableEntity) => {
 
             // calculate the entity position in every direction from its
-            // hitbox
+            // current position
             let position: {
                 [direction: number]: Vector2D
             } = {};
@@ -56,14 +56,6 @@ export class CollisionDetection {
 
                 // get the tile numbers that are at the players point
                 let tileNumbers = world.getTileNumbersForPosition(position[direction]);
-
-                if ((<any>window).log === true) {
-                    if (direction === Direction.Right) {
-
-                        console.log(tileNumbers);
-                        (<any>window).log = false;
-                    }
-                }
 
                 // on a collidable tile?
                 let collidableTileNumbers = world.getCollidableTileNumbers();

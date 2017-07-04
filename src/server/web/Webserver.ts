@@ -11,6 +11,7 @@ require('file-loader?name=[name].[ext]!./index.html');
 import * as http from 'http';
 import * as express from 'express';
 import * as path from 'path';
+import * as fs from 'fs';
 
 import { Log } from '../../shared/log';
 
@@ -45,7 +46,7 @@ export class Webserver {
      * @param response
      */
     private serveApplication(
-        request: any, response: any
+        request: any, response: express.Response
     ): void {
 
         // get the requested file from the request object
@@ -56,7 +57,15 @@ export class Webserver {
         // @todo: do not serve the server.js file for security reasons!
         // get the file and send it back to the client
         let absolutePath = path.resolve(`./dist/${file}`);
-        response.sendFile(absolutePath);
+
+        try {
+
+            response.type(file.split('.').pop());
+            response.send(fs.readFileSync(absolutePath));
+        } catch (e) {
+
+            response.sendStatus(404);
+        }
     }
 
     /**

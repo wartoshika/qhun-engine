@@ -12,6 +12,10 @@ import { AssetLoader } from './AssetLoader';
 /**
  * a basic class for implementing the getter and setter function
  * of the required asset interface
+ *
+ * be sure to implement the folling needed functions
+ * @need public static async register(...images: InlineAsset[]): Promise<any>
+ * @need constructor(name?: string, path?: string, data?: any): Asset
  */
 export abstract class AbstractAsset implements Asset {
 
@@ -24,7 +28,7 @@ export abstract class AbstractAsset implements Asset {
         protected name?: string,
         protected path?: string,
         protected type?: AssetType,
-        protected data?: any
+        protected data?: Blob
     ) { }
 
     /**
@@ -45,7 +49,7 @@ export abstract class AbstractAsset implements Asset {
         return this.path;
     }
 
-    public getAssetType(): AssetType {
+    public getType(): AssetType {
 
         return this.type;
     }
@@ -65,7 +69,7 @@ export abstract class AbstractAsset implements Asset {
         this.path = path;
     }
 
-    public setData(data: string): void {
+    public setData(data: Blob): void {
 
         this.data = data;
     }
