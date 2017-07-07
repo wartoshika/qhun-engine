@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 9);
+/******/ 	return __webpack_require__(__webpack_require__.s = 16);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -79,8 +79,8 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(2));
-__export(__webpack_require__(17));
+__export(__webpack_require__(5));
+__export(__webpack_require__(6));
 
 
 /***/ }),
@@ -99,9 +99,9 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(5));
-__export(__webpack_require__(20));
-__export(__webpack_require__(6));
+__export(__webpack_require__(8));
+__export(__webpack_require__(25));
+__export(__webpack_require__(9));
 
 
 /***/ }),
@@ -117,37 +117,12 @@ __export(__webpack_require__(6));
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * a basic loglevel categorisation
- */
-var LogLevel;
-(function (LogLevel) {
-    LogLevel[LogLevel["None"] = 0] = "None";
-    LogLevel[LogLevel["Debug"] = 1] = "Debug";
-    LogLevel[LogLevel["Info"] = 2] = "Info";
-    LogLevel[LogLevel["Warning"] = 3] = "Warning";
-    LogLevel[LogLevel["Error"] = 4] = "Error";
-})(LogLevel = exports.LogLevel || (exports.LogLevel = {}));
-
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-const storage_1 = __webpack_require__(4);
+const storage_1 = __webpack_require__(3);
+const event_1 = __webpack_require__(11);
 /**
  * a class to handle the singleton paradigmen
  */
-class Singleton {
+class Singleton extends event_1.EventEmitter {
     /**
      * generates a storage name for the instance storing
      *
@@ -183,6 +158,25 @@ exports.Singleton = Singleton;
 
 
 /***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(7));
+
+
+/***/ }),
 /* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -198,7 +192,10 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(18));
+__export(__webpack_require__(2));
+__export(__webpack_require__(37));
+__export(__webpack_require__(10));
+__export(__webpack_require__(38));
 
 
 /***/ }),
@@ -215,51 +212,16 @@ __export(__webpack_require__(18));
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
- * simple math helper class
+ * a basic loglevel categorisation
  */
-class Helper {
-    /**
-     * calculates a random degree
-     */
-    static randomDegree() {
-        return Math.floor(Math.random() * 359) + 1;
-    }
-    /**
-     * transforms a degree number to radian number
-     *
-     * @param degree the given degree
-     */
-    static degreeToRadian(degree) {
-        return degree * Math.PI / 180;
-    }
-    /**
-     * transforms a radian number to degree
-     *
-     * @param radian the radian value
-     */
-    static radianToDegree(radian) {
-        return radian * (180 / Math.PI);
-    }
-    /**
-     * rounds to a given precision
-     *
-     * @param number the number to round
-     * @param precision the precision
-     */
-    static roundToPrecision(number, precision = 2) {
-        return +number.toFixed(precision);
-    }
-    /**
-     * converts mass to newtons based on a given force
-     *
-     * @param mass the mass of the object
-     * @param force the gravity force
-     */
-    static massToWeight(mass, force) {
-        return mass * force;
-    }
-}
-exports.Helper = Helper;
+var LogLevel;
+(function (LogLevel) {
+    LogLevel[LogLevel["None"] = 0] = "None";
+    LogLevel[LogLevel["Debug"] = 1] = "Debug";
+    LogLevel[LogLevel["Info"] = 2] = "Info";
+    LogLevel[LogLevel["Warning"] = 3] = "Warning";
+    LogLevel[LogLevel["Error"] = 4] = "Error";
+})(LogLevel = exports.LogLevel || (exports.LogLevel = {}));
 
 
 /***/ }),
@@ -275,293 +237,14 @@ exports.Helper = Helper;
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * a basic holder of x and y values as one datatype
- */
-class Dimension {
-    /**
-     *
-     * @param x the x coordinate
-     * @param y the y coordinate
-     */
-    constructor(x = 0, y = 0) {
-        this.x = x;
-        this.y = y;
-    }
-}
-exports.Dimension = Dimension;
-
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-var FileSizeType;
-(function (FileSizeType) {
-    FileSizeType[FileSizeType["Byte"] = 0] = "Byte";
-    FileSizeType[FileSizeType["Kilobyte"] = 1] = "Kilobyte";
-    FileSizeType[FileSizeType["Megabyte"] = 2] = "Megabyte";
-    FileSizeType[FileSizeType["Gigabyte"] = 3] = "Gigabyte";
-    FileSizeType[FileSizeType["Terrabyte"] = 4] = "Terrabyte";
-})(FileSizeType = exports.FileSizeType || (exports.FileSizeType = {}));
-/**
- * a helper class for file and path things
- */
-class File {
-    /**
-     * get the file extension of a path
-     *
-     * @param path the path to the file
-     */
-    static getFileExtension(path) {
-        return path.split('.').pop();
-    }
-    /**
-     * converts a byle number to a given superset
-     *
-     * @param bytes the base byte number
-     * @param type the wanted type
-     */
-    static byteToSize(bytes, type) {
-        return bytes / Math.pow(1024, type);
-    }
-}
-exports.File = File;
-
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-const math_1 = __webpack_require__(1);
-/**
- * the base class for all game entities
- */
-class Entity {
-    constructor(position = new math_1.Vector2D(0, 0)) {
-        this.position = position;
-    }
-    /**
-     * get the current position of the entity ( top left )
-     */
-    getPosition() {
-        return this.position;
-    }
-    /**
-     * set the entities new position
-     *
-     * @param position the new position
-     */
-    setPosition(position) {
-        this.position = position;
-    }
-}
-exports.Entity = Entity;
-
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-const web_1 = __webpack_require__(10);
-const network_1 = __webpack_require__(21);
-const shared_1 = __webpack_require__(24);
-/**
- * the game server main class. loads all important things
- * and also provides a buildin webserver to serve the app
- */
-class Server {
-    constructor(serverConfig) {
-        this.serverConfig = serverConfig;
-        /**
-         * logger instance
-         */
-        this.logger = shared_1.Log.getLogger(Server.name);
-        // set the log level
-        this.logger.setLogLevel(serverConfig.logLevel);
-        // start the webserver
-        this.webserver = new web_1.Webserver(serverConfig.webAdress, serverConfig.webPort);
-        // start network
-        this.network = new network_1.NetworkServer(this.webserver.getApplication());
-    }
-}
-exports.Server = Server;
-// start the webserver
-new Server({
-    webAdress: '127.0.0.1',
-    webPort: 3000,
-    logLevel: shared_1.LogLevel.Debug
-});
-
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(11));
-
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-// need the index file in the build directory
-__webpack_require__(12);
-const http = __webpack_require__(13);
-const express = __webpack_require__(14);
-const path = __webpack_require__(15);
-const fs = __webpack_require__(16);
-const log_1 = __webpack_require__(0);
-/**
- * the buildin webserver to serve the client
- */
-class Webserver {
-    constructor(listenAdress = "127.0.0.1", port = 3000, app = express()) {
-        /**
-         * the logger instance
-         */
-        this.logger = log_1.Log.getLogger(Webserver.name);
-        // setup server
-        this.httpServer = http.createServer(app);
-        // start listening
-        this.httpServer.listen(port, listenAdress);
-        this.logger.info("Listening at ", `${listenAdress}:${port}`);
-        // handle http calls
-        app.get('/*', this.serveApplication.bind(this));
-    }
-    /**
-     * handles incomming file calls
-     *
-     * @param request
-     * @param response
-     */
-    serveApplication(request, response) {
-        // get the requested file from the request object
-        let file = request.url;
-        if (file === "/")
-            file = "index.html";
-        // @todo: do not serve the server.js file for security reasons!
-        // get the file and send it back to the client
-        let absolutePath = path.resolve(`./dist/${file}`);
-        try {
-            response.type(file.split('.').pop());
-            response.send(fs.readFileSync(absolutePath));
-        }
-        catch (e) {
-            response.sendStatus(404);
-        }
-    }
-    /**
-     * gets the current express application
-     *
-     * @return the passed through app at constructing time or a newly created app if no parameter was given during constructing
-     */
-    getApplication() {
-        return this.app;
-    }
-}
-exports.Webserver = Webserver;
-
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "index.html";
-
-/***/ }),
-/* 13 */
-/***/ (function(module, exports) {
-
-module.exports = require("http");
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports) {
-
-module.exports = require("express");
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports) {
-
-module.exports = require("path");
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports) {
-
-module.exports = require("fs");
-
-/***/ }),
-/* 17 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-const LogLevel_1 = __webpack_require__(2);
-const helper_1 = __webpack_require__(31);
-const storage_1 = __webpack_require__(4);
+const LogLevel_1 = __webpack_require__(5);
+const Singleton_1 = __webpack_require__(2);
+const RamStorage_1 = __webpack_require__(7);
 /**
  * a log wrapper to allow log levels and a more complex
  * logging structure
  */
-class Log extends helper_1.Singleton {
+class Log extends Singleton_1.Singleton {
     constructor() {
         super(...arguments);
         /**
@@ -587,15 +270,15 @@ class Log extends helper_1.Singleton {
      */
     static getLogger(prefix) {
         let instance = null;
-        if (!storage_1.RamStorage.has(this.generateStorageName(prefix))) {
+        if (!RamStorage_1.RamStorage.has(this.generateStorageName(prefix))) {
             // get the constructor and store an instance of the class at the ram storage
             let constructor = this;
             let logger = new constructor();
             logger.prefix = prefix;
-            storage_1.RamStorage.add(this.generateStorageName(prefix), logger);
+            RamStorage_1.RamStorage.add(this.generateStorageName(prefix), logger);
         }
         // get the instance
-        return storage_1.RamStorage.get(this.generateStorageName(prefix));
+        return RamStorage_1.RamStorage.get(this.generateStorageName(prefix));
     }
     /**
      * override the generate storage name method to allow prefixing the
@@ -696,7 +379,7 @@ exports.Log = Log;
 
 
 /***/ }),
-/* 18 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -709,9 +392,9 @@ exports.Log = Log;
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 // the dependency to get the memory footprint ob stored objects
-let sizeof = __webpack_require__(19);
+let sizeof = __webpack_require__(24);
 const math_1 = __webpack_require__(1);
-const File_1 = __webpack_require__(7);
+const File_1 = __webpack_require__(10);
 /**
  * holds objects in the ram of the operating unit
  */
@@ -809,13 +492,7 @@ exports.RamStorage = RamStorage;
 
 
 /***/ }),
-/* 19 */
-/***/ (function(module, exports) {
-
-module.exports = require("object-sizeof");
-
-/***/ }),
-/* 20 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -827,8 +504,446 @@ module.exports = require("object-sizeof");
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-const Helper_1 = __webpack_require__(5);
-const Dimension_1 = __webpack_require__(6);
+/**
+ * simple math helper class
+ */
+class Helper {
+    /**
+     * calculates a random degree
+     */
+    static randomDegree() {
+        return Math.floor(Math.random() * 359) + 1;
+    }
+    /**
+     * transforms a degree number to radian number
+     *
+     * @param degree the given degree
+     */
+    static degreeToRadian(degree) {
+        return degree * Math.PI / 180;
+    }
+    /**
+     * transforms a radian number to degree
+     *
+     * @param radian the radian value
+     */
+    static radianToDegree(radian) {
+        return radian * (180 / Math.PI);
+    }
+    /**
+     * rounds to a given precision
+     *
+     * @param number the number to round
+     * @param precision the precision
+     */
+    static roundToPrecision(number, precision = 2) {
+        return +number.toFixed(precision);
+    }
+    /**
+     * converts mass to newtons based on a given force
+     *
+     * @param mass the mass of the object
+     * @param force the gravity force
+     */
+    static massToWeight(mass, force) {
+        return mass * force;
+    }
+}
+exports.Helper = Helper;
+
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * a basic holder of x and y values as one datatype
+ */
+class Dimension {
+    /**
+     *
+     * @param x the x coordinate
+     * @param y the y coordinate
+     */
+    constructor(x = 0, y = 0) {
+        this.x = x;
+        this.y = y;
+    }
+}
+exports.Dimension = Dimension;
+
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+var FileSizeType;
+(function (FileSizeType) {
+    FileSizeType[FileSizeType["Byte"] = 0] = "Byte";
+    FileSizeType[FileSizeType["Kilobyte"] = 1] = "Kilobyte";
+    FileSizeType[FileSizeType["Megabyte"] = 2] = "Megabyte";
+    FileSizeType[FileSizeType["Gigabyte"] = 3] = "Gigabyte";
+    FileSizeType[FileSizeType["Terrabyte"] = 4] = "Terrabyte";
+})(FileSizeType = exports.FileSizeType || (exports.FileSizeType = {}));
+/**
+ * a helper class for file and path things
+ */
+class File {
+    /**
+     * get the file extension of a path
+     *
+     * @param path the path to the file
+     */
+    static getFileExtension(path) {
+        return path.split('.').pop();
+    }
+    /**
+     * converts a byle number to a given superset
+     *
+     * @param bytes the base byte number
+     * @param type the wanted type
+     */
+    static byteToSize(bytes, type) {
+        return bytes / Math.pow(1024, type);
+    }
+}
+exports.File = File;
+
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(12));
+__export(__webpack_require__(26));
+__export(__webpack_require__(27));
+
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+var EventName;
+(function (EventName) {
+    EventName[EventName["BeforePreload"] = "BeforePreload"] = "BeforePreload";
+    EventName[EventName["AfterPreload"] = "AfterPreload"] = "AfterPreload";
+    EventName[EventName["BeforeLoaded"] = "BeforeLoaded"] = "BeforeLoaded";
+    EventName[EventName["AfterLoaded"] = "AfterLoaded"] = "AfterLoaded";
+})(EventName = exports.EventName || (exports.EventName = {}));
+
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+function isNodeEnv() {
+    return typeof global !== 'undefined';
+}
+function isBrowserEnv() {
+    return typeof window !== 'undefined';
+}
+/**
+ * loads a polyfill if the object was not found
+ */
+function polyfill(...modules) {
+    modules.forEach(_module => {
+        if (isNodeEnv()) {
+            // load node polyfill
+            global[_module.fills] = !(function webpackMissingModule() { var e = new Error("Cannot find module \".\""); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+        }
+        else if (isBrowserEnv()) {
+            // load browser polyfill
+            window[_module.fills] = !(function webpackMissingModule() { var e = new Error("Cannot find module \".\""); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+        }
+    });
+}
+exports.polyfill = polyfill;
+
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports) {
+
+function webpackEmptyContext(req) {
+	throw new Error("Cannot find module '" + req + "'.");
+}
+webpackEmptyContext.keys = function() { return []; };
+webpackEmptyContext.resolve = webpackEmptyContext;
+module.exports = webpackEmptyContext;
+webpackEmptyContext.id = 14;
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+const math_1 = __webpack_require__(1);
+/**
+ * the base class for all game entities
+ */
+class Entity {
+    constructor(position = new math_1.Vector2D(0, 0)) {
+        this.position = position;
+    }
+    /**
+     * get the current position of the entity ( top left )
+     */
+    getPosition() {
+        return this.position;
+    }
+    /**
+     * set the entities new position
+     *
+     * @param position the new position
+     */
+    setPosition(position) {
+        this.position = position;
+    }
+}
+exports.Entity = Entity;
+
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+const web_1 = __webpack_require__(17);
+const network_1 = __webpack_require__(28);
+const shared_1 = __webpack_require__(31);
+/**
+ * the game server main class. loads all important things
+ * and also provides a buildin webserver to serve the app
+ */
+class Server {
+    constructor(serverConfig) {
+        this.serverConfig = serverConfig;
+        /**
+         * logger instance
+         */
+        this.logger = shared_1.Log.getLogger(Server.name);
+        // set the log level
+        this.logger.setLogLevel(serverConfig.logLevel);
+        // start the webserver
+        this.webserver = new web_1.Webserver(serverConfig.webAdress, serverConfig.webPort);
+        // start network
+        this.network = new network_1.NetworkServer(this.webserver.getApplication());
+    }
+}
+exports.Server = Server;
+// start the webserver
+new Server({
+    webAdress: '127.0.0.1',
+    webPort: 3000,
+    logLevel: shared_1.LogLevel.Debug
+});
+
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(18));
+
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+// need the index file in the build directory
+__webpack_require__(19);
+const http = __webpack_require__(20);
+const express = __webpack_require__(21);
+const path = __webpack_require__(22);
+const fs = __webpack_require__(23);
+const log_1 = __webpack_require__(0);
+/**
+ * the buildin webserver to serve the client
+ */
+class Webserver {
+    constructor(listenAdress = "127.0.0.1", port = 3000, app = express()) {
+        /**
+         * the logger instance
+         */
+        this.logger = log_1.Log.getLogger(Webserver.name);
+        // setup server
+        this.httpServer = http.createServer(app);
+        // start listening
+        this.httpServer.listen(port, listenAdress);
+        this.logger.info("Listening at ", `${listenAdress}:${port}`);
+        // handle http calls
+        app.get('/*', this.serveApplication.bind(this));
+    }
+    /**
+     * handles incomming file calls
+     *
+     * @param request
+     * @param response
+     */
+    serveApplication(request, response) {
+        // get the requested file from the request object
+        let file = request.url;
+        if (file === "/")
+            file = "index.html";
+        // @todo: do not serve the server.js file for security reasons!
+        // get the file and send it back to the client
+        let absolutePath = path.resolve(`./dist/${file}`);
+        try {
+            response.type(file.split('.').pop());
+            response.send(fs.readFileSync(absolutePath));
+        }
+        catch (e) {
+            response.sendStatus(404);
+        }
+    }
+    /**
+     * gets the current express application
+     *
+     * @return the passed through app at constructing time or a newly created app if no parameter was given during constructing
+     */
+    getApplication() {
+        return this.app;
+    }
+}
+exports.Webserver = Webserver;
+
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "index.html";
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports) {
+
+module.exports = require("http");
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports) {
+
+module.exports = require("express");
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports) {
+
+module.exports = require("path");
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports) {
+
+module.exports = require("fs");
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports) {
+
+module.exports = require("object-sizeof");
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+const Helper_1 = __webpack_require__(8);
+const Dimension_1 = __webpack_require__(9);
 /**
  * represents a 2D vector with x and y coordinates.
  */
@@ -922,7 +1037,99 @@ exports.Vector2D = Vector2D;
 
 
 /***/ }),
-/* 21 */
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+const storage_1 = __webpack_require__(3);
+/**
+ * a class that can emit events and can add listeners to events
+ */
+class EventEmitter {
+    /**
+     * listen on the given event
+     *
+     * @param event the desired event
+     * @param listener the listener function
+     */
+    on(event, listener) {
+        // first get all listeners
+        let listeners = storage_1.RamStorage.get(EventEmitter.name);
+        // check if listeners is defined
+        if (!listeners) {
+            listeners = {};
+        }
+        // create array context if not allready done
+        if (!Array.isArray(listeners[event])) {
+            listeners[event] = [];
+        }
+        // stack it up
+        listeners[event].push(listener);
+        // save it back to the storage
+        storage_1.RamStorage.add(EventEmitter.name, listeners);
+        // chaning context
+        return this;
+    }
+    /**
+     * emit an event
+     *
+     * @param event the event name
+     * @param listenerBoundContext this context of the executed function. default: null
+     * @param args optional parameter to pass to the listener function
+     */
+    emit(event, listenerBoundContext, ...args) {
+        // get all listeners for this event
+        let listeners = storage_1.RamStorage.get(EventEmitter.name);
+        // is listeners defined?
+        if (!listeners) {
+            // cancel
+            return this;
+        }
+        // get all functions for this event
+        let eventFunctions = listeners[event];
+        // are there any?
+        if (Array.isArray(eventFunctions)) {
+            // execute them
+            eventFunctions.forEach((ev) => {
+                // take the context or no context
+                if (!listenerBoundContext)
+                    listenerBoundContext = {};
+                // call it
+                ev.apply(listenerBoundContext, args);
+            });
+        }
+        // chaning context
+        return this;
+    }
+}
+exports.EventEmitter = EventEmitter;
+
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+
+
+/***/ }),
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -937,11 +1144,11 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(22));
+__export(__webpack_require__(29));
 
 
 /***/ }),
-/* 22 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -953,7 +1160,7 @@ __export(__webpack_require__(22));
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-const socketio = __webpack_require__(23);
+const socketio = __webpack_require__(30);
 const log_1 = __webpack_require__(0);
 /**
  * the network base to use a client-server based structure
@@ -1004,13 +1211,13 @@ exports.NetworkServer = NetworkServer;
 
 
 /***/ }),
-/* 23 */
+/* 30 */
 /***/ (function(module, exports) {
 
 module.exports = require("socket.io");
 
 /***/ }),
-/* 24 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1025,17 +1232,19 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(25));
-__export(__webpack_require__(27));
-__export(__webpack_require__(29));
-__export(__webpack_require__(31));
+__export(__webpack_require__(32));
+__export(__webpack_require__(34));
+__export(__webpack_require__(40));
+__export(__webpack_require__(4));
 __export(__webpack_require__(0));
 __export(__webpack_require__(1));
-__export(__webpack_require__(4));
+__export(__webpack_require__(3));
+__export(__webpack_require__(11));
+__export(__webpack_require__(13));
 
 
 /***/ }),
-/* 25 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1050,11 +1259,11 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(26));
+__export(__webpack_require__(33));
 
 
 /***/ }),
-/* 26 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1078,7 +1287,7 @@ var CollisionType;
 
 
 /***/ }),
-/* 27 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1093,11 +1302,13 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(28));
+__export(__webpack_require__(35));
+__export(__webpack_require__(36));
+__export(__webpack_require__(39));
 
 
 /***/ }),
-/* 28 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1133,7 +1344,7 @@ exports.logMethodCall = logMethodCall;
 
 
 /***/ }),
-/* 29 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1144,16 +1355,46 @@ exports.logMethodCall = logMethodCall;
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(8));
-__export(__webpack_require__(30));
+const helper_1 = __webpack_require__(4);
+/**
+ * a property decorator to define a phase in wich the property
+ * will be emptied
+ *
+ * @param event property will be cleared on the defined event
+ * @param clearVal the new value that will be the property value
+ */
+function collectGargabe(event, cleanVal) {
+    return (target, propertyKey) => {
+        // the collector function
+        let collectGarbage = (targets) => {
+            // iterate all targets
+            targets.forEach(target => {
+                // cleck if property exists
+                if (target[propertyKey]) {
+                    //clean it!
+                    target[propertyKey] = cleanVal;
+                }
+                else {
+                    // not found!
+                    throw new Error(`@collectGargabe property ${propertyKey} on target ${target.constructor.name} not found!`);
+                }
+            });
+        };
+        // register the deletion event in the garbage collector
+        let collector = helper_1.GarbageCollector.getInstance();
+        collector.registerCleaning({
+            event: event,
+            ctor: target.constructor,
+            cleanFunction: collectGarbage
+        });
+    };
+}
+exports.collectGargabe = collectGargabe;
 
 
 /***/ }),
-/* 30 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1165,79 +1406,8 @@ __export(__webpack_require__(30));
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-const Entity_1 = __webpack_require__(8);
-const math_1 = __webpack_require__(1);
-/**
- * an entity that can collide with other collidable entities
- */
-class CollidableEntity extends Entity_1.Entity {
-    constructor(entityWidth, entityHeight, position = math_1.Vector2D.from(0, 0)) {
-        super(position);
-        this.entityWidth = entityWidth;
-        this.entityHeight = entityHeight;
-    }
-    /**
-     * get the width of the entity
-     */
-    getWidth() {
-        return this.entityWidth;
-    }
-    /**
-     * get the height of the entity
-     */
-    getHeight() {
-        return this.entityHeight;
-    }
-    /**
-     * get the width of the entity
-     */
-    setWidth(width) {
-        this.entityWidth = width;
-    }
-    /**
-     * get the height of the entity
-     */
-    setHeight(height) {
-        this.entityHeight = height;
-    }
-}
-exports.CollidableEntity = CollidableEntity;
-
-
-/***/ }),
-/* 31 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(3));
-__export(__webpack_require__(32));
-__export(__webpack_require__(7));
-
-
-/***/ }),
-/* 32 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-Object.defineProperty(exports, "__esModule", { value: true });
+const polyfill_1 = __webpack_require__(13);
+polyfill_1.polyfill({ require: "atob", fills: "atob" }, { require: "w3c-blob", fills: "Blob" });
 /**
  * a helper class for binary content
  */
@@ -1304,6 +1474,225 @@ class Binary {
     }
 }
 exports.Binary = Binary;
+
+
+/***/ }),
+/* 38 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+const Singleton_1 = __webpack_require__(2);
+const EventName_1 = __webpack_require__(12);
+const Log_1 = __webpack_require__(6);
+/**
+ * an internal garbage collector class to clear some memory for the
+ * user.
+ */
+class GarbageCollector extends Singleton_1.Singleton {
+    constructor() {
+        super();
+        /**
+         * holder of all registered targets for cleaning
+         */
+        this.registeredTargets = {};
+        /**
+         * the stack of all registered garbage collection processes
+         */
+        this.registerStack = [];
+        /**
+         * the logger instance
+         */
+        this.logger = Log_1.Log.getLogger(GarbageCollector.name);
+        // temp stack for event names
+        let eventTmpStack = [];
+        // register all events
+        Object.keys(EventName_1.EventName).forEach(event => {
+            // register event and execute the cleaning
+            let eventEnum = event;
+            // only register event if not allready done
+            if (eventTmpStack.indexOf(eventEnum) === -1) {
+                // register the event
+                this.on(eventEnum, this.executeEvent.bind(this, eventEnum));
+            }
+        });
+        // bind instance
+        GarbageCollector.bindInstance(this);
+    }
+    /**
+     * register a property to be cleaned if a specific event occurs
+     *
+     * @param cleaning the nessesary objects to clean something
+     */
+    registerCleaning(cleaning) {
+        this.registerStack.push(cleaning);
+    }
+    /**
+     *
+     * @param ctorName the constructor name of the class
+     * @param target the target class as instance
+     */
+    addTarget(ctorName, target) {
+        if (!Array.isArray(this.registeredTargets[ctorName])) {
+            this.registeredTargets[ctorName] = [];
+        }
+        this.registeredTargets[ctorName].push(target);
+    }
+    /**
+     * get all targets by its constructor function
+     */
+    getTargets(cleanTask) {
+        // no targets available?
+        if (!this.registeredTargets[cleanTask.ctor.name]) {
+            // log a warning message
+            this.logger.warning("Trying to clean at class", cleanTask.ctor.name, "but there aren't any registered targets.", "Please be sure you decorated the class with @enableGarbageCollection");
+            // no targets found!
+            return [];
+        }
+        // get all of them!
+        return this.registeredTargets[cleanTask.ctor.name];
+    }
+    /**
+     * execute the garbage collector at the given event
+     */
+    executeEvent(eventName) {
+        this.registerStack
+            .filter(clean => clean.event === EventName_1.EventName.BeforePreload)
+            .forEach(clean => clean
+            .cleanFunction(
+        // get all targets to clear
+        this.getTargets(clean), 
+        // pass the callback args to the function if available
+        ...(clean.callbackArguments ? clean.callbackArguments : [])));
+    }
+}
+exports.GarbageCollector = GarbageCollector;
+
+
+/***/ }),
+/* 39 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+const helper_1 = __webpack_require__(4);
+/**
+ * a class decorator that enabled garbage collecting on this class.
+ * this is required to use @collectGarbage as property decorator
+ */
+function enableGarbageCollection(ctor) {
+    return class extends ctor {
+        constructor(...args) {
+            super();
+            // register the instance at the gc
+            let gc = helper_1.GarbageCollector.getInstance();
+            gc.addTarget(ctor.name, this);
+        }
+    };
+}
+exports.enableGarbageCollection = enableGarbageCollection;
+
+
+/***/ }),
+/* 40 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(41));
+__export(__webpack_require__(15));
+__export(__webpack_require__(42));
+
+
+/***/ }),
+/* 41 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+
+
+/***/ }),
+/* 42 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+const Entity_1 = __webpack_require__(15);
+const math_1 = __webpack_require__(1);
+/**
+ * an entity that can collide with other collidable entities
+ */
+class CollidableEntity extends Entity_1.Entity {
+    constructor(entityWidth, entityHeight, position = math_1.Vector2D.from(0, 0)) {
+        super(position);
+        this.entityWidth = entityWidth;
+        this.entityHeight = entityHeight;
+    }
+    /**
+     * get the width of the entity
+     */
+    getWidth() {
+        return this.entityWidth;
+    }
+    /**
+     * get the height of the entity
+     */
+    getHeight() {
+        return this.entityHeight;
+    }
+    /**
+     * get the width of the entity
+     */
+    setWidth(width) {
+        this.entityWidth = width;
+    }
+    /**
+     * get the height of the entity
+     */
+    setHeight(height) {
+        this.entityHeight = height;
+    }
+}
+exports.CollidableEntity = CollidableEntity;
 
 
 /***/ })

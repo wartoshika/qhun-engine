@@ -12,7 +12,8 @@
             "dom"
         ],
         "types": [
-            "node"
+            "node",
+            "reflect-metadata"
         ],
         "typeRoots": [
             "../../node_modules/@types"

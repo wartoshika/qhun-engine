@@ -6,8 +6,8 @@
  */
 
 import { LogLevel } from './LogLevel';
-import { Singleton } from '../helper';
-import { RamStorage } from '../storage';
+import { Singleton } from '../helper/Singleton';
+import { RamStorage } from '../storage/RamStorage';
 
 /**
  * a log wrapper to allow log levels and a more complex

@@ -6,11 +6,13 @@
  */
 
 import { RamStorage } from '../storage';
+import { EventEmitter } from '../event';
 
 /**
  * a class to handle the singleton paradigmen
  */
-export abstract class Singleton {
+export abstract class Singleton extends EventEmitter {
+
     /**
      * generates a storage name for the instance storing
      *

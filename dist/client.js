@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 27);
+/******/ 	return __webpack_require__(__webpack_require__.s = 33);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -79,9 +79,9 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(13));
-__export(__webpack_require__(37));
-__export(__webpack_require__(14));
+__export(__webpack_require__(15));
+__export(__webpack_require__(36));
+__export(__webpack_require__(16));
 
 
 /***/ }),
@@ -122,7 +122,7 @@ var AssetType;
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-var AssetLoader_1 = __webpack_require__(23);
+var AssetLoader_1 = __webpack_require__(27);
 /**
  * a basic class for implementing the getter and setter function
  * of the required asset interface
@@ -190,7 +190,14 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(10));
+__export(__webpack_require__(56));
+__export(__webpack_require__(58));
+__export(__webpack_require__(13));
+__export(__webpack_require__(4));
+__export(__webpack_require__(5));
+__export(__webpack_require__(0));
+__export(__webpack_require__(7));
+__export(__webpack_require__(23));
 __export(__webpack_require__(29));
 
 
@@ -210,13 +217,10 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(49));
-__export(__webpack_require__(9));
-__export(__webpack_require__(19));
 __export(__webpack_require__(6));
-__export(__webpack_require__(3));
-__export(__webpack_require__(0));
-__export(__webpack_require__(5));
+__export(__webpack_require__(61));
+__export(__webpack_require__(22));
+__export(__webpack_require__(62));
 
 
 /***/ }),
@@ -235,7 +239,8 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(30));
+__export(__webpack_require__(17));
+__export(__webpack_require__(18));
 
 
 /***/ }),
@@ -250,17 +255,83 @@ __export(__webpack_require__(30));
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(11));
-__export(__webpack_require__(38));
-__export(__webpack_require__(15));
+var storage_1 = __webpack_require__(7);
+var event_1 = __webpack_require__(23);
+/**
+ * a class to handle the singleton paradigmen
+ */
+var Singleton = (function (_super) {
+    __extends(Singleton, _super);
+    function Singleton() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    /**
+     * generates a storage name for the instance storing
+     *
+     * @param className the class name
+     */
+    Singleton.generateStorageName = function () {
+        return "singleton.instance." + this.name;
+    };
+    /**
+     * get the singleton instance
+     */
+    Singleton.getInstance = function () {
+        var instance = null;
+        if (!storage_1.RamStorage.has(this.generateStorageName())) {
+            // get the constructor and store an instance of the class at the ram storage
+            var constructor = this;
+            storage_1.RamStorage.add(this.generateStorageName(), new constructor());
+        }
+        // get the instance
+        return storage_1.RamStorage.get(this.generateStorageName());
+    };
+    /**
+     * bind the instance to the singleton storage
+     *
+     * @param instance the instance that should be bound
+     */
+    Singleton.bindInstance = function (instance) {
+        // save the instance
+        storage_1.RamStorage.add(this.generateStorageName(), instance);
+    };
+    return Singleton;
+}(event_1.EventEmitter));
+exports.Singleton = Singleton;
 
 
 /***/ }),
 /* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(19));
+
+
+/***/ }),
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -354,25 +425,6 @@ exports.Image = Image;
 
 
 /***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(51));
-
-
-/***/ }),
 /* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -388,11 +440,388 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(28));
+__export(__webpack_require__(64));
 
 
 /***/ }),
 /* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(11));
+__export(__webpack_require__(46));
+__export(__webpack_require__(47));
+__export(__webpack_require__(48));
+__export(__webpack_require__(49));
+__export(__webpack_require__(12));
+
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var AnimationEntity_1 = __webpack_require__(12);
+/**
+ * the base class for all game entities
+ */
+var Entity = (function (_super) {
+    __extends(Entity, _super);
+    function Entity() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return Entity;
+}(AnimationEntity_1.AnimationEntity));
+exports.Entity = Entity;
+
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var entity_1 = __webpack_require__(13);
+var Animation_1 = __webpack_require__(38);
+var log_1 = __webpack_require__(5);
+/**
+ * a base class for animations on entities
+ */
+var AnimationEntity = (function (_super) {
+    __extends(AnimationEntity, _super);
+    function AnimationEntity() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        /**
+         * all animations of the entity
+         */
+        _this.animationStack = [];
+        /**
+         * the visibility flag
+         */
+        _this.visible = true;
+        /**
+         * the current scale factor
+         */
+        _this.scaleFactor = 1;
+        /**
+         * the logger instance
+         */
+        _this.logger = log_1.Log.getLogger(AnimationEntity.name);
+        return _this;
+    }
+    /**
+     * add one or many animations to the entity
+     */
+    AnimationEntity.prototype.addAnimation = function () {
+        var animations = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            animations[_i] = arguments[_i];
+        }
+        (_a = this.animationStack).push.apply(_a, animations);
+        var _a;
+    };
+    /**
+     * play the given animation
+     * @todo: possible observable return type to let the user know when an animation changes it's state
+     */
+    AnimationEntity.prototype.playAnimation = function (name, loop) {
+        if (loop === void 0) { loop = false; }
+        // if there is allready a running animation, stop it
+        if (this.currentAnimation) {
+            // if the animation name is the same, ignore the call
+            if (this.currentAnimation.getName() === name)
+                return;
+            // stop and play the new animation
+            this.currentAnimation.stopAndRestore();
+        }
+        // get the animation player
+        var animation = this.animationStack.find(function (a) { return a.name === name; });
+        // check if the animation is valid
+        if (!animation) {
+            this.logger.warning("Animation", name, "was not added to", this.constructor.name, ". Ignoring this animation.");
+            return;
+        }
+        // play!
+        this.currentAnimation = new Animation_1.Animation(animation, this, loop);
+        this.currentAnimation.play();
+    };
+    /**
+     * stops the currently playing animation
+     */
+    AnimationEntity.prototype.stopAnimation = function () {
+        // currently playing an animation?
+        if (!this.currentAnimation) {
+            // log a warning
+            this.logger.warning("trying to stop an animation on", this.constructor.name, "but there is no active animation");
+            return;
+        }
+        // stops the animation
+        this.currentAnimation.stopAndRestore();
+        this.currentAnimation = null;
+    };
+    /**
+     * check if any or a spefific animation is running
+     *
+     * @param name the name or nothing
+     */
+    AnimationEntity.prototype.isAnimationRunning = function (name) {
+        return (!name && !!this.currentAnimation)
+            ||
+                (name && this.currentAnimation && this.currentAnimation.getName() === name);
+    };
+    /**
+     * get the image asset that displays the current entity
+     */
+    AnimationEntity.prototype.getImage = function () {
+        return this.currentTemplate;
+    };
+    /**
+     * set the new image for this entity
+     *
+     * @param image the current image that should represent this entity during rendering
+     */
+    AnimationEntity.prototype.setImage = function (image) {
+        this.currentTemplate = image;
+    };
+    /**
+     * is the entity visible? if not, the renderer will not render this entity
+     */
+    AnimationEntity.prototype.isVisible = function () {
+        return this.visible;
+    };
+    /**
+     * sets the visibility of the entity
+     */
+    AnimationEntity.prototype.setVisible = function (visible) {
+        this.visible = visible;
+    };
+    /**
+     * get the current scale
+     */
+    AnimationEntity.prototype.getScale = function () {
+        return this.scaleFactor;
+    };
+    /**
+     * set the current local entity scale
+     *
+     * @param scale the new scale
+     */
+    AnimationEntity.prototype.setScale = function (scale) {
+        this.scaleFactor = scale;
+    };
+    return AnimationEntity;
+}(entity_1.Entity));
+exports.AnimationEntity = AnimationEntity;
+
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(35));
+__export(__webpack_require__(14));
+__export(__webpack_require__(37));
+
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+var math_1 = __webpack_require__(0);
+/**
+ * the base class for all game entities
+ */
+var Entity = (function () {
+    function Entity(position) {
+        if (position === void 0) { position = new math_1.Vector2D(0, 0); }
+        this.position = position;
+    }
+    /**
+     * get the current position of the entity ( top left )
+     */
+    Entity.prototype.getPosition = function () {
+        return this.position;
+    };
+    /**
+     * set the entities new position
+     *
+     * @param position the new position
+     */
+    Entity.prototype.setPosition = function (position) {
+        this.position = position;
+    };
+    return Entity;
+}());
+exports.Entity = Entity;
+
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * simple math helper class
+ */
+var Helper = (function () {
+    function Helper() {
+    }
+    /**
+     * calculates a random degree
+     */
+    Helper.randomDegree = function () {
+        return Math.floor(Math.random() * 359) + 1;
+    };
+    /**
+     * transforms a degree number to radian number
+     *
+     * @param degree the given degree
+     */
+    Helper.degreeToRadian = function (degree) {
+        return degree * Math.PI / 180;
+    };
+    /**
+     * transforms a radian number to degree
+     *
+     * @param radian the radian value
+     */
+    Helper.radianToDegree = function (radian) {
+        return radian * (180 / Math.PI);
+    };
+    /**
+     * rounds to a given precision
+     *
+     * @param number the number to round
+     * @param precision the precision
+     */
+    Helper.roundToPrecision = function (number, precision) {
+        if (precision === void 0) { precision = 2; }
+        return +number.toFixed(precision);
+    };
+    /**
+     * converts mass to newtons based on a given force
+     *
+     * @param mass the mass of the object
+     * @param force the gravity force
+     */
+    Helper.massToWeight = function (mass, force) {
+        return mass * force;
+    };
+    return Helper;
+}());
+exports.Helper = Helper;
+
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * a basic holder of x and y values as one datatype
+ */
+var Dimension = (function () {
+    /**
+     *
+     * @param x the x coordinate
+     * @param y the y coordinate
+     */
+    function Dimension(x, y) {
+        if (x === void 0) { x = 0; }
+        if (y === void 0) { y = 0; }
+        this.x = x;
+        this.y = y;
+    }
+    return Dimension;
+}());
+exports.Dimension = Dimension;
+
+
+/***/ }),
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -418,7 +847,194 @@ var LogLevel;
 
 
 /***/ }),
-/* 11 */
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var LogLevel_1 = __webpack_require__(17);
+var Singleton_1 = __webpack_require__(6);
+var RamStorage_1 = __webpack_require__(19);
+/**
+ * a log wrapper to allow log levels and a more complex
+ * logging structure
+ */
+var Log = (function (_super) {
+    __extends(Log, _super);
+    function Log() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        /**
+         * the current log prefix
+         */
+        _this.prefix = "";
+        // the current loglevel
+        _this.logLevel = LogLevel_1.LogLevel.Debug;
+        return _this;
+    }
+    /**
+     * sets the log level for the application environment
+     *
+     * @param level the new log level
+     */
+    Log.prototype.setLogLevel = function (level) {
+        this.logLevel = level;
+    };
+    /**
+     * get the logger instance with prefixing for better
+     * detection
+     *
+     * @param prefix the prefix string
+     */
+    Log.getLogger = function (prefix) {
+        var instance = null;
+        if (!RamStorage_1.RamStorage.has(this.generateStorageName(prefix))) {
+            // get the constructor and store an instance of the class at the ram storage
+            var constructor = this;
+            var logger = new constructor();
+            logger.prefix = prefix;
+            RamStorage_1.RamStorage.add(this.generateStorageName(prefix), logger);
+        }
+        // get the instance
+        return RamStorage_1.RamStorage.get(this.generateStorageName(prefix));
+    };
+    /**
+     * override the generate storage name method to allow prefixing the
+     * log instance
+     *
+     * @param prefix the desired prefix
+     */
+    Log.generateStorageName = function (prefix) {
+        return "singleton.instance." + this.name + "." + prefix;
+    };
+    /**
+     * logs the given data
+     *
+     * @param level the level to log in
+     * @param optionalPrefix the optional prefix
+     * @param params all params as vararg array
+     */
+    Log.prototype.log = function (level) {
+        var params = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            params[_i - 1] = arguments[_i];
+        }
+        // log if the log level is ok
+        if (parseInt(level) >= parseInt(this.logLevel)
+            &&
+                this.logLevel !== LogLevel_1.LogLevel.None) {
+            var prefix = "";
+            if (this.prefix) {
+                prefix = "[" + this.prefix + "]";
+            }
+            this.getLogFunctionByLevel(level).apply(void 0, ["[" + this.constructor.name + "." + LogLevel_1.LogLevel[level] + "]" + prefix].concat(params));
+        }
+    };
+    /**
+     * gets a callback function to log
+     *
+     * @param level the level to get the function from
+     */
+    Log.prototype.getLogFunctionByLevel = function (level) {
+        var callback;
+        // go through the different log levels
+        switch (level) {
+            case LogLevel_1.LogLevel.Debug:
+                callback = console.debug;
+                break;
+            case LogLevel_1.LogLevel.Info:
+                callback = console.info;
+                break;
+            case LogLevel_1.LogLevel.Warning:
+                callback = console.warn;
+                break;
+            case LogLevel_1.LogLevel.Error:
+                callback = console.error;
+                break;
+        }
+        return callback;
+    };
+    /**
+     * get the current log level
+     */
+    Log.prototype.getLogLevel = function () {
+        return this.logLevel;
+    };
+    /**
+     * logs as debug level
+     *
+     * @param optionalPrefix if this is a constructor, the log will pre prefixed with its name. if not, the param will just printed
+     * @param params all params as vararg array
+     */
+    Log.prototype.debug = function () {
+        var params = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            params[_i] = arguments[_i];
+        }
+        this.log.apply(this, [LogLevel_1.LogLevel.Debug].concat(params));
+    };
+    /**
+     * logs as info level
+     *
+     * @param optionalPrefix if this is a constructor, the log will pre prefixed with its name. if not, the param will just printed
+     * @param params all params as vararg array
+     */
+    Log.prototype.info = function () {
+        var params = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            params[_i] = arguments[_i];
+        }
+        this.log.apply(this, [LogLevel_1.LogLevel.Info].concat(params));
+    };
+    /**
+     * logs as warning level
+     *
+     * @param optionalPrefix if this is a constructor, the log will pre prefixed with its name. if not, the param will just printed
+     * @param params all params as vararg array
+     */
+    Log.prototype.warning = function () {
+        var params = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            params[_i] = arguments[_i];
+        }
+        this.log.apply(this, [LogLevel_1.LogLevel.Warning].concat(params));
+    };
+    /**
+     * logs as error level
+     *
+     * @param optionalPrefix if this is a constructor, the log will pre prefixed with its name. if not, the param will just printed
+     * @param params all params as vararg array
+     */
+    Log.prototype.error = function () {
+        var params = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            params[_i] = arguments[_i];
+        }
+        this.log.apply(this, [LogLevel_1.LogLevel.Error].concat(params));
+    };
+    return Log;
+}(Singleton_1.Singleton));
+exports.Log = Log;
+
+
+/***/ }),
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -430,50 +1046,113 @@ var LogLevel;
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-var storage_1 = __webpack_require__(5);
+// the dependency to get the memory footprint ob stored objects
+var sizeof = __webpack_require__(39);
+var math_1 = __webpack_require__(0);
+var File_1 = __webpack_require__(22);
 /**
- * a class to handle the singleton paradigmen
+ * holds objects in the ram of the operating unit
  */
-var Singleton = (function () {
-    function Singleton() {
+var RamStorage = (function () {
+    function RamStorage() {
     }
     /**
-     * generates a storage name for the instance storing
+     * adds an elemement to the cache
      *
-     * @param className the class name
+     * @param path the path to the object. dots can be used to structure
+     * @param elemement the element to store
      */
-    Singleton.generateStorageName = function () {
-        return "singleton.instance." + this.name;
+    RamStorage.add = function (path, elemement) {
+        RamStorage.cache[path] = elemement;
     };
     /**
-     * get the singleton instance
+     * removes an element from the cache
+     *
+     * @param path the path to the object. dots can be used to structure
      */
-    Singleton.getInstance = function () {
-        var instance = null;
-        if (!storage_1.RamStorage.has(this.generateStorageName())) {
-            // get the constructor and store an instance of the class at the ram storage
-            var constructor = this;
-            storage_1.RamStorage.add(this.generateStorageName(), new constructor());
-        }
-        // get the instance
-        return storage_1.RamStorage.get(this.generateStorageName());
+    RamStorage.remove = function (path) {
+        delete RamStorage.cache[path];
     };
     /**
-     * bind the instance to the singleton storage
-     *
-     * @param instance the instance that should be bound
+     * reset the complete storage!
      */
-    Singleton.bindInstance = function (instance) {
-        // save the instance
-        storage_1.RamStorage.add(this.generateStorageName(), instance);
+    RamStorage.clear = function () {
+        this.cache = {};
     };
-    return Singleton;
+    /**
+     * removes all entires in the given path
+     *
+     * @param path the path to clear
+     * @return the amount of deleted objects
+     */
+    RamStorage.clearPath = function (path) {
+        var counter = 0;
+        Object.keys(RamStorage.cache).forEach(function (key) {
+            // if the path is present
+            if (key.indexOf(path) === 0) {
+                // remove the part
+                delete RamStorage.cache[key];
+                counter++;
+            }
+        });
+        return counter;
+    };
+    /**
+     * get an element from the cache
+     *
+     * @param path the path to the object. dots can be used to structure
+     */
+    RamStorage.get = function (path) {
+        return RamStorage.cache[path];
+    };
+    /**
+     * checks if an object exists in the cache
+     *
+     * @param path the path to the object. dots can be used to structure
+     */
+    RamStorage.has = function (path) {
+        return RamStorage.get(path) !== undefined;
+    };
+    /**
+     * the path to one or many objects in the storage
+     *
+     * @param path the path to the object. dots can be used to structure
+     */
+    RamStorage.amount = function (path) {
+        var counter = 0;
+        Object.keys(RamStorage.cache).forEach(function (key) {
+            // if the path is present, update counter
+            if (key.indexOf(path) === 0)
+                counter++;
+        });
+        return counter;
+    };
+    /**
+     * calculates the used memory for the selected objects in the storage.
+     *
+     * @param path the path to the object. dots can be used to structure
+     */
+    RamStorage.getSize = function (path, type) {
+        if (path === void 0) { path = ""; }
+        if (type === void 0) { type = File_1.FileSizeType.Byte; }
+        var byteCounter = 0;
+        Object.keys(RamStorage.cache).forEach(function (key) {
+            // if the path is present, update counter
+            if (key.indexOf(path) === 0)
+                byteCounter += sizeof(RamStorage.cache[key]);
+        });
+        var bytes = File_1.File.byteToSize(byteCounter, type);
+        return math_1.Helper.roundToPrecision(bytes, 2);
+    };
+    // the private cache object
+    RamStorage.cache = {};
+    return RamStorage;
 }());
-exports.Singleton = Singleton;
+exports.RamStorage = RamStorage;
 
 
 /***/ }),
-/* 12 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -487,9 +1166,9 @@ exports.Singleton = Singleton;
 
 
 
-var base64 = __webpack_require__(34)
-var ieee754 = __webpack_require__(35)
-var isArray = __webpack_require__(36)
+var base64 = __webpack_require__(41)
+var ieee754 = __webpack_require__(42)
+var isArray = __webpack_require__(43)
 
 exports.Buffer = Buffer
 exports.SlowBuffer = SlowBuffer
@@ -2267,108 +2946,37 @@ function isnan (val) {
   return val !== val // eslint-disable-line no-self-compare
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(21)))
 
 /***/ }),
-/* 13 */
-/***/ (function(module, exports, __webpack_require__) {
+/* 21 */
+/***/ (function(module, exports) {
 
-"use strict";
+var g;
 
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * simple math helper class
- */
-var Helper = (function () {
-    function Helper() {
-    }
-    /**
-     * calculates a random degree
-     */
-    Helper.randomDegree = function () {
-        return Math.floor(Math.random() * 359) + 1;
-    };
-    /**
-     * transforms a degree number to radian number
-     *
-     * @param degree the given degree
-     */
-    Helper.degreeToRadian = function (degree) {
-        return degree * Math.PI / 180;
-    };
-    /**
-     * transforms a radian number to degree
-     *
-     * @param radian the radian value
-     */
-    Helper.radianToDegree = function (radian) {
-        return radian * (180 / Math.PI);
-    };
-    /**
-     * rounds to a given precision
-     *
-     * @param number the number to round
-     * @param precision the precision
-     */
-    Helper.roundToPrecision = function (number, precision) {
-        if (precision === void 0) { precision = 2; }
-        return +number.toFixed(precision);
-    };
-    /**
-     * converts mass to newtons based on a given force
-     *
-     * @param mass the mass of the object
-     * @param force the gravity force
-     */
-    Helper.massToWeight = function (mass, force) {
-        return mass * force;
-    };
-    return Helper;
-}());
-exports.Helper = Helper;
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
 
 
 /***/ }),
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * a basic holder of x and y values as one datatype
- */
-var Dimension = (function () {
-    /**
-     *
-     * @param x the x coordinate
-     * @param y the y coordinate
-     */
-    function Dimension(x, y) {
-        if (x === void 0) { x = 0; }
-        if (y === void 0) { y = 0; }
-        this.x = x;
-        this.y = y;
-    }
-    return Dimension;
-}());
-exports.Dimension = Dimension;
-
-
-/***/ }),
-/* 15 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2417,7 +3025,7 @@ exports.File = File;
 
 
 /***/ }),
-/* 16 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2432,226 +3040,13 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(17));
-__export(__webpack_require__(42));
-__export(__webpack_require__(18));
+__export(__webpack_require__(24));
+__export(__webpack_require__(44));
+__export(__webpack_require__(45));
 
 
 /***/ }),
-/* 17 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-var AnimationEntity_1 = __webpack_require__(18);
-/**
- * the base class for all game entities
- */
-var Entity = (function (_super) {
-    __extends(Entity, _super);
-    function Entity() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    return Entity;
-}(AnimationEntity_1.AnimationEntity));
-exports.Entity = Entity;
-
-
-/***/ }),
-/* 18 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-var entity_1 = __webpack_require__(19);
-var Animation_1 = __webpack_require__(41);
-var log_1 = __webpack_require__(3);
-/**
- * a base class for animations on entities
- */
-var AnimationEntity = (function (_super) {
-    __extends(AnimationEntity, _super);
-    function AnimationEntity() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        /**
-         * all animations of the entity
-         */
-        _this.animationStack = [];
-        /**
-         * the visibility flag
-         */
-        _this.visible = true;
-        /**
-         * the current scale factor
-         */
-        _this.scaleFactor = 1;
-        /**
-         * the logger instance
-         */
-        _this.logger = log_1.Log.getLogger(AnimationEntity.name);
-        return _this;
-    }
-    /**
-     * add one or many animations to the entity
-     */
-    AnimationEntity.prototype.addAnimation = function () {
-        var animations = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            animations[_i] = arguments[_i];
-        }
-        (_a = this.animationStack).push.apply(_a, animations);
-        var _a;
-    };
-    /**
-     * play the given animation
-     * @todo: possible observable return type to let the user know when an animation changes it's state
-     */
-    AnimationEntity.prototype.playAnimation = function (name, loop) {
-        if (loop === void 0) { loop = false; }
-        // if there is allready a running animation, stop it
-        if (this.currentAnimation) {
-            // if the animation name is the same, ignore the call
-            if (this.currentAnimation.getName() === name)
-                return;
-            // stop and play the new animation
-            this.currentAnimation.stopAndRestore();
-        }
-        // get the animation player
-        var animation = this.animationStack.find(function (a) { return a.name === name; });
-        // check if the animation is valid
-        if (!animation) {
-            this.logger.warning("Animation", name, "was not added to", this.constructor.name, ". Ignoring this animation.");
-            return;
-        }
-        // play!
-        this.currentAnimation = new Animation_1.Animation(animation, this, loop);
-        this.currentAnimation.play();
-    };
-    /**
-     * stops the currently playing animation
-     */
-    AnimationEntity.prototype.stopAnimation = function () {
-        // currently playing an animation?
-        if (!this.currentAnimation) {
-            // log a warning
-            this.logger.warning("trying to stop an animation on", this.constructor.name, "but there is no active animation");
-            return;
-        }
-        // stops the animation
-        this.currentAnimation.stopAndRestore();
-        this.currentAnimation = null;
-    };
-    /**
-     * check if any or a spefific animation is running
-     *
-     * @param name the name or nothing
-     */
-    AnimationEntity.prototype.isAnimationRunning = function (name) {
-        return (!name && !!this.currentAnimation)
-            ||
-                (name && this.currentAnimation && this.currentAnimation.getName() === name);
-    };
-    /**
-     * get the image asset that displays the current entity
-     */
-    AnimationEntity.prototype.getImage = function () {
-        return this.currentTemplate;
-    };
-    /**
-     * set the new image for this entity
-     *
-     * @param image the current image that should represent this entity during rendering
-     */
-    AnimationEntity.prototype.setImage = function (image) {
-        this.currentTemplate = image;
-    };
-    /**
-     * is the entity visible? if not, the renderer will not render this entity
-     */
-    AnimationEntity.prototype.isVisible = function () {
-        return this.visible;
-    };
-    /**
-     * sets the visibility of the entity
-     */
-    AnimationEntity.prototype.setVisible = function (visible) {
-        this.visible = visible;
-    };
-    /**
-     * get the current scale
-     */
-    AnimationEntity.prototype.getScale = function () {
-        return this.scaleFactor;
-    };
-    /**
-     * set the current local entity scale
-     *
-     * @param scale the new scale
-     */
-    AnimationEntity.prototype.setScale = function (scale) {
-        this.scaleFactor = scale;
-    };
-    return AnimationEntity;
-}(entity_1.Entity));
-exports.AnimationEntity = AnimationEntity;
-
-
-/***/ }),
-/* 19 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(20));
-__export(__webpack_require__(40));
-
-
-/***/ }),
-/* 20 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2663,36 +3058,17 @@ __export(__webpack_require__(40));
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-var math_1 = __webpack_require__(0);
-/**
- * the base class for all game entities
- */
-var Entity = (function () {
-    function Entity(position) {
-        if (position === void 0) { position = new math_1.Vector2D(0, 0); }
-        this.position = position;
-    }
-    /**
-     * get the current position of the entity ( top left )
-     */
-    Entity.prototype.getPosition = function () {
-        return this.position;
-    };
-    /**
-     * set the entities new position
-     *
-     * @param position the new position
-     */
-    Entity.prototype.setPosition = function (position) {
-        this.position = position;
-    };
-    return Entity;
-}());
-exports.Entity = Entity;
+var EventName;
+(function (EventName) {
+    EventName[EventName["BeforePreload"] = "BeforePreload"] = "BeforePreload";
+    EventName[EventName["AfterPreload"] = "AfterPreload"] = "AfterPreload";
+    EventName[EventName["BeforeLoaded"] = "BeforeLoaded"] = "BeforeLoaded";
+    EventName[EventName["AfterLoaded"] = "AfterLoaded"] = "AfterLoaded";
+})(EventName = exports.EventName || (exports.EventName = {}));
 
 
 /***/ }),
-/* 21 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2716,7 +3092,7 @@ exports.Scene = Scene;
 
 
 /***/ }),
-/* 22 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2731,18 +3107,19 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(7));
-__export(__webpack_require__(52));
-__export(__webpack_require__(53));
+__export(__webpack_require__(8));
+__export(__webpack_require__(65));
+__export(__webpack_require__(66));
 __export(__webpack_require__(1));
-__export(__webpack_require__(23));
-__export(__webpack_require__(54));
+__export(__webpack_require__(27));
+__export(__webpack_require__(67));
+__export(__webpack_require__(68));
 __export(__webpack_require__(2));
-__export(__webpack_require__(24));
+__export(__webpack_require__(28));
 
 
 /***/ }),
-/* 23 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2763,6 +3140,15 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -2800,9 +3186,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var AssetType_1 = __webpack_require__(1);
-var AssetStorage_1 = __webpack_require__(24);
-var network_1 = __webpack_require__(8);
-var shared_1 = __webpack_require__(4);
+var AssetStorage_1 = __webpack_require__(28);
+var network_1 = __webpack_require__(9);
+var shared_1 = __webpack_require__(3);
 /**
  * this class handles the loading of assets
  */
@@ -2822,6 +3208,10 @@ var AssetLoader = (function (_super) {
          * the logger
          */
         _this.logger = shared_1.Log.getLogger(AssetLoader.name);
+        /**
+         * a stack of all inline assets
+         */
+        _this.registeringAssets = [];
         return _this;
     }
     /**
@@ -2843,6 +3233,8 @@ var AssetLoader = (function (_super) {
             return __generator(this, function (_b) {
                 outerPromise = [];
                 resourceStack = [];
+                // pre check the given assets
+                this.checkInlineAssets.apply(this, assets);
                 // iterate through all given assets
                 assets.forEach(function (asset) {
                     // check if the asset exists
@@ -2875,6 +3267,26 @@ var AssetLoader = (function (_super) {
                         var _a;
                     })];
             });
+        });
+    };
+    /**
+     * check the given assets for errors
+     *
+     * @throw Error
+     */
+    AssetLoader.prototype.checkInlineAssets = function () {
+        var assets = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            assets[_i] = arguments[_i];
+        }
+        var uniqueStack = {};
+        assets.forEach(function (asset) {
+            if (uniqueStack["" + asset.name + asset.assetType] === true) {
+                // error!
+                throw new Error("The asset " + asset.name + " and type " + AssetType_1.AssetType[asset.assetType] + " is at least two times in the given assets!");
+            }
+            // add the asset
+            uniqueStack["" + asset.name + asset.assetType] = true;
         });
     };
     /**
@@ -2973,13 +3385,17 @@ var AssetLoader = (function (_super) {
             });
         });
     };
+    __decorate([
+        shared_1.collectGargabe(shared_1.EventName.AfterPreload, []),
+        __metadata("design:type", Array)
+    ], AssetLoader.prototype, "registeringAssets", void 0);
     return AssetLoader;
 }(shared_1.Singleton));
 exports.AssetLoader = AssetLoader;
 
 
 /***/ }),
-/* 24 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3002,7 +3418,8 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var AssetType_1 = __webpack_require__(1);
-var shared_1 = __webpack_require__(4);
+var shared_1 = __webpack_require__(3);
+console.log("HERE", shared_1.Singleton);
 /**
  * a class that handles asset storing and getting
  */
@@ -3093,7 +3510,61 @@ exports.AssetStorage = AssetStorage;
 
 
 /***/ }),
-/* 25 */
+/* 29 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(global) {
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+function isNodeEnv() {
+    return typeof global !== 'undefined';
+}
+function isBrowserEnv() {
+    return typeof window !== 'undefined';
+}
+/**
+ * loads a polyfill if the object was not found
+ */
+function polyfill() {
+    var modules = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        modules[_i] = arguments[_i];
+    }
+    modules.forEach(function (_module) {
+        if (isNodeEnv()) {
+            // load node polyfill
+            global[_module.fills] = !(function webpackMissingModule() { var e = new Error("Cannot find module \".\""); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+        }
+        else if (isBrowserEnv()) {
+            // load browser polyfill
+            window[_module.fills] = !(function webpackMissingModule() { var e = new Error("Cannot find module \".\""); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+        }
+    });
+}
+exports.polyfill = polyfill;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(21)))
+
+/***/ }),
+/* 30 */
+/***/ (function(module, exports) {
+
+function webpackEmptyContext(req) {
+	throw new Error("Cannot find module '" + req + "'.");
+}
+webpackEmptyContext.keys = function() { return []; };
+webpackEmptyContext.resolve = webpackEmptyContext;
+module.exports = webpackEmptyContext;
+webpackEmptyContext.id = 30;
+
+/***/ }),
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3105,7 +3576,7 @@ exports.AssetStorage = AssetStorage;
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-var shared_1 = __webpack_require__(4);
+var shared_1 = __webpack_require__(3);
 /**
  * the view for the player into the game
  */
@@ -3192,7 +3663,7 @@ exports.BaseCamera = BaseCamera;
 
 
 /***/ }),
-/* 26 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3214,7 +3685,7 @@ var CameraMode;
 
 
 /***/ }),
-/* 27 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3225,6 +3696,16 @@ var CameraMode;
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3235,28 +3716,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var decorator_1 = __webpack_require__(9);
-var log_1 = __webpack_require__(3);
-var helper_1 = __webpack_require__(6);
-var Game_1 = __webpack_require__(39);
-var storage_1 = __webpack_require__(5);
-var asset_1 = __webpack_require__(22);
-var input_1 = __webpack_require__(57);
-var collision_1 = __webpack_require__(59);
+var Game_1 = __webpack_require__(34);
+var shared_1 = __webpack_require__(3);
+var asset_1 = __webpack_require__(26);
+var input_1 = __webpack_require__(72);
+var collision_1 = __webpack_require__(74);
 /**
  * the initiation class of the game client
  */
-var Client = (function () {
+var Client = (function (_super) {
+    __extends(Client, _super);
     function Client(clientConfig) {
-        this.clientConfig = clientConfig;
+        var _this = _super.call(this) || this;
+        _this.clientConfig = clientConfig;
         /**
          * the logger instance
          */
-        this.logger = log_1.Log.getLogger(Client.name);
+        _this.logger = shared_1.Log.getLogger(Client.name);
         // print package and version info
         console.info("%c -= Qhun-Engine v1.0.0 =- [ http://engine.qhun.de ]", "background: green; font-color: white;");
         // step by step setup of the game
-        this.bindLoadEvent();
+        _this.bindLoadEvent();
+        // bind to singleton instance
+        Client.bindInstance(_this);
+        return _this;
     }
     /**
      * bind window events to let the start of the engine pause
@@ -3280,7 +3763,9 @@ var Client = (function () {
         // some logging
         this.logger.info("Using", this.renderer.constructor.name, "as Renderer");
         // start the preload phase
+        this.fireEvent(shared_1.EventName.BeforePreload);
         this.preload();
+        this.fireEvent(shared_1.EventName.AfterPreload);
         // await the asset loading
         Promise.all(assetLoader.getUnresolvedPromised()).then(function () {
             // log the information about the registration process of assets
@@ -3292,7 +3777,9 @@ var Client = (function () {
             _this.gameInstance = new Game_1.Game(_this.renderer);
             _this.inputInstance = new input_1.Input();
             // fire loaded event
+            _this.fireEvent(shared_1.EventName.BeforeLoaded);
             _this.loaded(_this.gameInstance);
+            _this.fireEvent(shared_1.EventName.AfterLoaded);
             _this.printMemoryFootprint();
             // init the game loop
             _this.gameLoop();
@@ -3302,8 +3789,8 @@ var Client = (function () {
      * logs the current memory footprint to the console
      */
     Client.prototype.printMemoryFootprint = function () {
-        var assets = storage_1.RamStorage.getSize("assetloader", helper_1.FileSizeType.Megabyte);
-        var misc = storage_1.RamStorage.getSize("singleton", helper_1.FileSizeType.Megabyte);
+        var assets = shared_1.RamStorage.getSize("assetloader", shared_1.FileSizeType.Megabyte);
+        var misc = shared_1.RamStorage.getSize("singleton", shared_1.FileSizeType.Megabyte);
         var overall = +(assets + misc).toFixed(2);
         // print current memory footprint
         this.logger.info("Memory footprint:", overall, "MB");
@@ -3332,899 +3819,24 @@ var Client = (function () {
         window.requestAnimationFrame(this.gameLoop.bind(this));
     };
     __decorate([
-        decorator_1.logMethodCall,
+        shared_1.logMethodCall,
         __metadata("design:type", Function),
         __metadata("design:paramtypes", []),
         __metadata("design:returntype", void 0)
     ], Client.prototype, "bindLoadEvent", null);
     __decorate([
-        decorator_1.logMethodCall,
+        shared_1.logMethodCall,
         __metadata("design:type", Function),
         __metadata("design:paramtypes", []),
         __metadata("design:returntype", void 0)
     ], Client.prototype, "internalSetup", null);
     return Client;
-}());
+}(shared_1.Singleton));
 exports.Client = Client;
 
 
 /***/ }),
-/* 28 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-var log_1 = __webpack_require__(3);
-/**
- * a decorator for logging method calls to debug console
- *
- * @param target
- * @param propertyKey
- * @param descriptor
- */
-function logMethodCall(target, key, descriptor) {
-    // load the logger
-    var logger = log_1.Log.getInstance();
-    return {
-        value: function () {
-            var args = [];
-            for (var _i = 0; _i < arguments.length; _i++) {
-                args[_i] = arguments[_i];
-            }
-            // log the call
-            logger.debug("@logMethodCall", target.constructor.name + ":" + key + "()");
-            // original method call
-            return descriptor.value.apply(this, args);
-        }
-    };
-}
-exports.logMethodCall = logMethodCall;
-
-
-/***/ }),
-/* 29 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-var LogLevel_1 = __webpack_require__(10);
-var helper_1 = __webpack_require__(6);
-var storage_1 = __webpack_require__(5);
-/**
- * a log wrapper to allow log levels and a more complex
- * logging structure
- */
-var Log = (function (_super) {
-    __extends(Log, _super);
-    function Log() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        /**
-         * the current log prefix
-         */
-        _this.prefix = "";
-        // the current loglevel
-        _this.logLevel = LogLevel_1.LogLevel.Debug;
-        return _this;
-    }
-    /**
-     * sets the log level for the application environment
-     *
-     * @param level the new log level
-     */
-    Log.prototype.setLogLevel = function (level) {
-        this.logLevel = level;
-    };
-    /**
-     * get the logger instance with prefixing for better
-     * detection
-     *
-     * @param prefix the prefix string
-     */
-    Log.getLogger = function (prefix) {
-        var instance = null;
-        if (!storage_1.RamStorage.has(this.generateStorageName(prefix))) {
-            // get the constructor and store an instance of the class at the ram storage
-            var constructor = this;
-            var logger = new constructor();
-            logger.prefix = prefix;
-            storage_1.RamStorage.add(this.generateStorageName(prefix), logger);
-        }
-        // get the instance
-        return storage_1.RamStorage.get(this.generateStorageName(prefix));
-    };
-    /**
-     * override the generate storage name method to allow prefixing the
-     * log instance
-     *
-     * @param prefix the desired prefix
-     */
-    Log.generateStorageName = function (prefix) {
-        return "singleton.instance." + this.name + "." + prefix;
-    };
-    /**
-     * logs the given data
-     *
-     * @param level the level to log in
-     * @param optionalPrefix the optional prefix
-     * @param params all params as vararg array
-     */
-    Log.prototype.log = function (level) {
-        var params = [];
-        for (var _i = 1; _i < arguments.length; _i++) {
-            params[_i - 1] = arguments[_i];
-        }
-        // log if the log level is ok
-        if (parseInt(level) >= parseInt(this.logLevel)
-            &&
-                this.logLevel !== LogLevel_1.LogLevel.None) {
-            var prefix = "";
-            if (this.prefix) {
-                prefix = "[" + this.prefix + "]";
-            }
-            this.getLogFunctionByLevel(level).apply(void 0, ["[" + this.constructor.name + "." + LogLevel_1.LogLevel[level] + "]" + prefix].concat(params));
-        }
-    };
-    /**
-     * gets a callback function to log
-     *
-     * @param level the level to get the function from
-     */
-    Log.prototype.getLogFunctionByLevel = function (level) {
-        var callback;
-        // go through the different log levels
-        switch (level) {
-            case LogLevel_1.LogLevel.Debug:
-                callback = console.debug;
-                break;
-            case LogLevel_1.LogLevel.Info:
-                callback = console.info;
-                break;
-            case LogLevel_1.LogLevel.Warning:
-                callback = console.warn;
-                break;
-            case LogLevel_1.LogLevel.Error:
-                callback = console.error;
-                break;
-        }
-        return callback;
-    };
-    /**
-     * get the current log level
-     */
-    Log.prototype.getLogLevel = function () {
-        return this.logLevel;
-    };
-    /**
-     * logs as debug level
-     *
-     * @param optionalPrefix if this is a constructor, the log will pre prefixed with its name. if not, the param will just printed
-     * @param params all params as vararg array
-     */
-    Log.prototype.debug = function () {
-        var params = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            params[_i] = arguments[_i];
-        }
-        this.log.apply(this, [LogLevel_1.LogLevel.Debug].concat(params));
-    };
-    /**
-     * logs as info level
-     *
-     * @param optionalPrefix if this is a constructor, the log will pre prefixed with its name. if not, the param will just printed
-     * @param params all params as vararg array
-     */
-    Log.prototype.info = function () {
-        var params = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            params[_i] = arguments[_i];
-        }
-        this.log.apply(this, [LogLevel_1.LogLevel.Info].concat(params));
-    };
-    /**
-     * logs as warning level
-     *
-     * @param optionalPrefix if this is a constructor, the log will pre prefixed with its name. if not, the param will just printed
-     * @param params all params as vararg array
-     */
-    Log.prototype.warning = function () {
-        var params = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            params[_i] = arguments[_i];
-        }
-        this.log.apply(this, [LogLevel_1.LogLevel.Warning].concat(params));
-    };
-    /**
-     * logs as error level
-     *
-     * @param optionalPrefix if this is a constructor, the log will pre prefixed with its name. if not, the param will just printed
-     * @param params all params as vararg array
-     */
-    Log.prototype.error = function () {
-        var params = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            params[_i] = arguments[_i];
-        }
-        this.log.apply(this, [LogLevel_1.LogLevel.Error].concat(params));
-    };
-    return Log;
-}(helper_1.Singleton));
-exports.Log = Log;
-
-
-/***/ }),
-/* 30 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-// the dependency to get the memory footprint ob stored objects
-var sizeof = __webpack_require__(31);
-var math_1 = __webpack_require__(0);
-var File_1 = __webpack_require__(15);
-/**
- * holds objects in the ram of the operating unit
- */
-var RamStorage = (function () {
-    function RamStorage() {
-    }
-    /**
-     * adds an elemement to the cache
-     *
-     * @param path the path to the object. dots can be used to structure
-     * @param elemement the element to store
-     */
-    RamStorage.add = function (path, elemement) {
-        RamStorage.cache[path] = elemement;
-    };
-    /**
-     * removes an element from the cache
-     *
-     * @param path the path to the object. dots can be used to structure
-     */
-    RamStorage.remove = function (path) {
-        delete RamStorage.cache[path];
-    };
-    /**
-     * reset the complete storage!
-     */
-    RamStorage.clear = function () {
-        this.cache = {};
-    };
-    /**
-     * removes all entires in the given path
-     *
-     * @param path the path to clear
-     * @return the amount of deleted objects
-     */
-    RamStorage.clearPath = function (path) {
-        var counter = 0;
-        Object.keys(RamStorage.cache).forEach(function (key) {
-            // if the path is present
-            if (key.indexOf(path) === 0) {
-                // remove the part
-                delete RamStorage.cache[key];
-                counter++;
-            }
-        });
-        return counter;
-    };
-    /**
-     * get an element from the cache
-     *
-     * @param path the path to the object. dots can be used to structure
-     */
-    RamStorage.get = function (path) {
-        return RamStorage.cache[path];
-    };
-    /**
-     * checks if an object exists in the cache
-     *
-     * @param path the path to the object. dots can be used to structure
-     */
-    RamStorage.has = function (path) {
-        return RamStorage.get(path) !== undefined;
-    };
-    /**
-     * the path to one or many objects in the storage
-     *
-     * @param path the path to the object. dots can be used to structure
-     */
-    RamStorage.amount = function (path) {
-        var counter = 0;
-        Object.keys(RamStorage.cache).forEach(function (key) {
-            // if the path is present, update counter
-            if (key.indexOf(path) === 0)
-                counter++;
-        });
-        return counter;
-    };
-    /**
-     * calculates the used memory for the selected objects in the storage.
-     *
-     * @param path the path to the object. dots can be used to structure
-     */
-    RamStorage.getSize = function (path, type) {
-        if (path === void 0) { path = ""; }
-        if (type === void 0) { type = File_1.FileSizeType.Byte; }
-        var byteCounter = 0;
-        Object.keys(RamStorage.cache).forEach(function (key) {
-            // if the path is present, update counter
-            if (key.indexOf(path) === 0)
-                byteCounter += sizeof(RamStorage.cache[key]);
-        });
-        var bytes = File_1.File.byteToSize(byteCounter, type);
-        return math_1.Helper.roundToPrecision(bytes, 2);
-    };
-    // the private cache object
-    RamStorage.cache = {};
-    return RamStorage;
-}());
-exports.RamStorage = RamStorage;
-
-
-/***/ }),
-/* 31 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-// Copyright 2014 Andrei Karpushonak
-
-
-
-var ECMA_SIZES  = __webpack_require__(32);
-var Buffer = __webpack_require__(12).Buffer;
-
-/**
- * Main module's entry point
- * Calculates Bytes for the provided parameter
- * @param object - handles object/string/boolean/buffer
- * @returns {*}
- */
-function sizeof(object) {
-    if (object !== null && typeof (object) === 'object') {
-      if (Buffer.isBuffer(object)) {
-        return object.length;
-      }
-      else {
-        var bytes = 0;
-        for (var key in object) {
-
-          if(!Object.hasOwnProperty.call(object, key)) {
-            continue;
-          }
-
-          bytes += sizeof(key);
-          try {
-            bytes += sizeof(object[key]);
-          } catch (ex) {
-            if(ex instanceof RangeError) {
-              // circular reference detected, final result might be incorrect
-              // let's be nice and not throw an exception
-              bytes = 0;
-            }
-          }
-        }
-        return bytes;
-      }
-    } else if (typeof (object) === 'string') {
-      return object.length * ECMA_SIZES.STRING;
-    } else if (typeof (object) === 'boolean') {
-      return ECMA_SIZES.BOOLEAN;
-    } else if (typeof (object) === 'number') {
-      return ECMA_SIZES.NUMBER;
-    } else {
-      return 0;
-    }
-}
-
-module.exports = sizeof;
-
-
-/***/ }),
-/* 32 */
-/***/ (function(module, exports) {
-
-/**
- * Byte sizes are taken from ECMAScript Language Specification
- * http://www.ecma-international.org/ecma-262/5.1/
- * http://bclary.com/2004/11/07/#a-4.3.16
- */
-
-module.exports = {
-    STRING: 2,
-    BOOLEAN: 4,
-    NUMBER: 8
-};
-
-/***/ }),
-/* 33 */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
 /* 34 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-exports.byteLength = byteLength
-exports.toByteArray = toByteArray
-exports.fromByteArray = fromByteArray
-
-var lookup = []
-var revLookup = []
-var Arr = typeof Uint8Array !== 'undefined' ? Uint8Array : Array
-
-var code = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
-for (var i = 0, len = code.length; i < len; ++i) {
-  lookup[i] = code[i]
-  revLookup[code.charCodeAt(i)] = i
-}
-
-revLookup['-'.charCodeAt(0)] = 62
-revLookup['_'.charCodeAt(0)] = 63
-
-function placeHoldersCount (b64) {
-  var len = b64.length
-  if (len % 4 > 0) {
-    throw new Error('Invalid string. Length must be a multiple of 4')
-  }
-
-  // the number of equal signs (place holders)
-  // if there are two placeholders, than the two characters before it
-  // represent one byte
-  // if there is only one, then the three characters before it represent 2 bytes
-  // this is just a cheap hack to not do indexOf twice
-  return b64[len - 2] === '=' ? 2 : b64[len - 1] === '=' ? 1 : 0
-}
-
-function byteLength (b64) {
-  // base64 is 4/3 + up to two characters of the original data
-  return (b64.length * 3 / 4) - placeHoldersCount(b64)
-}
-
-function toByteArray (b64) {
-  var i, l, tmp, placeHolders, arr
-  var len = b64.length
-  placeHolders = placeHoldersCount(b64)
-
-  arr = new Arr((len * 3 / 4) - placeHolders)
-
-  // if there are placeholders, only get up to the last complete 4 chars
-  l = placeHolders > 0 ? len - 4 : len
-
-  var L = 0
-
-  for (i = 0; i < l; i += 4) {
-    tmp = (revLookup[b64.charCodeAt(i)] << 18) | (revLookup[b64.charCodeAt(i + 1)] << 12) | (revLookup[b64.charCodeAt(i + 2)] << 6) | revLookup[b64.charCodeAt(i + 3)]
-    arr[L++] = (tmp >> 16) & 0xFF
-    arr[L++] = (tmp >> 8) & 0xFF
-    arr[L++] = tmp & 0xFF
-  }
-
-  if (placeHolders === 2) {
-    tmp = (revLookup[b64.charCodeAt(i)] << 2) | (revLookup[b64.charCodeAt(i + 1)] >> 4)
-    arr[L++] = tmp & 0xFF
-  } else if (placeHolders === 1) {
-    tmp = (revLookup[b64.charCodeAt(i)] << 10) | (revLookup[b64.charCodeAt(i + 1)] << 4) | (revLookup[b64.charCodeAt(i + 2)] >> 2)
-    arr[L++] = (tmp >> 8) & 0xFF
-    arr[L++] = tmp & 0xFF
-  }
-
-  return arr
-}
-
-function tripletToBase64 (num) {
-  return lookup[num >> 18 & 0x3F] + lookup[num >> 12 & 0x3F] + lookup[num >> 6 & 0x3F] + lookup[num & 0x3F]
-}
-
-function encodeChunk (uint8, start, end) {
-  var tmp
-  var output = []
-  for (var i = start; i < end; i += 3) {
-    tmp = (uint8[i] << 16) + (uint8[i + 1] << 8) + (uint8[i + 2])
-    output.push(tripletToBase64(tmp))
-  }
-  return output.join('')
-}
-
-function fromByteArray (uint8) {
-  var tmp
-  var len = uint8.length
-  var extraBytes = len % 3 // if we have 1 byte left, pad 2 bytes
-  var output = ''
-  var parts = []
-  var maxChunkLength = 16383 // must be multiple of 3
-
-  // go through the array every three bytes, we'll deal with trailing stuff later
-  for (var i = 0, len2 = len - extraBytes; i < len2; i += maxChunkLength) {
-    parts.push(encodeChunk(uint8, i, (i + maxChunkLength) > len2 ? len2 : (i + maxChunkLength)))
-  }
-
-  // pad the end with zeros, but make sure to not forget the extra bytes
-  if (extraBytes === 1) {
-    tmp = uint8[len - 1]
-    output += lookup[tmp >> 2]
-    output += lookup[(tmp << 4) & 0x3F]
-    output += '=='
-  } else if (extraBytes === 2) {
-    tmp = (uint8[len - 2] << 8) + (uint8[len - 1])
-    output += lookup[tmp >> 10]
-    output += lookup[(tmp >> 4) & 0x3F]
-    output += lookup[(tmp << 2) & 0x3F]
-    output += '='
-  }
-
-  parts.push(output)
-
-  return parts.join('')
-}
-
-
-/***/ }),
-/* 35 */
-/***/ (function(module, exports) {
-
-exports.read = function (buffer, offset, isLE, mLen, nBytes) {
-  var e, m
-  var eLen = nBytes * 8 - mLen - 1
-  var eMax = (1 << eLen) - 1
-  var eBias = eMax >> 1
-  var nBits = -7
-  var i = isLE ? (nBytes - 1) : 0
-  var d = isLE ? -1 : 1
-  var s = buffer[offset + i]
-
-  i += d
-
-  e = s & ((1 << (-nBits)) - 1)
-  s >>= (-nBits)
-  nBits += eLen
-  for (; nBits > 0; e = e * 256 + buffer[offset + i], i += d, nBits -= 8) {}
-
-  m = e & ((1 << (-nBits)) - 1)
-  e >>= (-nBits)
-  nBits += mLen
-  for (; nBits > 0; m = m * 256 + buffer[offset + i], i += d, nBits -= 8) {}
-
-  if (e === 0) {
-    e = 1 - eBias
-  } else if (e === eMax) {
-    return m ? NaN : ((s ? -1 : 1) * Infinity)
-  } else {
-    m = m + Math.pow(2, mLen)
-    e = e - eBias
-  }
-  return (s ? -1 : 1) * m * Math.pow(2, e - mLen)
-}
-
-exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
-  var e, m, c
-  var eLen = nBytes * 8 - mLen - 1
-  var eMax = (1 << eLen) - 1
-  var eBias = eMax >> 1
-  var rt = (mLen === 23 ? Math.pow(2, -24) - Math.pow(2, -77) : 0)
-  var i = isLE ? 0 : (nBytes - 1)
-  var d = isLE ? 1 : -1
-  var s = value < 0 || (value === 0 && 1 / value < 0) ? 1 : 0
-
-  value = Math.abs(value)
-
-  if (isNaN(value) || value === Infinity) {
-    m = isNaN(value) ? 1 : 0
-    e = eMax
-  } else {
-    e = Math.floor(Math.log(value) / Math.LN2)
-    if (value * (c = Math.pow(2, -e)) < 1) {
-      e--
-      c *= 2
-    }
-    if (e + eBias >= 1) {
-      value += rt / c
-    } else {
-      value += rt * Math.pow(2, 1 - eBias)
-    }
-    if (value * c >= 2) {
-      e++
-      c /= 2
-    }
-
-    if (e + eBias >= eMax) {
-      m = 0
-      e = eMax
-    } else if (e + eBias >= 1) {
-      m = (value * c - 1) * Math.pow(2, mLen)
-      e = e + eBias
-    } else {
-      m = value * Math.pow(2, eBias - 1) * Math.pow(2, mLen)
-      e = 0
-    }
-  }
-
-  for (; mLen >= 8; buffer[offset + i] = m & 0xff, i += d, m /= 256, mLen -= 8) {}
-
-  e = (e << mLen) | m
-  eLen += mLen
-  for (; eLen > 0; buffer[offset + i] = e & 0xff, i += d, e /= 256, eLen -= 8) {}
-
-  buffer[offset + i - d] |= s * 128
-}
-
-
-/***/ }),
-/* 36 */
-/***/ (function(module, exports) {
-
-var toString = {}.toString;
-
-module.exports = Array.isArray || function (arr) {
-  return toString.call(arr) == '[object Array]';
-};
-
-
-/***/ }),
-/* 37 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-var Helper_1 = __webpack_require__(13);
-var Dimension_1 = __webpack_require__(14);
-/**
- * represents a 2D vector with x and y coordinates.
- */
-var Vector2D = (function (_super) {
-    __extends(Vector2D, _super);
-    /**
-     *
-     * @param x the x coordinate
-     * @param y the y coordinate
-     */
-    function Vector2D(x, y) {
-        if (x === void 0) { x = 0; }
-        if (y === void 0) { y = 0; }
-        return _super.call(this, x, y) || this;
-    }
-    /**
-     * helper method to get vector instances
-     *
-     * @param x the x value
-     * @param y the y value. if no y value is present, x and y will come from x
-     */
-    Vector2D.from = function (x, y) {
-        return new Vector2D(x, y !== undefined ? y : x);
-    };
-    /**
-     * adds another vector
-     *
-     * @param vector the other vector
-     */
-    Vector2D.prototype.add = function (vector) {
-        return new Vector2D((this.x + vector.x), (this.y + vector.y));
-    };
-    /**
-     * substract another vector
-     *
-     * @param vector the other vector
-     */
-    Vector2D.prototype.substract = function (vector) {
-        return new Vector2D((this.x - vector.x), (this.y - vector.y));
-    };
-    /**
-     * divide another vector
-     *
-     * @param vector the other vector
-     */
-    Vector2D.prototype.divide = function (vector) {
-        return new Vector2D((this.x / vector.x), (this.y / vector.y));
-    };
-    /**
-     * multiply two vectors
-     *
-     * @param vector the other vector
-     */
-    Vector2D.prototype.multiply = function (vector) {
-        return new Vector2D((this.x * vector.x), (this.y * vector.y));
-    };
-    /**
-     * rounds the vector to a given precision
-     */
-    Vector2D.prototype.round = function (precision) {
-        if (precision === void 0) { precision = 2; }
-        return new Vector2D((Helper_1.Helper.roundToPrecision(this.x, precision)), (Helper_1.Helper.roundToPrecision(this.y, precision)));
-    };
-    /**
-     * calculates the distance of two vector points
-     *
-     * @param otherVector the other vector calculate to
-     * @return the distance in pixel
-     */
-    Vector2D.prototype.distanceToVector = function (otherVector) {
-        return Math.sqrt(Math.pow((this.x - otherVector.x), 2)
-            +
-                Math.pow((this.y - otherVector.y), 2));
-    };
-    /**
-     * get the current vector divided by 2
-     */
-    Vector2D.prototype.half = function () {
-        return this.divide(new Vector2D(2, 2));
-    };
-    /**
-     * get the current vector multiply by 2
-     */
-    Vector2D.prototype.double = function () {
-        return this.multiply(new Vector2D(2, 2));
-    };
-    /**
-     * Math.abs() on x and y
-     */
-    Vector2D.prototype.abs = function () {
-        return new Vector2D(Math.abs(this.x), Math.abs(this.y));
-    };
-    return Vector2D;
-}(Dimension_1.Dimension));
-exports.Vector2D = Vector2D;
-
-
-/***/ }),
-/* 38 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(Buffer) {
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * a helper class for binary content
- */
-var Binary = (function () {
-    function Binary() {
-    }
-    /**
-     * converts a data uri to a blob
-     *
-     * @param dataUri the data uri from the object
-     */
-    Binary.dataUriToBlob = function (dataUri) {
-        // @see https://stackoverflow.com/questions/12168909/blob-from-dataurl
-        // convert base64 to raw binary data held in a string
-        // doesn't handle URLEncoded DataURIs - see SO answer #6850276 for code that does this
-        var byteString = atob(dataUri.split(',')[1]);
-        // separate out the mime component
-        var mimeString = dataUri.split(',')[0].split(':')[1].split(';')[0];
-        // write the bytes of the string to an ArrayBuffer
-        var ab = new ArrayBuffer(byteString.length);
-        // create a view into the buffer
-        var ia = new Uint8Array(ab);
-        // set the bytes of the buffer to the correct values
-        for (var i = 0; i < byteString.length; i++) {
-            ia[i] = byteString.charCodeAt(i);
-        }
-        // write the ArrayBuffer to a blob, and you're done
-        var blob = new Blob([ab], { type: mimeString });
-        return blob;
-    };
-    /**
-     * converts a binary buffer into a string
-     *
-     * @param buffer the binary content
-     */
-    Binary.bufferToString = function (buffer) {
-        return String.fromCharCode.apply(null, new Uint8Array(buffer));
-    };
-    /**
-     * converts a buffer to a blob instance
-     *
-     * @param buffer the buffer
-     */
-    Binary.bufferToBlob = function (buffer) {
-        if (buffer instanceof ArrayBuffer) {
-            // cast to buffer
-            buffer = Buffer.from(buffer);
-        }
-        return new Blob([new Uint8Array(buffer)]);
-    };
-    /**
-     * converts a data uri to a buffer
-     *
-     * @param dataUri the given data uri
-     */
-    Binary.dataUriToBuffer = function (dataUri) {
-        var binStr = atob(dataUri);
-        // create a uint8array to store the characters
-        var array = new Uint8Array(binStr.length);
-        // add each char from the binary string
-        for (var i = 0; i < binStr.length; i++) {
-            array[i] = binStr.charCodeAt(i);
-        }
-        // finally
-        return Buffer.from(array.buffer);
-    };
-    return Binary;
-}());
-exports.Binary = Binary;
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12).Buffer))
-
-/***/ }),
-/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4281,11 +3893,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var entity_1 = __webpack_require__(16);
-var scene_1 = __webpack_require__(43);
-var world_1 = __webpack_require__(45);
-var camera_1 = __webpack_require__(55);
-var shared_1 = __webpack_require__(4);
+var entity_1 = __webpack_require__(10);
+var scene_1 = __webpack_require__(50);
+var world_1 = __webpack_require__(52);
+var camera_1 = __webpack_require__(69);
+var shared_1 = __webpack_require__(3);
 /**
  * a class that handles adding of entities, cameras, physics ...
  */
@@ -4448,7 +4060,22 @@ exports.Game = Game;
 
 
 /***/ }),
-/* 40 */
+/* 35 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+
+
+/***/ }),
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4470,7 +4097,129 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var Entity_1 = __webpack_require__(20);
+var Helper_1 = __webpack_require__(15);
+var Dimension_1 = __webpack_require__(16);
+/**
+ * represents a 2D vector with x and y coordinates.
+ */
+var Vector2D = (function (_super) {
+    __extends(Vector2D, _super);
+    /**
+     *
+     * @param x the x coordinate
+     * @param y the y coordinate
+     */
+    function Vector2D(x, y) {
+        if (x === void 0) { x = 0; }
+        if (y === void 0) { y = 0; }
+        return _super.call(this, x, y) || this;
+    }
+    /**
+     * helper method to get vector instances
+     *
+     * @param x the x value
+     * @param y the y value. if no y value is present, x and y will come from x
+     */
+    Vector2D.from = function (x, y) {
+        return new Vector2D(x, y !== undefined ? y : x);
+    };
+    /**
+     * adds another vector
+     *
+     * @param vector the other vector
+     */
+    Vector2D.prototype.add = function (vector) {
+        return new Vector2D((this.x + vector.x), (this.y + vector.y));
+    };
+    /**
+     * substract another vector
+     *
+     * @param vector the other vector
+     */
+    Vector2D.prototype.substract = function (vector) {
+        return new Vector2D((this.x - vector.x), (this.y - vector.y));
+    };
+    /**
+     * divide another vector
+     *
+     * @param vector the other vector
+     */
+    Vector2D.prototype.divide = function (vector) {
+        return new Vector2D((this.x / vector.x), (this.y / vector.y));
+    };
+    /**
+     * multiply two vectors
+     *
+     * @param vector the other vector
+     */
+    Vector2D.prototype.multiply = function (vector) {
+        return new Vector2D((this.x * vector.x), (this.y * vector.y));
+    };
+    /**
+     * rounds the vector to a given precision
+     */
+    Vector2D.prototype.round = function (precision) {
+        if (precision === void 0) { precision = 2; }
+        return new Vector2D((Helper_1.Helper.roundToPrecision(this.x, precision)), (Helper_1.Helper.roundToPrecision(this.y, precision)));
+    };
+    /**
+     * calculates the distance of two vector points
+     *
+     * @param otherVector the other vector calculate to
+     * @return the distance in pixel
+     */
+    Vector2D.prototype.distanceToVector = function (otherVector) {
+        return Math.sqrt(Math.pow((this.x - otherVector.x), 2)
+            +
+                Math.pow((this.y - otherVector.y), 2));
+    };
+    /**
+     * get the current vector divided by 2
+     */
+    Vector2D.prototype.half = function () {
+        return this.divide(new Vector2D(2, 2));
+    };
+    /**
+     * get the current vector multiply by 2
+     */
+    Vector2D.prototype.double = function () {
+        return this.multiply(new Vector2D(2, 2));
+    };
+    /**
+     * Math.abs() on x and y
+     */
+    Vector2D.prototype.abs = function () {
+        return new Vector2D(Math.abs(this.x), Math.abs(this.y));
+    };
+    return Vector2D;
+}(Dimension_1.Dimension));
+exports.Vector2D = Vector2D;
+
+
+/***/ }),
+/* 37 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var Entity_1 = __webpack_require__(14);
 var math_1 = __webpack_require__(0);
 /**
  * an entity that can collide with other collidable entities
@@ -4514,7 +4263,7 @@ exports.CollidableEntity = CollidableEntity;
 
 
 /***/ }),
-/* 41 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4601,7 +4350,417 @@ exports.Animation = Animation;
 
 
 /***/ }),
+/* 39 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+// Copyright 2014 Andrei Karpushonak
+
+
+
+var ECMA_SIZES  = __webpack_require__(40);
+var Buffer = __webpack_require__(20).Buffer;
+
+/**
+ * Main module's entry point
+ * Calculates Bytes for the provided parameter
+ * @param object - handles object/string/boolean/buffer
+ * @returns {*}
+ */
+function sizeof(object) {
+    if (object !== null && typeof (object) === 'object') {
+      if (Buffer.isBuffer(object)) {
+        return object.length;
+      }
+      else {
+        var bytes = 0;
+        for (var key in object) {
+
+          if(!Object.hasOwnProperty.call(object, key)) {
+            continue;
+          }
+
+          bytes += sizeof(key);
+          try {
+            bytes += sizeof(object[key]);
+          } catch (ex) {
+            if(ex instanceof RangeError) {
+              // circular reference detected, final result might be incorrect
+              // let's be nice and not throw an exception
+              bytes = 0;
+            }
+          }
+        }
+        return bytes;
+      }
+    } else if (typeof (object) === 'string') {
+      return object.length * ECMA_SIZES.STRING;
+    } else if (typeof (object) === 'boolean') {
+      return ECMA_SIZES.BOOLEAN;
+    } else if (typeof (object) === 'number') {
+      return ECMA_SIZES.NUMBER;
+    } else {
+      return 0;
+    }
+}
+
+module.exports = sizeof;
+
+
+/***/ }),
+/* 40 */
+/***/ (function(module, exports) {
+
+/**
+ * Byte sizes are taken from ECMAScript Language Specification
+ * http://www.ecma-international.org/ecma-262/5.1/
+ * http://bclary.com/2004/11/07/#a-4.3.16
+ */
+
+module.exports = {
+    STRING: 2,
+    BOOLEAN: 4,
+    NUMBER: 8
+};
+
+/***/ }),
+/* 41 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.byteLength = byteLength
+exports.toByteArray = toByteArray
+exports.fromByteArray = fromByteArray
+
+var lookup = []
+var revLookup = []
+var Arr = typeof Uint8Array !== 'undefined' ? Uint8Array : Array
+
+var code = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+for (var i = 0, len = code.length; i < len; ++i) {
+  lookup[i] = code[i]
+  revLookup[code.charCodeAt(i)] = i
+}
+
+revLookup['-'.charCodeAt(0)] = 62
+revLookup['_'.charCodeAt(0)] = 63
+
+function placeHoldersCount (b64) {
+  var len = b64.length
+  if (len % 4 > 0) {
+    throw new Error('Invalid string. Length must be a multiple of 4')
+  }
+
+  // the number of equal signs (place holders)
+  // if there are two placeholders, than the two characters before it
+  // represent one byte
+  // if there is only one, then the three characters before it represent 2 bytes
+  // this is just a cheap hack to not do indexOf twice
+  return b64[len - 2] === '=' ? 2 : b64[len - 1] === '=' ? 1 : 0
+}
+
+function byteLength (b64) {
+  // base64 is 4/3 + up to two characters of the original data
+  return (b64.length * 3 / 4) - placeHoldersCount(b64)
+}
+
+function toByteArray (b64) {
+  var i, l, tmp, placeHolders, arr
+  var len = b64.length
+  placeHolders = placeHoldersCount(b64)
+
+  arr = new Arr((len * 3 / 4) - placeHolders)
+
+  // if there are placeholders, only get up to the last complete 4 chars
+  l = placeHolders > 0 ? len - 4 : len
+
+  var L = 0
+
+  for (i = 0; i < l; i += 4) {
+    tmp = (revLookup[b64.charCodeAt(i)] << 18) | (revLookup[b64.charCodeAt(i + 1)] << 12) | (revLookup[b64.charCodeAt(i + 2)] << 6) | revLookup[b64.charCodeAt(i + 3)]
+    arr[L++] = (tmp >> 16) & 0xFF
+    arr[L++] = (tmp >> 8) & 0xFF
+    arr[L++] = tmp & 0xFF
+  }
+
+  if (placeHolders === 2) {
+    tmp = (revLookup[b64.charCodeAt(i)] << 2) | (revLookup[b64.charCodeAt(i + 1)] >> 4)
+    arr[L++] = tmp & 0xFF
+  } else if (placeHolders === 1) {
+    tmp = (revLookup[b64.charCodeAt(i)] << 10) | (revLookup[b64.charCodeAt(i + 1)] << 4) | (revLookup[b64.charCodeAt(i + 2)] >> 2)
+    arr[L++] = (tmp >> 8) & 0xFF
+    arr[L++] = tmp & 0xFF
+  }
+
+  return arr
+}
+
+function tripletToBase64 (num) {
+  return lookup[num >> 18 & 0x3F] + lookup[num >> 12 & 0x3F] + lookup[num >> 6 & 0x3F] + lookup[num & 0x3F]
+}
+
+function encodeChunk (uint8, start, end) {
+  var tmp
+  var output = []
+  for (var i = start; i < end; i += 3) {
+    tmp = (uint8[i] << 16) + (uint8[i + 1] << 8) + (uint8[i + 2])
+    output.push(tripletToBase64(tmp))
+  }
+  return output.join('')
+}
+
+function fromByteArray (uint8) {
+  var tmp
+  var len = uint8.length
+  var extraBytes = len % 3 // if we have 1 byte left, pad 2 bytes
+  var output = ''
+  var parts = []
+  var maxChunkLength = 16383 // must be multiple of 3
+
+  // go through the array every three bytes, we'll deal with trailing stuff later
+  for (var i = 0, len2 = len - extraBytes; i < len2; i += maxChunkLength) {
+    parts.push(encodeChunk(uint8, i, (i + maxChunkLength) > len2 ? len2 : (i + maxChunkLength)))
+  }
+
+  // pad the end with zeros, but make sure to not forget the extra bytes
+  if (extraBytes === 1) {
+    tmp = uint8[len - 1]
+    output += lookup[tmp >> 2]
+    output += lookup[(tmp << 4) & 0x3F]
+    output += '=='
+  } else if (extraBytes === 2) {
+    tmp = (uint8[len - 2] << 8) + (uint8[len - 1])
+    output += lookup[tmp >> 10]
+    output += lookup[(tmp >> 4) & 0x3F]
+    output += lookup[(tmp << 2) & 0x3F]
+    output += '='
+  }
+
+  parts.push(output)
+
+  return parts.join('')
+}
+
+
+/***/ }),
 /* 42 */
+/***/ (function(module, exports) {
+
+exports.read = function (buffer, offset, isLE, mLen, nBytes) {
+  var e, m
+  var eLen = nBytes * 8 - mLen - 1
+  var eMax = (1 << eLen) - 1
+  var eBias = eMax >> 1
+  var nBits = -7
+  var i = isLE ? (nBytes - 1) : 0
+  var d = isLE ? -1 : 1
+  var s = buffer[offset + i]
+
+  i += d
+
+  e = s & ((1 << (-nBits)) - 1)
+  s >>= (-nBits)
+  nBits += eLen
+  for (; nBits > 0; e = e * 256 + buffer[offset + i], i += d, nBits -= 8) {}
+
+  m = e & ((1 << (-nBits)) - 1)
+  e >>= (-nBits)
+  nBits += mLen
+  for (; nBits > 0; m = m * 256 + buffer[offset + i], i += d, nBits -= 8) {}
+
+  if (e === 0) {
+    e = 1 - eBias
+  } else if (e === eMax) {
+    return m ? NaN : ((s ? -1 : 1) * Infinity)
+  } else {
+    m = m + Math.pow(2, mLen)
+    e = e - eBias
+  }
+  return (s ? -1 : 1) * m * Math.pow(2, e - mLen)
+}
+
+exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
+  var e, m, c
+  var eLen = nBytes * 8 - mLen - 1
+  var eMax = (1 << eLen) - 1
+  var eBias = eMax >> 1
+  var rt = (mLen === 23 ? Math.pow(2, -24) - Math.pow(2, -77) : 0)
+  var i = isLE ? 0 : (nBytes - 1)
+  var d = isLE ? 1 : -1
+  var s = value < 0 || (value === 0 && 1 / value < 0) ? 1 : 0
+
+  value = Math.abs(value)
+
+  if (isNaN(value) || value === Infinity) {
+    m = isNaN(value) ? 1 : 0
+    e = eMax
+  } else {
+    e = Math.floor(Math.log(value) / Math.LN2)
+    if (value * (c = Math.pow(2, -e)) < 1) {
+      e--
+      c *= 2
+    }
+    if (e + eBias >= 1) {
+      value += rt / c
+    } else {
+      value += rt * Math.pow(2, 1 - eBias)
+    }
+    if (value * c >= 2) {
+      e++
+      c /= 2
+    }
+
+    if (e + eBias >= eMax) {
+      m = 0
+      e = eMax
+    } else if (e + eBias >= 1) {
+      m = (value * c - 1) * Math.pow(2, mLen)
+      e = e + eBias
+    } else {
+      m = value * Math.pow(2, eBias - 1) * Math.pow(2, mLen)
+      e = 0
+    }
+  }
+
+  for (; mLen >= 8; buffer[offset + i] = m & 0xff, i += d, m /= 256, mLen -= 8) {}
+
+  e = (e << mLen) | m
+  eLen += mLen
+  for (; eLen > 0; buffer[offset + i] = e & 0xff, i += d, e /= 256, eLen -= 8) {}
+
+  buffer[offset + i - d] |= s * 128
+}
+
+
+/***/ }),
+/* 43 */
+/***/ (function(module, exports) {
+
+var toString = {}.toString;
+
+module.exports = Array.isArray || function (arr) {
+  return toString.call(arr) == '[object Array]';
+};
+
+
+/***/ }),
+/* 44 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+var storage_1 = __webpack_require__(7);
+/**
+ * a class that can emit events and can add listeners to events
+ */
+var EventEmitter = (function () {
+    function EventEmitter() {
+    }
+    /**
+     * listen on the given event
+     *
+     * @param event the desired event
+     * @param listener the listener function
+     */
+    EventEmitter.prototype.on = function (event, listener) {
+        // first get all listeners
+        var listeners = storage_1.RamStorage.get(EventEmitter.name);
+        // check if listeners is defined
+        if (!listeners) {
+            listeners = {};
+        }
+        // create array context if not allready done
+        if (!Array.isArray(listeners[event])) {
+            listeners[event] = [];
+        }
+        // stack it up
+        listeners[event].push(listener);
+        // save it back to the storage
+        storage_1.RamStorage.add(EventEmitter.name, listeners);
+        // chaning context
+        return this;
+    };
+    /**
+     * emit an event
+     *
+     * @param event the event name
+     * @param listenerBoundContext this context of the executed function. default: null
+     * @param args optional parameter to pass to the listener function
+     */
+    EventEmitter.prototype.emit = function (event, listenerBoundContext) {
+        var args = [];
+        for (var _i = 2; _i < arguments.length; _i++) {
+            args[_i - 2] = arguments[_i];
+        }
+        // get all listeners for this event
+        var listeners = storage_1.RamStorage.get(EventEmitter.name);
+        // is listeners defined?
+        if (!listeners) {
+            // cancel
+            return this;
+        }
+        // get all functions for this event
+        var eventFunctions = listeners[event];
+        // are there any?
+        if (Array.isArray(eventFunctions)) {
+            // execute them
+            eventFunctions.forEach(function (ev) {
+                // take the context or no context
+                if (!listenerBoundContext)
+                    listenerBoundContext = {};
+                // call it
+                ev.apply(listenerBoundContext, args);
+            });
+        }
+        // chaning context
+        return this;
+    };
+    return EventEmitter;
+}());
+exports.EventEmitter = EventEmitter;
+
+
+/***/ }),
+/* 45 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+
+
+/***/ }),
+/* 46 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+
+
+/***/ }),
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4623,7 +4782,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var Entity_1 = __webpack_require__(17);
+var Entity_1 = __webpack_require__(11);
 /**
  * a helper type for eg. blocked directions
  */
@@ -4725,7 +4884,37 @@ exports.CollidableEntity = CollidableEntity;
 
 
 /***/ }),
-/* 43 */
+/* 48 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+
+
+/***/ }),
+/* 49 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+
+
+/***/ }),
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4740,12 +4929,12 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(21));
-__export(__webpack_require__(44));
+__export(__webpack_require__(25));
+__export(__webpack_require__(51));
 
 
 /***/ }),
-/* 44 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4802,7 +4991,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var Scene_1 = __webpack_require__(21);
+var Scene_1 = __webpack_require__(25);
 /**
  * a basic loading screen scene
  */
@@ -4853,7 +5042,7 @@ exports.LoadingScreenScene = LoadingScreenScene;
 
 
 /***/ }),
-/* 45 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4868,11 +5057,11 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(46));
+__export(__webpack_require__(53));
 
 
 /***/ }),
-/* 46 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4884,9 +5073,9 @@ __export(__webpack_require__(46));
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-var physic_1 = __webpack_require__(47);
+var physic_1 = __webpack_require__(54);
 var math_1 = __webpack_require__(0);
-var asset_1 = __webpack_require__(22);
+var asset_1 = __webpack_require__(26);
 /**
  * a class to handle world spefific things
  */
@@ -4990,7 +5179,7 @@ exports.World = World;
 
 
 /***/ }),
-/* 47 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5005,11 +5194,11 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(48));
+__export(__webpack_require__(55));
 
 
 /***/ }),
-/* 48 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5033,7 +5222,7 @@ var GravityForce;
 
 
 /***/ }),
-/* 49 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5048,11 +5237,11 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(50));
+__export(__webpack_require__(57));
 
 
 /***/ }),
-/* 50 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5076,7 +5265,367 @@ var CollisionType;
 
 
 /***/ }),
-/* 51 */
+/* 58 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(59));
+__export(__webpack_require__(60));
+__export(__webpack_require__(63));
+
+
+/***/ }),
+/* 59 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+var log_1 = __webpack_require__(5);
+/**
+ * a decorator for logging method calls to debug console
+ *
+ * @param target
+ * @param propertyKey
+ * @param descriptor
+ */
+function logMethodCall(target, key, descriptor) {
+    // load the logger
+    var logger = log_1.Log.getInstance();
+    return {
+        value: function () {
+            var args = [];
+            for (var _i = 0; _i < arguments.length; _i++) {
+                args[_i] = arguments[_i];
+            }
+            // log the call
+            logger.debug("@logMethodCall", target.constructor.name + ":" + key + "()");
+            // original method call
+            return descriptor.value.apply(this, args);
+        }
+    };
+}
+exports.logMethodCall = logMethodCall;
+
+
+/***/ }),
+/* 60 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+var helper_1 = __webpack_require__(4);
+/**
+ * a property decorator to define a phase in wich the property
+ * will be emptied
+ *
+ * @param event property will be cleared on the defined event
+ * @param clearVal the new value that will be the property value
+ */
+function collectGargabe(event, cleanVal) {
+    return function (target, propertyKey) {
+        // the collector function
+        var collectGarbage = function (targets) {
+            // iterate all targets
+            targets.forEach(function (target) {
+                // cleck if property exists
+                if (target[propertyKey]) {
+                    //clean it!
+                    target[propertyKey] = cleanVal;
+                }
+                else {
+                    // not found!
+                    throw new Error("@collectGargabe property " + propertyKey + " on target " + target.constructor.name + " not found!");
+                }
+            });
+        };
+        // register the deletion event in the garbage collector
+        var collector = helper_1.GarbageCollector.getInstance();
+        collector.registerCleaning({
+            event: event,
+            ctor: target.constructor,
+            cleanFunction: collectGarbage
+        });
+    };
+}
+exports.collectGargabe = collectGargabe;
+
+
+/***/ }),
+/* 61 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(Buffer) {
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+var polyfill_1 = __webpack_require__(29);
+polyfill_1.polyfill({ require: "atob", fills: "atob" }, { require: "w3c-blob", fills: "Blob" });
+/**
+ * a helper class for binary content
+ */
+var Binary = (function () {
+    function Binary() {
+    }
+    /**
+     * converts a data uri to a blob
+     *
+     * @param dataUri the data uri from the object
+     */
+    Binary.dataUriToBlob = function (dataUri) {
+        // @see https://stackoverflow.com/questions/12168909/blob-from-dataurl
+        // convert base64 to raw binary data held in a string
+        // doesn't handle URLEncoded DataURIs - see SO answer #6850276 for code that does this
+        var byteString = atob(dataUri.split(',')[1]);
+        // separate out the mime component
+        var mimeString = dataUri.split(',')[0].split(':')[1].split(';')[0];
+        // write the bytes of the string to an ArrayBuffer
+        var ab = new ArrayBuffer(byteString.length);
+        // create a view into the buffer
+        var ia = new Uint8Array(ab);
+        // set the bytes of the buffer to the correct values
+        for (var i = 0; i < byteString.length; i++) {
+            ia[i] = byteString.charCodeAt(i);
+        }
+        // write the ArrayBuffer to a blob, and you're done
+        var blob = new Blob([ab], { type: mimeString });
+        return blob;
+    };
+    /**
+     * converts a binary buffer into a string
+     *
+     * @param buffer the binary content
+     */
+    Binary.bufferToString = function (buffer) {
+        return String.fromCharCode.apply(null, new Uint8Array(buffer));
+    };
+    /**
+     * converts a buffer to a blob instance
+     *
+     * @param buffer the buffer
+     */
+    Binary.bufferToBlob = function (buffer) {
+        if (buffer instanceof ArrayBuffer) {
+            // cast to buffer
+            buffer = Buffer.from(buffer);
+        }
+        return new Blob([new Uint8Array(buffer)]);
+    };
+    /**
+     * converts a data uri to a buffer
+     *
+     * @param dataUri the given data uri
+     */
+    Binary.dataUriToBuffer = function (dataUri) {
+        var binStr = atob(dataUri);
+        // create a uint8array to store the characters
+        var array = new Uint8Array(binStr.length);
+        // add each char from the binary string
+        for (var i = 0; i < binStr.length; i++) {
+            array[i] = binStr.charCodeAt(i);
+        }
+        // finally
+        return Buffer.from(array.buffer);
+    };
+    return Binary;
+}());
+exports.Binary = Binary;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(20).Buffer))
+
+/***/ }),
+/* 62 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var Singleton_1 = __webpack_require__(6);
+var EventName_1 = __webpack_require__(24);
+var Log_1 = __webpack_require__(18);
+/**
+ * an internal garbage collector class to clear some memory for the
+ * user.
+ */
+var GarbageCollector = (function (_super) {
+    __extends(GarbageCollector, _super);
+    function GarbageCollector() {
+        var _this = _super.call(this) || this;
+        /**
+         * holder of all registered targets for cleaning
+         */
+        _this.registeredTargets = {};
+        /**
+         * the stack of all registered garbage collection processes
+         */
+        _this.registerStack = [];
+        /**
+         * the logger instance
+         */
+        _this.logger = Log_1.Log.getLogger(GarbageCollector.name);
+        // temp stack for event names
+        var eventTmpStack = [];
+        // register all events
+        Object.keys(EventName_1.EventName).forEach(function (event) {
+            // register event and execute the cleaning
+            var eventEnum = event;
+            // only register event if not allready done
+            if (eventTmpStack.indexOf(eventEnum) === -1) {
+                // register the event
+                _this.on(eventEnum, _this.executeEvent.bind(_this, eventEnum));
+            }
+        });
+        // bind instance
+        GarbageCollector.bindInstance(_this);
+        return _this;
+    }
+    /**
+     * register a property to be cleaned if a specific event occurs
+     *
+     * @param cleaning the nessesary objects to clean something
+     */
+    GarbageCollector.prototype.registerCleaning = function (cleaning) {
+        this.registerStack.push(cleaning);
+    };
+    /**
+     *
+     * @param ctorName the constructor name of the class
+     * @param target the target class as instance
+     */
+    GarbageCollector.prototype.addTarget = function (ctorName, target) {
+        if (!Array.isArray(this.registeredTargets[ctorName])) {
+            this.registeredTargets[ctorName] = [];
+        }
+        this.registeredTargets[ctorName].push(target);
+    };
+    /**
+     * get all targets by its constructor function
+     */
+    GarbageCollector.prototype.getTargets = function (cleanTask) {
+        // no targets available?
+        if (!this.registeredTargets[cleanTask.ctor.name]) {
+            // log a warning message
+            this.logger.warning("Trying to clean at class", cleanTask.ctor.name, "but there aren't any registered targets.", "Please be sure you decorated the class with @enableGarbageCollection");
+            // no targets found!
+            return [];
+        }
+        // get all of them!
+        return this.registeredTargets[cleanTask.ctor.name];
+    };
+    /**
+     * execute the garbage collector at the given event
+     */
+    GarbageCollector.prototype.executeEvent = function (eventName) {
+        var _this = this;
+        this.registerStack
+            .filter(function (clean) { return clean.event === EventName_1.EventName.BeforePreload; })
+            .forEach(function (clean) { return clean
+            .cleanFunction.apply(clean
+        // call clear function for every listener
+        , [
+            // get all targets to clear
+            _this.getTargets(clean)].concat((clean.callbackArguments ? clean.callbackArguments : []))); });
+    };
+    return GarbageCollector;
+}(Singleton_1.Singleton));
+exports.GarbageCollector = GarbageCollector;
+
+
+/***/ }),
+/* 63 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var helper_1 = __webpack_require__(4);
+/**
+ * a class decorator that enabled garbage collecting on this class.
+ * this is required to use @collectGarbage as property decorator
+ */
+function enableGarbageCollection(ctor) {
+    return (function (_super) {
+        __extends(class_1, _super);
+        function class_1() {
+            var args = [];
+            for (var _i = 0; _i < arguments.length; _i++) {
+                args[_i] = arguments[_i];
+            }
+            var _this = _super.call(this) || this;
+            // register the instance at the gc
+            var gc = helper_1.GarbageCollector.getInstance();
+            gc.addTarget(ctor.name, _this);
+            return _this;
+        }
+        return class_1;
+    }(ctor));
+}
+exports.enableGarbageCollection = enableGarbageCollection;
+
+
+/***/ }),
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5182,7 +5731,7 @@ exports.Request = Request;
 
 
 /***/ }),
-/* 52 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5240,9 +5789,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var AssetType_1 = __webpack_require__(1);
-var Image_1 = __webpack_require__(7);
+var Image_1 = __webpack_require__(8);
 var AbstractAsset_1 = __webpack_require__(2);
-var network_1 = __webpack_require__(8);
+var network_1 = __webpack_require__(9);
 var SPRITE_MAP_DELIMITER = ',';
 /**
  * an internal enum to index the correct array position for sprite maps
@@ -5358,7 +5907,7 @@ exports.Sprite = Sprite;
 
 
 /***/ }),
-/* 53 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5410,7 +5959,22 @@ exports.Sound = Sound;
 
 
 /***/ }),
-/* 54 */
+/* 67 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+
+
+/***/ }),
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5469,8 +6033,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var AbstractAsset_1 = __webpack_require__(2);
 var AssetType_1 = __webpack_require__(1);
-var Image_1 = __webpack_require__(7);
-var network_1 = __webpack_require__(8);
+var Image_1 = __webpack_require__(8);
+var network_1 = __webpack_require__(9);
 var math_1 = __webpack_require__(0);
 /**
  * an asset class to load a tilemap as world
@@ -5630,7 +6194,7 @@ exports.TileMap = TileMap;
 
 
 /***/ }),
-/* 55 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5645,13 +6209,29 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(25));
-__export(__webpack_require__(56));
-__export(__webpack_require__(26));
+__export(__webpack_require__(70));
+__export(__webpack_require__(31));
+__export(__webpack_require__(71));
+__export(__webpack_require__(32));
 
 
 /***/ }),
-/* 56 */
+/* 70 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+
+
+/***/ }),
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5673,8 +6253,8 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var BaseCamera_1 = __webpack_require__(25);
-var CameraMode_1 = __webpack_require__(26);
+var BaseCamera_1 = __webpack_require__(31);
+var CameraMode_1 = __webpack_require__(32);
 /**
  * an orthogonal camera for the view of the player
  */
@@ -5694,7 +6274,7 @@ exports.OrthogonalCamera = OrthogonalCamera;
 
 
 /***/ }),
-/* 57 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5709,11 +6289,11 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(58));
+__export(__webpack_require__(73));
 
 
 /***/ }),
-/* 58 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5735,7 +6315,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var helper_1 = __webpack_require__(6);
+var helper_1 = __webpack_require__(4);
 /**
  * a basic class to get user input like keybord or mouse data
  */
@@ -5802,7 +6382,7 @@ exports.Input = Input;
 
 
 /***/ }),
-/* 59 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5817,11 +6397,11 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(60));
+__export(__webpack_require__(75));
 
 
 /***/ }),
-/* 60 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5833,7 +6413,7 @@ __export(__webpack_require__(60));
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-var entity_1 = __webpack_require__(16);
+var entity_1 = __webpack_require__(10);
 var math_1 = __webpack_require__(0);
 var CollisionDetection = (function () {
     function CollisionDetection() {

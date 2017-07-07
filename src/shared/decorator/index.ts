@@ -6,3 +6,5 @@
  */
 
 export * from './logMethodCall';
+export * from './collectGarbage';
+export * from './enableGarbageCollection';

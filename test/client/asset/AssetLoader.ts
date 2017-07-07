@@ -5,8 +5,12 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { Request, AssetType } from '@client';
-import { Binary } from '@shared';
+import {
+    Request, AssetType, AssetLoader, InlineAsset, AssetStorage
+} from '@client';
+import {
+    Binary, Log, LogLevel
+} from '@shared';
 
 import { suite, test, context } from 'mocha-typescript';
 import { expect } from 'chai';
@@ -35,12 +39,27 @@ class Test {
         // set up the request mock
         this.context.add('xhr', new SinonFakeXhr());
         this.context.get<SinonFakeXhr>('xhr').recordRequests();
+
+        this.context.add('store', AssetStorage.getInstance());
     }
 
     afterEach() {
 
         // restore the faker
         this.context.get<SinonFakeXhr>('xhr').restoreXhr();
+
+        // restore the asset store
+        this.context.get<AssetStorage>('store').clearStorage();
+    }
+
+    private answerRequests() {
+
+        // respond to the requests
+        this.context.get<SinonFakeXhr>('xhr').getRequests().forEach(
+
+            // answer every request with the binary image
+            request => request.respond(200, [], binaryTestImage)
+        );
     }
 
     @test "a mocked asset should be registed in the asset loader"(done: Function) {
@@ -65,12 +84,53 @@ class Test {
             done();
         });
 
-        // respond to the requests
-        this.context.get<SinonFakeXhr>('xhr').getRequests().forEach(
+        this.answerRequests();
+    }
 
-            // answer every request with the binary image
-            request => request.respond(200, [], binaryTestImage)
-        );
+    @test async "register an asset with equal names and types should result in error"() {
+
+        // register two identical assets
+        let asset: InlineAsset = {
+            name: 'MyCoolAsset',
+            path: 'test/path.png'
+        };
+
+        let error = false;
+
+        // try to register two same assets
+        try {
+
+            await AssetMock.register(asset, asset);
+        } catch (e) {
+            error = true;
+        }
+
+        expect(error, "register has not thrown an error").to.be.true;
+    }
+
+    @test async "register should warn about existing assets"() {
+
+        // get the asset loader logger for spying and disable output
+        let assetLoaderLogger = Log.getLogger(AssetLoader.name);
+        assetLoaderLogger.setLogLevel(LogLevel.None);
+
+        // add spy
+        this.context.addSpy(assetLoaderLogger, 'warning');
+
+        // register two identical assets
+        let asset: InlineAsset = {
+            name: 'MyCoolAsset',
+            path: 'test/path.png'
+        };
+
+        // register them
+        AssetMock.register(asset);
+        AssetMock.register(asset);
+
+        // warning message should have been called
+        sinon.assert.called(this.context.getSpy(assetLoaderLogger, 'warning'));
+
+        this.answerRequests();
     }
 
 }

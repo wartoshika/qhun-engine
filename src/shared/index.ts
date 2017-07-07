@@ -12,4 +12,5 @@ export * from './helper';
 export * from './log';
 export * from './math';
 export * from './storage';
+export * from './event';
 export * from './polyfill';

@@ -6,11 +6,12 @@
  */
 
 import { ClientConfig } from './ClientConfig';
-import { logMethodCall } from '../shared/decorator';
-import { Log } from '../shared/log';
-import { FileSizeType } from '../shared/helper';
 import { Game } from './Game';
-import { RamStorage } from '../shared/storage';
+
+import {
+    logMethodCall, Log, FileSizeType, RamStorage,
+    Singleton, EventName
+} from '../shared';
 
 import { AssetLoader, AssetType, AssetStorage } from './asset';
 import { Renderer } from './render';
@@ -20,7 +21,7 @@ import { CollisionDetection } from './collision';
 /**
  * the initiation class of the game client
  */
-export abstract class Client {
+export abstract class Client extends Singleton {
 
     /**
      * the renderer instance
@@ -46,11 +47,16 @@ export abstract class Client {
         private clientConfig: ClientConfig
     ) {
 
+        super();
+
         // print package and version info
         console.info("%c -= Qhun-Engine v1.0.0 =- [ http://engine.qhun.de ]", "background: green; font-color: white;");
 
         // step by step setup of the game
         this.bindLoadEvent();
+
+        // bind to singleton instance
+        Client.bindInstance(this);
     }
 
     /**
@@ -82,7 +88,9 @@ export abstract class Client {
         this.logger.info("Using", this.renderer.constructor.name, "as Renderer");
 
         // start the preload phase
+        this.fireEvent(EventName.BeforePreload);
         this.preload();
+        this.fireEvent(EventName.AfterPreload);
 
         // await the asset loading
         Promise.all(assetLoader.getUnresolvedPromised()).then(() => {
@@ -98,7 +106,9 @@ export abstract class Client {
             this.inputInstance = new Input();
 
             // fire loaded event
+            this.fireEvent(EventName.BeforeLoaded);
             this.loaded(this.gameInstance);
+            this.fireEvent(EventName.AfterLoaded);
             this.printMemoryFootprint();
 
             // init the game loop

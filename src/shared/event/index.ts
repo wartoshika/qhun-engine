@@ -5,7 +5,6 @@
  * https://opensource.org/licenses/MIT
  */
 
-export * from './Singleton';
-export * from './Binary';
-export * from './File';
-export * from './GarbageCollector';
+export * from './EventName';
+export * from './EventEmitter';
+export * from './Event';

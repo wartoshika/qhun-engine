@@ -11,7 +11,7 @@ import { AssetStorage } from './AssetStorage';
 import { Request } from '../network';
 
 import {
-    RamStorage, Log, Singleton, Binary
+    RamStorage, Log, Singleton, Binary, collectGargabe, EventName
 } from '../../shared';
 
 /**
@@ -35,6 +35,12 @@ export class AssetLoader extends Singleton {
     private logger = Log.getLogger(AssetLoader.name);
 
     /**
+     * a stack of all inline assets
+     */
+    @collectGargabe(EventName.AfterPreload, [])
+    private registeringAssets: InlineAsset[] = [];
+
+    /**
      * register one or many assets to adress then later in the game
      * an asset name should allways be unique, event if the asset type
      * is different
@@ -46,6 +52,9 @@ export class AssetLoader extends Singleton {
 
         let outerPromise: Promise<Asset>[] = [];
         let resourceStack: Asset[] = [];
+
+        // pre check the given assets
+        this.checkInlineAssets(...assets);
 
         // iterate through all given assets
         assets.forEach(asset => {
@@ -87,6 +96,28 @@ export class AssetLoader extends Singleton {
 
             // resolve the promise
             return resourceStack;
+        });
+    }
+
+    /**
+     * check the given assets for errors
+     *
+     * @throw Error
+     */
+    private checkInlineAssets(...assets: InlineAsset[]): void {
+
+        let uniqueStack: { [index: string]: boolean } = {};
+
+        assets.forEach(asset => {
+
+            if (uniqueStack[`${asset.name}${asset.assetType}`] === true) {
+
+                // error!
+                throw new Error(`The asset ${asset.name} and type ${AssetType[asset.assetType]} is at least two times in the given assets!`);
+            }
+
+            // add the asset
+            uniqueStack[`${asset.name}${asset.assetType}`] = true;
         });
     }
 
