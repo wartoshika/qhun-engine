@@ -2,8 +2,7 @@ language: node_js
 node_js:
   - "node"
   - "stable"
-  - "7"
-  - "6"
+  - "8"
 install:
   - npm install
 script:
