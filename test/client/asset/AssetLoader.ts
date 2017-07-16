@@ -9,7 +9,7 @@ import {
     Request, AssetType, AssetLoader, InlineAsset, AssetStorage
 } from '@client';
 import {
-    Binary, Log, LogLevel
+    Binary, Log, LogLevel, RamStorage
 } from '@shared';
 
 import { suite, test, context } from 'mocha-typescript';
@@ -30,6 +30,7 @@ let binaryTestImage: string = Binary.bufferToString(
 class Test {
 
     context: UnitTestContext;
+    assetLoader: AssetLoader;
 
     before() {
 
@@ -41,6 +42,7 @@ class Test {
         this.context.get<SinonFakeXhr>('xhr').recordRequests();
 
         this.context.add('store', AssetStorage.getInstance());
+        this.assetLoader = AssetLoader.getInstance<AssetLoader>();
     }
 
     afterEach() {
@@ -72,7 +74,10 @@ class Test {
         AssetMock.register({
             name: name,
             path: path
-        }).then((registeredAssets) => {
+        });
+
+        // load all registered assets
+        this.assetLoader.loadRegisteredAssets().then((registeredAssets) => {
 
             // names should be equal
             expect(registeredAssets.length).to.eq(1);
@@ -106,31 +111,6 @@ class Test {
         }
 
         expect(error, "register has not thrown an error").to.be.true;
-    }
-
-    @test async "register should warn about existing assets"() {
-
-        // get the asset loader logger for spying and disable output
-        let assetLoaderLogger = Log.getLogger(AssetLoader.name);
-        assetLoaderLogger.setLogLevel(LogLevel.None);
-
-        // add spy
-        this.context.addSpy(assetLoaderLogger, 'warning');
-
-        // register two identical assets
-        let asset: InlineAsset = {
-            name: 'MyCoolAsset',
-            path: 'test/path.png'
-        };
-
-        // register them
-        AssetMock.register(asset);
-        AssetMock.register(asset);
-
-        // warning message should have been called
-        sinon.assert.called(this.context.getSpy(assetLoaderLogger, 'warning'));
-
-        this.answerRequests();
     }
 
 }

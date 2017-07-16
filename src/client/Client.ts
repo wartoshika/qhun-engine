@@ -74,7 +74,7 @@ export abstract class Client extends Singleton {
      * internal setup phase
      */
     @logMethodCall
-    private internalSetup(): void {
+    private async internalSetup(): Promise<void> {
 
         // get all promised from the preload phase and await them
         let assetLoader = AssetLoader.getInstance<AssetLoader>();
@@ -92,8 +92,12 @@ export abstract class Client extends Singleton {
         this.preload();
         this.emit(EventName.AfterPreload);
 
-        // await the asset loading
-        Promise.all(assetLoader.getUnresolvedPromised()).then(() => {
+        // start asset loading
+        this.emit(EventName.BeforeAssetLoading);
+        assetLoader.loadRegisteredAssets().then(() => {
+
+            // asset loading finished!
+            this.emit(EventName.AfterAssetLoading);
 
             // log the information about the registration process of assets
             this.logger.info("Registered", assetStorage.getAssetAmount(AssetType.Image), "Images");

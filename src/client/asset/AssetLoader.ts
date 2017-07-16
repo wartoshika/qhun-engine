@@ -11,12 +11,14 @@ import { AssetStorage } from './AssetStorage';
 import { Request } from '../network';
 
 import {
-    RamStorage, Log, Singleton, Binary, collectGargabe, EventName
+    RamStorage, Log, Singleton, Binary, collectGargabe, EventName,
+    enableGarbageCollection
 } from '../../shared';
 
 /**
  * this class handles the loading of assets
  */
+@enableGarbageCollection
 export class AssetLoader extends Singleton {
 
     /**
@@ -37,7 +39,7 @@ export class AssetLoader extends Singleton {
     /**
      * a stack of all inline assets
      */
-    @collectGargabe(EventName.AfterPreload, [])
+    @collectGargabe(EventName.AfterAssetLoading, [])
     private registeringAssets: InlineAsset[] = [];
 
     /**
@@ -53,38 +55,38 @@ export class AssetLoader extends Singleton {
         // add constructor
         assets.forEach(asset => asset.ctor = assetClass);
 
+        // check if all assets are unique
+        this.checkInlineAssets(...[...assets, ...this.registeringAssets]);
+
         // register
         this.registeringAssets.push(...assets);
-        /*
+    }
 
-        let outerPromise: Promise<Asset>[] = [];
-        let resourceStack: Asset[] = [];
+    /**
+     * loads all registered assets and promide a callback
+     * with the loaded assets
+     */
+    public async loadRegisteredAssets(): Promise<Asset[]> {
 
-        // pre check the given assets
-        this.checkInlineAssets(...assets);
+        let loadPromiseStack: Promise<Asset>[] = [];
+        let loadResourceStack: Asset[] = [];
 
-        // iterate through all given assets
-        assets.forEach(asset => {
+        // iterate through all assets
+        this.registeringAssets.forEach(asset => {
 
-            // check if the asset exists
-            if (this.assetStorage.hasAsset(asset.name, asset.assetType)) {
-
-                // log a warning that an asset has a double register
-                this.logger.warning("The given asset with the name", asset.name, "is allready registered.");
-            }
-
-            // add a promise to await its loading
-            outerPromise.push(new Promise<Asset>(resolve => {
+            // create a wrapper promise to load the asset
+            // with its load function
+            loadPromiseStack.push(new Promise<Asset>(resolve => {
 
                 // construct an instance of the asset
-                let instance = new assetClass();
+                let instance = new asset.ctor();
                 instance.setName(asset.name);
 
                 // fill the instance
                 this.loadAsset(instance, asset.path).then(resource => {
 
                     // store the asset
-                    resourceStack.push(resource);
+                    loadResourceStack.push(resource);
 
                     // resolve the promise
                     resolve(resource);
@@ -92,18 +94,12 @@ export class AssetLoader extends Singleton {
             }));
         });
 
-        // stack all loading promises to the asset loading process
-        this.assetLoaderPromiseStack.push(...outerPromise);
+        // wait for all assets to load
+        return Promise.all(loadPromiseStack).then(() => {
 
-        // return the promise
-        return Promise.all(outerPromise).then(() => {
-
-            // store all assets
-            this.assetStorage.addAsset(...resourceStack);
-
-            // resolve the promise
-            return resourceStack;
-        });*/
+            // return all assets
+            return loadResourceStack;
+        });
     }
 
     /**

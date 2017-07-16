@@ -31,7 +31,7 @@ export class AssetMock extends AbstractAsset {
      *
      * @param assets the assets to register
      */
-    public static async register(...assets: InlineAsset[]): Promise<Asset[]> {
+    public static register(...assets: InlineAsset[]): void {
 
         // add the asset type
         assets.forEach(asset => asset.assetType = AssetMock.currentAssetType);

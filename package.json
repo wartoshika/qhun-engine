@@ -4,9 +4,10 @@
   "description": "A framework to build web games based on canvas rendering",
   "main": "build/server.js",
   "scripts": {
-    "start": "node dist/server.js",
     "test": "cd test && ts-mocha -r tsconfig-paths/register ./**/*.ts",
-    "test:coverage": "nyc npm t"
+    "start": "node build/server.js",
+    "test:coverage": "nyc npm t",
+    "test:coveralls": "npm run test:coverage && nyc report --reporter=text-lcov | coveralls"
   },
   "nyc": {
     "include": [
@@ -41,6 +42,7 @@
     "circular-dependency-plugin": "^3.0.0",
     "clean-webpack-plugin": "^0.1.16",
     "copy-webpack-plugin": "^4.0.1",
+    "coveralls": "^2.13.1",
     "express": "^4.15.3",
     "file-api": "^0.10.4",
     "file-loader": "^0.11.2",
