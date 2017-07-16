@@ -1,6 +1,6 @@
 [![npm](https://img.shields.io/npm/l/express.svg)]()
-[![Coverage Status](https://coveralls.io/repos/github/wartoshika/qhun-engine/badge.svg?branch=master)](https://coveralls.io/github/wartoshika/qhun-engine?branch=master)
-[![Build Status](https://travis-ci.org/wartoshika/qhun-engine.svg?branch=master)](https://travis-ci.org/wartoshika/qhun-engine)
+[![Coverage Status](https://coveralls.io/repos/github/wartoshika/qhun-engine/badge.svg?branch=master)](https://coveralls.io/github/wartoshika/qhun-engine?branch={REPO-NAME})
+[![Build Status](https://travis-ci.org/wartoshika/qhun-engine.svg?branch={REPO-NAME})](https://travis-ci.org/wartoshika/qhun-engine)
 
 Qhun-Engine
 ===========
