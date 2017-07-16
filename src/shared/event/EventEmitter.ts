@@ -67,7 +67,6 @@ export abstract class EventEmitter<E = EventName> {
 
             // cancel
             return this;
-
         }
 
         // get all functions for this event

@@ -37,7 +37,7 @@ export class Sprite extends AbstractAsset {
     public static register(...sprites: InlineAsset[]): void {
 
         // add asset type
-        sprites.forEach((sprite) => sprite.assetType = AssetType.Image);
+        sprites.forEach((sprite) => sprite.assetType = AssetType.Sprite);
 
         // register the asset
         return Sprite.getAssetLoader().registerAsset(Sprite, ...sprites);

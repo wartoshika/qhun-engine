@@ -9,12 +9,12 @@ import * as sinon from 'sinon';
 import { context } from 'mocha-typescript';
 
 interface InlineSpy {
-    target: object,
-    func: string,
+    target: object;
+    func: string;
 }
 
 interface DefinedSpy extends InlineSpy {
-    restore: sinon.SinonSpy
+    restore: sinon.SinonSpy;
 }
 
 /**
@@ -48,7 +48,7 @@ export class UnitTestContext {
      */
     public get<T = any>(name: string): T {
 
-        return <T>this.objectStore[name];
+        return this.objectStore[name] as T;
     }
 
     /**
@@ -60,13 +60,13 @@ export class UnitTestContext {
     public addSpy(target: object, func: string): void {
 
         // spy on the target
-        let newSpyFunction = sinon.stub(target, func);
+        const newSpyFunction = sinon.stub(target, func);
 
         // save the spie
         if (newSpyFunction)
             this.spies.push({
-                target: target,
-                func: func,
+                target,
+                func,
                 restore: newSpyFunction
             });
     }
@@ -80,15 +80,15 @@ export class UnitTestContext {
     public getSpy(target: { [func: string]: any }, func: string): sinon.SinonSpy {
 
         // check if the object is a spy
-        let spy = this.spies.find(spy => spy.target === target && spy.func === func);
+        const spy = this.spies.find((theSpy) => theSpy.target === target && theSpy.func === func);
 
         // does the spy exist
         if (!spy) {
-            throw 'Never spied on function ' + func;
+            throw new Error('Never spied on function ' + func);
         }
 
         // cast the spy
-        return <sinon.SinonSpy>(<any>spy.target)[spy.func];
+        return (spy.target as any)[spy.func] as sinon.SinonSpy;
     }
 
     /**
@@ -99,23 +99,23 @@ export class UnitTestContext {
     public removeSpy(...spies: InlineSpy[]): void {
 
         // restore all
-        spies.forEach(spy => {
+        spies.forEach((spy) => {
 
             // find defined spy
-            spy = this.spies.find(s => s.target === spy.target && s.func === spy.func);
+            spy = this.spies.find((s) => s.target === spy.target && s.func === spy.func);
 
             // parse the target
-            let target = (<any>spy.target)[spy.func];
+            const target = (spy.target as any)[spy.func];
 
             // check if the restore function is available
-            if (typeof target['restore'] === 'function') {
+            if (typeof target.restore === 'function') {
 
                 // restore using it dedicated function
-                target['restore']();
+                target.restore();
             } else {
 
                 // restore using the original function
-                (<any>spy.target)[spy.func] = (<DefinedSpy>spy).restore;
+                (spy.target as any)[spy.func] = (spy as DefinedSpy).restore;
             }
         });
     }

@@ -5,11 +5,11 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { polyfill } from '../polyfill';
+import { polyfill, PolyfillModules } from '../polyfill';
 
 polyfill(
-    { require: 'atob', fills: 'atob' },
-    { require: 'w3c-blob', fills: 'Blob' }
+    PolyfillModules.atob,
+    PolyfillModules.w3cBlob
 );
 
 /**

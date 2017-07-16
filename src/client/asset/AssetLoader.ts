@@ -11,6 +11,10 @@ import { AssetStorage } from './AssetStorage';
 import { Request } from '../network';
 
 import {
+    TypeLoader, ImageLoader, AudioLoader, SpriteLoader, TilemapLoader
+} from './assetTypeLoader';
+
+import {
     RamStorage, Log, Singleton, Binary, collectGargabe, EventName,
     enableGarbageCollection
 } from '../../shared';
@@ -20,11 +24,6 @@ import {
  */
 @enableGarbageCollection
 export class AssetLoader extends Singleton {
-
-    /**
-     * the holder of all asset loads
-     */
-    private assetLoaderPromiseStack: Array<Promise<Asset>> = [];
 
     /**
      * the asset storage instance
@@ -41,6 +40,24 @@ export class AssetLoader extends Singleton {
      */
     @collectGargabe(EventName.AfterAssetLoading, [])
     private registeringAssets: InlineAsset[] = [];
+
+    /**
+     * all available asset loader
+     */
+    private availableAssetTypeLoader: {
+        [assetType: string]: TypeLoader
+    } = {};
+
+    constructor() {
+
+        super();
+
+        // register asset type loader
+        this.availableAssetTypeLoader[AssetType.Image] = ImageLoader.getInstance<ImageLoader>();
+        this.availableAssetTypeLoader[AssetType.Audio] = AudioLoader.getInstance<AudioLoader>();
+        this.availableAssetTypeLoader[AssetType.Sprite] = SpriteLoader.getInstance<SpriteLoader>();
+        this.availableAssetTypeLoader[AssetType.TileMap] = TilemapLoader.getInstance<TilemapLoader>();
+    }
 
     /**
      * register one or many assets to adress then later in the game
@@ -83,7 +100,7 @@ export class AssetLoader extends Singleton {
                 instance.setName(asset.name);
 
                 // fill the instance
-                this.loadAsset(instance, asset.path).then((resource) => {
+                this.loadAndStoreAsset(instance, asset.path).then((resource) => {
 
                     // store the asset
                     loadResourceStack.push(resource);
@@ -95,31 +112,11 @@ export class AssetLoader extends Singleton {
         });
 
         // wait for all assets to load
-        return Promise.all(loadPromiseStack).then(() => {
+        return Promise.all(loadPromiseStack).then((assets) => {
 
             // return all assets
             return loadResourceStack;
         });
-    }
-
-    /**
-     * get all unresolved assets from the register process
-     */
-    public getUnresolvedPromised(): Array<Promise<Asset>> {
-
-        return this.assetLoaderPromiseStack;
-    }
-
-    /**
-     * add promises to the asset loader. this can be used to delay the game
-     * startup until all assets are loaded.
-     *
-     * @param promises the promises to add
-     */
-    public addAssetLoaderPromise(...promises: Array<Promise<any>>): Array<Promise<any>> {
-
-        this.assetLoaderPromiseStack.push(...promises);
-        return promises;
     }
 
     /**
@@ -145,12 +142,12 @@ export class AssetLoader extends Singleton {
     }
 
     /**
-     * loads one asset
+     * loads one asset and store it
      *
      * @param instance the instance to be loaded
      * @param path the path where to load the asset from
      */
-    private async loadAsset(instance: Asset, path: string): Promise<Asset> {
+    private async loadAndStoreAsset(instance: Asset, path: string): Promise<Asset> {
 
         // check if the path is a local data uri
         if (path.indexOf('data:') === 0) {
@@ -163,59 +160,27 @@ export class AssetLoader extends Singleton {
             });
         }
 
-        let callback: (path: string) => Promise<Blob>;
-        switch (instance.getType()) {
+        // find the loader
+        const typeLoader = this.availableAssetTypeLoader[instance.getType()];
+        if (typeof typeLoader === 'undefined') {
 
-            case AssetType.Image:
-            case AssetType.TileMap:
-
-                callback = this.loadImage.bind(this);
-                break;
-            default:
-
-                throw new Error(`Asset type ${AssetType[instance.getType()]} is not implemented`);
+            throw new Error(`Asset type ${AssetType[instance.getType()]} is not implemented`);
         }
 
-        // load the resource
-        return callback(path).then((resource) => {
+        // load the asset!
+        return typeLoader.load(path, instance).then((loadedAssets) => {
 
-            // set the resource data to the asset instance
-            instance.setData(resource);
+            // wrap as array
+            if (!Array.isArray(loadedAssets)) {
+
+                loadedAssets = [loadedAssets];
+            }
+
+            // now save
+            this.assetStorage.addAsset(...loadedAssets as Asset[]);
+
+            // return the instance
             return instance;
         });
     }
-
-    /**
-     * load an image
-     *
-     * @param path the path to the image
-     */
-    private async loadImage(path: string): Promise<Blob> {
-
-        // make an xhr call to the file
-        return Request.getBinary(path).then((image) => {
-
-            // create the image bitmap for the blob
-            return Binary.bufferToBlob(image);
-        });
-    }
-
-    /**
-     * load an audio file
-     *
-     * @param path the path to the audio file
-     */
-    private async loadAudio(path: string): Promise<any> {
-        // to be filled
-    }
-
-    /**
-     * load a json file and parse its body
-     *
-     * @param path the path to the json file
-     */
-    private async loadJSON(path: string): Promise<any> {
-        // to be filled
-    }
-
 }

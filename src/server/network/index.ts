@@ -5,4 +5,4 @@
  * https://opensource.org/licenses/MIT
  */
 
-export * from './web/Webserver';
+export * from './NetworkServer';

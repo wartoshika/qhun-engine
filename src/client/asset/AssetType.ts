@@ -9,6 +9,7 @@
  * an enumeration of loadable assets via AssetLoader
  */
 export enum AssetType {
+    Sprite,
     Image,
     TileMap,
     Audio,
