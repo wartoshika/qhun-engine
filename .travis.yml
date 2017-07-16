@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+  - "node"
+  - "stable"
+  - "7"
+  - "6"
+install:
+  - npm install
+script:
+  - npm test
+after_success:
+  - npm run test:coveralls
