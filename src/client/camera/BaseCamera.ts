@@ -20,6 +20,11 @@ import {
 export abstract class BaseCamera implements Camera {
 
     /**
+     * the camera mode
+     */
+    protected abstract readonly mode: CameraMode;
+
+    /**
      * the entitiy which the camera should follow
      */
     private followingEntity: Entity = null;
@@ -28,11 +33,6 @@ export abstract class BaseCamera implements Camera {
      * the current camera world bounds
      */
     private worldBounds: Vector2D = null;
-
-    /**
-     * the camera mode
-     */
-    protected abstract readonly mode: CameraMode;
 
     /**
      *
@@ -100,7 +100,7 @@ export abstract class BaseCamera implements Camera {
      */
     public setWorldBounds(world: World): void {
 
-        let dimension = world.getWorldDimension();
+        const dimension = world.getWorldDimension();
         this.worldBounds = new Vector2D(
             dimension.x,
             dimension.y
@@ -114,7 +114,7 @@ export abstract class BaseCamera implements Camera {
      */
     public getWorldBounds(): Vector2D {
 
-        let wb = this.worldBounds;
+        const wb = this.worldBounds;
         if (!wb) return wb;
 
         // add the current camera scale

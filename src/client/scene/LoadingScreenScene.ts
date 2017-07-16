@@ -20,7 +20,7 @@ export class LoadingScreenScene extends Scene {
      */
     public async create(game: Game): Promise<void> {
 
-        console.log("scene create");
+        console.log('scene create');
     }
 
     /**
@@ -31,7 +31,7 @@ export class LoadingScreenScene extends Scene {
      */
     public update(game: Game): void {
 
-       // console.log("scene update");
+       // console.log('scene update');
     }
 
     /**
@@ -42,6 +42,6 @@ export class LoadingScreenScene extends Scene {
      */
     public async destroy(game: Game): Promise<void> {
 
-        console.log("scene destroy");
+        console.log('scene destroy');
     }
 }

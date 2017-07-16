@@ -22,11 +22,6 @@ export abstract class AnimationEntity extends Entity implements AnimationableEnt
     protected animationStack: InlineAnimation[] = [];
 
     /**
-     * the image that is rendered during game loop to display the entitiy
-     */
-    private currentTemplate: string;
-
-    /**
      * the visibility flag
      */
     protected visible: boolean = true;
@@ -40,6 +35,11 @@ export abstract class AnimationEntity extends Entity implements AnimationableEnt
      * the current scale factor
      */
     protected scaleFactor: number = 1;
+
+    /**
+     * the image that is rendered during game loop to display the entitiy
+     */
+    private currentTemplate: string;
 
     /**
      * the logger instance
@@ -71,12 +71,12 @@ export abstract class AnimationEntity extends Entity implements AnimationableEnt
         }
 
         // get the animation player
-        let animation = this.animationStack.find(a => a.name === name);
+        const animation = this.animationStack.find((a) => a.name === name);
 
         // check if the animation is valid
         if (!animation) {
 
-            this.logger.warning("Animation", name, "was not added to", this.constructor.name, ". Ignoring this animation.");
+            this.logger.warning('Animation', name, 'was not added to', this.constructor.name, '. Ignoring this animation.');
             return;
         }
 
@@ -94,7 +94,7 @@ export abstract class AnimationEntity extends Entity implements AnimationableEnt
         if (!this.currentAnimation) {
 
             // log a warning
-            this.logger.warning("trying to stop an animation on", this.constructor.name, "but there is no active animation");
+            this.logger.warning('trying to stop an animation on', this.constructor.name, 'but there is no active animation');
             return;
         }
 

@@ -12,5 +12,5 @@ import { AnimationEntity } from './AnimationEntity';
  */
 export abstract class Entity extends AnimationEntity {
 
-
+    // basic entity class to use instanceof
 }

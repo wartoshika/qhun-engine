@@ -99,12 +99,26 @@ export class Animation {
     }
 
     /**
+     * stops the animation and restores the image of the entity
+     */
+    public stopAndRestore(): void {
+
+        // stop the animation
+        window.clearTimeout(this.currentTimeoutHolder);
+
+        // restores the image
+        // currently no restore
+        // @todo: should this be optional?
+        // this.entity.setImage(this.previousEntityImage);
+    }
+
+    /**
      * displays the next animation frame
      */
     private nextAnimationFrame(): void {
 
         // get the current state
-        let currentState = this.animation.states[this.currentAnimationPhase];
+        const currentState = this.animation.states[this.currentAnimationPhase];
 
         // set the image of the entity
         this.entity.setImage(`${this.animation.sprite}[${currentState.image}]`);
@@ -129,19 +143,5 @@ export class Animation {
             // animation is completed
             this.stopAndRestore();
         }
-    }
-
-    /**
-     * stops the animation and restores the image of the entity
-     */
-    public stopAndRestore(): void {
-
-        // stop the animation
-        window.clearTimeout(this.currentTimeoutHolder);
-
-        // restores the image
-        // currently no restore
-        // @todo: should this be optional?
-        //this.entity.setImage(this.previousEntityImage);
     }
 }

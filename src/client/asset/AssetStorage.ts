@@ -31,7 +31,7 @@ export class AssetStorage extends Singleton {
         if (!RamStorage.has(this.getAssetStorageName(name, type))) {
 
             // print error
-            this.logger.error("Trying to load not existing asset", name, "with type", AssetType[type]);
+            this.logger.error('Trying to load not existing asset', name, 'with type', AssetType[type]);
             return;
         }
 
@@ -69,14 +69,14 @@ export class AssetStorage extends Singleton {
     public addAsset(...assets: Asset[]): void {
 
         // iterate all assets
-        assets.forEach(asset => {
+        assets.forEach((asset) => {
 
             // if the asset is allready there, write a warning
             if (this.hasAsset(asset.getName(), asset.getType())) {
 
                 this.logger.warning(
-                    "Asset with name", asset.getName(), "and type", AssetType[asset.getType()],
-                    "allready exists. The asser will be overwritten!"
+                    'Asset with name', asset.getName(), 'and type', AssetType[asset.getType()],
+                    'allready exists. The asser will be overwritten!'
                 );
             }
 
@@ -90,7 +90,7 @@ export class AssetStorage extends Singleton {
      */
     public clearStorage(type?: AssetType): void {
 
-        RamStorage.clearPath(this.getAssetStorageName("", type));
+        RamStorage.clearPath(this.getAssetStorageName('', type));
     }
 
     /**
@@ -100,7 +100,7 @@ export class AssetStorage extends Singleton {
      */
     private getAssetStorageName(name?: string, type?: AssetType): string {
 
-        let path = "assetloader";
+        let path = 'assetloader';
         if (type !== undefined) path += `.${type}`;
         if (name) path += `.${name}`;
 

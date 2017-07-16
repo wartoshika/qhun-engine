@@ -37,6 +37,20 @@ export class Input extends Singleton {
     }
 
     /**
+     * get the current user input for arrow keys
+     */
+    public getArrowKeys(): InputArrowKeys {
+
+        const keys: InputArrowKeys = {
+            down: this.currentKeyInput.indexOf(40) !== -1,
+            up: this.currentKeyInput.indexOf(38) !== -1,
+            left: this.currentKeyInput.indexOf(37) !== -1,
+            right: this.currentKeyInput.indexOf(39) !== -1
+        };
+        return keys;
+    }
+
+    /**
      * add window events to captcher user input
      */
     private addEventListener(): void {
@@ -74,18 +88,5 @@ export class Input extends Singleton {
 
         // removes the code from the key input
         this.currentKeyInput.splice(this.currentKeyInput.indexOf(event.keyCode), 1);
-    }
-
-    /**
-     * get the current user input for arrow keys
-     */
-    public getArrowKeys(): InputArrowKeys {
-
-        return <InputArrowKeys>{
-            down: this.currentKeyInput.indexOf(40) !== -1,
-            up: this.currentKeyInput.indexOf(38) !== -1,
-            left: this.currentKeyInput.indexOf(37) !== -1,
-            right: this.currentKeyInput.indexOf(39) !== -1
-        };
     }
 }

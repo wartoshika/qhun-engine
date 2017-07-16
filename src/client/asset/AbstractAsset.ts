@@ -20,6 +20,14 @@ import { AssetLoader } from './AssetLoader';
 export abstract class AbstractAsset implements Asset {
 
     /**
+     * get the asset loader instance to load the desired asset
+     */
+    protected static getAssetLoader(): AssetLoader {
+
+        return AbstractAsset.assetLoader;
+    }
+
+    /**
      * holder of the asset loader
      */
     private static assetLoader = AssetLoader.getInstance<AssetLoader>();
@@ -30,14 +38,6 @@ export abstract class AbstractAsset implements Asset {
         protected type?: AssetType,
         protected data?: Blob
     ) { }
-
-    /**
-     * get the asset loader instance to load the desired asset
-     */
-    protected static getAssetLoader(): AssetLoader {
-
-        return AbstractAsset.assetLoader;
-    }
 
     public getName(): string {
 

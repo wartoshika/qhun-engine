@@ -40,19 +40,19 @@ export class CanvasWorldRenderer {
         // @todo: save the rendered tilemap as image to just draw the image if the camera is not moving
 
         // get the filemap asset from the world object
-        let tileMap = this.world.getTileMap();
+        const tileMap = this.world.getTileMap();
 
         // loop through the different layers
         for (let layer = 0; layer < tileMap.layerCount; layer++) {
 
             // build up the map object
-            let mapLines = tileMap.getMap()[layer].split(String.fromCharCode(13));
-            let horizontalImageCount = mapLines.length - 1;
-            let verticalImageCount = mapLines.length - 1;
+            const mapLines = tileMap.getMap()[layer].split(String.fromCharCode(13));
+            const horizontalImageCount = mapLines.length - 1;
+            const verticalImageCount = mapLines.length - 1;
 
             // get the asset loader instance
-            let assetStorage = AssetStorage.getInstance<AssetStorage>();
-            let tileDimension = this.world.getTileMap().getDimension();
+            const assetStorage = AssetStorage.getInstance<AssetStorage>();
+            const tileDimension = this.world.getTileMap().getDimension();
 
             // iterate through all tiles
             for (let v = 0; v < verticalImageCount; v++) {
@@ -61,20 +61,20 @@ export class CanvasWorldRenderer {
                 for (let h = 0; h < horizontalImageCount; h++) {
 
                     // get the tile number from the map
-                    let tileNumber = parseInt(mapLines[v].split(',')[h]);
+                    const tileNumber = parseInt(mapLines[v].split(',')[h], 10);
 
                     // ignore -1 tiles
                     if (tileNumber === -1) continue;
 
                     // get the asset
                     // @todo: local asset caching meight be a performance improvement
-                    let tileImage = assetStorage.getAsset<Image>(
+                    const tileImage = assetStorage.getAsset<Image>(
                         `${this.world.getTileMap().getName()}[${tileNumber}]`,
                         AssetType.Image
                     );
 
                     // draw the tile
-                    let renderable = CameraOffsetCalculator.imageScaleDrawTile(
+                    const renderable = CameraOffsetCalculator.imageScaleDrawTile(
                         new Dimension(
                             h * tileDimension.x, v * tileDimension.y
                         ), tileImage, this.camera
@@ -83,7 +83,7 @@ export class CanvasWorldRenderer {
                     // is not visible, ignore
                     if (!renderable) continue;
 
-                    (<any>this.ctx).drawImage(...<any[]>renderable);
+                    (this.ctx as any).drawImage(...renderable as any[]);
 
                 }
             }

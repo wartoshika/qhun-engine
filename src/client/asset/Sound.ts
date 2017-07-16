@@ -11,15 +11,6 @@ import { AbstractAsset } from './AbstractAsset';
 
 export class Sound extends AbstractAsset {
 
-    constructor(
-        name?: string,
-        path?: string,
-        data?: Blob
-    ) {
-
-        super(name, path, AssetType.Audio, data);
-    }
-
     /**
      * register an image asset
      *
@@ -29,9 +20,18 @@ export class Sound extends AbstractAsset {
     public static register(...sounds: InlineAsset[]): void {
 
         // add the asset type
-        sounds.forEach(sound => sound.assetType = AssetType.Audio);
+        sounds.forEach((sound) => sound.assetType = AssetType.Audio);
 
         // resiger all given sounds
         Sound.getAssetLoader().registerAsset(Sound, ...sounds);
+    }
+
+    constructor(
+        name?: string,
+        path?: string,
+        data?: Blob
+    ) {
+
+        super(name, path, AssetType.Audio, data);
     }
 }

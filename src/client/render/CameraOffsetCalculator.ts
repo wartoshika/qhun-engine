@@ -16,8 +16,6 @@ import { Vector2D, Dimension } from '../../shared/math';
  */
 export class CameraOffsetCalculator {
 
-    private static assetStorage: AssetStorage = AssetStorage.getInstance<AssetStorage>();
-
     /**
      * calculates the entity offset and scaleability of its image by using one
      * camera object.
@@ -28,19 +26,19 @@ export class CameraOffsetCalculator {
     public static imageScaleDrawEntity(entity: RenderableEntity, camera: Camera): any[] | boolean {
 
         // get the entity image scale from the camera
-        let scale = camera.getScale();
+        const scale = camera.getScale();
 
         // get the original image as ImageBitmap
-        let entityImage = <ImageBitmap>CameraOffsetCalculator.assetStorage.getAsset<Image>(
+        const entityImage = CameraOffsetCalculator.assetStorage.getAsset<Image>(
             entity.getImage(), AssetType.Image
-        ).getData();
+        ).getData() as ImageBitmap;
 
         // calculate the scale
-        let newWidth = entityImage.width * scale * entity.getScale();
-        let newHeight = entityImage.width * scale * entity.getScale();
+        const newWidth = entityImage.width * scale * entity.getScale();
+        const newHeight = entityImage.width * scale * entity.getScale();
 
         // calculate position
-        let newPosition = CameraOffsetCalculator.calculatePositionOffsetForCameraFollow(
+        const newPosition = CameraOffsetCalculator.calculatePositionOffsetForCameraFollow(
             entity.getPosition(), camera
         );
 
@@ -74,18 +72,18 @@ export class CameraOffsetCalculator {
     public static imageScaleDrawTile(originalPosition: Dimension, tile: Image, camera: Camera): any[] | boolean {
 
         // get the current camera scale
-        let scale = camera.getScale();
+        const scale = camera.getScale();
 
         // get the tile image as BitmapImage
-        let tileImage = <ImageBitmap>tile.getData();
+        const tileImage = tile.getData() as ImageBitmap;
 
         // calculate the scale
-        let newWidth = tileImage.width * scale;
-        let newHeight = tileImage.height * scale;
+        const newWidth = tileImage.width * scale;
+        const newHeight = tileImage.height * scale;
 
         // calculate position
         // @todo: result is not 100% accurate... need further investigations
-        let newPosition = CameraOffsetCalculator.calculatePositionOffsetForCameraFollow(
+        const newPosition = CameraOffsetCalculator.calculatePositionOffsetForCameraFollow(
             new Vector2D(originalPosition.x * scale, originalPosition.y * scale),
             camera
         );
@@ -108,6 +106,8 @@ export class CameraOffsetCalculator {
         ];
     }
 
+    private static assetStorage: AssetStorage = AssetStorage.getInstance<AssetStorage>();
+
     /**
      * check if an object is visible by the camera
      *
@@ -117,12 +117,12 @@ export class CameraOffsetCalculator {
     private static positionIsWithinCameraRange(position: Vector2D, objectDimension: Vector2D): boolean {
 
         // @todo: no check with window here, use the canvas object itself
-        let canvasDim = CameraOffsetCalculator.getCanvasDimension();
-        let canvasWidth = canvasDim.x;
-        let canvasHeight = canvasDim.y;
+        const canvasDim = CameraOffsetCalculator.getCanvasDimension();
+        const canvasWidth = canvasDim.x;
+        const canvasHeight = canvasDim.y;
 
         // add the two vectors
-        let maxOffsetVector = position.substract(objectDimension);
+        const maxOffsetVector = position.substract(objectDimension);
 
         // check if visible
         return canvasWidth >= maxOffsetVector.x && canvasHeight >= maxOffsetVector.y;
@@ -133,7 +133,7 @@ export class CameraOffsetCalculator {
      */
     private static getCanvasDimension(): Vector2D {
 
-        let canvas = document.querySelector('canvas');
+        const canvas = document.querySelector('canvas');
         return new Vector2D(
             canvas.width,
             canvas.height
@@ -146,22 +146,22 @@ export class CameraOffsetCalculator {
     private static calculatePositionOffsetForCameraFollow(originalPosition: Vector2D, camera: Camera): Vector2D {
 
         // first check if there is any following
-        let entity = camera.getFollowingEntity();
+        const entity = camera.getFollowingEntity();
 
         // if no following is active, return the original position
         if (!entity) return originalPosition;
 
         // calculate the offset. the entity should be in the center of the screen
-        let canvasDim = CameraOffsetCalculator.getCanvasDimension();
+        const canvasDim = CameraOffsetCalculator.getCanvasDimension();
 
         // calculate the center position for the entity and shift the other
         // vectors.
-        let tmpVector = originalPosition.substract(entity.getPosition()).add(
+        const tmpVector = originalPosition.substract(entity.getPosition()).add(
             canvasDim.divide(new Vector2D(2, 2))
         );
 
         // now check if the camera has world bounds
-        let worldBounds = camera.getWorldBounds();
+        const worldBounds = camera.getWorldBounds();
         if (!worldBounds) return tmpVector;
 
         // check if the original vector is smaller than the shifted vector
@@ -181,8 +181,8 @@ export class CameraOffsetCalculator {
         // now the left and bottom bounds
         // we need the world dimension to check if the camera reaches
         // the end of the world in the visible area
-        let entityPosition = entity.getPosition();
-        let worldBoundCanvas = worldBounds.substract(canvasDim.half());
+        const entityPosition = entity.getPosition();
+        const worldBoundCanvas = worldBounds.substract(canvasDim.half());
 
         if (entityPosition.x > worldBoundCanvas.x) {
 

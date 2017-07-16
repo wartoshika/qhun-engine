@@ -24,7 +24,7 @@ export class AssetLoader extends Singleton {
     /**
      * the holder of all asset loads
      */
-    private assetLoaderPromiseStack: Promise<Asset>[] = [];
+    private assetLoaderPromiseStack: Array<Promise<Asset>> = [];
 
     /**
      * the asset storage instance
@@ -53,7 +53,7 @@ export class AssetLoader extends Singleton {
     public registerAsset(assetClass: new () => Asset, ...assets: InlineAsset[]): void {
 
         // add constructor
-        assets.forEach(asset => asset.ctor = assetClass);
+        assets.forEach((asset) => asset.ctor = assetClass);
 
         // check if all assets are unique
         this.checkInlineAssets(...[...assets, ...this.registeringAssets]);
@@ -68,22 +68,22 @@ export class AssetLoader extends Singleton {
      */
     public async loadRegisteredAssets(): Promise<Asset[]> {
 
-        let loadPromiseStack: Promise<Asset>[] = [];
-        let loadResourceStack: Asset[] = [];
+        const loadPromiseStack: Array<Promise<Asset>> = [];
+        const loadResourceStack: Asset[] = [];
 
         // iterate through all assets
-        this.registeringAssets.forEach(asset => {
+        this.registeringAssets.forEach((asset) => {
 
             // create a wrapper promise to load the asset
             // with its load function
-            loadPromiseStack.push(new Promise<Asset>(resolve => {
+            loadPromiseStack.push(new Promise<Asset>((resolve) => {
 
                 // construct an instance of the asset
-                let instance = new asset.ctor();
+                const instance = new asset.ctor();
                 instance.setName(asset.name);
 
                 // fill the instance
-                this.loadAsset(instance, asset.path).then(resource => {
+                this.loadAsset(instance, asset.path).then((resource) => {
 
                     // store the asset
                     loadResourceStack.push(resource);
@@ -103,15 +103,35 @@ export class AssetLoader extends Singleton {
     }
 
     /**
+     * get all unresolved assets from the register process
+     */
+    public getUnresolvedPromised(): Array<Promise<Asset>> {
+
+        return this.assetLoaderPromiseStack;
+    }
+
+    /**
+     * add promises to the asset loader. this can be used to delay the game
+     * startup until all assets are loaded.
+     *
+     * @param promises the promises to add
+     */
+    public addAssetLoaderPromise(...promises: Array<Promise<any>>): Array<Promise<any>> {
+
+        this.assetLoaderPromiseStack.push(...promises);
+        return promises;
+    }
+
+    /**
      * check the given assets for errors
      *
      * @throw Error
      */
     private checkInlineAssets(...assets: InlineAsset[]): void {
 
-        let uniqueStack: { [index: string]: boolean } = {};
+        const uniqueStack: { [index: string]: boolean } = {};
 
-        assets.forEach(asset => {
+        assets.forEach((asset) => {
 
             if (uniqueStack[`${asset.name}${asset.assetType}`] === true) {
 
@@ -135,7 +155,7 @@ export class AssetLoader extends Singleton {
         // check if the path is a local data uri
         if (path.indexOf('data:') === 0) {
 
-            return new Promise<Asset>(resolve => {
+            return new Promise<Asset>((resolve) => {
 
                 // set the blob for the asset
                 instance.setData(Binary.dataUriToBlob(path));
@@ -153,36 +173,16 @@ export class AssetLoader extends Singleton {
                 break;
             default:
 
-                throw `Asset type ${AssetType[instance.getType()]} is not implemented`;
+                throw new Error(`Asset type ${AssetType[instance.getType()]} is not implemented`);
         }
 
         // load the resource
-        return callback(path).then(resource => {
+        return callback(path).then((resource) => {
 
             // set the resource data to the asset instance
             instance.setData(resource);
             return instance;
         });
-    }
-
-    /**
-     * get all unresolved assets from the register process
-     */
-    public getUnresolvedPromised(): Promise<Asset>[] {
-
-        return this.assetLoaderPromiseStack;
-    }
-
-    /**
-     * add promises to the asset loader. this can be used to delay the game
-     * startup until all assets are loaded.
-     *
-     * @param promises the promises to add
-     */
-    public addAssetLoaderPromise(...promises: Promise<any>[]): Promise<any>[] {
-
-        this.assetLoaderPromiseStack.push(...promises);
-        return promises;
     }
 
     /**
@@ -206,7 +206,7 @@ export class AssetLoader extends Singleton {
      * @param path the path to the audio file
      */
     private async loadAudio(path: string): Promise<any> {
-
+        // to be filled
     }
 
     /**
@@ -215,8 +215,7 @@ export class AssetLoader extends Singleton {
      * @param path the path to the json file
      */
     private async loadJSON(path: string): Promise<any> {
-
-
+        // to be filled
     }
 
 }

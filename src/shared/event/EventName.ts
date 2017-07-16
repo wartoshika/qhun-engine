@@ -7,12 +7,12 @@
 
 export enum EventName {
 
-    BeforePreload = <any>"BeforePreload",
-    AfterPreload = <any>"AfterPreload",
+    BeforePreload = 'BeforePreload' as any,
+    AfterPreload = 'AfterPreload' as any,
 
-    BeforeAssetLoading = <any>"BeforeAssetLoading",
-    AfterAssetLoading = <any>"AfterAssetLoading",
+    BeforeAssetLoading = 'BeforeAssetLoading' as any,
+    AfterAssetLoading = 'AfterAssetLoading' as any,
 
-    BeforeLoaded = <any>"BeforeLoaded",
-    AfterLoaded = <any>"AfterLoaded"
+    BeforeLoaded = 'BeforeLoaded' as any,
+    AfterLoaded = 'AfterLoaded' as any,
 }

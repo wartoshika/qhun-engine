@@ -20,10 +20,10 @@ export class Request {
      */
     public static async getBinary(path: string): Promise<ArrayBuffer> {
 
-        return new Promise<ArrayBuffer>(resolve => {
+        return new Promise<ArrayBuffer>((resolve) => {
 
             // create xhr instance and set properties
-            let xhr = new XMLHttpRequest();
+            const xhr = new XMLHttpRequest();
             xhr.responseType = 'arraybuffer';
             xhr.open('GET', path);
 
@@ -31,7 +31,7 @@ export class Request {
             xhr.onload = () => {
 
                 // resolve the promise with a
-                resolve(<ArrayBuffer>xhr.response);
+                resolve(xhr.response as ArrayBuffer);
             };
 
             // send the request
@@ -46,10 +46,10 @@ export class Request {
      */
     public static async get(path: string): Promise<string> {
 
-        return new Promise<string>(resolve => {
+        return new Promise<string>((resolve) => {
 
             // create xhr instance and set properties
-            let xhr = new XMLHttpRequest();
+            const xhr = new XMLHttpRequest();
             xhr.open('GET', path);
 
             // register finish event

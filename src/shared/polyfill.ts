@@ -15,7 +15,7 @@ function isBrowserEnv(): boolean {
     return typeof window !== 'undefined';
 }
 
-interface IPolyfill {
+interface Polyfill {
 
     require: string;
     fills: string;
@@ -24,19 +24,19 @@ interface IPolyfill {
 /**
  * loads a polyfill if the object was not found
  */
-export function polyfill(...modules: IPolyfill[]): void {
+export function polyfill(...modules: Polyfill[]): void {
 
-    modules.forEach(_module => {
+    modules.forEach((_module) => {
 
         if (isNodeEnv()) {
 
             // load node polyfill
-            (<any>global)[_module.fills] = require(_module.require);
+            (global as any)[_module.fills] = require(_module.require);
 
         } else if (isBrowserEnv()) {
 
             // load browser polyfill
-            (<any>window)[_module.fills] = require(_module.require);
+            (window as any)[_module.fills] = require(_module.require);
         }
 
     });

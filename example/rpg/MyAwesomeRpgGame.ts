@@ -55,7 +55,7 @@ class MyAwesomeRpgGame extends Client {
      * you now have access to the registered assets
      */
     @logMethodCall
-    public loaded(game: Game): void {
+    public loaded(myGame: Game): void {
 
         // create entities
         // link is a CollidableEntity so collision detection
@@ -63,9 +63,9 @@ class MyAwesomeRpgGame extends Client {
         this.link = new Link();
 
         // create game objects
-        let camera = new OrthogonalCamera(1.5);
-        let world = new World(
-            game, 'world1'
+        const camera = new OrthogonalCamera(1.5);
+        const world = new World(
+            myGame, 'world1'
         );
 
         // set tile collision
@@ -75,10 +75,10 @@ class MyAwesomeRpgGame extends Client {
         ]);
 
         // add game objects
-        game.add(this.link, world, camera);
+        myGame.add(this.link, world, camera);
 
         // load the world
-        game.loadWorld('world1');
+        myGame.loadWorld('world1');
 
         // follow the player with the camera
         camera.followEntity(this.link);
@@ -94,7 +94,7 @@ class MyAwesomeRpgGame extends Client {
      *
      * @warning dont do heavy stuff in here because this meight cause performance issues
      */
-    public update(game: Game, input: Input): void {
+    public update(myGame: Game, input: Input): void {
 
         // handle movement for link
         this.link.handleMovement(input.getArrowKeys());
@@ -102,4 +102,4 @@ class MyAwesomeRpgGame extends Client {
 }
 
 // start the game
-new MyAwesomeRpgGame();
+const game = new MyAwesomeRpgGame();

@@ -14,26 +14,26 @@ import { Dimension } from './Dimension';
 export class Vector2D<T extends number = number> extends Dimension {
 
     /**
-     *
-     * @param x the x coordinate
-     * @param y the y coordinate
-     */
-    constructor(
-        x: T = <T>0,
-        y: T = <T>0
-    ) {
-        super(x, y);
-    }
-
-    /**
      * helper method to get vector instances
      *
      * @param x the x value
      * @param y the y value. if no y value is present, x and y will come from x
      */
-    public static from<T extends number = number>(x: T, y?: T): Vector2D<T> {
+    public static from<StaticType extends number = number>(x: StaticType, y?: StaticType): Vector2D<StaticType> {
 
-        return new Vector2D<T>(x, y !== undefined ? y : x);
+        return new Vector2D<StaticType>(x, y !== undefined ? y : x);
+    }
+
+    /**
+     *
+     * @param x the x coordinate
+     * @param y the y coordinate
+     */
+    constructor(
+        x: T = 0 as T,
+        y: T = 0 as T
+    ) {
+        super(x, y);
     }
 
     /**
@@ -41,11 +41,11 @@ export class Vector2D<T extends number = number> extends Dimension {
      *
      * @param vector the other vector
      */
-    public add(vector: Vector2D<T>): Vector2D<T> {
+    public add(vector: Vector2D): Vector2D {
 
-        return new Vector2D<T>(
-            <T>(this.x + vector.x),
-            <T>(this.y + vector.y)
+        return new Vector2D(
+            (this.x + vector.x) as T,
+            (this.y + vector.y) as T
         );
     }
 
@@ -54,11 +54,11 @@ export class Vector2D<T extends number = number> extends Dimension {
      *
      * @param vector the other vector
      */
-    public substract(vector: Vector2D<T>): Vector2D<T> {
+    public substract(vector: Vector2D): Vector2D {
 
-        return new Vector2D<T>(
-            <T>(this.x - vector.x),
-            <T>(this.y - vector.y)
+        return new Vector2D(
+            (this.x - vector.x) as T,
+            (this.y - vector.y) as T
         );
     }
 
@@ -67,11 +67,11 @@ export class Vector2D<T extends number = number> extends Dimension {
      *
      * @param vector the other vector
      */
-    public divide(vector: Vector2D<T>): Vector2D<T> {
+    public divide(vector: Vector2D): Vector2D {
 
-        return new Vector2D<T>(
-            <T>(this.x / vector.x),
-            <T>(this.y / vector.y)
+        return new Vector2D(
+            (this.x / vector.x) as T,
+            (this.y / vector.y) as T
         );
     }
 
@@ -80,22 +80,22 @@ export class Vector2D<T extends number = number> extends Dimension {
      *
      * @param vector the other vector
      */
-    public multiply(vector: Vector2D<T>): Vector2D<T> {
+    public multiply(vector: Vector2D): Vector2D {
 
-        return new Vector2D<T>(
-            <T>(this.x * vector.x),
-            <T>(this.y * vector.y)
+        return new Vector2D(
+            (this.x * vector.x) as T,
+            (this.y * vector.y) as T
         );
     }
 
     /**
      * rounds the vector to a given precision
      */
-    public round(precision: number = 2): Vector2D<T> {
+    public round(precision: number = 2): Vector2D {
 
-        return new Vector2D<T>(
-            <T>(Helper.roundToPrecision(this.x, precision)),
-            <T>(Helper.roundToPrecision(this.y, precision))
+        return new Vector2D(
+            (Helper.roundToPrecision(this.x, precision)) as T,
+            (Helper.roundToPrecision(this.y, precision)) as T
         );
     }
 
@@ -105,7 +105,7 @@ export class Vector2D<T extends number = number> extends Dimension {
      * @param otherVector the other vector calculate to
      * @return the distance in pixel
      */
-    public distanceToVector(otherVector: Vector2D<T>): number {
+    public distanceToVector(otherVector: Vector2D): number {
 
         return Math.sqrt(
             Math.pow((this.x - otherVector.x), 2)
@@ -117,7 +117,7 @@ export class Vector2D<T extends number = number> extends Dimension {
     /**
      * get the current vector divided by 2
      */
-    public half(): Vector2D<T> {
+    public half(): Vector2D {
 
         return this.divide(new Vector2D(2, 2));
     }
@@ -125,16 +125,16 @@ export class Vector2D<T extends number = number> extends Dimension {
     /**
      * get the current vector multiply by 2
      */
-    public double(): Vector2D<T> {
+    public double(): Vector2D {
 
-        return this.multiply(new Vector2D<T>(<T>2, <T>2));
+        return this.multiply(new Vector2D(2 as T, 2 as T));
     }
 
     /**
      * Math.abs() on x and y
      */
-    public abs(): Vector2D<T> {
+    public abs(): Vector2D {
 
-        return new Vector2D<T>(<T>Math.abs(this.x), <T>Math.abs(this.y));
+        return new Vector2D(Math.abs(this.x) as T, Math.abs(this.y) as T);
     }
 }

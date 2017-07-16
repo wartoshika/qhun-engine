@@ -50,113 +50,13 @@ export abstract class Client extends Singleton {
         super();
 
         // print package and version info
-        console.info("%c -= Qhun-Engine v1.0.0 =- [ http://engine.qhun.de ]", "background: green; font-color: white;");
+        console.info('%c -= Qhun-Engine v1.0.0 =- [ http://engine.qhun.de ]', 'background: green; font-color: white;');
 
         // step by step setup of the game
         this.bindLoadEvent();
 
         // bind to singleton instance
         Client.bindInstance(this);
-    }
-
-    /**
-     * bind window events to let the start of the engine pause
-     * until the javascript dom is ready
-     */
-    @logMethodCall
-    private bindLoadEvent(): void {
-
-        // at window load, start the internal setup
-        window.addEventListener('load', this.internalSetup.bind(this));
-    }
-
-    /**
-     * internal setup phase
-     */
-    @logMethodCall
-    private async internalSetup(): Promise<void> {
-
-        // get all promised from the preload phase and await them
-        let assetLoader = AssetLoader.getInstance<AssetLoader>();
-        let assetStorage = AssetStorage.getInstance<AssetStorage>();
-
-        // setup renderer
-        this.renderer = new this.clientConfig.rederer();
-        this.renderer.setup(this.clientConfig);
-
-        // some logging
-        this.logger.info("Using", this.renderer.constructor.name, "as Renderer");
-
-        // start the preload phase
-        this.emit(EventName.BeforePreload);
-        this.preload();
-        this.emit(EventName.AfterPreload);
-
-        // start asset loading
-        this.emit(EventName.BeforeAssetLoading);
-        assetLoader.loadRegisteredAssets().then(() => {
-
-            // asset loading finished!
-            this.emit(EventName.AfterAssetLoading);
-
-            // log the information about the registration process of assets
-            this.logger.info("Registered", assetStorage.getAssetAmount(AssetType.Image), "Images");
-            this.logger.info("Registered", assetStorage.getAssetAmount(AssetType.TileMap), "TileMaps");
-            this.logger.info("Registered", assetStorage.getAssetAmount(AssetType.Audio), "Sounds");
-            this.logger.info("Registered", assetStorage.getAssetAmount(AssetType.Json), "JSON Objects");
-
-            // all assets loaded, continue startup
-            this.gameInstance = new Game(this.renderer);
-            this.inputInstance = new Input();
-
-            // fire loaded event
-            this.emit(EventName.BeforeLoaded);
-            this.loaded(this.gameInstance);
-            this.emit(EventName.AfterLoaded);
-            this.printMemoryFootprint();
-
-            // init the game loop
-            this.gameLoop();
-        });
-    }
-
-    /**
-     * logs the current memory footprint to the console
-     */
-    private printMemoryFootprint(): void {
-
-        let assets = RamStorage.getSize("assetloader", FileSizeType.Megabyte);
-        let misc = RamStorage.getSize("singleton", FileSizeType.Megabyte);
-        let overall = +(assets + misc).toFixed(2);
-
-        // print current memory footprint
-        this.logger.info("Memory footprint:", overall, "MB");
-        this.logger.info("\t- Assets:\t", assets, "MB");
-        this.logger.info("\t- Misc:\t\t", misc, "MB");
-    }
-
-    /**
-     * the game loop where all things come together
-     */
-    private gameLoop(): void {
-
-        // call update method
-        this.update(this.gameInstance, this.inputInstance);
-
-        // run collision detection
-        CollisionDetection.entitiesWithWorld(this.gameInstance.getCurrentEntities(), this.renderer.getWorld(), this.gameInstance.getCurrentCamera());
-
-        // call the scene update
-        let scene = this.gameInstance.getCurrentScene();
-        if (scene) scene.update(this.gameInstance);
-
-        // render the game
-        if (typeof this.renderer.preRender === 'function') this.renderer.preRender();
-        this.renderer.render();
-        if (typeof this.renderer.postRender === 'function') this.renderer.postRender();
-
-        // request the next game frame
-        window.requestAnimationFrame(this.gameLoop.bind(this));
     }
 
     /**
@@ -179,4 +79,104 @@ export abstract class Client extends Singleton {
      * @warning dont do heavy stuff in here because this meight cause performance issues
      */
     public abstract update(game: Game, input: Input): void;
+
+    /**
+     * bind window events to let the start of the engine pause
+     * until the javascript dom is ready
+     */
+    @logMethodCall
+    private bindLoadEvent(): void {
+
+        // at window load, start the internal setup
+        window.addEventListener('load', this.internalSetup.bind(this));
+    }
+
+    /**
+     * internal setup phase
+     */
+    @logMethodCall
+    private async internalSetup(): Promise<void> {
+
+        // get all promised from the preload phase and await them
+        const assetLoader = AssetLoader.getInstance<AssetLoader>();
+        const assetStorage = AssetStorage.getInstance<AssetStorage>();
+
+        // setup renderer
+        this.renderer = new this.clientConfig.rederer();
+        this.renderer.setup(this.clientConfig);
+
+        // some logging
+        this.logger.info('Using', this.renderer.constructor.name, 'as Renderer');
+
+        // start the preload phase
+        this.emit(EventName.BeforePreload);
+        this.preload();
+        this.emit(EventName.AfterPreload);
+
+        // start asset loading
+        this.emit(EventName.BeforeAssetLoading);
+        assetLoader.loadRegisteredAssets().then(() => {
+
+            // asset loading finished!
+            this.emit(EventName.AfterAssetLoading);
+
+            // log the information about the registration process of assets
+            this.logger.info('Registered', assetStorage.getAssetAmount(AssetType.Image), 'Images');
+            this.logger.info('Registered', assetStorage.getAssetAmount(AssetType.TileMap), 'TileMaps');
+            this.logger.info('Registered', assetStorage.getAssetAmount(AssetType.Audio), 'Sounds');
+            this.logger.info('Registered', assetStorage.getAssetAmount(AssetType.Json), 'JSON Objects');
+
+            // all assets loaded, continue startup
+            this.gameInstance = new Game(this.renderer);
+            this.inputInstance = new Input();
+
+            // fire loaded event
+            this.emit(EventName.BeforeLoaded);
+            this.loaded(this.gameInstance);
+            this.emit(EventName.AfterLoaded);
+            this.printMemoryFootprint();
+
+            // init the game loop
+            this.gameLoop();
+        });
+    }
+
+    /**
+     * logs the current memory footprint to the console
+     */
+    private printMemoryFootprint(): void {
+
+        const assets = RamStorage.getSize('assetloader', FileSizeType.Megabyte);
+        const misc = RamStorage.getSize('singleton', FileSizeType.Megabyte);
+        const overall = +(assets + misc).toFixed(2);
+
+        // print current memory footprint
+        this.logger.info('Memory footprint:', overall, 'MB');
+        this.logger.info('\t- Assets:\t', assets, 'MB');
+        this.logger.info('\t- Misc:\t\t', misc, 'MB');
+    }
+
+    /**
+     * the game loop where all things come together
+     */
+    private gameLoop(): void {
+
+        // call update method
+        this.update(this.gameInstance, this.inputInstance);
+
+        // run collision detection
+        CollisionDetection.entitiesWithWorld(this.gameInstance.getCurrentEntities(), this.renderer.getWorld(), this.gameInstance.getCurrentCamera());
+
+        // call the scene update
+        const scene = this.gameInstance.getCurrentScene();
+        if (scene) scene.update(this.gameInstance);
+
+        // render the game
+        if (typeof this.renderer.preRender === 'function') this.renderer.preRender();
+        this.renderer.render();
+        if (typeof this.renderer.postRender === 'function') this.renderer.postRender();
+
+        // request the next game frame
+        window.requestAnimationFrame(this.gameLoop.bind(this));
+    }
 }

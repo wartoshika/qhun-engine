@@ -20,38 +20,38 @@ const objectSizeof = require('object-sizeof');
  */
 export function collectGargabe(event: EventName, cleanVal?: any): PropertyDecorator {
 
-    return (target: Object, propertyKey: string | symbol) => {
+    return (target: {}, propertyKey: string | symbol) => {
 
         // the collector function
-        let collectGarbage = (targets: object[]) => {
+        const collectGarbage = (targets: object[]) => {
 
             // for size calc
             let size = 0;
 
             // iterate all targets
-            targets.forEach(target => {
+            targets.forEach((targetInstance) => {
 
                 // cleck if property exists
-                if ((<any>target)[propertyKey]) {
+                if ((targetInstance as any)[propertyKey]) {
 
-                    //clean it!
-                    size += objectSizeof((<any>target)[propertyKey]);
-                    (<any>target)[propertyKey] = cleanVal;
+                    // clean it!
+                    size += objectSizeof((targetInstance as any)[propertyKey]);
+                    (targetInstance as any)[propertyKey] = cleanVal;
                 }
             });
 
             // print log
             Log.getLogger('@' + collectGargabe.name).debug(
-                "cleared", File.byteToSize(size, FileSizeType.Kilobyte) + "KB"
-            )
+                'cleared', File.byteToSize(size, FileSizeType.Kilobyte) + 'KB'
+            );
         };
 
         // register the deletion event in the garbage collector
-        let collector = GarbageCollector.getInstance<GarbageCollector>();
+        const collector = GarbageCollector.getInstance<GarbageCollector>();
         collector.registerCleaning({
-            event: event,
-            ctor: target.constructor,
+            event,
+            ctor: target.constructor as () => any,
             cleanFunction: collectGarbage
         });
-    }
+    };
 }

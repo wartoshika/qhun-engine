@@ -16,24 +16,6 @@ import { RamStorage } from '../storage/RamStorage';
 export class Log extends Singleton {
 
     /**
-     * the current log prefix
-     */
-    private prefix: string = "";
-
-    // the current loglevel
-    protected logLevel: LogLevel = LogLevel.Debug;
-
-    /**
-     * sets the log level for the application environment
-     *
-     * @param level the new log level
-     */
-    public setLogLevel(level: LogLevel): void {
-
-        this.logLevel = level;
-    }
-
-    /**
      * get the logger instance with prefixing for better
      * detection
      *
@@ -41,12 +23,11 @@ export class Log extends Singleton {
      */
     public static getLogger(prefix?: string): Log {
 
-        let instance = null;
         if (!RamStorage.has(this.generateStorageName(prefix))) {
 
             // get the constructor and store an instance of the class at the ram storage
-            let constructor = <{ new (): Log }><any>this;
-            let logger = new constructor();
+            const constructor = this as any as { new(): Log };
+            const logger = new constructor();
             logger.prefix = prefix;
             RamStorage.add(this.generateStorageName(prefix), logger);
         }
@@ -66,6 +47,24 @@ export class Log extends Singleton {
         return `singleton.instance.${this.name}.${prefix}`;
     }
 
+    // the current loglevel
+    protected logLevel: LogLevel = LogLevel.Debug;
+
+    /**
+     * the current log prefix
+     */
+    private prefix: string = '';
+
+    /**
+     * sets the log level for the application environment
+     *
+     * @param level the new log level
+     */
+    public setLogLevel(level: LogLevel): void {
+
+        this.logLevel = level;
+    }
+
     /**
      * logs the given data
      *
@@ -77,12 +76,12 @@ export class Log extends Singleton {
 
         // log if the log level is ok
         if (
-            parseInt(<any>level) >= parseInt(<any>this.logLevel)
+            parseInt(level as any, 10) >= parseInt(this.logLevel as any, 10)
             &&
             this.logLevel !== LogLevel.None
         ) {
 
-            let prefix = "";
+            let prefix = '';
             if (this.prefix) {
                 prefix = `[${this.prefix}]`;
             }
@@ -91,27 +90,6 @@ export class Log extends Singleton {
                 `[${this.constructor.name}.${LogLevel[level]}]${prefix}`, ...params
             );
         }
-    }
-
-    /**
-     * gets a callback function to log
-     *
-     * @param level the level to get the function from
-     */
-    protected getLogFunctionByLevel(level: LogLevel): Function {
-
-        let callback;
-
-        // go through the different log levels
-        switch (level) {
-
-            case LogLevel.Debug: callback = console.debug; break;
-            case LogLevel.Info: callback = console.info; break;
-            case LogLevel.Warning: callback = console.warn; break;
-            case LogLevel.Error: callback = console.error; break;
-        }
-
-        return callback;
     }
 
     /**
@@ -164,5 +142,26 @@ export class Log extends Singleton {
     public error(...params: any[]): void {
 
         this.log(LogLevel.Error, ...params);
+    }
+
+    /**
+     * gets a callback function to log
+     *
+     * @param level the level to get the function from
+     */
+    protected getLogFunctionByLevel(level: LogLevel): () => void {
+
+        let callback;
+
+        // go through the different log levels
+        switch (level) {
+
+            case LogLevel.Debug: callback = console.debug; break;
+            case LogLevel.Info: callback = console.info; break;
+            case LogLevel.Warning: callback = console.warn; break;
+            case LogLevel.Error: callback = console.error; break;
+        }
+
+        return callback;
     }
 }

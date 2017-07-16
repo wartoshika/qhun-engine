@@ -16,5 +16,5 @@ export class OrthogonalCamera extends BaseCamera {
     /**
      * the camera mode
      */
-    protected mode: CameraMode = CameraMode.Orthogonal
+    protected mode: CameraMode = CameraMode.Orthogonal;
 }

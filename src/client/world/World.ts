@@ -69,7 +69,6 @@ export class World {
         return this.map.getWorldDimension();
     }
 
-
     /**
      * set single tile numbers to collide with
      *
@@ -111,19 +110,19 @@ export class World {
      */
     public getTileNumbersForPosition(position: Vector2D): number[] {
 
-        let numbers: number[] = [];
+        const numbers: number[] = [];
 
         // iterate through the map and each layer
         this.map.map.forEach((map, layer) => {
 
             // the y axis
-            let line = map.split(String.fromCharCode(13));
+            const line = map.split(String.fromCharCode(13));
             if (line[position.y]) {
 
                 // the x axis
-                let tiles = line[position.y].split(',');
+                const tiles = line[position.y].split(',');
                 if (tiles[position.x]) {
-                    numbers.push(parseInt(tiles[position.x]));
+                    numbers.push(parseInt(tiles[position.x], 10));
                 } else {
 
                     numbers.push(-2);

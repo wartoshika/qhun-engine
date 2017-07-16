@@ -14,15 +14,6 @@ import { AbstractAsset } from './AbstractAsset';
  */
 export class Image extends AbstractAsset {
 
-    constructor(
-        name?: string,
-        path?: string,
-        data?: Blob
-    ) {
-
-        super(name, path, AssetType.Image, data);
-    }
-
     /**
      * register an image asset
      *
@@ -32,10 +23,18 @@ export class Image extends AbstractAsset {
     public static register(...images: InlineAsset[]): void {
 
         // add the asset type
-        images.forEach(image => image.assetType = AssetType.Image);
+        images.forEach((image) => image.assetType = AssetType.Image);
 
         // resiger all given images
         return Image.getAssetLoader().registerAsset(Image, ...images);
     }
 
+    constructor(
+        name?: string,
+        path?: string,
+        data?: Blob
+    ) {
+
+        super(name, path, AssetType.Image, data);
+    }
 }

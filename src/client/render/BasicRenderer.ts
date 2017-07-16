@@ -16,8 +16,6 @@ import { ClientConfig } from '../ClientConfig';
  */
 export abstract class BasicRenderer extends Singleton {
 
-    private entities: RenderableEntity[] = [];
-
     /**
      * holds the game instance
      */
@@ -38,13 +36,26 @@ export abstract class BasicRenderer extends Singleton {
     };
 
     /**
+     * all renderable entities
+     */
+    private entities: RenderableEntity[] = [];
+
+    /**
      * sets up the renderer
      *
      * @param clientConfig the current config
      */
     public setup(clientConfig: ClientConfig): void {
 
+        // to be filled
+    }
 
+    /**
+     * add an entity to the current game scene
+     */
+    public addEntity(entity: RenderableEntity): void {
+
+        this.entities.push(entity);
     }
 
     /**
@@ -52,8 +63,8 @@ export abstract class BasicRenderer extends Singleton {
      */
     protected getRenderableEntities(): RenderableEntity[] {
 
-        let renderableEntities: RenderableEntity[] = [];
-        this.entities.forEach(entity => {
+        const renderableEntities: RenderableEntity[] = [];
+        this.entities.forEach((entity) => {
 
             // only visible entities and entities that have an image
             if (entity.isVisible() && entity.getImage())
@@ -70,23 +81,15 @@ export abstract class BasicRenderer extends Singleton {
     protected calculateFps(): void {
 
         // @see https://stackoverflow.com/questions/5078913/html5-canvas-performance-calculating-loops-frames-per-second
-        let thisFrameFps = 1000 / ((this.fps.now = +new Date()) - this.fps.lastUpdate);
+        const thisFrameFps = 1000 / ((this.fps.now = +new Date()) - this.fps.lastUpdate);
 
         // if there was an update
-        if (this.fps.now != this.fps.lastUpdate) {
+        if (this.fps.now !== this.fps.lastUpdate) {
 
             // yes, calculate the new fps
             this.fps.fps += (thisFrameFps - this.fps.fps) / this.fps.filter;
             this.fps.lastUpdate = this.fps.now;
         }
-    }
-
-    /**
-     * add an entity to the current game scene
-     */
-    public addEntity(entity: RenderableEntity): void {
-
-        this.entities.push(entity);
     }
 
     /**

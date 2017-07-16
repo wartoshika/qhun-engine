@@ -23,21 +23,21 @@ export class CollisionDetection {
     ): void {
 
         // only take entities that can collide
-        entities.filter(entity => entity instanceof CollidableEntity).forEach((entity: CollidableEntity) => {
+        entities.filter((entity) => entity instanceof CollidableEntity).forEach((entity: CollidableEntity) => {
 
             // calculate the entity position in every direction from its
             // current position
-            let position: {
+            const position: {
                 [direction: number]: Vector2D
             } = {};
 
             // get the position of the entity
-            let entityPosition = entity.getPosition();
-            let tileDimension = world.getTileMap().getDimension();
-            let entityCollidesWithWorldBounds = entity.getWorldBoundCollision();
+            const entityPosition = entity.getPosition();
+            const tileDimension = world.getTileMap().getDimension();
+            const entityCollidesWithWorldBounds = entity.getWorldBoundCollision();
 
             // calculate the tile position on the map
-            let tilePosition = entityPosition
+            const tilePosition = entityPosition
                 .divide(camera.getScaleVector())
                 .divide(Vector2D.from(tileDimension.y, tileDimension.y))
                 .round(0);
@@ -49,19 +49,19 @@ export class CollisionDetection {
             position[Direction.Down] = tilePosition.add(Vector2D.from(0, 1));
 
             // iterate the directions
-            Object.keys(position).forEach(key => {
+            Object.keys(position).forEach((key) => {
 
-                let direction = <Direction>parseInt(key);
+                const direction = parseInt(key, 10) as Direction;
                 let collision = false;
 
                 // get the tile numbers that are at the players point
-                let tileNumbers = world.getTileNumbersForPosition(position[direction]);
+                const tileNumbers = world.getTileNumbersForPosition(position[direction]);
 
                 // on a collidable tile?
-                let collidableTileNumbers = world.getCollidableTileNumbers();
+                const collidableTileNumbers = world.getCollidableTileNumbers();
 
                 // test collision
-                tileNumbers.forEach(number => {
+                tileNumbers.forEach((number) => {
 
                     // does the number exist?
                     if (

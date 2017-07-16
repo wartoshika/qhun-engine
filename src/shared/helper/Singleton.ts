@@ -14,6 +14,22 @@ import { EventEmitter } from '../event';
 export abstract class Singleton extends EventEmitter {
 
     /**
+     * get the singleton instance
+     */
+    public static getInstance<T>(): T {
+
+        if (!RamStorage.has(this.generateStorageName())) {
+
+            // get the constructor and store an instance of the class at the ram storage
+            const constructor = this as any as { new(): T };
+            RamStorage.add(this.generateStorageName(), new constructor());
+        }
+
+        // get the instance
+        return RamStorage.get<T>(this.generateStorageName());
+    }
+
+    /**
      * generates a storage name for the instance storing
      *
      * @param className the class name
@@ -21,23 +37,6 @@ export abstract class Singleton extends EventEmitter {
     protected static generateStorageName(): string {
 
         return `singleton.instance.${this.name}`;
-    }
-
-    /**
-     * get the singleton instance
-     */
-    public static getInstance<T>(): T {
-
-        let instance = null;
-        if (!RamStorage.has(this.generateStorageName())) {
-
-            // get the constructor and store an instance of the class at the ram storage
-            let constructor = <{ new (): T }><any>this;
-            RamStorage.add(this.generateStorageName(), new constructor());
-        }
-
-        // get the instance
-        return RamStorage.get<T>(this.generateStorageName());
     }
 
     /**

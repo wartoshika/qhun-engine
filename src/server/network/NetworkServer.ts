@@ -34,18 +34,7 @@ export class NetworkServer {
         private application: express.Application
     ) {
 
-
         this.bindWebsocketToApplication();
-    }
-
-    /**
-     * binds a websocket to the applications router
-     */
-    private bindWebsocketToApplication(): void {
-
-        // init websocket and bind to application
-        this.socket = socketio(this.application);
-        this.logger.info("Websocket started");
     }
 
     /**
@@ -54,7 +43,7 @@ export class NetworkServer {
      * @param eventName the event name you choose between server and client
      * @param callback a function executed on event occur
      */
-    public bindEvent(eventName: string, callback: Function): void {
+    public bindEvent(eventName: string, callback: () => void): void {
 
         // pass this to socketio
         this.socket.on(eventName, callback);
@@ -68,6 +57,16 @@ export class NetworkServer {
     public bindNewConnectionEvent(callback: (socket: SocketIO.Socket) => void): void {
 
         // pass this event to socketio
-        this.socket.on("connection", callback);
+        this.socket.on('connection', callback);
+    }
+
+    /**
+     * binds a websocket to the applications router
+     */
+    private bindWebsocketToApplication(): void {
+
+        // init websocket and bind to application
+        this.socket = socketio(this.application);
+        this.logger.info('Websocket started');
     }
 }

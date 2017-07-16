@@ -32,6 +32,6 @@ export class File {
      */
     public static byteToSize(bytes: number, type: FileSizeType): number {
 
-        return bytes / Math.pow(1024, <number>type);
+        return bytes / Math.pow(1024, type as number);
     }
 }

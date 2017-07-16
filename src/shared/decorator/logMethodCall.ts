@@ -15,20 +15,20 @@ import { Log } from '../log';
  * @param descriptor
  */
 export function logMethodCall(
-    target: Object, key: string | symbol, descriptor: TypedPropertyDescriptor<Function>
+    target: {}, key: string | symbol, descriptor: TypedPropertyDescriptor<(...args: any[]) => any>
 ) {
 
     // load the logger
     const logger = Log.getInstance<Log>();
 
     return {
-        value: function (...args: any[]) {
+        value(...args: any[]) {
 
             // log the call
-            logger.debug("@logMethodCall", `${target.constructor.name}:${key}()`);
+            logger.debug('@logMethodCall', `${target.constructor.name}:${key}()`);
 
             // original method call
             return descriptor.value.apply(this, args);
         }
-    }
+    };
 }

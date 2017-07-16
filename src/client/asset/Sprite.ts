@@ -28,16 +28,6 @@ enum SpriteMapInformation {
  */
 export class Sprite extends AbstractAsset {
 
-    constructor(
-        name?: string,
-        path?: string,
-        data?: Blob,
-        public map?: string
-    ) {
-
-        super(name, path, AssetType.Image, data);
-    }
-
     /**
      * register a sprite asset
      *
@@ -47,7 +37,7 @@ export class Sprite extends AbstractAsset {
     public static register(...sprites: InlineAsset[]): void {
 
         // add asset type
-        sprites.forEach(sprite => sprite.assetType = AssetType.Image);
+        sprites.forEach((sprite) => sprite.assetType = AssetType.Image);
 
         // register the asset
         return Sprite.getAssetLoader().registerAsset(Sprite, ...sprites);
@@ -116,29 +106,29 @@ export class Sprite extends AbstractAsset {
     private static async registerSpriteSubImages(sprite: Sprite): Promise<Image[]> {
 
         // split the map into lines and count them
-        let mapLines = sprite.map.split(String.fromCharCode(13));
-        let countImages = mapLines.length;
-        let itemRegisterPromiseStack: Promise<Image>[] = [];
+        const mapLines = sprite.map.split(String.fromCharCode(13));
+        const countImages = mapLines.length;
+        const itemRegisterPromiseStack: Array<Promise<Image>> = [];
 
         // create a canvas element for the picture extraction
-        let canvas = document.createElement('canvas');
-        let ctx = canvas.getContext('2d');
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
 
         // iterate through all sub images
         for (let i = 0; i < countImages; i++) {
 
             // get the information of image width and height
-            let info = mapLines[i].split(',');
+            const info = mapLines[i].split(',');
 
             // set the canvas height and width
-            canvas.width = parseInt(info[SpriteMapInformation.Width]);
-            canvas.height = parseInt(info[SpriteMapInformation.Height]);
+            canvas.width = parseInt(info[SpriteMapInformation.Width], 10);
+            canvas.height = parseInt(info[SpriteMapInformation.Height], 10);
 
             // draw the image on the canvas
             ctx.drawImage(
-                <ImageBitmap>sprite.getData(),
-                -parseInt(info[SpriteMapInformation.OffsetLeft]),
-                -parseInt(info[SpriteMapInformation.OffsetTop])
+                sprite.getData() as ImageBitmap,
+                -parseInt(info[SpriteMapInformation.OffsetLeft], 10),
+                -parseInt(info[SpriteMapInformation.OffsetTop], 10)
             );
 
             // get the image as data uri to register the new image
@@ -151,4 +141,15 @@ export class Sprite extends AbstractAsset {
         // await the registration process
         return Promise.all(itemRegisterPromiseStack);
     }
+
+    constructor(
+        name?: string,
+        path?: string,
+        data?: Blob,
+        public map?: string
+    ) {
+
+        super(name, path, AssetType.Image, data);
+    }
+
 }

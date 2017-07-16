@@ -31,50 +31,6 @@ interface InlineTileMapAsset extends InlineAsset {
  */
 export class TileMap extends AbstractAsset {
 
-    constructor(
-        name?: string,
-        path?: string,
-        data?: Blob,
-        public map?: string[],
-        public dimension?: Dimension,
-        public layerCount?: number
-    ) {
-
-        super(name, path, AssetType.TileMap, data);
-    }
-
-    /**
-     * get the map of the filemap object
-     */
-    public getMap(): string[] {
-
-        return this.map;
-    }
-
-    /**
-     * get the tile dimension object
-     */
-    public getDimension(): Dimension {
-
-        return this.dimension;
-    }
-
-    /**
-     * get the amount of pixel for the complete world
-     */
-    public getWorldDimension(): Dimension {
-
-        //@todo: asuming that each layer has the same height and width
-        let width = this.map[0].split(String.fromCharCode(13))[0].split(',').length;
-        let height = this.map[0].split(String.fromCharCode(13)).length - 1;
-
-        // multiply with the tile width and height
-        return new Dimension(
-            width * this.dimension.x,
-            height * this.dimension.y
-        );
-    }
-
     /**
      * register a tilemap asset
      *
@@ -84,7 +40,7 @@ export class TileMap extends AbstractAsset {
     public static register(...tilemaps: InlineTileMapAsset[]): void {
 
         // add asset type
-        tilemaps.forEach(tilemap => tilemap.assetType = AssetType.TileMap);
+        tilemaps.forEach((tilemap) => tilemap.assetType = AssetType.TileMap);
 
         // register the asset
         return TileMap.getAssetLoader().registerAsset(TileMap, ...tilemaps);
@@ -187,17 +143,17 @@ export class TileMap extends AbstractAsset {
         // the first check is, how height and width the tilemap image is
         // with this data and the dimension of each tile, the loop
         // can be build to get each tile as seperate image
-        let tileMapHeight = (<ImageBitmap>tileMap.getData()).height;
-        let tileMapWidth = (<ImageBitmap>tileMap.getData()).width;
+        const tileMapHeight = (tileMap.getData() as ImageBitmap).height;
+        const tileMapWidth = (tileMap.getData() as ImageBitmap).width;
 
         // get the amount of tiles
-        let horizontalTileAmount = tileMapWidth / tileMap.dimension.x;
-        let verticalTileAmount = tileMapHeight / tileMap.dimension.y;
+        const horizontalTileAmount = tileMapWidth / tileMap.dimension.x;
+        const verticalTileAmount = tileMapHeight / tileMap.dimension.y;
 
         // create a canvas element for the picture extraction
-        let canvas = document.createElement('canvas');
-        let ctx = canvas.getContext('2d');
-        let itemRegisterPromiseStack: Promise<Image>[] = [];
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        const itemRegisterPromiseStack: Array<Promise<Image>> = [];
 
         // height and width of each tile is fixed
         canvas.width = tileMap.dimension.x;
@@ -217,7 +173,7 @@ export class TileMap extends AbstractAsset {
 
                 // draw the image at the canvas
                 ctx.drawImage(
-                    <ImageBitmap>tileMap.getData(),
+                    tileMap.getData() as ImageBitmap,
                     -(h * tileMap.dimension.x),
                     -(v * tileMap.dimension.y)
                 );
@@ -233,4 +189,49 @@ export class TileMap extends AbstractAsset {
         // await the registration process
         return Promise.all(itemRegisterPromiseStack);
     }
+
+    constructor(
+        name?: string,
+        path?: string,
+        data?: Blob,
+        public map?: string[],
+        public dimension?: Dimension,
+        public layerCount?: number
+    ) {
+
+        super(name, path, AssetType.TileMap, data);
+    }
+
+    /**
+     * get the map of the filemap object
+     */
+    public getMap(): string[] {
+
+        return this.map;
+    }
+
+    /**
+     * get the tile dimension object
+     */
+    public getDimension(): Dimension {
+
+        return this.dimension;
+    }
+
+    /**
+     * get the amount of pixel for the complete world
+     */
+    public getWorldDimension(): Dimension {
+
+        // @todo: asuming that each layer has the same height and width
+        const width = this.map[0].split(String.fromCharCode(13))[0].split(',').length;
+        const height = this.map[0].split(String.fromCharCode(13)).length - 1;
+
+        // multiply with the tile width and height
+        return new Dimension(
+            width * this.dimension.x,
+            height * this.dimension.y
+        );
+    }
+
 }

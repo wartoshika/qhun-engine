@@ -45,7 +45,7 @@ export class Server {
 }
 
 // start the webserver
-new Server({
+const server = new Server({
     webAdress: '127.0.0.1',
     webPort: 3000,
     logLevel: LogLevel.Debug

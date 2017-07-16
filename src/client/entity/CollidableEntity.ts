@@ -17,14 +17,14 @@ import { HasMass } from './HasMass';
 export enum Direction {
 
     Left, Right, Up, Down
-};
+}
 
 interface DirectionBlocked {
-    [generic: string]: boolean,
-    Left: boolean,
-    Right: boolean,
-    Up: boolean,
-    Down: boolean
+    [generic: string]: boolean;
+    Left: boolean;
+    Right: boolean;
+    Up: boolean;
+    Down: boolean;
 }
 
 /**

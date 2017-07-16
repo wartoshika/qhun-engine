@@ -10,8 +10,8 @@
             "single"
         ],
         "object-literal-sort-keys": false,
-        "trailing-comma": false,
         "class-name": true,
+        "trailing-comma": false,
         "semicolon": [
             true,
             "always"
@@ -37,8 +37,16 @@
         "curly": false,
         "no-reference": false,
         "no-var-requires": false,
+        "no-trailing-whitespace": false,
         "ordered-imports": false,
-        "no-trailing-whitespace": true
+        "max-line-length": [
+            true,
+            250
+        ],
+        "interface-name": [
+            true,
+            "never-prefix"
+        ]
     },
     "rulesDirectory": []
 }

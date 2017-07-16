@@ -29,7 +29,7 @@ export class Webserver {
     private logger = Log.getLogger(Webserver.name);
 
     constructor(
-        listenAdress: string = "127.0.0.1",
+        listenAdress: string = '127.0.0.1',
         port: number = 3000,
         app: express.Application = express()
     ) {
@@ -38,10 +38,20 @@ export class Webserver {
 
         // start listening
         this.httpServer.listen(port, listenAdress);
-        this.logger.info("Listening at ", `${listenAdress}:${port}`);
+        this.logger.info('Listening at ', `${listenAdress}:${port}`);
 
         // handle http calls
         app.get('/*', this.serveApplication.bind(this));
+    }
+
+    /**
+     * gets the current express application
+     *
+     * @return the passed through app at constructing time or a newly created app if no parameter was given during constructing
+     */
+    public getApplication(): express.Application {
+
+        return this.app;
     }
 
     /**
@@ -56,12 +66,12 @@ export class Webserver {
 
         // get the requested file from the request object
         let file = request.url;
-        if (file === "/")
-            file = "index.html";
+        if (file === '/')
+            file = 'index.html';
 
         // @todo: do not serve the server.js file for security reasons!
         // get the file and send it back to the client
-        let absolutePath = path.resolve(`./dist/${file}`);
+        const absolutePath = path.resolve(`./dist/${file}`);
 
         try {
 
@@ -71,15 +81,5 @@ export class Webserver {
 
             response.sendStatus(404);
         }
-    }
-
-    /**
-     * gets the current express application
-     *
-     * @return the passed through app at constructing time or a newly created app if no parameter was given during constructing
-     */
-    public getApplication(): express.Application {
-
-        return this.app;
     }
 }

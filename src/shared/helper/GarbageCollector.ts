@@ -10,9 +10,9 @@ import { EventName } from '../event/EventName';
 import { Log } from '../log/Log';
 
 interface CleanTask {
-    event: EventName,
-    ctor: Function,
-    callbackArguments?: string[],
+    event: EventName;
+    ctor: () => any;
+    callbackArguments?: string[];
     cleanFunction(targets: object[], ...callbackArguments: string[]): void;
 }
 
@@ -44,10 +44,10 @@ export class GarbageCollector extends Singleton {
         super();
 
         // register all events
-        Object.keys(EventName).forEach(event => {
+        Object.keys(EventName).forEach((event) => {
 
             // register event and execute the cleaning
-            let eventEnum = <EventName><any>event;
+            const eventEnum = event as any as EventName;
 
             // register the event
             this.on(eventEnum, this.executeEvent.bind(this, eventEnum));
@@ -92,9 +92,9 @@ export class GarbageCollector extends Singleton {
 
             // log a warning message
             this.logger.warning(
-                "Trying to clean at class", cleanTask.ctor.name,
-                "but there aren't any registered targets.",
-                "Please be sure you decorated the class with @enableGarbageCollection"
+                'Trying to clean at class', cleanTask.ctor.name,
+                'but there aren\'t any registered targets.',
+                'Please be sure you decorated the class with @enableGarbageCollection'
             );
 
             // no targets found!
@@ -111,8 +111,8 @@ export class GarbageCollector extends Singleton {
     private executeEvent(eventName: EventName): void {
 
         this.registerStack
-            .filter(clean => clean.event === eventName)
-            .forEach(clean => clean
+            .filter((clean) => clean.event === eventName)
+            .forEach((clean) => clean
                 // call clear function for every listener
                 .cleanFunction(
                 // get all targets to clear

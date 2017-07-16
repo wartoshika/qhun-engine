@@ -6,7 +6,7 @@
  */
 
 // the dependency to get the memory footprint ob stored objects
-let sizeof = require('object-sizeof');
+const sizeof = require('object-sizeof');
 
 import { Helper } from '../math';
 import { File, FileSizeType } from '../helper/File';
@@ -15,11 +15,6 @@ import { File, FileSizeType } from '../helper/File';
  * holds objects in the ram of the operating unit
  */
 export class RamStorage {
-
-    // the private cache object
-    private static cache: {
-        [path: string]: any
-    } = {};
 
     /**
      * adds an elemement to the cache
@@ -60,7 +55,7 @@ export class RamStorage {
 
         let counter = 0;
 
-        Object.keys(RamStorage.cache).forEach(key => {
+        Object.keys(RamStorage.cache).forEach((key) => {
 
             // if the path is present
             if (key.indexOf(path) === 0) {
@@ -81,7 +76,7 @@ export class RamStorage {
      */
     public static get<T>(path: string): T {
 
-        return <T>RamStorage.cache[path];
+        return RamStorage.cache[path] as T;
     }
 
     /**
@@ -102,7 +97,7 @@ export class RamStorage {
     public static amount(path: string): number {
 
         let counter = 0;
-        Object.keys(RamStorage.cache).forEach(key => {
+        Object.keys(RamStorage.cache).forEach((key) => {
 
             // if the path is present, update counter
             if (key.indexOf(path) === 0) counter++;
@@ -116,16 +111,21 @@ export class RamStorage {
      *
      * @param path the path to the object. dots can be used to structure
      */
-    public static getSize(path: string = "", type: FileSizeType = FileSizeType.Byte): number {
+    public static getSize(path: string = '', type: FileSizeType = FileSizeType.Byte): number {
 
         let byteCounter = 0;
-        Object.keys(RamStorage.cache).forEach(key => {
+        Object.keys(RamStorage.cache).forEach((key) => {
 
             // if the path is present, update counter
             if (key.indexOf(path) === 0) byteCounter += sizeof(RamStorage.cache[key]);
         });
 
-        let bytes = File.byteToSize(byteCounter, type);
+        const bytes = File.byteToSize(byteCounter, type);
         return Helper.roundToPrecision(bytes, 2);
     }
+
+    // the private cache object
+    private static cache: {
+        [path: string]: any
+    } = {};
 }

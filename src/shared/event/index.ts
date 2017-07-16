@@ -7,4 +7,3 @@
 
 export * from './EventName';
 export * from './EventEmitter';
-export * from './Event';

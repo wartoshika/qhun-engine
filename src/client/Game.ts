@@ -64,21 +64,21 @@ export class Game extends Singleton {
     public add(...things: Thing[]): void {
 
         // iterate through all things
-        things.forEach(thing => {
+        things.forEach((thing) => {
 
             // check the type of the thing
             if (thing instanceof Entity) {
 
-                this.addEntity(<Entity>thing);
+                this.addEntity(thing as Entity);
             } else if (thing instanceof Scene) {
 
-                this.addScene(<Scene>thing);
+                this.addScene(thing as Scene);
             } else if (thing instanceof World) {
 
-                this.addWorld(<World>thing);
+                this.addWorld(thing as World);
             } else if (thing instanceof BaseCamera) {
 
-                this.addCamera(<Camera>thing);
+                this.addCamera(thing as Camera);
             }
         });
     }
@@ -109,7 +109,6 @@ export class Game extends Singleton {
         this.renderer.setCamera(camera);
         this.currentCamera = camera;
     }
-
 
     /**
      * add one world to the game
@@ -151,7 +150,7 @@ export class Game extends Singleton {
      */
     public async loadScene(scene: Scene): Promise<void> {
 
-        let promise = new Promise<void>(r => r());
+        const promise = new Promise<void>((r) => r());
 
         // destruct the current scene
         if (this.currentScene) {
@@ -176,7 +175,7 @@ export class Game extends Singleton {
         if (!(world in this.worldStack)) {
 
             // print error
-            this.logger.error("Trying to load", world, "but this world does not exists");
+            this.logger.error('Trying to load', world, 'but this world does not exists');
             return;
         }
 

@@ -93,47 +93,6 @@ export class CanvasRenderer extends BasicRenderer implements Renderer {
     }
 
     /**
-     * print the current fps on the screen
-     *
-     * @param fps the current fps
-     */
-    protected printFps(): void {
-
-        // print only if the user want this
-        if (!this.clientConfig.printFps) return;
-
-        // calculate the fps
-        this.calculateFps();
-
-        // write the fps number to the canvas context
-        this.ctx.fillStyle = "white";
-        this.ctx.font = "30px Arial";
-        this.ctx.textAlign = "center";
-        this.ctx.fillText(this.fps.fps.toFixed(0), FPS_OFFSET, FPS_OFFSET);
-
-        // black stroke
-        this.ctx.strokeStyle = "black";
-        this.ctx.font = "361x Arial";
-        this.ctx.textAlign = "center";
-        this.ctx.strokeText(this.fps.fps.toFixed(0), FPS_OFFSET, FPS_OFFSET);
-    }
-
-    /**
-     * creates the canvas element and append it to the given parentNode
-     */
-    private createCanvas(): void {
-
-        // create the canvas
-        this.canvas = document.createElement('canvas');
-        document.body.appendChild(this.canvas);
-
-        // apply the game dimension
-        this.canvas.setAttribute('width', `${this.gameDimension.x}px`);
-        this.canvas.setAttribute('height', `${this.gameDimension.y}px`);
-        this.canvas.setAttribute('style', 'display:block;position:absolute;');
-    }
-
-    /**
      * pre rendering
      */
     public preRender(): void {
@@ -157,19 +116,19 @@ export class CanvasRenderer extends BasicRenderer implements Renderer {
 
         // get all entities that shoule be visible by the client
         // @todo: only render entitites that are visible by the camera
-        let visibleEntities = this.getRenderableEntities();
+        const visibleEntities = this.getRenderableEntities();
 
         // render the entity at its center point
-        visibleEntities.forEach(entity => {
+        visibleEntities.forEach((entity) => {
 
             // get the draw array
-            let renderable = CameraOffsetCalculator.imageScaleDrawEntity(entity, this.currentCamera);
+            const renderable = CameraOffsetCalculator.imageScaleDrawEntity(entity, this.currentCamera);
 
             // check if the element is visible
             if (!renderable) return;
 
             // calculate the new height and width and draw the entity
-            (<any>this.ctx).drawImage(...<any[]>renderable);
+            (this.ctx as any).drawImage(...(renderable as any[]));
         });
 
         // print fps
@@ -197,6 +156,47 @@ export class CanvasRenderer extends BasicRenderer implements Renderer {
 
         if (!this.worldRenderer) return;
         return this.worldRenderer.getWorld();
+    }
+
+    /**
+     * print the current fps on the screen
+     *
+     * @param fps the current fps
+     */
+    protected printFps(): void {
+
+        // print only if the user want this
+        if (!this.clientConfig.printFps) return;
+
+        // calculate the fps
+        this.calculateFps();
+
+        // write the fps number to the canvas context
+        this.ctx.fillStyle = 'white';
+        this.ctx.font = '30px Arial';
+        this.ctx.textAlign = 'center';
+        this.ctx.fillText(this.fps.fps.toFixed(0), FPS_OFFSET, FPS_OFFSET);
+
+        // black stroke
+        this.ctx.strokeStyle = 'black';
+        this.ctx.font = '361x Arial';
+        this.ctx.textAlign = 'center';
+        this.ctx.strokeText(this.fps.fps.toFixed(0), FPS_OFFSET, FPS_OFFSET);
+    }
+
+    /**
+     * creates the canvas element and append it to the given parentNode
+     */
+    private createCanvas(): void {
+
+        // create the canvas
+        this.canvas = document.createElement('canvas');
+        document.body.appendChild(this.canvas);
+
+        // apply the game dimension
+        this.canvas.setAttribute('width', `${this.gameDimension.x}px`);
+        this.canvas.setAttribute('height', `${this.gameDimension.y}px`);
+        this.canvas.setAttribute('style', 'display:block;position:absolute;');
     }
 
 }
