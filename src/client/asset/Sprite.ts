@@ -44,7 +44,14 @@ export class Sprite extends AbstractAsset {
      * @param name the unique name of the image
      * @param path the path to the image
      */
-    public static async register(...sprites: InlineAsset[]): Promise<Sprite[]> {
+    public static register(...sprites: InlineAsset[]): void {
+
+        // add asset type
+        sprites.forEach(sprite => sprite.assetType = AssetType.Image);
+
+        // register the asset
+        return Sprite.getAssetLoader().registerAsset(Sprite, ...sprites);
+        /*
 
         // get the asset loader
         let assetLoader = Sprite.getAssetLoader();
@@ -99,7 +106,7 @@ export class Sprite extends AbstractAsset {
                     });
                 });
             });
-        })));
+        }))); */
     }
 
     /**

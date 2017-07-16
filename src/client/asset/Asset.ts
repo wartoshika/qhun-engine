@@ -23,4 +23,5 @@ export interface InlineAsset {
     path: string;
     assetType?: AssetType;
     data?: Blob;
+    ctor?: Function;
 }

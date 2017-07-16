@@ -6,7 +6,10 @@
  */
 
 import { EventName } from '../event';
-import { GarbageCollector } from '../helper';
+import { GarbageCollector, File, FileSizeType } from '../helper';
+import { Log } from '../log/Log';
+
+const objectSizeof = require('object-sizeof');
 
 /**
  * a property decorator to define a phase in wich the property
@@ -22,6 +25,9 @@ export function collectGargabe(event: EventName, cleanVal?: any): PropertyDecora
         // the collector function
         let collectGarbage = (targets: object[]) => {
 
+            // for size calc
+            let size = 0;
+
             // iterate all targets
             targets.forEach(target => {
 
@@ -29,9 +35,15 @@ export function collectGargabe(event: EventName, cleanVal?: any): PropertyDecora
                 if ((<any>target)[propertyKey]) {
 
                     //clean it!
+                    size += objectSizeof((<any>target)[propertyKey]);
                     (<any>target)[propertyKey] = cleanVal;
                 }
             });
+
+            // print log
+            Log.getLogger('@' + collectGargabe.name).debug(
+                "cleared", File.byteToSize(size, FileSizeType.Kilobyte) + "KB"
+            )
         };
 
         // register the deletion event in the garbage collector

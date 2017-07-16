@@ -48,7 +48,14 @@ export class AssetLoader extends Singleton {
      * @param assetClass the class of the asset
      * @param assets the asset to register
      */
-    public async registerAsset(assetClass: new () => Asset, ...assets: InlineAsset[]): Promise<Asset[]> {
+    public registerAsset(assetClass: new () => Asset, ...assets: InlineAsset[]): void {
+
+        // add constructor
+        assets.forEach(asset => asset.ctor = assetClass);
+
+        // register
+        this.registeringAssets.push(...assets);
+        /*
 
         let outerPromise: Promise<Asset>[] = [];
         let resourceStack: Asset[] = [];
@@ -96,7 +103,7 @@ export class AssetLoader extends Singleton {
 
             // resolve the promise
             return resourceStack;
-        });
+        });*/
     }
 
     /**

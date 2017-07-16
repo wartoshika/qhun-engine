@@ -88,9 +88,9 @@ export abstract class Client extends Singleton {
         this.logger.info("Using", this.renderer.constructor.name, "as Renderer");
 
         // start the preload phase
-        this.fireEvent(EventName.BeforePreload);
+        this.emit(EventName.BeforePreload);
         this.preload();
-        this.fireEvent(EventName.AfterPreload);
+        this.emit(EventName.AfterPreload);
 
         // await the asset loading
         Promise.all(assetLoader.getUnresolvedPromised()).then(() => {
@@ -106,9 +106,9 @@ export abstract class Client extends Singleton {
             this.inputInstance = new Input();
 
             // fire loaded event
-            this.fireEvent(EventName.BeforeLoaded);
+            this.emit(EventName.BeforeLoaded);
             this.loaded(this.gameInstance);
-            this.fireEvent(EventName.AfterLoaded);
+            this.emit(EventName.AfterLoaded);
             this.printMemoryFootprint();
 
             // init the game loop

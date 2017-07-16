@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 16);
+/******/ 	return __webpack_require__(__webpack_require__.s = 17);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -79,8 +79,8 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(5));
 __export(__webpack_require__(6));
+__export(__webpack_require__(2));
 
 
 /***/ }),
@@ -99,9 +99,9 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(8));
-__export(__webpack_require__(25));
 __export(__webpack_require__(9));
+__export(__webpack_require__(25));
+__export(__webpack_require__(10));
 
 
 /***/ }),
@@ -117,128 +117,8 @@ __export(__webpack_require__(9));
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-const storage_1 = __webpack_require__(3);
-const event_1 = __webpack_require__(11);
-/**
- * a class to handle the singleton paradigmen
- */
-class Singleton extends event_1.EventEmitter {
-    /**
-     * generates a storage name for the instance storing
-     *
-     * @param className the class name
-     */
-    static generateStorageName() {
-        return `singleton.instance.${this.name}`;
-    }
-    /**
-     * get the singleton instance
-     */
-    static getInstance() {
-        let instance = null;
-        if (!storage_1.RamStorage.has(this.generateStorageName())) {
-            // get the constructor and store an instance of the class at the ram storage
-            let constructor = this;
-            storage_1.RamStorage.add(this.generateStorageName(), new constructor());
-        }
-        // get the instance
-        return storage_1.RamStorage.get(this.generateStorageName());
-    }
-    /**
-     * bind the instance to the singleton storage
-     *
-     * @param instance the instance that should be bound
-     */
-    static bindInstance(instance) {
-        // save the instance
-        storage_1.RamStorage.add(this.generateStorageName(), instance);
-    }
-}
-exports.Singleton = Singleton;
-
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(7));
-
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(2));
-__export(__webpack_require__(37));
-__export(__webpack_require__(10));
-__export(__webpack_require__(38));
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * a basic loglevel categorisation
- */
-var LogLevel;
-(function (LogLevel) {
-    LogLevel[LogLevel["None"] = 0] = "None";
-    LogLevel[LogLevel["Debug"] = 1] = "Debug";
-    LogLevel[LogLevel["Info"] = 2] = "Info";
-    LogLevel[LogLevel["Warning"] = 3] = "Warning";
-    LogLevel[LogLevel["Error"] = 4] = "Error";
-})(LogLevel = exports.LogLevel || (exports.LogLevel = {}));
-
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
- *
- * This software is released under the MIT License.
- * https://opensource.org/licenses/MIT
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-const LogLevel_1 = __webpack_require__(5);
-const Singleton_1 = __webpack_require__(2);
+const LogLevel_1 = __webpack_require__(6);
+const Singleton_1 = __webpack_require__(3);
 const RamStorage_1 = __webpack_require__(7);
 /**
  * a log wrapper to allow log levels and a more complex
@@ -379,6 +259,126 @@ exports.Log = Log;
 
 
 /***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+const storage_1 = __webpack_require__(4);
+const event_1 = __webpack_require__(12);
+/**
+ * a class to handle the singleton paradigmen
+ */
+class Singleton extends event_1.EventEmitter {
+    /**
+     * generates a storage name for the instance storing
+     *
+     * @param className the class name
+     */
+    static generateStorageName() {
+        return `singleton.instance.${this.name}`;
+    }
+    /**
+     * get the singleton instance
+     */
+    static getInstance() {
+        let instance = null;
+        if (!storage_1.RamStorage.has(this.generateStorageName())) {
+            // get the constructor and store an instance of the class at the ram storage
+            let constructor = this;
+            storage_1.RamStorage.add(this.generateStorageName(), new constructor());
+        }
+        // get the instance
+        return storage_1.RamStorage.get(this.generateStorageName());
+    }
+    /**
+     * bind the instance to the singleton storage
+     *
+     * @param instance the instance that should be bound
+     */
+    static bindInstance(instance) {
+        // save the instance
+        storage_1.RamStorage.add(this.generateStorageName(), instance);
+    }
+}
+exports.Singleton = Singleton;
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(7));
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(3));
+__export(__webpack_require__(37));
+__export(__webpack_require__(11));
+__export(__webpack_require__(38));
+
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Copyright (c) 2017 Oliver Warrings <dev@qhun.de>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * a basic loglevel categorisation
+ */
+var LogLevel;
+(function (LogLevel) {
+    LogLevel[LogLevel["None"] = 0] = "None";
+    LogLevel[LogLevel["Debug"] = 1] = "Debug";
+    LogLevel[LogLevel["Info"] = 2] = "Info";
+    LogLevel[LogLevel["Warning"] = 3] = "Warning";
+    LogLevel[LogLevel["Error"] = 4] = "Error";
+})(LogLevel = exports.LogLevel || (exports.LogLevel = {}));
+
+
+/***/ }),
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -392,9 +392,9 @@ exports.Log = Log;
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 // the dependency to get the memory footprint ob stored objects
-let sizeof = __webpack_require__(24);
+let sizeof = __webpack_require__(8);
 const math_1 = __webpack_require__(1);
-const File_1 = __webpack_require__(10);
+const File_1 = __webpack_require__(11);
 /**
  * holds objects in the ram of the operating unit
  */
@@ -493,6 +493,12 @@ exports.RamStorage = RamStorage;
 
 /***/ }),
 /* 8 */
+/***/ (function(module, exports) {
+
+module.exports = require("object-sizeof");
+
+/***/ }),
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -553,7 +559,7 @@ exports.Helper = Helper;
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -583,7 +589,7 @@ exports.Dimension = Dimension;
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -629,7 +635,7 @@ exports.File = File;
 
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -644,13 +650,13 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(12));
+__export(__webpack_require__(13));
 __export(__webpack_require__(26));
 __export(__webpack_require__(27));
 
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -666,13 +672,15 @@ var EventName;
 (function (EventName) {
     EventName[EventName["BeforePreload"] = "BeforePreload"] = "BeforePreload";
     EventName[EventName["AfterPreload"] = "AfterPreload"] = "AfterPreload";
+    EventName[EventName["BeforeAssetLoading"] = "BeforeAssetLoading"] = "BeforeAssetLoading";
+    EventName[EventName["AfterAssetLoading"] = "AfterAssetLoading"] = "AfterAssetLoading";
     EventName[EventName["BeforeLoaded"] = "BeforeLoaded"] = "BeforeLoaded";
     EventName[EventName["AfterLoaded"] = "AfterLoaded"] = "AfterLoaded";
 })(EventName = exports.EventName || (exports.EventName = {}));
 
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -709,7 +717,7 @@ exports.polyfill = polyfill;
 
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports) {
 
 function webpackEmptyContext(req) {
@@ -718,10 +726,10 @@ function webpackEmptyContext(req) {
 webpackEmptyContext.keys = function() { return []; };
 webpackEmptyContext.resolve = webpackEmptyContext;
 module.exports = webpackEmptyContext;
-webpackEmptyContext.id = 14;
+webpackEmptyContext.id = 15;
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -760,7 +768,7 @@ exports.Entity = Entity;
 
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -772,7 +780,7 @@ exports.Entity = Entity;
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-const web_1 = __webpack_require__(17);
+const web_1 = __webpack_require__(18);
 const network_1 = __webpack_require__(28);
 const shared_1 = __webpack_require__(31);
 /**
@@ -804,7 +812,7 @@ new Server({
 
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -819,11 +827,11 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(18));
+__export(__webpack_require__(19));
 
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -836,11 +844,11 @@ __export(__webpack_require__(18));
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 // need the index file in the build directory
-__webpack_require__(19);
-const http = __webpack_require__(20);
-const express = __webpack_require__(21);
-const path = __webpack_require__(22);
-const fs = __webpack_require__(23);
+__webpack_require__(20);
+const http = __webpack_require__(21);
+const express = __webpack_require__(22);
+const path = __webpack_require__(23);
+const fs = __webpack_require__(24);
 const log_1 = __webpack_require__(0);
 /**
  * the buildin webserver to serve the client
@@ -894,40 +902,34 @@ exports.Webserver = Webserver;
 
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "index.html";
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports) {
 
 module.exports = require("http");
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports) {
 
 module.exports = require("express");
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports) {
 
 module.exports = require("path");
 
 /***/ }),
-/* 23 */
-/***/ (function(module, exports) {
-
-module.exports = require("fs");
-
-/***/ }),
 /* 24 */
 /***/ (function(module, exports) {
 
-module.exports = require("object-sizeof");
+module.exports = require("fs");
 
 /***/ }),
 /* 25 */
@@ -942,8 +944,8 @@ module.exports = require("object-sizeof");
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-const Helper_1 = __webpack_require__(8);
-const Dimension_1 = __webpack_require__(9);
+const Helper_1 = __webpack_require__(9);
+const Dimension_1 = __webpack_require__(10);
 /**
  * represents a 2D vector with x and y coordinates.
  */
@@ -1049,7 +1051,7 @@ exports.Vector2D = Vector2D;
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-const storage_1 = __webpack_require__(3);
+const storage_1 = __webpack_require__(4);
 /**
  * a class that can emit events and can add listeners to events
  */
@@ -1108,6 +1110,22 @@ class EventEmitter {
         }
         // chaning context
         return this;
+    }
+    /**
+     * get all registered listeners for the given event
+     *
+     * @param event the event to get the listeners for
+     */
+    getListeners(event) {
+        // get all listeners from the storage
+        let listeners = storage_1.RamStorage.get(EventEmitter.name);
+        // check if the event has listeners
+        if (!listeners)
+            return [];
+        else if (!listeners[event])
+            return [];
+        // return the listeners
+        return listeners[event];
     }
 }
 exports.EventEmitter = EventEmitter;
@@ -1235,12 +1253,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __export(__webpack_require__(32));
 __export(__webpack_require__(34));
 __export(__webpack_require__(40));
-__export(__webpack_require__(4));
+__export(__webpack_require__(5));
 __export(__webpack_require__(0));
 __export(__webpack_require__(1));
-__export(__webpack_require__(3));
-__export(__webpack_require__(11));
-__export(__webpack_require__(13));
+__export(__webpack_require__(4));
+__export(__webpack_require__(12));
+__export(__webpack_require__(14));
 
 
 /***/ }),
@@ -1356,7 +1374,9 @@ exports.logMethodCall = logMethodCall;
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-const helper_1 = __webpack_require__(4);
+const helper_1 = __webpack_require__(5);
+const Log_1 = __webpack_require__(2);
+const objectSizeof = __webpack_require__(8);
 /**
  * a property decorator to define a phase in wich the property
  * will be emptied
@@ -1368,18 +1388,19 @@ function collectGargabe(event, cleanVal) {
     return (target, propertyKey) => {
         // the collector function
         let collectGarbage = (targets) => {
+            // for size calc
+            let size = 0;
             // iterate all targets
             targets.forEach(target => {
                 // cleck if property exists
                 if (target[propertyKey]) {
                     //clean it!
+                    size += objectSizeof(target[propertyKey]);
                     target[propertyKey] = cleanVal;
                 }
-                else {
-                    // not found!
-                    throw new Error(`@collectGargabe property ${propertyKey} on target ${target.constructor.name} not found!`);
-                }
             });
+            // print log
+            Log_1.Log.getLogger('@' + collectGargabe.name).debug("cleared", helper_1.File.byteToSize(size, helper_1.FileSizeType.Kilobyte) + "KB");
         };
         // register the deletion event in the garbage collector
         let collector = helper_1.GarbageCollector.getInstance();
@@ -1406,7 +1427,7 @@ exports.collectGargabe = collectGargabe;
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-const polyfill_1 = __webpack_require__(13);
+const polyfill_1 = __webpack_require__(14);
 polyfill_1.polyfill({ require: "atob", fills: "atob" }, { require: "w3c-blob", fills: "Blob" });
 /**
  * a helper class for binary content
@@ -1489,9 +1510,9 @@ exports.Binary = Binary;
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-const Singleton_1 = __webpack_require__(2);
-const EventName_1 = __webpack_require__(12);
-const Log_1 = __webpack_require__(6);
+const Singleton_1 = __webpack_require__(3);
+const EventName_1 = __webpack_require__(13);
+const Log_1 = __webpack_require__(2);
 /**
  * an internal garbage collector class to clear some memory for the
  * user.
@@ -1511,17 +1532,12 @@ class GarbageCollector extends Singleton_1.Singleton {
          * the logger instance
          */
         this.logger = Log_1.Log.getLogger(GarbageCollector.name);
-        // temp stack for event names
-        let eventTmpStack = [];
         // register all events
         Object.keys(EventName_1.EventName).forEach(event => {
             // register event and execute the cleaning
             let eventEnum = event;
-            // only register event if not allready done
-            if (eventTmpStack.indexOf(eventEnum) === -1) {
-                // register the event
-                this.on(eventEnum, this.executeEvent.bind(this, eventEnum));
-            }
+            // register the event
+            this.on(eventEnum, this.executeEvent.bind(this, eventEnum));
         });
         // bind instance
         GarbageCollector.bindInstance(this);
@@ -1564,7 +1580,7 @@ class GarbageCollector extends Singleton_1.Singleton {
      */
     executeEvent(eventName) {
         this.registerStack
-            .filter(clean => clean.event === EventName_1.EventName.BeforePreload)
+            .filter(clean => clean.event === eventName)
             .forEach(clean => clean
             .cleanFunction(
         // get all targets to clear
@@ -1589,7 +1605,7 @@ exports.GarbageCollector = GarbageCollector;
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-const helper_1 = __webpack_require__(4);
+const helper_1 = __webpack_require__(5);
 /**
  * a class decorator that enabled garbage collecting on this class.
  * this is required to use @collectGarbage as property decorator
@@ -1624,7 +1640,7 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(__webpack_require__(41));
-__export(__webpack_require__(15));
+__export(__webpack_require__(16));
 __export(__webpack_require__(42));
 
 
@@ -1656,7 +1672,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-const Entity_1 = __webpack_require__(15);
+const Entity_1 = __webpack_require__(16);
 const math_1 = __webpack_require__(1);
 /**
  * an entity that can collide with other collidable entities

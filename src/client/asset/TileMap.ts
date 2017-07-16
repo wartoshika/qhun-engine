@@ -81,8 +81,15 @@ export class TileMap extends AbstractAsset {
      * @param name the unique name of the image
      * @param path the path to the image
      */
-    public static async register(...tilemaps: InlineTileMapAsset[]): Promise<TileMap[]> {
+    public static register(...tilemaps: InlineTileMapAsset[]): void {
 
+        // add asset type
+        tilemaps.forEach(tilemap => tilemap.assetType = AssetType.TileMap);
+
+        // register the asset
+        return TileMap.getAssetLoader().registerAsset(TileMap, ...tilemaps);
+
+        /*
         // get the asset loader
         let assetLoader = TileMap.getAssetLoader();
         let mapLoaderPromise: Promise<any>[] = [];
@@ -167,7 +174,7 @@ export class TileMap extends AbstractAsset {
                     });
                 });
             });
-        })));
+        })));*/
     }
 
     /**

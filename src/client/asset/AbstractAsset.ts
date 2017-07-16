@@ -14,8 +14,8 @@ import { AssetLoader } from './AssetLoader';
  * of the required asset interface
  *
  * be sure to implement the folling needed functions
- * @need public static async register(...images: InlineAsset[]): Promise<any>
- * @need constructor(name?: string, path?: string, data?: any): Asset
+ * @required public static async register(...images: InlineAsset[]): Promise<any>
+ * @required constructor(name?: string, path?: string, data?: any): Asset
  */
 export abstract class AbstractAsset implements Asset {
 

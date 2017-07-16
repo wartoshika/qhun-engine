@@ -29,7 +29,7 @@ export class Image extends AbstractAsset {
      * @param name the unique name of the image
      * @param path the path to the image
      */
-    public static async register(...images: InlineAsset[]): Promise<any> {
+    public static register(...images: InlineAsset[]): void {
 
         // add the asset type
         images.forEach(image => image.assetType = AssetType.Image);
