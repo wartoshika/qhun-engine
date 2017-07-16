@@ -7,8 +7,8 @@
     "test": "ts-mocha test/**/*.ts",
     "start": "node build/server.js",
     "test:coverage": "nyc npm t",
-    "test:watch": "ts-mocha --watch-extensions ts --watch test/**/*.ts",
-    "test:coveralls": "npm run test:coverage && nyc report --reporter=text-lcov | coveralls"
+    "test:coveralls": "npm run test:coverage && nyc report --reporter=text-lcov | coveralls",
+    "lint": "node ./node_modules/tslint/bin/tslint src/**/*.ts"
   },
   "nyc": {
     "include": [
@@ -53,6 +53,8 @@
     "socket.io": "^2.0.3",
     "socket.io-client": "^2.0.3",
     "ts-mocha": "^1.0.3",
+    "tslint": "^5.5.0",
+    "tslint-loader": "^3.5.3",
     "typescript": "^2.4.1",
     "webpack": "^3.0.0"
   }
