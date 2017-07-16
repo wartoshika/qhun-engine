@@ -7,7 +7,8 @@
     "test": "cd test && ts-mocha -r tsconfig-paths/register ./**/*.ts",
     "start": "node build/server.js",
     "test:coverage": "nyc npm t",
-    "test:coveralls": "npm run test:coverage && nyc report --reporter=text-lcov | coveralls"
+    "test:coveralls": "npm run test:coverage && nyc report --reporter=text-lcov | coveralls",
+    "lint": "node ./node_modules/tslint/bin/tslint src/**/*.ts"
   },
   "nyc": {
     "include": [
@@ -58,6 +59,8 @@
     "socket.io-client": "^2.0.3",
     "ts-mocha": "^1.0.3",
     "tsconfig-paths": "^2.2.0",
+    "tslint": "^5.5.0",
+    "tslint-loader": "^3.5.3",
     "typescript": "^2.4.1",
     "w3c-blob": "0.0.1",
     "webpack": "^3.0.0"

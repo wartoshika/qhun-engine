@@ -1,0 +1,14 @@
+engines:
+  tslint:
+    enabled: true
+    channel: beta
+    config: tslint.json
+ratings:
+  paths:
+    - "src/**/*.ts"
+exclude_paths:
+  - build
+  - node_modules
+  - coverage
+  - dist
+  - test
