@@ -46,7 +46,7 @@ export class CanvasWorldRenderer {
         for (let layer = 0; layer < tileMap.layerCount; layer++) {
 
             // build up the map object
-            const mapLines = tileMap.getMap()[layer].split(String.fromCharCode(13));
+            const mapLines = tileMap.map[layer].split(String.fromCharCode(13));
             const horizontalImageCount = mapLines.length - 1;
             const verticalImageCount = mapLines.length - 1;
 

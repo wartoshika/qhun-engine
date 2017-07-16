@@ -6,7 +6,7 @@
  */
 
 import { Renderer } from './render';
-import { Dimension } from '../shared/math';
+import { Dimension, Storage } from '../shared';
 
 /**
  * holds information about the possible client configuration
@@ -27,4 +27,9 @@ export interface ClientConfig {
      * should the current fps be printed on the screen?
      */
     printFps?: boolean;
+
+    /**
+     * the storage class to use
+     */
+    storage?: Storage;
 }

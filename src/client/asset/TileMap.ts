@@ -15,7 +15,7 @@ export interface InlineTileMapAsset extends InlineAsset {
     /**
      * the dimension of each tile
      */
-    tileMapDimension: Dimension;
+    dimension: number[];
 
     /**
      * the amount of layers this tilemap has
@@ -29,13 +29,46 @@ export interface InlineTileMapAsset extends InlineAsset {
  */
 export class TileMap extends AbstractAsset {
 
+    public worldWidth: number = 0;
+    public worldHeight: number = 0;
+
     constructor(
         name?: string,
         path?: string,
         data?: Blob,
-        public map?: string
+        public map?: string[],
+        public dimension?: number[],
+        public layerCount?: number
     ) {
 
         super(name, path, AssetType.TileMap, data);
+    }
+
+    /**
+     * get the current tilemap layer count
+     */
+    public getLayerCount(): number {
+
+        return this.layerCount || 1;
+    }
+
+    /**
+     * get the height and width as dimension instance
+     */
+    public getDimension(): Dimension {
+
+        return new Dimension(this.dimension[0], this.dimension[1]);
+    }
+
+    /**
+     * get the world dimension of the tilemap csv file
+     */
+    public getWorldDimension(): Dimension {
+
+        // multiply with the tile width and height
+        return new Dimension(
+            this.worldWidth,
+            this.worldHeight
+        );
     }
 }

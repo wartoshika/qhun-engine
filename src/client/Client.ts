@@ -10,7 +10,7 @@ import { Game } from './Game';
 
 import {
     logMethodCall, Log, FileSizeType, RamStorage,
-    Singleton, EventName
+    Singleton, EventName, InjectorRegistry
 } from '../shared';
 
 import { AssetLoader, AssetType, AssetStorage, AssetRegister } from './asset';
@@ -97,6 +97,13 @@ export abstract class Client extends Singleton {
     @logMethodCall
     private async internalSetup(): Promise<void> {
 
+        // add default config
+        this.setupDefaultConfig();
+
+        // setup storing mechanism
+        const storageConstructor = this.clientConfig.storage as any as new () => Storage;
+        InjectorRegistry.add('Storage', new storageConstructor());
+
         // get all promised from the preload phase and await them
         const assetLoader = AssetLoader.getInstance<AssetLoader>();
         const assetStorage = AssetStorage.getInstance<AssetStorage>();
@@ -139,6 +146,14 @@ export abstract class Client extends Singleton {
             // init the game loop
             this.gameLoop();
         });
+    }
+
+    /**
+     * fill all config things that are not provided
+     */
+    private setupDefaultConfig(): void {
+
+        this.clientConfig.storage = (this.clientConfig.storage || RamStorage) as any;
     }
 
     /**

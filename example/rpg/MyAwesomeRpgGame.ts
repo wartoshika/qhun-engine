@@ -12,7 +12,7 @@ import {
 } from '@qhun-engine/client';
 
 import {
-    logMethodCall, Vector2D, Dimension
+    logMethodCall
 } from '@qhun-engine/shared';
 
 import { Link } from './entity/Link';
@@ -45,7 +45,7 @@ class MyAwesomeRpgGame extends Client {
         registry.add('TileMap', {
             name: 'world1',
             path: 'example/rpg/asset/image/world1.png',
-            tileMapDimension: new Dimension(32, 32),
+            dimension: [32, 32],
             layerCount: 2
         });
     }

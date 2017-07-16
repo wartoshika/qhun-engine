@@ -5,8 +5,7 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { RamStorage } from '../storage';
-import { EventEmitter } from '../event';
+import { EventEmitter } from '../event/EventEmitter';
 
 /**
  * a class to handle the singleton paradigmen
@@ -18,26 +17,17 @@ export abstract class Singleton extends EventEmitter {
      */
     public static getInstance<T>(): T {
 
-        if (!RamStorage.has(this.generateStorageName())) {
+        if (!this.instance) {
 
             // get the constructor and store an instance of the class at the ram storage
             const constructor = this as any as { new(): T };
-            RamStorage.add(this.generateStorageName(), new constructor());
+            this.instance = new constructor();
         }
 
-        // get the instance
-        return RamStorage.get<T>(this.generateStorageName());
+        return this.instance as T;
     }
 
-    /**
-     * generates a storage name for the instance storing
-     *
-     * @param className the class name
-     */
-    protected static generateStorageName(): string {
-
-        return `singleton.instance.${this.name}`;
-    }
+    protected static instance: {} = null;
 
     /**
      * bind the instance to the singleton storage
@@ -47,6 +37,6 @@ export abstract class Singleton extends EventEmitter {
     protected static bindInstance(instance: any): void {
 
         // save the instance
-        RamStorage.add(this.generateStorageName(), instance);
+        this.instance = instance;
     }
 }

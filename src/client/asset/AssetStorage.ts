@@ -9,7 +9,7 @@ import { AssetType } from './AssetType';
 import { Asset } from './Asset';
 
 import {
-    Singleton, RamStorage, Log
+    Singleton, Log, inject, Storage
 } from '../../shared';
 
 /**
@@ -21,14 +21,22 @@ export class AssetStorage extends Singleton {
     private logger: Log = Log.getLogger(AssetStorage.name);
 
     /**
+     * the storage of all assets
+     */
+    private storage: {
+        [assetName: string]: Asset
+    } = {};
+
+    /**
      * get an asset from the storage
      *
      * @param name the name of the asset
      */
-    public getAsset<T>(name: string, type: AssetType): T {
+    public getAsset<T extends Asset>(name: string, type: AssetType): T {
 
         // check if the asset is available
-        if (!RamStorage.has(this.getAssetStorageName(name, type))) {
+        const assetName = this.getAssetStorageName(name, type);
+        if (!(assetName in this.storage)) {
 
             // print error
             this.logger.error('Trying to load not existing asset', name, 'with type', AssetType[type]);
@@ -36,7 +44,7 @@ export class AssetStorage extends Singleton {
         }
 
         // ask the ram storage for the asset
-        return RamStorage.get<T>(this.getAssetStorageName(name, type));
+        return this.storage[assetName] as T;
     }
 
     /**
@@ -48,7 +56,8 @@ export class AssetStorage extends Singleton {
     public hasAsset(name: string, type: AssetType): boolean {
 
         // ask the ram storage
-        return RamStorage.has(this.getAssetStorageName(name, type));
+        const assetName = this.getAssetStorageName(name, type);
+        return assetName in this.storage;
     }
 
     /**
@@ -58,7 +67,12 @@ export class AssetStorage extends Singleton {
      */
     public getAssetAmount(type: AssetType): number {
 
-        return RamStorage.amount(this.getAssetStorageName('', type));
+        const assetsOfType = Object
+            .keys(this.storage)
+            .map((assetKey) => this.storage[assetKey])
+            .filter((asset) => asset.getType() === type);
+
+        return assetsOfType.length;
     }
 
     /**
@@ -81,7 +95,8 @@ export class AssetStorage extends Singleton {
             }
 
             // now add the asset
-            RamStorage.add(this.getAssetStorageName(asset.getName(), asset.getType()), asset);
+            const assetName = this.getAssetStorageName(asset.getName(), asset.getType());
+            this.storage[assetName] = asset;
         });
     }
 
@@ -90,7 +105,14 @@ export class AssetStorage extends Singleton {
      */
     public clearStorage(type?: AssetType): void {
 
-        RamStorage.clearPath(this.getAssetStorageName('', type));
+        const assetName = this.getAssetStorageName('', type);
+        Object.keys(this.storage)
+            .filter((assetKey) => assetKey.indexOf(type.toString()) === 0)
+            .forEach((assetKey) => {
+
+                // delete the asset
+                delete this.storage[assetKey];
+            });
     }
 
     /**
@@ -98,7 +120,7 @@ export class AssetStorage extends Singleton {
      *
      * @param name the name of the asset
      */
-    private getAssetStorageName(name?: string, type?: AssetType): string {
+    public getAssetStorageName(name?: string, type?: AssetType): string {
 
         let path = 'assetloader';
         if (type !== undefined) path += `.${type}`;

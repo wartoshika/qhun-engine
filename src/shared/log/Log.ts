@@ -7,7 +7,6 @@
 
 import { LogLevel } from './LogLevel';
 import { Singleton } from '../helper/Singleton';
-import { RamStorage } from '../storage/RamStorage';
 
 /**
  * a log wrapper to allow log levels and a more complex
@@ -23,29 +22,28 @@ export class Log extends Singleton {
      */
     public static getLogger(prefix?: string): Log {
 
-        if (!RamStorage.has(this.generateStorageName(prefix))) {
+        // is there any prefix
+        if (!prefix) return Log.getInstance<Log>();
+
+        // check if the instance has been created
+        if (!this.prefixedLoggerInstances[prefix]) {
 
             // get the constructor and store an instance of the class at the ram storage
             const constructor = this as any as { new(): Log };
             const logger = new constructor();
             logger.prefix = prefix;
-            RamStorage.add(this.generateStorageName(prefix), logger);
+
+            // save the instance
+            Log.prefixedLoggerInstances[prefix] = logger;
         }
 
         // get the instance
-        return RamStorage.get<Log>(this.generateStorageName(prefix));
+        return Log.prefixedLoggerInstances[prefix];
     }
 
-    /**
-     * override the generate storage name method to allow prefixing the
-     * log instance
-     *
-     * @param prefix the desired prefix
-     */
-    protected static generateStorageName(prefix?: string): string {
-
-        return `singleton.instance.${this.name}.${prefix}`;
-    }
+    private static prefixedLoggerInstances: {
+        [prefix: string]: Log
+    } = {};
 
     // the current loglevel
     protected logLevel: LogLevel = LogLevel.Debug;

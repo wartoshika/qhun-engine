@@ -31,11 +31,11 @@ export class AssetRegister extends Singleton {
      *
      * @param assets the assets to register
      */
-    public add(ctor: StandardAssets, ...assets: InlineAsset[]): void;
-    public add(ctor: TileMapAsset, ...assets: InlineTileMapAsset[]): void;
-    public add(ctor: string, ...assets: InlineAsset[]): void {
+    public add(assetType: StandardAssets, ...assets: InlineAsset[]): void;
+    public add(assetType: TileMapAsset, ...assets: InlineTileMapAsset[]): void;
+    public add(assetType: string, ...assets: InlineAsset[]): void {
 
-        const ctorCheck = ctor as any;
+        const ctorCheck = assetType as any;
         let constructor: new () => Asset;
 
         switch (ctorCheck) {

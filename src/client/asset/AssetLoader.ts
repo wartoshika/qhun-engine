@@ -97,7 +97,12 @@ export class AssetLoader extends Singleton {
 
                 // construct an instance of the asset
                 const instance = new asset.ctor();
-                instance.setName(asset.name);
+
+                // bind the inline asset attributes to the instance
+                Object.keys(asset).forEach((property) => {
+
+                    (instance as any)[property] = (asset as any)[property];
+                });
 
                 // fill the instance
                 this.loadAndStoreAsset(instance, asset.path).then((resource) => {

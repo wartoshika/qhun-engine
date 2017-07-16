@@ -6,3 +6,4 @@
  */
 
 export * from './RamStorage';
+export * from './Storage';

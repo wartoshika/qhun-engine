@@ -6,7 +6,8 @@
  */
 
 import { EventName } from './EventName';
-import { RamStorage } from '../storage';
+import { Storage } from '../storage/Storage';
+import { inject } from '../decorator/inject';
 
 // the type for storing event listeners
 interface EventListener {
@@ -19,6 +20,11 @@ interface EventListener {
 export abstract class EventEmitter<E = EventName> {
 
     /**
+     * the stack of events
+     */
+    private eventStack: EventListener = {};
+
+    /**
      * listen on the given event
      *
      * @param event the desired event
@@ -26,25 +32,14 @@ export abstract class EventEmitter<E = EventName> {
      */
     public on(event: E, listener: () => any): this {
 
-        // first get all listeners
-        let listeners = RamStorage.get<EventListener>(EventEmitter.name);
-
-        // check if listeners is defined
-        if (!listeners) {
-            listeners = {};
-        }
-
         // create array context if not allready done
-        if (!Array.isArray(listeners[event as any])) {
+        if (!Array.isArray(this.eventStack[event as any])) {
 
-            listeners[event as any] = [];
+            this.eventStack[event as any] = [];
         }
 
         // stack it up
-        listeners[event as any].push(listener);
-
-        // save it back to the storage
-        RamStorage.add(EventEmitter.name, listeners);
+        this.eventStack[event as any].push(listener);
 
         // chaning context
         return this;
@@ -59,18 +54,15 @@ export abstract class EventEmitter<E = EventName> {
      */
     public emit(event: E, listenerBoundContext?: object, ...args: any[]): this {
 
-        // get all listeners for this event
-        const listeners = RamStorage.get<EventListener>(EventEmitter.name);
-
         // is listeners defined?
-        if (!listeners) {
+        if (!this.eventStack[event as any]) {
 
             // cancel
             return this;
         }
 
         // get all functions for this event
-        const eventFunctions = listeners[event as any];
+        const eventFunctions = this.eventStack[event as any];
 
         // are there any?
         if (Array.isArray(eventFunctions)) {
@@ -98,14 +90,11 @@ export abstract class EventEmitter<E = EventName> {
      */
     public getListeners(event: E): Array<() => any> {
 
-        // get all listeners from the storage
-        const listeners = RamStorage.get<EventListener>(EventEmitter.name);
-
         // check if the event has listeners
-        if (!listeners) return [];
-        else if (!listeners[event as any]) return [];
+        if (!this.eventStack) return [];
+        else if (!this.eventStack[event as any]) return [];
 
         // return the listeners
-        return listeners[event as any];
+        return this.eventStack[event as any];
     }
 }

@@ -10,11 +10,20 @@ const sizeof = require('object-sizeof');
 
 import { Helper } from '../math';
 import { File, FileSizeType } from '../helper/File';
+import { Singleton } from '../helper/Singleton';
+import { Storage } from './Storage';
 
 /**
  * holds objects in the ram of the operating unit
  */
-export class RamStorage {
+export class RamStorage extends Singleton implements Storage {
+
+    /**
+     * the cache
+     */
+    private cache: {
+        [cacheIndex: string]: any
+    };
 
     /**
      * adds an elemement to the cache
@@ -22,9 +31,9 @@ export class RamStorage {
      * @param path the path to the object. dots can be used to structure
      * @param elemement the element to store
      */
-    public static add(path: string, elemement: any): void {
+    public add(path: string, elemement: any): void {
 
-        RamStorage.cache[path] = elemement;
+        this.cache[path] = elemement;
     }
 
     /**
@@ -32,15 +41,15 @@ export class RamStorage {
      *
      * @param path the path to the object. dots can be used to structure
      */
-    public static remove(path: string): void {
+    public remove(path: string): void {
 
-        delete RamStorage.cache[path];
+        delete this.cache[path];
     }
 
     /**
      * reset the complete storage!
      */
-    public static clear(): void {
+    public clear(): void {
 
         this.cache = {};
     }
@@ -51,17 +60,17 @@ export class RamStorage {
      * @param path the path to clear
      * @return the amount of deleted objects
      */
-    public static clearPath(path: string): number {
+    public clearPath(path: string): number {
 
         let counter = 0;
 
-        Object.keys(RamStorage.cache).forEach((key) => {
+        Object.keys(this.cache).forEach((key) => {
 
             // if the path is present
             if (key.indexOf(path) === 0) {
 
                 // remove the part
-                delete RamStorage.cache[key];
+                delete this.cache[key];
                 counter++;
             }
         });
@@ -74,9 +83,26 @@ export class RamStorage {
      *
      * @param path the path to the object. dots can be used to structure
      */
-    public static get<T>(path: string): T {
+    public get<T>(path: string): T {
 
-        return RamStorage.cache[path] as T;
+        return this.cache[path] as T;
+    }
+
+    /**
+     * get all elementes that fit the given path
+     *
+     * @param path the path to test
+     */
+    public getAllByPath<T>(path: string = ''): T[] {
+
+        const elementStack: T[] = [];
+        Object.keys(this.cache).forEach((key) => {
+
+            if (key.indexOf(path) === 0)
+                elementStack.push(this.get<T>(key));
+        });
+
+        return elementStack;
     }
 
     /**
@@ -84,9 +110,9 @@ export class RamStorage {
      *
      * @param path the path to the object. dots can be used to structure
      */
-    public static has(path: string): boolean {
+    public has(path: string): boolean {
 
-        return RamStorage.get(path) !== undefined;
+        return this.get(path) !== undefined;
     }
 
     /**
@@ -94,10 +120,10 @@ export class RamStorage {
      *
      * @param path the path to the object. dots can be used to structure
      */
-    public static amount(path: string): number {
+    public amount(path: string): number {
 
         let counter = 0;
-        Object.keys(RamStorage.cache).forEach((key) => {
+        Object.keys(this.cache).forEach((key) => {
 
             // if the path is present, update counter
             if (key.indexOf(path) === 0) counter++;
@@ -111,21 +137,16 @@ export class RamStorage {
      *
      * @param path the path to the object. dots can be used to structure
      */
-    public static getSize(path: string = '', type: FileSizeType = FileSizeType.Byte): number {
+    public getSize(path: string = '', type: FileSizeType = FileSizeType.Byte): number {
 
         let byteCounter = 0;
-        Object.keys(RamStorage.cache).forEach((key) => {
+        Object.keys(this.cache).forEach((key) => {
 
             // if the path is present, update counter
-            if (key.indexOf(path) === 0) byteCounter += sizeof(RamStorage.cache[key]);
+            if (key.indexOf(path) === 0) byteCounter += sizeof(this.cache[key]);
         });
 
         const bytes = File.byteToSize(byteCounter, type);
         return Helper.roundToPrecision(bytes, 2);
     }
-
-    // the private cache object
-    private static cache: {
-        [path: string]: any
-    } = {};
 }
