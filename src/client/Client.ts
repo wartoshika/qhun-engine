@@ -13,7 +13,7 @@ import {
     Singleton, EventName
 } from '../shared';
 
-import { AssetLoader, AssetType, AssetStorage } from './asset';
+import { AssetLoader, AssetType, AssetStorage, AssetRegister } from './asset';
 import { Renderer } from './render';
 import { Input } from './input';
 import { CollisionDetection } from './collision';
@@ -63,7 +63,7 @@ export abstract class Client extends Singleton {
      * preload function that allows to load sprites and do some heavy
      * stuff before the game actually starts
      */
-    public abstract preload(): void;
+    public abstract preload(assetRegister: AssetRegister): void;
 
     /**
      * a function that is called if the preload phase is completed
@@ -110,7 +110,7 @@ export abstract class Client extends Singleton {
 
         // start the preload phase
         this.emit(EventName.BeforePreload);
-        this.preload();
+        this.preload(AssetRegister.getInstance<AssetRegister>());
         this.emit(EventName.AfterPreload);
 
         // start asset loading

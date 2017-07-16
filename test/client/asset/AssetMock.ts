@@ -6,7 +6,7 @@
  */
 
 import {
-    AbstractAsset, InlineAsset, AssetType, Asset
+    AbstractAsset, InlineAsset, AssetType, Asset, AssetLoader
 } from '@client';
 
 /**
@@ -16,16 +16,6 @@ export class AssetMock extends AbstractAsset {
 
     public static currentAssetType: AssetType = AssetType.Image;
 
-    constructor(
-        name?: string,
-        type?: AssetType,
-        path?: string,
-        data?: Blob
-    ) {
-
-        super(name, path, type || AssetMock.currentAssetType, data);
-    }
-
     /**
      * register some assets
      *
@@ -34,9 +24,20 @@ export class AssetMock extends AbstractAsset {
     public static register(...assets: InlineAsset[]): void {
 
         // add the asset type
-        assets.forEach(asset => asset.assetType = AssetMock.currentAssetType);
+        assets.forEach((asset) => asset.assetType = AssetMock.currentAssetType);
 
         // resiger all given assets
-        return AssetMock.getAssetLoader().registerAsset(AssetMock, ...assets);
+        return AssetLoader.getInstance<AssetLoader>()
+            .registerAsset(AssetMock, ...assets);
+    }
+
+    constructor(
+        name?: string,
+        type?: AssetType,
+        path?: string,
+        data?: Blob
+    ) {
+
+        super(name, path, type || AssetMock.currentAssetType, data);
     }
 }

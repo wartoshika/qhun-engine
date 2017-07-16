@@ -7,8 +7,8 @@
 
 import {
     Client, CanvasRenderer, Viewport, Game,
-    Image, Sprite, TileMap, AssetLoader,
-    LoadingScreenScene, Input, World, OrthogonalCamera
+    LoadingScreenScene, Input, World, OrthogonalCamera,
+    AssetRegister
 } from '@qhun-engine/client';
 
 import {
@@ -35,14 +35,14 @@ class MyAwesomeRpgGame extends Client {
      * preload function that allows to load sprites and do some heavy
      * stuff before the game actually starts
      */
-    public preload(): void {
+    public preload(registry: AssetRegister): void {
 
-        Sprite.register({
+        registry.add('Sprite', {
             name: 'link_run',
             path: 'example/rpg/asset/image/link_run.png'
         });
 
-        TileMap.register({
+        registry.add('TileMap', {
             name: 'world1',
             path: 'example/rpg/asset/image/world1.png',
             tileMapDimension: new Dimension(32, 32),

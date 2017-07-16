@@ -8,17 +8,15 @@
 import { AssetType } from './AssetType';
 import { AbstractAsset } from './AbstractAsset';
 
-/**
- * the image class handles exactly one image
- */
-export class Image extends AbstractAsset {
+export class Audio extends AbstractAsset {
 
     constructor(
         name?: string,
         path?: string,
-        data?: Blob
+        data?: Blob,
+        public map?: string
     ) {
 
-        super(name, path, AssetType.Image, data);
+        super(name, path, AssetType.Audio, data);
     }
 }

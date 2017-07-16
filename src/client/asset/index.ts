@@ -7,10 +7,11 @@
 
 export * from './Image';
 export * from './Sprite';
-export * from './Sound';
+export * from './Audio';
 export * from './AssetType';
 export * from './AssetLoader';
 export * from './Asset';
 export * from './TileMap';
 export * from './AbstractAsset';
 export * from './AssetStorage';
+export * from './AssetRegister';

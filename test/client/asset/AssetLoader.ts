@@ -21,12 +21,12 @@ import { SinonFakeXhr } from '../network/SinonFakeXhr';
 import { UnitTestContext } from '../../';
 
 // a simple test asset image
-let testImage: string = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
+let testImage: string = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
 let binaryTestImage: string = Binary.bufferToString(
     Binary.dataUriToBuffer(testImage)
 );
 
-@suite("client/asset/AssetLoader")
+@suite('client/asset/AssetLoader')
 class Test {
 
     context: UnitTestContext;
@@ -54,20 +54,10 @@ class Test {
         this.context.get<AssetStorage>('store').clearStorage();
     }
 
-    private answerRequests() {
+    @test 'a mocked asset should be registed in the asset loader'(done: Function) {
 
-        // respond to the requests
-        this.context.get<SinonFakeXhr>('xhr').getRequests().forEach(
-
-            // answer every request with the binary image
-            request => request.respond(200, [], binaryTestImage)
-        );
-    }
-
-    @test "a mocked asset should be registed in the asset loader"(done: Function) {
-
-        let path = "test/path.png";
-        let name = "testImage";
+        let path = 'test/path.png';
+        let name = 'testImage';
 
         // register the image asset
         AssetMock.currentAssetType = AssetType.Image;
@@ -92,7 +82,7 @@ class Test {
         this.answerRequests();
     }
 
-    @test async "register an asset with equal names and types should result in error"() {
+    @test async 'register an asset with equal names and types should result in error'() {
 
         // register two identical assets
         let asset: InlineAsset = {
@@ -110,7 +100,17 @@ class Test {
             error = true;
         }
 
-        expect(error, "register has not thrown an error").to.be.true;
+        expect(error, 'register has not thrown an error').to.be.true;
+    }
+
+    private answerRequests() {
+
+        // respond to the requests
+        this.context.get<SinonFakeXhr>('xhr').getRequests().forEach(
+
+            // answer every request with the binary image
+            request => request.respond(200, [], binaryTestImage)
+        );
     }
 
 }

@@ -7,7 +7,6 @@
 
 import { Asset } from './Asset';
 import { AssetType } from './AssetType';
-import { AssetLoader } from './AssetLoader';
 
 /**
  * a basic class for implementing the getter and setter function
@@ -18,19 +17,6 @@ import { AssetLoader } from './AssetLoader';
  * @required constructor(name?: string, path?: string, data?: any): Asset
  */
 export abstract class AbstractAsset implements Asset {
-
-    /**
-     * get the asset loader instance to load the desired asset
-     */
-    protected static getAssetLoader(): AssetLoader {
-
-        return AbstractAsset.assetLoader;
-    }
-
-    /**
-     * holder of the asset loader
-     */
-    private static assetLoader = AssetLoader.getInstance<AssetLoader>();
 
     constructor(
         protected name?: string,

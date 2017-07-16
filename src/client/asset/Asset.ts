@@ -12,6 +12,7 @@ export interface Asset {
     getName(): string;
     getType(): AssetType;
     getData(): Blob;
+    getPath(): string;
 
     setName(name: string): void;
     setData(data: Blob): void;
