@@ -1,3 +1,12 @@
+Qhun-Engine
+===========
+
+A work in progress game engine for web games written in typescript to give you all freedom of the typescript langugage.
+
+A small rpg example with tile maps and orthogonal camera:
+![rpg example](http://i.imgur.com/kIVlvxs.gif)
+
+
 TODO
 ===========
 - [x] asset loading (currently images and sprites)
