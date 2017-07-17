@@ -6,8 +6,7 @@
  */
 
 import {
-    collectGargabe, EventName, EventEmitter,
-    Singleton, enableGarbageCollection
+    collectGargabe, EventName, EventEmitter, enableGarbageCollection
 } from '@shared';
 
 import { suite, test, context } from 'mocha-typescript';
@@ -33,17 +32,23 @@ class TestEventEmitter extends EventEmitter {
 @suite("shared/decorator/collectGargabe")
 class Test {
 
+    emitter: TestEventEmitter;
+
+    before() {
+
+        this.emitter = new TestEventEmitter();
+    }
+
     @test "should clear the value on the specified event"() {
 
         // init the event emitter and stub class
-        let emitter = new TestEventEmitter();
         let stub = new StubClass();
 
         // check if the property still has its values
         expect(stub.heavyProperty.length).to.eq(2);
 
         // fire garbage collection event
-        emitter.fireBeforePreloadEvent();
+        this.emitter.fireBeforePreloadEvent();
 
         // the value should be now empty array
         expect(Array.isArray(stub.heavyProperty)).to.be.true;

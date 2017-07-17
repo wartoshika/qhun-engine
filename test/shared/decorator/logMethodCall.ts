@@ -30,7 +30,7 @@ class Test {
 
         // prepare the suite
         this.context = new UnitTestContext();
-        let logger = Log.getInstance<Log>();
+        let logger = Log.getLogger();
         logger.setLogLevel(LogLevel.Debug);
 
         // bind context

@@ -5,7 +5,7 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { Singleton, RamStorage } from '@shared';
+import { Singleton } from '@shared';
 
 import { suite, test } from 'mocha-typescript';
 import { expect } from 'chai';
@@ -15,26 +15,36 @@ class TestClass extends Singleton { }
 @suite("shared/helper/Singleton")
 class TestSingleton {
 
-    @test "singleton should store its instance in the ram storage"() {
+    before() {
 
-        // ram storage should not contain any singleton classes
-        expect(RamStorage.getSize("singleton.instance.TestClass")).to.eq(0);
-
-        let test = TestClass.getInstance<TestClass>();
-
-        // the storage should not grow
-        expect(RamStorage.get<TestClass>("singleton.instance.TestClass")).to.eq(test);
+        // reset singleton instance
+        TestClass.bindInstance(null);
     }
 
-    @test "bindInstace() sould bind the given instance to the storage"() {
+    @test "singleton should store its instance"() {
 
-        let a = new TestClass();
-        (<any>a).test = true;
-        (<any>TestClass).bindInstance(a);
+        let testClass = new TestClass();
 
-        // get from the storage
-        let b = RamStorage.get<TestClass>("singleton.instance.TestClass");
+        // get the class
+        let test = TestClass.getInstance<TestClass>();
 
-        expect((<any>b).test).to.be.true;
+        // vars should be equal
+        expect(testClass).to.eq(test);
+    }
+
+    @test "singleton should fail on constructing multiple instances"() {
+
+        let error = false;
+        let testClass = new TestClass();
+
+        try {
+
+            let otherTestClass = new TestClass();
+        } catch (e) {
+
+            error = true;
+        }
+
+        expect(error, "singleton can be created multiple times").to.be.true;
     }
 }

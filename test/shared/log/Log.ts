@@ -138,7 +138,7 @@ class Test {
         ]);
 
         // test log without prefixing
-        let normalLogger = Log.getInstance<Log>();
+        let normalLogger = Log.getLogger();
         normalLogger.info("test1", "test2");
 
         // check the spy

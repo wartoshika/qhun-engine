@@ -22,10 +22,13 @@ class Test {
     gc: GarbageCollector;
     context: UnitTestContext;
 
-    before() {
+    static before() {
 
-        // clear the ram storage to have an empty event list
-        RamStorage.clear();
+        // clear gc singleton instance
+        GarbageCollector.bindInstance(null);
+    }
+
+    before() {
 
         this.gc = GarbageCollector.getInstance<GarbageCollector>();
         this.context = new UnitTestContext();
@@ -44,7 +47,7 @@ class Test {
         });
 
         // check the amounts
-        expect(expectedListeners).to.eq(registeredListeners);
+        expect(registeredListeners).to.eq(expectedListeners);
     }
 
     @test "should warn about executing a cleanTask with no registered target"() {

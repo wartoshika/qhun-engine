@@ -15,7 +15,7 @@ import * as sinon from 'sinon';
 import { AssetMock } from './AssetMock';
 import { UnitTestContext } from '../../';
 
-@suite("client/asset/AssetStorage")
+@suite('client/asset/AssetStorage')
 class Test {
 
     assetStorage: AssetStorage;
@@ -45,32 +45,32 @@ class Test {
         this.context.removeAllSpies();
     }
 
-    @test "addAsset() should be able to add assets"() {
+    @test 'addAsset() should be able to add assets'() {
 
-        let asset = new AssetMock("testAssetName");
+        const asset = new AssetMock('testAssetName');
         this.assetStorage.addAsset(asset);
 
         // asset should be added
         expect(
-            this.assetStorage.hasAsset("testAssetName", asset.getType())
+            this.assetStorage.hasAsset('testAssetName', asset.getType())
         ).to.be.true;
     }
 
-    @test "addAsset() should print a warning on double adding the same name and type"() {
+    @test 'addAsset() should print a warning on double adding the same name and type'() {
 
         // add the assets
         this.assetStorage.addAsset(...[
-            new AssetMock("test"),
-            new AssetMock("test")
+            new AssetMock('test'),
+            new AssetMock('test')
         ]);
 
         // warning message should be called
         sinon.assert.called(this.context.getSpy(console, 'warn'));
     }
 
-    @test "hasAsset() should work correctly"() {
+    @test 'hasAsset() should work correctly'() {
 
-        const name = "test"
+        const name = 'test';
         expect(this.assetStorage.hasAsset(
             name, AssetType.Image
         )).to.be.false;
@@ -82,15 +82,15 @@ class Test {
         )).to.be.true;
     }
 
-    @test "getAssetAmount() should calculate a correct amount"() {
+    @test 'getAssetAmount() should calculate a correct amount'() {
 
         expect(this.assetStorage.getAssetAmount(AssetType.Image)).to.eq(0);
 
         // add example assets
         this.assetStorage.addAsset(...[
-            new AssetMock("test1", AssetType.Image),
-            new AssetMock("test2", AssetType.Image),
-            new AssetMock("test3", AssetType.Audio)
+            new AssetMock('test1', AssetType.Image),
+            new AssetMock('test2', AssetType.Image),
+            new AssetMock('test3', AssetType.Audio)
         ]);
 
         // check the counter
@@ -99,22 +99,22 @@ class Test {
         expect(this.assetStorage.getAssetAmount(AssetType.Json)).to.eq(0);
     }
 
-    @test "getAsset() should return the correct asset"() {
+    @test 'getAsset() should return the correct asset'() {
 
-        let asset = new AssetMock("test2", AssetType.Image);
+        const asset = new AssetMock('test2', AssetType.Image);
 
         // add example assets
         this.assetStorage.addAsset(...[
-            new AssetMock("test1", AssetType.Image),
+            new AssetMock('test1', AssetType.Image),
             asset,
-            new AssetMock("test3", AssetType.Audio)
+            new AssetMock('test3', AssetType.Audio)
         ]);
 
         // expeting to get agget with name test2
-        expect(this.assetStorage.getAsset("test2", AssetType.Image)).to.eq(asset);
+        expect(this.assetStorage.getAsset('test2', AssetType.Image)).to.eq(asset);
     }
 
-    @test "getAsset() should error when a user try to load a non existing asset"() {
+    @test 'getAsset() should error when a user try to load a non existing asset'() {
 
         // set log level to have a clean output
         let assetLogger = Log.getLogger(AssetStorage.name);
@@ -124,7 +124,7 @@ class Test {
         expect(this.assetStorage.getAsset).to.throw();
 
         // storage is empty so get an asset
-        this.assetStorage.getAsset("notExisting", AssetType.Image)
+        this.assetStorage.getAsset('notExisting', AssetType.Image)
     }
 
 }

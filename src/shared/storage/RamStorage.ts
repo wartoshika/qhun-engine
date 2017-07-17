@@ -23,7 +23,7 @@ export class RamStorage extends Singleton implements Storage {
      */
     private cache: {
         [cacheIndex: string]: any
-    };
+    } = {};
 
     /**
      * adds an elemement to the cache

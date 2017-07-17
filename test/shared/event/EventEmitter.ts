@@ -5,7 +5,7 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { EventEmitter, RamStorage } from '@shared';
+import { EventEmitter } from '@shared';
 
 import { suite, test } from 'mocha-typescript';
 import { expect } from 'chai';
@@ -26,9 +26,8 @@ class TestEntity {
     before() {
 
         // clear all events in the storage
-        RamStorage.clear();
-
         this.emitter = new StubEventEmitter();
+        this.emitter.clearEvents();
     }
 
     @test "should be able to add listeners to events"() {
@@ -88,7 +87,7 @@ class TestEntity {
         };
 
         // es5 function declaration is required for a bound context!
-        let callback = function() {
+        let callback = function () {
 
             // if this callback is fired, the context variable should be
             // the this context

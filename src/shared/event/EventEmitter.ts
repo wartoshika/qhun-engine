@@ -22,7 +22,7 @@ export abstract class EventEmitter<E = EventName> {
     /**
      * the stack of events
      */
-    private eventStack: EventListener = {};
+    private static eventStack: EventListener = {};
 
     /**
      * listen on the given event
@@ -33,13 +33,13 @@ export abstract class EventEmitter<E = EventName> {
     public on(event: E, listener: () => any): this {
 
         // create array context if not allready done
-        if (!Array.isArray(this.eventStack[event as any])) {
+        if (!Array.isArray(EventEmitter.eventStack[event as any])) {
 
-            this.eventStack[event as any] = [];
+            EventEmitter.eventStack[event as any] = [];
         }
 
         // stack it up
-        this.eventStack[event as any].push(listener);
+        EventEmitter.eventStack[event as any].push(listener);
 
         // chaning context
         return this;
@@ -55,14 +55,14 @@ export abstract class EventEmitter<E = EventName> {
     public emit(event: E, listenerBoundContext?: object, ...args: any[]): this {
 
         // is listeners defined?
-        if (!this.eventStack[event as any]) {
+        if (!EventEmitter.eventStack[event as any]) {
 
             // cancel
             return this;
         }
 
         // get all functions for this event
-        const eventFunctions = this.eventStack[event as any];
+        const eventFunctions = EventEmitter.eventStack[event as any];
 
         // are there any?
         if (Array.isArray(eventFunctions)) {
@@ -91,10 +91,18 @@ export abstract class EventEmitter<E = EventName> {
     public getListeners(event: E): Array<() => any> {
 
         // check if the event has listeners
-        if (!this.eventStack) return [];
-        else if (!this.eventStack[event as any]) return [];
+        if (!EventEmitter.eventStack) return [];
+        else if (!EventEmitter.eventStack[event as any]) return [];
 
         // return the listeners
-        return this.eventStack[event as any];
+        return EventEmitter.eventStack[event as any];
+    }
+
+    /**
+     * removes all events with its listeners
+     */
+    public clearEvents(): void {
+
+        EventEmitter.eventStack = {};
     }
 }

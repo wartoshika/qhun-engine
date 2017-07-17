@@ -13,6 +13,17 @@ import { EventEmitter } from '../event/EventEmitter';
 export abstract class Singleton extends EventEmitter {
 
     /**
+     * bind the instance to the singleton storage
+     *
+     * @param instance the instance that should be bound
+     */
+    public static bindInstance(instance: any): void {
+
+        // save the instance
+        this.instance = instance;
+    }
+
+    /**
      * get the singleton instance
      */
     public static getInstance<T>(): T {
@@ -29,14 +40,16 @@ export abstract class Singleton extends EventEmitter {
 
     protected static instance: {} = null;
 
-    /**
-     * bind the instance to the singleton storage
-     *
-     * @param instance the instance that should be bound
-     */
-    protected static bindInstance(instance: any): void {
+    constructor() {
+        super();
 
-        // save the instance
-        this.instance = instance;
+        const staticContext = (this.constructor as typeof Singleton);
+
+        // check if allready constructed
+        if (staticContext.instance !== null)
+            throw new Error('Singleton can only be constructed once');
+
+        // bind instance
+        staticContext.bindInstance(this);
     }
 }

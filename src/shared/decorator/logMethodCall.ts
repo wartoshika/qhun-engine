@@ -19,7 +19,7 @@ export function logMethodCall(
 ) {
 
     // load the logger
-    const logger = Log.getInstance<Log>();
+    const logger = Log.getLogger();
 
     return {
         value(...args: any[]) {

@@ -106,8 +106,10 @@ export class AssetStorage extends Singleton {
     public clearStorage(type?: AssetType): void {
 
         const assetName = this.getAssetStorageName('', type);
+        const stringType = type ? type.toString() : '';
+
         Object.keys(this.storage)
-            .filter((assetKey) => assetKey.indexOf(type.toString()) === 0)
+            .filter((assetKey) => assetKey.indexOf(stringType) === 0)
             .forEach((assetKey) => {
 
                 // delete the asset

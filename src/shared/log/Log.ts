@@ -12,7 +12,7 @@ import { Singleton } from '../helper/Singleton';
  * a log wrapper to allow log levels and a more complex
  * logging structure
  */
-export class Log extends Singleton {
+export class Log {
 
     /**
      * get the logger instance with prefixing for better
@@ -23,7 +23,7 @@ export class Log extends Singleton {
     public static getLogger(prefix?: string): Log {
 
         // is there any prefix
-        if (!prefix) return Log.getInstance<Log>();
+        if (!prefix) prefix = '';
 
         // check if the instance has been created
         if (!this.prefixedLoggerInstances[prefix]) {

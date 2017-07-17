@@ -10,14 +10,26 @@ import { RamStorage, Helper, FileSizeType } from '@shared';
 import { suite, test } from 'mocha-typescript';
 import { expect } from 'chai';
 
-@suite("shared/math/Dimension")
+@suite("shared/math/RamStorage")
 class TestRamStorage {
+
+    storage: RamStorage;
+
+    static before() {
+
+        RamStorage.bindInstance(null);
+    }
+
+    before() {
+
+        this.storage = RamStorage.getInstance<RamStorage>();
+    }
 
     constructor() {
 
         beforeEach(() => {
 
-            RamStorage.clear();
+            this.storage.clear();
         });
     }
 
@@ -25,50 +37,50 @@ class TestRamStorage {
 
         let element = { a: 'test' };
         let path = 'testPath.test';
-        RamStorage.add(path, element);
+        this.storage.add(path, element);
 
-        expect(RamStorage.get<any>(path)).to.eq(element);
+        expect(this.storage.get<any>(path)).to.eq(element);
     }
 
     @test "getSize() should get an acurate memory footprint"() {
 
         let element = { test: 'test' };
         let path = 'testPath.test';
-        RamStorage.add(path, element);
+        this.storage.add(path, element);
 
-        expect(RamStorage.getSize('', FileSizeType.Byte)).to.be.eq(16);
+        expect(this.storage.getSize('', FileSizeType.Byte)).to.be.eq(16);
     }
 
     @test "remove() should remove one element"() {
 
         let el = { a: true };
-        RamStorage.add("test", el);
+        this.storage.add("test", el);
 
-        expect(RamStorage.getSize("test", FileSizeType.Byte)).to.be.greaterThan(0);
+        expect(this.storage.getSize("test", FileSizeType.Byte)).to.be.greaterThan(0);
 
-        RamStorage.remove("test");
+        this.storage.remove("test");
 
-        expect(RamStorage.getSize("test", FileSizeType.Byte)).to.eq(0);
-        expect(RamStorage.get<any>("test")).to.eq(undefined);
+        expect(this.storage.getSize("test", FileSizeType.Byte)).to.eq(0);
+        expect(this.storage.get<any>("test")).to.eq(undefined);
     }
 
     @test "has() should work correctly"() {
 
-        expect(RamStorage.has("test")).to.be.false;
+        expect(this.storage.has("test")).to.be.false;
 
         let el = { a: true };
-        RamStorage.add("test", el);
+        this.storage.add("test", el);
 
-        expect(RamStorage.has("test")).to.be.true;
+        expect(this.storage.has("test")).to.be.true;
     }
 
     @test "amount() should get the right amount from the storage cache"() {
 
-        expect(RamStorage.amount("test")).to.eq(0);
+        expect(this.storage.amount("test")).to.eq(0);
 
         let el = { a: true };
-        RamStorage.add("test", el);
+        this.storage.add("test", el);
 
-        expect(RamStorage.amount("test")).to.eq(1);
+        expect(this.storage.amount("test")).to.eq(1);
     }
 }
