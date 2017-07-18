@@ -7,9 +7,9 @@
 
 import { Renderer } from './Renderer';
 import { CanvasRenderer } from './CanvasRenderer';
-import { AssetType, AssetStorage } from '../asset';
+import { AssetType, AssetStorage, Asset } from '../asset';
 
-import { Singleton, RamStorage } from '../../shared';
+import { Singleton, inject, Storage } from '../../shared';
 
 /**
  * a class that handles the ramstorage cache to transform all assets
@@ -46,6 +46,29 @@ export class ObjectCache extends Singleton {
      */
     private async toImageBitmap(...assetTypes: AssetType[]): Promise<void> {
 
-        const elements = RamStorage.getAllByPath()
+        const elements: Asset[] = [];
+        const convertPromiseStack: Array<Promise<any>> = [];
+
+        assetTypes.forEach((type) => {
+
+            elements.push(...this.assetStorage.getAssetsByType(type));
+        });
+
+        // iterate and change type
+        elements.forEach((element) => {
+
+            // get name
+            const name = this.assetStorage.getAssetStorageName(element.getName(), element.getType());
+
+            // override data
+            convertPromiseStack.push(createImageBitmap(element.getData() as Blob).then((bitmap) => {
+
+                // set the data
+                element.setData(bitmap as ImageBitmap);
+
+                // readd to storage
+                this.assetStorage.overrideAsset(element);
+            }));
+        });
     }
 }

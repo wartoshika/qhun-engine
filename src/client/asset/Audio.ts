@@ -6,6 +6,7 @@
  */
 
 import { AssetType } from './AssetType';
+import { AssetDataType } from './Asset';
 import { AbstractAsset } from './AbstractAsset';
 
 export class Audio extends AbstractAsset {
@@ -13,7 +14,7 @@ export class Audio extends AbstractAsset {
     constructor(
         name?: string,
         path?: string,
-        data?: Blob,
+        data?: AssetDataType,
         public map?: string
     ) {
 

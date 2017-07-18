@@ -9,12 +9,12 @@ import { ClientConfig } from './ClientConfig';
 import { Game } from './Game';
 
 import {
-    logMethodCall, Log, FileSizeType, RamStorage,
+    logMethodCall, Log, FileSizeType, RamStorage, Storage,
     Singleton, EventName, InjectorRegistry
 } from '../shared';
 
 import { AssetLoader, AssetType, AssetStorage, AssetRegister } from './asset';
-import { Renderer } from './render';
+import { Renderer, ObjectCache } from './render';
 import { Input } from './input';
 import { CollisionDetection } from './collision';
 
@@ -122,30 +122,35 @@ export abstract class Client extends Singleton {
 
         // start asset loading
         this.emit(EventName.BeforeAssetLoading);
-        assetLoader.loadRegisteredAssets().then(() => {
+        await assetLoader.loadRegisteredAssets();
 
-            // asset loading finished!
-            this.emit(EventName.AfterAssetLoading);
+        // asset loading finished!
+        this.emit(EventName.AfterAssetLoading);
 
-            // log the information about the registration process of assets
-            this.logger.info('Registered', assetStorage.getAssetAmount(AssetType.Image), 'Images');
-            this.logger.info('Registered', assetStorage.getAssetAmount(AssetType.TileMap), 'TileMaps');
-            this.logger.info('Registered', assetStorage.getAssetAmount(AssetType.Audio), 'Sounds');
-            this.logger.info('Registered', assetStorage.getAssetAmount(AssetType.Json), 'JSON Objects');
+        // log the information about the registration process of assets
+        this.logger.info('Registered', assetStorage.getAssetAmount(AssetType.Sprite), 'Sprites');
+        this.logger.info('Registered', assetStorage.getAssetAmount(AssetType.TileMap), 'TileMaps');
+        this.logger.info('Registered', assetStorage.getAssetAmount(AssetType.Image), 'Images');
+        this.logger.info('Registered', assetStorage.getAssetAmount(AssetType.Audio), 'Sounds');
+        this.logger.info('Registered', assetStorage.getAssetAmount(AssetType.Json), 'JSON Objects');
 
-            // all assets loaded, continue startup
-            this.gameInstance = new Game(this.renderer);
-            this.inputInstance = new Input();
+        // all assets loaded, continue startup
+        this.gameInstance = new Game(this.renderer);
+        this.inputInstance = new Input();
 
-            // fire loaded event
-            this.emit(EventName.BeforeLoaded);
-            this.loaded(this.gameInstance);
-            this.emit(EventName.AfterLoaded);
-            this.printMemoryFootprint();
+        // convert assets to selected renderer objects
+        const transformObjects = new ObjectCache();
+        await transformObjects.transformObjectCache(
+            this.renderer, AssetType.Image
+        );
 
-            // init the game loop
-            this.gameLoop();
-        });
+        // fire loaded event
+        this.emit(EventName.BeforeLoaded);
+        this.loaded(this.gameInstance);
+        this.emit(EventName.AfterLoaded);
+
+        // init the game loop
+        this.gameLoop();
     }
 
     /**
@@ -153,22 +158,7 @@ export abstract class Client extends Singleton {
      */
     private setupDefaultConfig(): void {
 
-        this.clientConfig.storage = (this.clientConfig.storage || RamStorage) as any;
-    }
-
-    /**
-     * logs the current memory footprint to the console
-     */
-    private printMemoryFootprint(): void {
-
-        const assets = RamStorage.getSize('assetloader', FileSizeType.Megabyte);
-        const misc = RamStorage.getSize('singleton', FileSizeType.Megabyte);
-        const overall = +(assets + misc).toFixed(2);
-
-        // print current memory footprint
-        this.logger.info('Memory footprint:', overall, 'MB');
-        this.logger.info('\t- Assets:\t', assets, 'MB');
-        this.logger.info('\t- Misc:\t\t', misc, 'MB');
+        this.clientConfig.storage = (this.clientConfig.storage || RamStorage) as Storage;
     }
 
     /**

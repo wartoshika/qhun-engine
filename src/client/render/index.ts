@@ -10,3 +10,4 @@ export * from './CanvasRenderer';
 export * from './BasicRenderer';
 export * from './CanvasWorldRenderer';
 export * from './CameraOffsetCalculator';
+export * from './ObjectCache';

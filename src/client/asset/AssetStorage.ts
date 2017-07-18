@@ -48,6 +48,18 @@ export class AssetStorage extends Singleton {
     }
 
     /**
+     * get all assets by type
+     *
+     * @param type the type to search for
+     */
+    public getAssetsByType<T extends Asset>(type: AssetType): T[] {
+
+        return Object.keys(this.storage)
+            .map((assetKey) => this.storage[assetKey])
+            .filter((asset) => asset.getType() === type) as T[];
+    }
+
+    /**
      * check if the storage has the given asset
      *
      * @param name the name of the asset
@@ -98,6 +110,29 @@ export class AssetStorage extends Singleton {
             const assetName = this.getAssetStorageName(asset.getName(), asset.getType());
             this.storage[assetName] = asset;
         });
+    }
+
+    /**
+     * overrides the given asset
+     *
+     * @param asset the new asset
+     */
+    public overrideAsset(asset: Asset): void {
+
+        if (!this.hasAsset(asset.getName(), asset.getType())) {
+
+            // could not override!
+            this.logger.info(
+                `Asset ${asset.getName} cannot be overritten because
+                 the asset does not exists in the storage. Asset will be added instead.`
+            );
+
+            return this.addAsset(asset);
+        }
+
+        // override the asset
+        const assetName = this.getAssetStorageName(asset.getName(), asset.getType());
+        this.storage[assetName] = asset;
     }
 
     /**

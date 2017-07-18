@@ -6,6 +6,7 @@
  */
 
 import { AssetType } from './AssetType';
+import { AssetDataType } from './Asset';
 import { AbstractAsset } from './AbstractAsset';
 
 /**
@@ -16,7 +17,7 @@ export class Image extends AbstractAsset {
     constructor(
         name?: string,
         path?: string,
-        data?: Blob
+        data?: AssetDataType
     ) {
 
         super(name, path, AssetType.Image, data);

@@ -5,7 +5,7 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { Asset } from './Asset';
+import { Asset, AssetDataType } from './Asset';
 import { AssetType } from './AssetType';
 
 /**
@@ -22,7 +22,7 @@ export abstract class AbstractAsset implements Asset {
         protected name?: string,
         protected path?: string,
         protected type?: AssetType,
-        protected data?: Blob
+        protected data?: AssetDataType
     ) { }
 
     public getName(): string {
@@ -40,7 +40,7 @@ export abstract class AbstractAsset implements Asset {
         return this.type;
     }
 
-    public getData(): Blob {
+    public getData(): AssetDataType {
 
         return this.data;
     }
@@ -55,7 +55,7 @@ export abstract class AbstractAsset implements Asset {
         this.path = path;
     }
 
-    public setData(data: Blob): void {
+    public setData(data: AssetDataType): void {
 
         this.data = data;
     }

@@ -90,7 +90,7 @@ export class SpriteLoader extends Singleton implements TypeLoader {
             // add the image
             imageStack.push(
                 new Image(
-                    `${sprite.getName()}[${i}]`,
+                    `${sprite.getName()}[${info[SpriteMapInformation.Name]}]`,
                     sprite.getPath(),
                     Binary.dataUriToBlob(canvas.toDataURL())
                 )

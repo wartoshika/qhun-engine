@@ -7,15 +7,17 @@
 
 import { AssetType } from './AssetType';
 
+export declare type AssetDataType = Blob | ImageBitmap;
+
 export interface Asset {
 
     getName(): string;
     getType(): AssetType;
-    getData(): Blob;
+    getData(): AssetDataType;
     getPath(): string;
 
     setName(name: string): void;
-    setData(data: Blob): void;
+    setData(data: AssetDataType): void;
 }
 
 export interface InlineAsset {
@@ -23,6 +25,6 @@ export interface InlineAsset {
     name: string;
     path: string;
     assetType?: AssetType;
-    data?: Blob;
+    data?: AssetDataType;
     ctor?: new () => Asset;
 }

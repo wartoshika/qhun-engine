@@ -6,6 +6,7 @@
  */
 
 import { AbstractAsset } from './AbstractAsset';
+import { AssetDataType } from './Asset';
 import { InlineAsset } from './Asset';
 import { AssetType } from './AssetType';
 import { Dimension } from '../../shared';
@@ -35,7 +36,7 @@ export class TileMap extends AbstractAsset {
     constructor(
         name?: string,
         path?: string,
-        data?: Blob,
+        data?: AssetDataType,
         public map?: string[],
         public dimension?: number[],
         public layerCount?: number

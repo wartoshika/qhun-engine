@@ -6,6 +6,7 @@
  */
 
 import { AssetType } from './AssetType';
+import { AssetDataType } from './Asset';
 import { AbstractAsset } from './AbstractAsset';
 
 /**
@@ -17,10 +18,10 @@ export class Sprite extends AbstractAsset {
     constructor(
         name?: string,
         path?: string,
-        data?: Blob,
+        data?: AssetDataType,
         public map?: string
     ) {
 
-        super(name, path, AssetType.Image, data);
+        super(name, path, AssetType.Sprite, data);
     }
 }
