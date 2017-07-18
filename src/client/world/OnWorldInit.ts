@@ -5,5 +5,11 @@
  * https://opensource.org/licenses/MIT
  */
 
-export * from './World';
-export * from './OnWorldInit';
+export interface OnWorldInit {
+
+    /**
+     * will be fired if the world is loaded and able to
+     * add entities
+     */
+    onWorldInit(): void;
+}

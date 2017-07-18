@@ -88,7 +88,7 @@ export class Link extends CollidableEntity {
      */
     public onCollision(otherEntity: CollidableEntity): void {
 
-        console.log(this, "collided with", otherEntity);
+        console.log(this, 'collided with', otherEntity);
     }
 
     /**
@@ -99,7 +99,7 @@ export class Link extends CollidableEntity {
     public handleMovement(arrowKeys: InputArrowKeys): void {
 
         // get moveable directions
-        let blockedDirections = this.getBlockedDirections();
+        const blockedDirections = this.getBlockedDirections();
 
         // move the player
         if (arrowKeys.left && !blockedDirections.Left) {

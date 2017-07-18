@@ -5,6 +5,7 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { OnWorldInit } from './OnWorldInit';
 import { GravityForce } from '../physic';
 import { Vector2D, Dimension } from '../../shared/math';
 import { TileMap, AssetStorage, AssetType } from '../asset';
@@ -14,17 +15,17 @@ import { Game } from '../Game';
 /**
  * a class to handle world spefific things
  */
-export class World {
+export abstract class World implements OnWorldInit {
+
+    /**
+     * the current tilemap
+     */
+    protected map: TileMap;
 
     /**
      * the tile numbers that collides with entities derived from {@link CollidableEntity}
      */
     private collisionTiles: number[] = [];
-
-    /**
-     * the current tilemap
-     */
-    private map: TileMap;
 
     /**
      * @param game the game object
@@ -33,7 +34,7 @@ export class World {
      */
     constructor(
         game: Game,
-        map: string,
+        tileMapName: string,
         private gravity: Vector2D<GravityForce> = new Vector2D<GravityForce>(
             GravityForce.None,
             GravityForce.None
@@ -42,8 +43,14 @@ export class World {
 
         // get the tilemap from the asset loader
         this.map = AssetStorage.getInstance<AssetStorage>()
-            .getAsset<TileMap>(map, AssetType.TileMap);
+            .getAsset<TileMap>(tileMapName, AssetType.TileMap);
     }
+
+    /**
+     * will be fired if the world is loaded and able to
+     * add entities
+     */
+    abstract onWorldInit(): void;
 
     /**
      * get the world name aka tilemap name

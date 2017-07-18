@@ -16,6 +16,7 @@ import {
 } from '@qhun-engine/shared';
 
 import { Link } from './entity/Link';
+import { Level1 } from './world/Level1';
 
 class MyAwesomeRpgGame extends Client {
 
@@ -43,7 +44,7 @@ class MyAwesomeRpgGame extends Client {
         });
 
         registry.add('TileMap', {
-            name: 'world1',
+            name: 'level1',
             path: 'example/rpg/asset/image/world1.png',
             dimension: [32, 32],
             layerCount: 2
@@ -64,8 +65,8 @@ class MyAwesomeRpgGame extends Client {
 
         // create game objects
         const camera = new OrthogonalCamera(1.5);
-        const world = new World(
-            myGame, 'world1'
+        const world = new Level1(
+            myGame, 'level1'
         );
 
         // set tile collision
@@ -78,7 +79,7 @@ class MyAwesomeRpgGame extends Client {
         myGame.add(this.link, world, camera);
 
         // load the world
-        myGame.loadWorld('world1');
+        myGame.loadWorld('level1');
 
         // follow the player with the camera
         camera.followEntity(this.link);
