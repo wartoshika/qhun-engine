@@ -47,7 +47,7 @@ export interface Renderer {
     /**
      * set the current visible world as background
      */
-    setWorld(world: World): void;
+    setWorld(world: World): Promise<void>;
 
     /**
      * get the current world

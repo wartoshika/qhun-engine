@@ -23,6 +23,11 @@ export interface InlineTileMapAsset extends InlineAsset {
      * @default 1
      */
     layerCount?: number;
+
+    /**
+     * set the tile numbers to collide with
+     */
+    tileCollision?: number[];
 }
 
 /**
@@ -32,6 +37,11 @@ export class TileMap extends AbstractAsset {
 
     public worldWidth: number = 0;
     public worldHeight: number = 0;
+
+    /**
+     * the tile numbers that collides with entities derived from CollidableEntity
+     */
+    private tileCollision: number[] = [];
 
     constructor(
         name?: string,
@@ -71,5 +81,38 @@ export class TileMap extends AbstractAsset {
             this.worldWidth,
             this.worldHeight
         );
+    }
+
+    /**
+     * set single tile numbers to collide with
+     *
+     * @param tileNumbers the tile numbers to collide with
+     */
+    public setCollisionDetection(...tileNumbers: number[]): void {
+
+        this.tileCollision.push(...tileNumbers);
+    }
+
+    /**
+     * set all tiles with this numbers to collide with
+     *
+     * @param from from tile number
+     * @param to to tile number
+     */
+    public setCollisionDetectionBetween(from: number, to: number): void {
+
+        // loop through the tile numbers
+        for (let tile = from; tile <= to; tile++) {
+
+            this.tileCollision.push(tile);
+        }
+    }
+
+    /**
+     * get the collidable tileNumbers for this world
+     */
+    public getCollidableTileNumbers(): number[] {
+
+        return this.tileCollision;
     }
 }

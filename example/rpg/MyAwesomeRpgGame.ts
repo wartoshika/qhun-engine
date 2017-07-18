@@ -47,7 +47,11 @@ class MyAwesomeRpgGame extends Client {
             name: 'level1',
             path: 'example/rpg/asset/image/world1.png',
             dimension: [32, 32],
-            layerCount: 2
+            layerCount: 2,
+            tileCollision: [
+                137, 138, 139, 160, 161, 163, 164, 165, 166, 167, 168,
+                208, 209, 210
+            ]
         });
     }
 
@@ -56,7 +60,7 @@ class MyAwesomeRpgGame extends Client {
      * you now have access to the registered assets
      */
     @logMethodCall
-    public loaded(myGame: Game): void {
+    public async loaded(myGame: Game): Promise<void> {
 
         // create entities
         // link is a CollidableEntity so collision detection
@@ -65,21 +69,13 @@ class MyAwesomeRpgGame extends Client {
 
         // create game objects
         const camera = new OrthogonalCamera(1.5);
-        const world = new Level1(
-            myGame, 'level1'
-        );
-
-        // set tile collision
-        world.setCollisionDetection(...[
-            137, 138, 139, 160, 161, 163, 164, 165, 166, 167, 168,
-            208, 209, 210
-        ]);
+        const world = new Level1('level1', 4);
 
         // add game objects
         myGame.add(this.link, world, camera);
 
         // load the world
-        myGame.loadWorld('level1');
+        await myGame.loadWorld('level1');
 
         // follow the player with the camera
         camera.followEntity(this.link);

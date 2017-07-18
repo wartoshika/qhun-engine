@@ -36,11 +36,6 @@ export class CanvasRenderer extends BasicRenderer implements Renderer {
     private ctx: CanvasRenderingContext2D;
 
     /**
-     * the asset loader instance
-     */
-    private assetLoader: AssetLoader;
-
-    /**
      * the game height and width holder
      */
     private gameDimension: Dimension;
@@ -55,17 +50,10 @@ export class CanvasRenderer extends BasicRenderer implements Renderer {
      */
     private worldRenderer: CanvasWorldRenderer = null;
 
+    /**
+     * the currently visible camera
+     */
     private currentCamera: Camera = null;
-
-    constructor() {
-        super();
-
-        // get the asset loader
-        this.assetLoader = AssetLoader.getInstance<AssetLoader>();
-
-        // bind the instance
-        CanvasRenderer.bindInstance(this);
-    }
 
     /**
      * set up the game environment to a given dimension
@@ -141,7 +129,7 @@ export class CanvasRenderer extends BasicRenderer implements Renderer {
     /**
      * set the current visible world as background
      */
-    public setWorld(world: World): void {
+    public async setWorld(world: World): Promise<void> {
 
         // instantiate the world renderer
         this.worldRenderer = new CanvasWorldRenderer(

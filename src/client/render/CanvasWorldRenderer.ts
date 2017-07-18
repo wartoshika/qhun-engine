@@ -36,7 +36,13 @@ export class CanvasWorldRenderer {
      */
     public render(): void {
 
-        // firstly an inperformant rendering
+        // generate clusters and display a cluster of one or many tiles
+        // are visible by the active camera
+
+
+
+
+/*        // firstly an inperformant rendering
         // @todo: save the rendered tilemap as image to just draw the image if the camera is not moving
 
         // get the filemap asset from the world object
@@ -89,6 +95,6 @@ export class CanvasWorldRenderer {
             }
 
         }
-
+*/
     }
 }

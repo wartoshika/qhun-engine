@@ -69,7 +69,7 @@ export abstract class Client extends Singleton {
      * a function that is called if the preload phase is completed
      * you now have access to the registered assets
      */
-    public abstract loaded(game: Game): void;
+    public abstract async loaded(game: Game): Promise<void>;
 
     /**
      * update function handles the interaction with the player eg. the keybord
@@ -146,7 +146,7 @@ export abstract class Client extends Singleton {
 
         // fire loaded event
         this.emit(EventName.BeforeLoaded);
-        this.loaded(this.gameInstance);
+        await this.loaded(this.gameInstance);
         this.emit(EventName.AfterLoaded);
 
         // init the game loop

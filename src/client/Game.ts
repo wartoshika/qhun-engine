@@ -169,7 +169,7 @@ export class Game extends Singleton {
      *
      * @param world the world name to load
      */
-    public loadWorld(world: string): void {
+    public async loadWorld(world: string): Promise<void> {
 
         // does the world exists?
         if (!(world in this.worldStack)) {
@@ -179,8 +179,13 @@ export class Game extends Singleton {
             return;
         }
 
+        const targetWorld = this.worldStack[world];
+
+        // render the world tile clusters
+        targetWorld.generateTileCluster();
+
         // set the world in the renderer
-        this.renderer.setWorld(this.worldStack[world]);
+        await this.renderer.setWorld(targetWorld);
     }
 
     /**

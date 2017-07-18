@@ -58,7 +58,7 @@ export class CollisionDetection {
                 const tileNumbers = world.getTileNumbersForPosition(position[direction]);
 
                 // on a collidable tile?
-                const collidableTileNumbers = world.getCollidableTileNumbers();
+                const collidableTileNumbers = world.getTileMap().getCollidableTileNumbers();
 
                 // test collision
                 tileNumbers.forEach((number) => {

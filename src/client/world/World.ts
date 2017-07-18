@@ -10,10 +10,11 @@ import { GravityForce } from '../physic';
 import { Vector2D, Dimension } from '../../shared/math';
 import { TileMap, AssetStorage, AssetType } from '../asset';
 import { Camera } from '../camera';
-import { Game } from '../Game';
+import { TilemapLoader } from '../asset/assetTypeLoader';
 
 /**
- * a class to handle world spefific things
+ * a class to handle world spefific things. a world could also be a level
+ * or a map (you call it what you want).
  */
 export abstract class World implements OnWorldInit {
 
@@ -23,18 +24,24 @@ export abstract class World implements OnWorldInit {
     protected map: TileMap;
 
     /**
-     * the tile numbers that collides with entities derived from {@link CollidableEntity}
+     * the clustered map
+     * first dimension is the layer
+     * second dimension is the x cluster number
+     * second dimension is the y cluster number
+     * forth dimension is the tile number array
      */
-    private collisionTiles: number[] = [];
+    protected tileCluster: number[][][][] = [];
 
     /**
-     * @param game the game object
      * @param map the map to show
+     * @param tileClusterSize the cluster size for every world. tiles will be clustered info one image
+     * to boost the performance. a larger number is better for smaller worlds,
+     * a smaller number is better for larger worlds. 4 means 4x4 cluster equals 16 tiles in a cluster
      * @param gravity the gravity that is present on this world
      */
     constructor(
-        game: Game,
         tileMapName: string,
+        private tileClusterSize: number = 1,
         private gravity: Vector2D<GravityForce> = new Vector2D<GravityForce>(
             GravityForce.None,
             GravityForce.None
@@ -77,36 +84,21 @@ export abstract class World implements OnWorldInit {
     }
 
     /**
-     * set single tile numbers to collide with
-     *
-     * @param tileNumbers the tile numbers to collide with
+     * get the current active cluster size of the world
      */
-    public setCollisionDetection(...tileNumbers: number[]): void {
+    public getTileClusterSize(): number {
 
-        this.collisionTiles.push(...tileNumbers);
+        return this.tileClusterSize;
     }
 
     /**
-     * set all tiles with this numbers to collide with
+     * set the current cluster size of the world
      *
-     * @param from from tile number
-     * @param to to tile number
+     * @param clusterSize the new size
      */
-    public setCollisionDetectionBetween(from: number, to: number): void {
+    public setTileClusterSize(clusterSize: number): void {
 
-        // loop through the tile numbers
-        for (let tile = from; tile <= to; tile++) {
-
-            this.collisionTiles.push(tile);
-        }
-    }
-
-    /**
-     * get the collidable tileNumbers for this world
-     */
-    public getCollidableTileNumbers(): number[] {
-
-        return this.collisionTiles;
+        this.tileClusterSize = clusterSize;
     }
 
     /**
@@ -119,26 +111,89 @@ export abstract class World implements OnWorldInit {
 
         const numbers: number[] = [];
 
-        // iterate through the map and each layer
-        this.map.map.forEach((map, layer) => {
+        // first get cluster number
+        const cluster = this.getClusterNumber(position);
 
-            // the y axis
-            const line = map.split(String.fromCharCode(13));
-            if (line[position.y]) {
+        // search for the tile number
+        for (let layer = 0; layer < this.tileCluster.length - 1; layer++) {
 
-                // the x axis
-                const tiles = line[position.y].split(',');
-                if (tiles[position.x]) {
-                    numbers.push(parseInt(tiles[position.x], 10));
-                } else {
+            try {
 
-                    numbers.push(-2);
-                }
-            } else {
+                // try to access the cluster path
+                const tileInCluster = this.tileCluster[layer][cluster.x][cluster.y];
+
+                // now check the concrete tile number
+                // keep in mind that in a 4x4 scenario a total of 16 tile
+                // numbers are present in the array
+                // after 4 tiles, the y coordinate must be increated by 1
+                // to fit a square
+                const xHelper = Math.floor(position.x % this.tileClusterSize);
+                const yHelper = Math.floor(position.y % this.tileClusterSize);
+
+                // increment the two coordinates to get the right tile number
+                numbers.push(xHelper + yHelper);
+
+            } catch (e) {
+
+                // if an error occured, the tile is not available in this layer
+                // or the cluster ended before the tile number reached
+                // in this case put -2 because the position is not on the map
                 numbers.push(-2);
             }
-        });
+        }
 
         return numbers;
+    }
+
+    /**
+     * generates the tile clusters used by the renderer to speed up
+     * the rendering process
+     */
+    public generateTileCluster(): void {
+
+        // iterate through the map and each layer
+        this.map.map.forEach((map, layerNumber) => {
+
+            if (!Array.isArray(this.tileCluster[layerNumber]))
+                this.tileCluster[layerNumber] = [];
+
+            // the y axis
+            map.split(String.fromCharCode(13)).forEach((line, yCoordinate) => {
+
+                // the x axis
+                line.trim().split(TilemapLoader.TILE_MAP_DELIMITER).forEach((tile, xCoordinate) => {
+
+                    // detect the cluster number
+                    const cluster = this.getClusterNumber(
+                        Vector2D.from(xCoordinate, yCoordinate)
+                    );
+
+                    // check if the cluster array is capable of taking the numbers
+                    if (!Array.isArray(this.tileCluster[layerNumber][cluster.x]))
+                        this.tileCluster[layerNumber][cluster.x] = [];
+                    if (!Array.isArray(this.tileCluster[layerNumber][cluster.x][cluster.y]))
+                        this.tileCluster[layerNumber][cluster.x][cluster.y] = [];
+
+                    // add the tile numbers
+                    const tileNumber = parseInt(tile, 10);
+                    this.tileCluster[layerNumber][cluster.x][cluster.y].push(
+                        tileNumber ? tileNumber : -2
+                    );
+                });
+            });
+        });
+    }
+
+    /**
+     * get the cluster number for a position
+     *
+     * @param position the position to check the cluster of
+     */
+    private getClusterNumber(position: Vector2D): Vector2D {
+
+        return Vector2D.from(
+            Math.floor(position.x / this.tileClusterSize),
+            Math.floor(position.y / this.tileClusterSize)
+        );
     }
 }

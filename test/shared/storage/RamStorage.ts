@@ -48,7 +48,11 @@ class TestRamStorage {
         let path = 'testPath.test';
         this.storage.add(path, element);
 
-        expect(this.storage.getSize('', FileSizeType.Byte)).to.be.eq(16);
+        expect(this.storage.getSize('testPath', FileSizeType.Byte)).to.be.eq(16);
+
+        // test other branches
+        expect(this.storage.getSize('')).to.eq(16); // default byte
+        expect(this.storage.getSize()).to.eq(16); // default byte and empty prefix
     }
 
     @test "remove() should remove one element"() {
@@ -82,5 +86,30 @@ class TestRamStorage {
         this.storage.add("test", el);
 
         expect(this.storage.amount("test")).to.eq(1);
+    }
+
+    @test "clearPaht() should clear elements beginning with a spefified path"() {
+
+        this.storage.add('test1', {});
+        this.storage.add('test2', {});
+        this.storage.add('abc', {});
+
+        // clear path test should remove 2 entries
+        this.storage.clearPath('test');
+        expect(this.storage.getAllByPath('').length).to.eq(1);
+    }
+
+    @test "getAllByPath() should get elements with the beginning path"() {
+
+        // first add some data
+        this.storage.add('test1', {});
+        this.storage.add('test2', {});
+        this.storage.add('abc', {});
+
+        // test test path
+        expect(this.storage.getAllByPath('test').length).to.eq(2);
+
+        // get all
+        expect(this.storage.getAllByPath().length).to.eq(3);
     }
 }
