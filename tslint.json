@@ -39,6 +39,7 @@
         "no-var-requires": false,
         "no-trailing-whitespace": false,
         "ordered-imports": false,
+        "no-unused-variable": true,
         "max-line-length": [
             true,
             250

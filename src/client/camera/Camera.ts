@@ -50,17 +50,4 @@ export interface Camera {
      */
     getFollowingEntity(): Entity;
 
-    /**
-     * if the camera should be allways within the world, set the world
-     * bounds to the current active world
-     */
-    setWorldBounds(world: World): void;
-
-    /**
-     * get the current world bounds.
-     *
-     * @warning return value can be null if no bounds are available!
-     */
-    getWorldBounds(): Vector2D;
-
 }

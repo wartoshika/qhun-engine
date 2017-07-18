@@ -6,17 +6,17 @@
  */
 
 import {
-    CollidableEntity, InputArrowKeys
+    Entity, InputArrowKeys
 } from '@qhun-engine/client';
 
 import {
-    Vector2D, CollisionType
+    Vector2D, CollisionType, CanCollide
 } from '@qhun-engine/shared';
 
 /**
  * the player entity
  */
-export class Link extends CollidableEntity {
+export class Link extends Entity implements CanCollide {
 
     protected scaleFactor: number = 2;
 
@@ -86,7 +86,7 @@ export class Link extends CollidableEntity {
     /**
      * an event handler that will fire if another entity collided with this instance
      */
-    public onCollision(otherEntity: CollidableEntity): void {
+    public onCollision(otherEntity: Entity): void {
 
         console.log(this, 'collided with', otherEntity);
     }
@@ -98,7 +98,7 @@ export class Link extends CollidableEntity {
      */
     public handleMovement(arrowKeys: InputArrowKeys): void {
 
-        // get moveable directions
+        /*// get moveable directions
         const blockedDirections = this.getBlockedDirections();
 
         // move the player
@@ -139,7 +139,7 @@ export class Link extends CollidableEntity {
 
             // stop animation
             this.stopAnimation();
-        }
+        }*/
     }
 
 }

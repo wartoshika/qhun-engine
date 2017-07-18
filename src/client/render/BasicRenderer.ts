@@ -5,21 +5,18 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { RenderableEntity } from '../entity';
-import { Singleton } from '../../shared/helper';
-import { Image } from '../asset';
-import { Game } from '../Game';
+import { Singleton } from '../../shared/helper/Singleton';
+import { Renderer } from './Renderer';
+import { Camera } from '../camera/Camera';
 import { ClientConfig } from '../ClientConfig';
+import { World } from '../world/World';
+import { WorldRenderer } from './WorldRenderer';
+import { EntityRenderer } from './EntityRenderer';
 
 /**
  * the basic renderer class that all renderers should extend
  */
-export abstract class BasicRenderer extends Singleton {
-
-    /**
-     * holds the game instance
-     */
-    protected gameInstance: Game;
+export abstract class BasicRenderer extends Singleton implements Renderer {
 
     /**
      * holder of fps things
@@ -36,43 +33,60 @@ export abstract class BasicRenderer extends Singleton {
     };
 
     /**
-     * all renderable entities
+     * the currently visible camera
      */
-    private entities: RenderableEntity[] = [];
+    protected currentCamera: Camera = null;
+
+    /**
+     * holder of the world renderer
+     */
+    protected worldRenderer: WorldRenderer = null;
+
+    /**
+     * holder of the entity renderer
+     */
+    protected entityRenderer: EntityRenderer = null;
 
     /**
      * sets up the renderer
      *
      * @param clientConfig the current config
      */
-    public setup(clientConfig: ClientConfig): void {
+    public abstract setup(clientConfig: ClientConfig): void;
 
-        // to be filled
+    /**
+     * the method where all the magic takes place. called in gameloop
+     * to render all entities and other stuff.
+     */
+    public abstract render(): void;
+
+    /**
+     * set the current visible world
+     */
+    public abstract async setWorld(world: World): Promise<void>;
+
+    /**
+     * get the current world
+     */
+    public getWorld(): World {
+
+        return this.worldRenderer.getWorld();
     }
 
     /**
-     * add an entity to the current game scene
+     * set the current camera as the users view into the game
      */
-    public addEntity(entity: RenderableEntity): void {
+    public setCamera(camera: Camera): void {
 
-        this.entities.push(entity);
+        this.currentCamera = camera;
     }
 
     /**
-     * get all renderable entities
+     * get the current active camera
      */
-    protected getRenderableEntities(): RenderableEntity[] {
+    public getCamera(): Camera {
 
-        const renderableEntities: RenderableEntity[] = [];
-        this.entities.forEach((entity) => {
-
-            // only visible entities and entities that have an image
-            if (entity.isVisible() && entity.getImage())
-                renderableEntities.push(entity);
-        });
-
-        // just return the currently visible entities
-        return renderableEntities;
+        return this.currentCamera;
     }
 
     /**

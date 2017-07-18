@@ -5,6 +5,4 @@
  * https://opensource.org/licenses/MIT
  */
 
-export * from './EventName';
-export * from './EventEmitter';
-export * from './GenericEventEmitter';
+export * from './WindowResizeEvent';

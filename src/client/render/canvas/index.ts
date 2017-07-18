@@ -5,6 +5,6 @@
  * https://opensource.org/licenses/MIT
  */
 
-export * from './EventName';
-export * from './EventEmitter';
-export * from './GenericEventEmitter';
+export * from './CanvasEntityRenderer';
+export * from './CanvasRenderer';
+export * from './CanvasWorldRenderer';

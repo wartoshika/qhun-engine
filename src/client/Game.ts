@@ -5,17 +5,10 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { Renderer } from './render';
-import { Entity } from './entity';
-import { Scene } from './scene';
-import { World } from './world';
-import { Camera, BaseCamera } from './camera';
-
-import {
-    Singleton, Log
-} from '../shared';
-
-declare type Thing = Entity | Scene | World | Camera;
+import { Singleton } from '../shared/helper/Singleton';
+import { World } from './world/World';
+import { Log } from '../shared/log/Log';
+import { Renderer } from './render/Renderer';
 
 /**
  * a class that handles adding of entities, cameras, physics ...
@@ -23,24 +16,9 @@ declare type Thing = Entity | Scene | World | Camera;
 export class Game extends Singleton {
 
     /**
-     * the holder of the currently visible scene
+     * the current active world instance
      */
-    protected currentScene: Scene;
-
-    /**
-     * the stack of the entities that are currently in the game
-     */
-    protected currentEntities: Entity[] = [];
-
-    /**
-     * the current camera
-     */
-    protected currentCamera: Camera;
-
-    /**
-     * holder of the registered worlds
-     */
-    protected worldStack: { [worldName: string]: World } = {};
+    protected currentWorld: World;
 
     /**
      * logger instance
@@ -57,150 +35,22 @@ export class Game extends Singleton {
     }
 
     /**
-     * add a thing to the game
-     *
-     * @param things the things to add
-     */
-    public add(...things: Thing[]): void {
-
-        // iterate through all things
-        things.forEach((thing) => {
-
-            // check the type of the thing
-            if (thing instanceof Entity) {
-
-                this.addEntity(thing as Entity);
-            } else if (thing instanceof Scene) {
-
-                this.addScene(thing as Scene);
-            } else if (thing instanceof World) {
-
-                this.addWorld(thing as World);
-            } else if (thing instanceof BaseCamera) {
-
-                this.addCamera(thing as Camera);
-            }
-        });
-    }
-
-    /**
-     * add one entity to the game
-     *
-     * @param entity the entity to add
-     */
-    public addEntity(entity: Entity): void {
-
-        if (this.currentEntities.indexOf(entity) === -1) {
-
-            // add the entity
-            this.currentEntities.push(entity);
-            this.renderer.addEntity(entity);
-        }
-    }
-
-    /**
-     * add a camera to the game
-     *
-     * @param camera the camera to add
-     */
-    public addCamera(camera: Camera): void {
-
-        // currently only one camera can be added.
-        this.renderer.setCamera(camera);
-        this.currentCamera = camera;
-    }
-
-    /**
-     * add one world to the game
-     *
-     * @param world the world to add
-     */
-    public addWorld(world: World): void {
-
-        this.worldStack[world.getName()] = world;
-    }
-
-    /**
-     * add one scene to the game
-     *
-     * @param scene the scene to add
-     * @param autostart should the scene start?
-     */
-    public addScene(scene: Scene, autostart: boolean = false): void {
-
-        if (autostart) {
-
-            // load the scene
-            this.loadScene(scene);
-        }
-    }
-
-    /**
-     * get the currently visible scene
-     */
-    public getCurrentScene(): Scene {
-
-        return this.currentScene;
-    }
-
-    /**
-     * load a new scene
-     *
-     * @param scene the scene to load
-     */
-    public async loadScene(scene: Scene): Promise<void> {
-
-        const promise = new Promise<void>((r) => r());
-
-        // destruct the current scene
-        if (this.currentScene) {
-
-            // wait for complete destruction
-            await this.currentScene.destroy(this);
-        }
-
-        // set the new scene
-        this.currentScene = scene;
-        this.currentScene.create(this);
-    }
-
-    /**
-     * load a world and render it in the background
+     * load the given world
      *
      * @param world the world name to load
      */
-    public async loadWorld(world: string): Promise<void> {
+    public async loadWorld(world: World): Promise<void> {
 
-        // does the world exists?
-        if (!(world in this.worldStack)) {
-
-            // print error
-            this.logger.error('Trying to load', world, 'but this world does not exists');
-            return;
-        }
-
-        const targetWorld = this.worldStack[world];
+        // set the current world variable
+        this.currentWorld = world;
 
         // render the world tile clusters
-        targetWorld.generateTileCluster();
+        this.currentWorld.generateTileCluster();
 
         // set the world in the renderer
-        await this.renderer.setWorld(targetWorld);
-    }
+        await this.renderer.setWorld(this.currentWorld);
 
-    /**
-     * get all entities that are in the game
-     */
-    public getCurrentEntities(): Entity[] {
-
-        return this.currentEntities;
-    }
-
-    /**
-     * get the current visible camera
-     */
-    public getCurrentCamera(): Camera {
-
-        return this.currentCamera;
+        // world on init event
+        this.currentWorld.onWorldInit();
     }
 }

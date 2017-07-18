@@ -135,10 +135,11 @@ export abstract class AnimationEntity extends Entity implements AnimationableEnt
 
     /**
      * is the entity visible? if not, the renderer will not render this entity
+     * @info isVisible() will return false if no template is given!
      */
     public isVisible(): boolean {
 
-        return this.visible;
+        return this.visible && !!this.currentTemplate;
     }
 
     /**

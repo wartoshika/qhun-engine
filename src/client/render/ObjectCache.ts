@@ -6,7 +6,7 @@
  */
 
 import { Renderer } from './Renderer';
-import { CanvasRenderer } from './CanvasRenderer';
+import { CanvasRenderer } from './canvas/CanvasRenderer';
 import { AssetType, AssetStorage, Asset } from '../asset';
 
 import { Singleton, inject, Storage } from '../../shared';

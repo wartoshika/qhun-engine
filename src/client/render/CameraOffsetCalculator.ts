@@ -9,12 +9,15 @@ import { Camera } from '../camera';
 import { AssetStorage, Image, AssetType } from '../asset';
 import { RenderableEntity } from '../entity';
 import { Vector2D, Dimension } from '../../shared/math';
+import { Singleton } from '../../shared/helper/Singleton';
 
 /**
  * a helper class to calculate the right offset and scale of objects
  * when a camera is unsed to display the game
  */
-export class CameraOffsetCalculator {
+export class CameraOffsetCalculator extends Singleton {
+
+    private assetStorage: AssetStorage = AssetStorage.getInstance<AssetStorage>();
 
     /**
      * calculates the entity offset and scaleability of its image by using one
@@ -23,13 +26,13 @@ export class CameraOffsetCalculator {
      *
      * @return the array for ctx.drawImage() or boolean === false if the entity is not within the canvas
      */
-    public static imageScaleDrawEntity(entity: RenderableEntity, camera: Camera): any[] | boolean {
+    public imageScaleDrawEntity(entity: RenderableEntity, camera: Camera): any[] | boolean {
 
         // get the entity image scale from the camera
         const scale = camera.getScale();
 
         // get the original image as ImageBitmap
-        const entityImage = CameraOffsetCalculator.assetStorage.getAsset<Image>(
+        const entityImage = this.assetStorage.getAsset<Image>(
             entity.getImage(), AssetType.Image
         ).getData() as ImageBitmap;
 
@@ -38,12 +41,12 @@ export class CameraOffsetCalculator {
         const newHeight = entityImage.width * scale * entity.getScale();
 
         // calculate position
-        const newPosition = CameraOffsetCalculator.calculatePositionOffsetForCameraFollow(
+        const newPosition = this.calculatePositionOffsetForCameraFollow(
             entity.getPosition(), camera
         );
 
         // check if visible
-        if (!CameraOffsetCalculator.positionIsWithinCameraRange(
+        if (!this.positionIsWithinCameraRange(
             newPosition, new Vector2D(newWidth, newHeight)
         )) return false;
 
@@ -69,7 +72,7 @@ export class CameraOffsetCalculator {
      *
      * @return the array for ctx.drawImage() or boolean === false if the entity is not within the canvas
      */
-    public static imageScaleDrawTile(originalPosition: Dimension, tile: Image, camera: Camera): any[] | boolean {
+    public imageScaleDrawTile(originalPosition: Dimension, tile: Image, camera: Camera): any[] | boolean {
 
         // get the current camera scale
         const scale = camera.getScale();
@@ -83,13 +86,13 @@ export class CameraOffsetCalculator {
 
         // calculate position
         // @todo: result is not 100% accurate... need further investigations
-        const newPosition = CameraOffsetCalculator.calculatePositionOffsetForCameraFollow(
+        const newPosition = this.calculatePositionOffsetForCameraFollow(
             new Vector2D(originalPosition.x * scale, originalPosition.y * scale),
             camera
         );
 
         // check if visible
-        if (!CameraOffsetCalculator.positionIsWithinCameraRange(
+        if (!this.positionIsWithinCameraRange(
             newPosition, new Vector2D(newWidth, newHeight)
         )) return false;
 
@@ -106,18 +109,16 @@ export class CameraOffsetCalculator {
         ];
     }
 
-    private static assetStorage: AssetStorage = AssetStorage.getInstance<AssetStorage>();
-
     /**
      * check if an object is visible by the camera
      *
      * @param position
      * @param objectDimension
      */
-    private static positionIsWithinCameraRange(position: Vector2D, objectDimension: Vector2D): boolean {
+    private positionIsWithinCameraRange(position: Vector2D, objectDimension: Vector2D): boolean {
 
         // @todo: no check with window here, use the canvas object itself
-        const canvasDim = CameraOffsetCalculator.getCanvasDimension();
+        const canvasDim = this.getCanvasDimension();
         const canvasWidth = canvasDim.x;
         const canvasHeight = canvasDim.y;
 
@@ -131,7 +132,7 @@ export class CameraOffsetCalculator {
     /**
      * get the current canvas dimension
      */
-    private static getCanvasDimension(): Vector2D {
+    private getCanvasDimension(): Vector2D {
 
         const canvas = document.querySelector('canvas');
         return new Vector2D(
@@ -143,7 +144,7 @@ export class CameraOffsetCalculator {
     /**
      * calculates the position offset for camera following
      */
-    private static calculatePositionOffsetForCameraFollow(originalPosition: Vector2D, camera: Camera): Vector2D {
+    private calculatePositionOffsetForCameraFollow(originalPosition: Vector2D, camera: Camera): Vector2D {
 
         // first check if there is any following
         const entity = camera.getFollowingEntity();
@@ -152,7 +153,7 @@ export class CameraOffsetCalculator {
         if (!entity) return originalPosition;
 
         // calculate the offset. the entity should be in the center of the screen
-        const canvasDim = CameraOffsetCalculator.getCanvasDimension();
+        const canvasDim = this.getCanvasDimension();
 
         // calculate the center position for the entity and shift the other
         // vectors.

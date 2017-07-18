@@ -30,7 +30,7 @@ export abstract class EventEmitter<E = EventName> {
      * @param event the desired event
      * @param listener the listener function
      */
-    public on(event: E, listener: () => any): this {
+    public on(event: E, listener: (...args: any[]) => any): this {
 
         // create array context if not allready done
         if (!Array.isArray(EventEmitter.eventStack[event as any])) {

@@ -7,10 +7,14 @@
 
 import { OnWorldInit } from './OnWorldInit';
 import { GravityForce } from '../physic';
-import { Vector2D, Dimension } from '../../shared/math';
+import {
+    Vector2D, Dimension, Log, GenericEventEmitter,
+    EventName
+} from '../../shared';
 import { TileMap, AssetStorage, AssetType } from '../asset';
 import { Camera } from '../camera';
 import { TilemapLoader } from '../asset/assetTypeLoader';
+import { Entity } from '../../shared/entity';
 
 /**
  * a class to handle world spefific things. a world could also be a level
@@ -24,6 +28,11 @@ export abstract class World implements OnWorldInit {
     protected map: TileMap;
 
     /**
+     * the stack of entities in this world
+     */
+    protected entityStack: Entity[] = [];
+
+    /**
      * the clustered map
      * first dimension is the layer
      * second dimension is the x cluster number
@@ -31,6 +40,16 @@ export abstract class World implements OnWorldInit {
      * forth dimension is the tile number array
      */
     protected tileCluster: number[][][][] = [];
+
+    /**
+     * all available cameras
+     */
+    protected camera: Camera[] = [];
+
+    /**
+     * the logger instance
+     */
+    private logger: Log = Log.getLogger(World.name);
 
     /**
      * @param map the map to show
@@ -92,6 +111,31 @@ export abstract class World implements OnWorldInit {
     }
 
     /**
+     * show the given camera to the player
+     *
+     * @param camera the camera to show. if no camera is given, the first added camera will be used
+     */
+    public show(camera?: Camera): void {
+
+        // camera valid?
+        camera = camera ? camera : this.camera[0];
+        if (!camera) {
+
+            this.logger.error('Trying to show a world but no camera has been added or given!');
+            return;
+        }
+
+        // check if the given camera has been added, if not do it
+        if (this.camera.indexOf(camera) === -1) this.camera.push(camera);
+
+        // activate the camera
+        GenericEventEmitter.getInstance<GenericEventEmitter>().emit(
+            EventName.CameraChange, {},
+            camera, this
+        );
+    }
+
+    /**
      * set the current cluster size of the world
      *
      * @param clusterSize the new size
@@ -99,6 +143,54 @@ export abstract class World implements OnWorldInit {
     public setTileClusterSize(clusterSize: number): void {
 
         this.tileClusterSize = clusterSize;
+    }
+
+    /**
+     * add an entity to this world
+     */
+    public addEntity(...entites: Entity[]): void {
+
+        this.entityStack.push(...entites);
+    }
+
+    /**
+     * remove an entity from the world
+     */
+    public removeEntity(...entites: Entity[]): void {
+
+        entites.forEach((entity) => {
+            this.entityStack.splice(this.entityStack.indexOf(entity), 1);
+        });
+    }
+
+    /**
+     * get all world entities
+     */
+    public getEntities(): Entity[] {
+
+        return this.entityStack;
+    }
+
+    /**
+     * adds a camera to the world
+     *
+     * @param camera the camera to add
+     */
+    public addCamera(...camera: Camera[]): void {
+
+        this.camera.push(...camera);
+    }
+
+    /**
+     * remove a camera from the world
+     *
+     * @param camera the camera to remove
+     */
+    public removeCamera(...cameras: Camera[]): void {
+
+        cameras.forEach((camera) => {
+            this.camera.splice(this.camera.indexOf(camera), 1);
+        });
     }
 
     /**

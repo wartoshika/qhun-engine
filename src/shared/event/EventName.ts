@@ -15,4 +15,7 @@ export enum EventName {
 
     BeforeLoaded = 'BeforeLoaded' as any,
     AfterLoaded = 'AfterLoaded' as any,
+
+    WindowResize = 'WindowResize' as any,
+    CameraChange = 'CameraChange' as any,
 }

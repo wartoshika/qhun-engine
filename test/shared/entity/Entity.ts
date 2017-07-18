@@ -32,4 +32,17 @@ class TestEntity {
         entity.setPosition(pos);
         expect(entity.getPosition()).to.eq(pos);
     }
+
+    @test "entity has a width and a height"() {
+
+        // default case
+        let entity = new StubEntity(10, 15);
+        expect(entity.getWidth()).to.eq(10);
+        expect(entity.getHeight()).to.eq(15);
+
+        // branch test without params
+        entity = new StubEntity();
+        expect(entity.getWidth()).to.eq(0);
+        expect(entity.getHeight()).to.eq(0);
+    }
 }

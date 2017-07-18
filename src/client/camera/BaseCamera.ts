@@ -30,11 +30,6 @@ export abstract class BaseCamera implements Camera {
     private followingEntity: Entity = null;
 
     /**
-     * the current camera world bounds
-     */
-    private worldBounds: Vector2D = null;
-
-    /**
      *
      * @param scale the scale of the world. 1 means that a tile of 32x32 will renderes on 32x32 pixel. scane 5 means that a tile of 32x32 will be rendered as (32*5)x(32*5) pixel...
      * @param mode the camera mode
@@ -92,32 +87,5 @@ export abstract class BaseCamera implements Camera {
     public getFollowingEntity(): Entity {
 
         return this.followingEntity;
-    }
-
-    /**
-     * if the camera should be allways within the world, set the world
-     * bounds to the current active world
-     */
-    public setWorldBounds(world: World): void {
-
-        const dimension = world.getWorldDimension();
-        this.worldBounds = new Vector2D(
-            dimension.x,
-            dimension.y
-        );
-    }
-
-    /**
-     * get the current world bounds.
-     *
-     * @warning return value can be null if no bounds are available!
-     */
-    public getWorldBounds(): Vector2D {
-
-        const wb = this.worldBounds;
-        if (!wb) return wb;
-
-        // add the current camera scale
-        return wb.multiply(new Vector2D(this.getScale(), this.getScale()));
     }
 }

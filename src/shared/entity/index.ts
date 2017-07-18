@@ -7,4 +7,3 @@
 
 export * from './CanCollide';
 export * from './Entity';
-export * from './CollidableEntity';

@@ -6,11 +6,13 @@
  */
 
 import { World } from '@qhun-engine/client';
+import { logMethodCall } from '@qhun-engine/shared';
 
 export class Level1 extends World {
 
+    @logMethodCall
     public onWorldInit(): void {
 
-        console.log('world init!');
+        //
     }
 }

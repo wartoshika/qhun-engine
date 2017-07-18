@@ -6,8 +6,11 @@
  */
 
 export * from './Renderer';
-export * from './CanvasRenderer';
 export * from './BasicRenderer';
-export * from './CanvasWorldRenderer';
 export * from './CameraOffsetCalculator';
 export * from './ObjectCache';
+export * from './WorldRenderer';
+export * from './EntityRenderer';
+export * from './BaseEntityRenderer';
+
+export * from './canvas';

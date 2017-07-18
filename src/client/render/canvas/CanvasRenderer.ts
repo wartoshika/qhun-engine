@@ -5,25 +5,23 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { Renderer } from '../render/Renderer';
-import { Dimension } from '../../shared/math';
-import { Log } from '../../shared/log';
-import { Image, AssetLoader, AssetType } from '../asset';
-import { World } from '../world';
-import { Camera } from '../camera';
-import { BasicRenderer } from '../render/BasicRenderer';
-import { ClientConfig } from '../ClientConfig';
+import { BasicRenderer } from '../BasicRenderer';
+import { Dimension } from '../../../shared/math/Dimension';
+import { ClientConfig } from '../../ClientConfig';
+import { AnimationEntity } from '../../entity/AnimationEntity';
+import { CameraOffsetCalculator } from '../CameraOffsetCalculator';
+import { World } from '../../world/World';
 import { CanvasWorldRenderer } from './CanvasWorldRenderer';
-import { CameraOffsetCalculator } from './CameraOffsetCalculator';
-
-import { RamStorage } from '../../shared/storage';
+import { CanvasEntityRenderer } from './CanvasEntityRenderer';
+import { RenderableEntity } from '../../entity/RenderableEntity';
+import { Entity as ClientEntity } from '../../entity/Entity';
 
 const FPS_OFFSET = 25;
 
 /**
  * a game renderer based on the html canvas element
  */
-export class CanvasRenderer extends BasicRenderer implements Renderer {
+export class CanvasRenderer extends BasicRenderer {
 
     /**
      * the holder of the canvas element
@@ -46,22 +44,11 @@ export class CanvasRenderer extends BasicRenderer implements Renderer {
     private clientConfig: ClientConfig;
 
     /**
-     * holder of the canvas world renderer
-     */
-    private worldRenderer: CanvasWorldRenderer = null;
-
-    /**
-     * the currently visible camera
-     */
-    private currentCamera: Camera = null;
-
-    /**
      * set up the game environment to a given dimension
      */
     public setup(clientConfig: ClientConfig): void {
 
-        // call super function
-        super.setup(clientConfig);
+        // store the config
         this.clientConfig = clientConfig;
 
         // save the dimension and create the canvas
@@ -70,14 +57,10 @@ export class CanvasRenderer extends BasicRenderer implements Renderer {
 
         // get the 2d context
         this.ctx = this.canvas.getContext('2d');
-    }
 
-    /**
-     * set the current camera as the users view into the game
-     */
-    public setCamera(camera: Camera): void {
+        // init entity renderer
+        this.entityRenderer = CanvasEntityRenderer.getInstance<CanvasEntityRenderer>();
 
-        this.currentCamera = camera;
     }
 
     /**
@@ -102,22 +85,20 @@ export class CanvasRenderer extends BasicRenderer implements Renderer {
      */
     public render(): void {
 
-        // get all entities that shoule be visible by the client
-        // @todo: only render entitites that are visible by the camera
-        const visibleEntities = this.getRenderableEntities();
+        // only render if a world renderer is present
+        if (!this.worldRenderer || !this.entityRenderer) return;
 
-        // render the entity at its center point
-        visibleEntities.forEach((entity) => {
+        // get all renderable entities and ignore invisible ones
+        // test for RenderableEntity is better but interface match is not possible...
+        const visibleEntities = this.worldRenderer
+            .getWorld().getEntities()
+            .filter((entity) => {
+                return entity instanceof ClientEntity;
+            }).forEach((entity) => {
 
-            // get the draw array
-            const renderable = CameraOffsetCalculator.imageScaleDrawEntity(entity, this.currentCamera);
-
-            // check if the element is visible
-            if (!renderable) return;
-
-            // calculate the new height and width and draw the entity
-            (this.ctx as any).drawImage(...(renderable as any[]));
-        });
+                // render the entity at its center point
+                this.entityRenderer.renderEntity(entity as RenderableEntity);
+            });
 
         // print fps
         this.printFps();
@@ -135,15 +116,12 @@ export class CanvasRenderer extends BasicRenderer implements Renderer {
         this.worldRenderer = new CanvasWorldRenderer(
             world, this.canvas, this.ctx, this.currentCamera
         );
-    }
 
-    /**
-     * get the current renderd world
-     */
-    public getWorld(): World {
+        // let the entity renderer know about the existing of the world renderer
+        this.entityRenderer.setWorldRenderer(this.worldRenderer);
 
-        if (!this.worldRenderer) return;
-        return this.worldRenderer.getWorld();
+        // watit until the clusters has been created
+        return await this.worldRenderer.preRenderClusterTiles();
     }
 
     /**

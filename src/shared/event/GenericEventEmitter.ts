@@ -5,6 +5,9 @@
  * https://opensource.org/licenses/MIT
  */
 
-export * from './EventName';
-export * from './EventEmitter';
-export * from './GenericEventEmitter';
+import { Singleton } from '../helper';
+
+/**
+ * a generic event emitter class
+ */
+export class GenericEventEmitter extends Singleton { }

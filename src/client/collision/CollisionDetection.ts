@@ -5,7 +5,7 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { Entity, CollidableEntity, Direction } from '../entity';
+import { Entity } from '../entity';
 import { World } from '../world';
 import { Camera } from '../camera';
 import { Vector2D } from '../../shared/math';
@@ -13,16 +13,13 @@ import { Vector2D } from '../../shared/math';
 export class CollisionDetection {
 
     /**
-     * checks if the given entities collides with the world
+     * check if entities collides with the world
      *
-     * @param entities the entities to test
-     * @param world the current world
+     * @param world the world to check
      */
-    public static entitiesWithWorld(
-        entities: Entity[], world: World, camera: Camera
-    ): void {
+    public static entitiesWithWorld(world: World): void {
 
-        // only take entities that can collide
+        /*// only take entities that can collide
         entities.filter((entity) => entity instanceof CollidableEntity).forEach((entity: CollidableEntity) => {
 
             // calculate the entity position in every direction from its
@@ -79,6 +76,6 @@ export class CollisionDetection {
                 // set the direction
                 entity.setDirectionBlocked(direction, collision);
             });
-        });
+        });*/
     }
 }

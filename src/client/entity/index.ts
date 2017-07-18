@@ -7,7 +7,5 @@
 
 export * from './Entity';
 export * from './RenderableEntity';
-export * from './CollidableEntity';
-export * from './CanCollide';
 export * from './AnimationableEntity';
 export * from './AnimationEntity';

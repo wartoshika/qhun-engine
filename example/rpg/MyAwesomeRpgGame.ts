@@ -62,26 +62,23 @@ class MyAwesomeRpgGame extends Client {
     @logMethodCall
     public async loaded(myGame: Game): Promise<void> {
 
-        // create entities
-        // link is a CollidableEntity so collision detection
-        // is automaticly on
+        // create player entity
         this.link = new Link();
 
         // create game objects
         const camera = new OrthogonalCamera(1.5);
         const world = new Level1('level1', 4);
 
-        // add game objects
-        myGame.add(this.link, world, camera);
+        // add global world things
+        world.addEntity(this.link);
+        world.addCamera(camera);
 
-        // load the world
-        await myGame.loadWorld('level1');
-
-        // follow the player with the camera
+        // camera should follow link
         camera.followEntity(this.link);
 
-        // let the camera stick to the world
-        camera.setWorldBounds(world);
+        // finally load the world
+        await myGame.loadWorld(world);
+        world.show(camera);
     }
 
     /**

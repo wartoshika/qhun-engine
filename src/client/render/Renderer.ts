@@ -40,11 +40,6 @@ export interface Renderer {
     postRender?(): void;
 
     /**
-     * add one or many entities to the current game scene
-     */
-    addEntity(entity: RenderableEntity): void;
-
-    /**
      * set the current visible world as background
      */
     setWorld(world: World): Promise<void>;

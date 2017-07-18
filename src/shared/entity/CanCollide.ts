@@ -6,7 +6,7 @@
  */
 
 import { CollisionType } from '../collision';
-import { CollidableEntity } from '../entity/CollidableEntity';
+import { Entity } from './Entity';
 
 /**
  * an interface that mark an entity as collidable with other
@@ -22,5 +22,5 @@ export interface CanCollide {
     /**
      * an event handler that will fire if another entity collided with this instance
      */
-    onCollision(otherEntity: CollidableEntity): void;
+    onCollision(otherEntity: Entity): void;
 }

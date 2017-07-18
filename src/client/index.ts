@@ -16,6 +16,7 @@ export * from './physic';
 export * from './render';
 export * from './world';
 export * from './scene';
+export * from './event';
 
 export * from './Client';
 export * from './ClientConfig';

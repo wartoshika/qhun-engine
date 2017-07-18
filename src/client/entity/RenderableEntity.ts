@@ -6,9 +6,9 @@
  */
 
 import { Image } from '../asset';
-import { Vector2D } from '../../shared/math';
+import { Vector2D, Entity } from '../../shared';
 
-export interface RenderableEntity {
+export interface RenderableEntity extends Entity {
 
     /**
      * get the image asset that displays the current entity

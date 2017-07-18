@@ -13,8 +13,26 @@ import { Vector2D } from '../math';
 export abstract class Entity {
 
     constructor(
+        protected entityWidth: number = 0,
+        protected entityHeight: number = 0,
         protected position: Vector2D = new Vector2D(0, 0)
     ) { }
+
+    /**
+     * get the width of the entity
+     */
+    public getWidth(): number {
+
+        return this.entityWidth;
+    }
+
+    /**
+     * get the height of the entity
+     */
+    public getHeight(): number {
+
+        return this.entityHeight;
+    }
 
     /**
      * get the current position of the entity ( top left )
