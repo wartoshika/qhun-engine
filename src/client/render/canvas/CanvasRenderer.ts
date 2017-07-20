@@ -6,7 +6,7 @@
  */
 
 import { BasicRenderer } from '../BasicRenderer';
-import { Dimension } from '../../../shared/math/Dimension';
+import { Dimension, Vector2D, EventName } from '../../../shared';
 import { ClientConfig } from '../../ClientConfig';
 import { AnimationEntity } from '../../entity/AnimationEntity';
 import { CameraOffsetCalculator } from '../CameraOffsetCalculator';
@@ -59,7 +59,12 @@ export class CanvasRenderer extends BasicRenderer {
         this.ctx = this.canvas.getContext('2d');
 
         // init entity renderer
-        this.entityRenderer = CanvasEntityRenderer.getInstance<CanvasEntityRenderer>();
+        this.entityRenderer = new CanvasEntityRenderer(
+            Vector2D.from(
+                this.gameDimension.x, this.gameDimension.y
+            )
+        );
+
 
     }
 
@@ -163,6 +168,18 @@ export class CanvasRenderer extends BasicRenderer {
         this.canvas.setAttribute('width', `${this.gameDimension.x}px`);
         this.canvas.setAttribute('height', `${this.gameDimension.y}px`);
         this.canvas.setAttribute('style', 'display:block;position:absolute;');
+
+        // start listen to window resize event
+        this.on(EventName.WindowResize, (newWindowSize: Vector2D) => {
+
+            // resize the canvas
+            this.canvas.width = newWindowSize.x;
+            this.canvas.height = newWindowSize.y;
+
+            // apply to dom
+            this.canvas.setAttribute('width', `${newWindowSize.x}px`);
+            this.canvas.setAttribute('height', `${newWindowSize.y}px`);
+        });
     }
 
 }

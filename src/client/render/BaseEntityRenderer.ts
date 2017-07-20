@@ -23,16 +23,13 @@ export abstract class BaseEntityRenderer extends Singleton implements EntityRend
     protected worldRenderer: WorldRenderer;
 
     /**
-     * the current drawing dimension
-     */
-    protected drawingDimension: Vector2D;
-
-    /**
      * logger instance
      */
     private logger: Log = Log.getLogger(BaseEntityRenderer.name);
 
-    constructor() {
+    constructor(
+        protected drawingDimension: Vector2D
+    ) {
 
         super();
 

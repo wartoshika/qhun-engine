@@ -9,7 +9,7 @@ import { Renderer } from './Renderer';
 import { CanvasRenderer } from './canvas/CanvasRenderer';
 import { AssetType, AssetStorage, Asset } from '../asset';
 
-import { Singleton, inject, Storage } from '../../shared';
+import { Singleton, inject, Storage, logMethodCall } from '../../shared';
 
 /**
  * a class that handles the ramstorage cache to transform all assets
@@ -44,6 +44,7 @@ export class ObjectCache extends Singleton {
      *
      * @param assetTypes the asset types to transform
      */
+    @logMethodCall
     private async toImageBitmap(...assetTypes: AssetType[]): Promise<void> {
 
         const elements: Asset[] = [];
@@ -70,5 +71,8 @@ export class ObjectCache extends Singleton {
                 this.assetStorage.overrideAsset(element);
             }));
         });
+
+        // await the conversion
+        return Promise.all(convertPromiseStack).then(() => { return; });
     }
 }

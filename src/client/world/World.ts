@@ -194,6 +194,14 @@ export abstract class World implements OnWorldInit {
     }
 
     /**
+     * get the tile cluster as a tile number multidimensional array
+     */
+    public getTileCluster(): number[][][][] {
+
+        return this.tileCluster;
+    }
+
+    /**
      * get the tile numbers for a position on the map
      * if the position is not on the map, a -2 will be returned
      *
