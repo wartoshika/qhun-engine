@@ -27,7 +27,12 @@ export abstract class BaseCamera implements Camera {
     /**
      * the entitiy which the camera should follow
      */
-    private followingEntity: Entity = null;
+    protected followingEntity: Entity = null;
+
+    /**
+     * the position of the camera
+     */
+    protected position: Vector2D = Vector2D.from(0, 0);
 
     /**
      *
@@ -37,6 +42,11 @@ export abstract class BaseCamera implements Camera {
     constructor(
         private scale: number = 1
     ) { }
+
+    /**
+     * checks if an entity is visible by this camera
+     */
+    public abstract isEntityVisible(entity: Entity): boolean;
 
     /**
      * get the camera mode

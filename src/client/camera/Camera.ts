@@ -50,4 +50,9 @@ export interface Camera {
      */
     getFollowingEntity(): Entity;
 
+    /**
+     * checks if an entity is visible by this camera
+     */
+    isEntityVisible(entity: Entity): boolean;
+
 }

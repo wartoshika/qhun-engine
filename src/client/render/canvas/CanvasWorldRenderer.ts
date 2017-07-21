@@ -123,6 +123,7 @@ export class CanvasWorldRenderer extends Singleton implements WorldRenderer {
         // generate clusters and display a cluster of one or many tiles
         // are visible by the active camera
 
+
     }
 
     /**

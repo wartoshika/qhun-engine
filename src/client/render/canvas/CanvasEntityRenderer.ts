@@ -18,8 +18,11 @@ export class CanvasEntityRenderer extends BaseEntityRenderer {
      */
     public renderEntity(entity: RenderableEntity): void {
 
+        // get the camera to check if the entity is visible
+        const camera = this.worldRenderer.getActiveCamera();
+
         // check if the entity is visible
-        if (!entity.isVisible() || !this.entityVisibleByCamera(entity)) return;
+        if (!entity.isVisible() || !camera.isEntityVisible(entity)) return;
 
         // get the position for the entity
 

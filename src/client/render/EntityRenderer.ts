@@ -16,11 +16,6 @@ import { WorldRenderer } from './WorldRenderer';
 export interface EntityRenderer {
 
     /**
-     * is the given entity visible by the given camera?
-     */
-    entityVisibleByCamera(entity: RenderableEntity, camera: Camera): boolean;
-
-    /**
      * renders the given entity
      */
     renderEntity(entity: RenderableEntity): void;
