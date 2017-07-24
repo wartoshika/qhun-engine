@@ -10,7 +10,7 @@ import { TileMap } from '../TileMap';
 import { Image } from '../Image';
 import { TypeLoader } from './TypeLoader';
 import { Request } from '../../network';
-import { Singleton, Binary } from '../../../shared';
+import { Singleton, Binary, Vector2D } from '../../../shared';
 
 /**
  * the image asset loader class
@@ -72,9 +72,9 @@ export class TilemapLoader extends Singleton implements TypeLoader {
     private registerTilemapSubImages(instance: TileMap, bitmap: ImageBitmap): Image[] {
 
         // get the amount of tiles
-        const dimension = instance.getDimension();
-        const horizontalTileAmount = bitmap.width / dimension.x;
-        const verticalTileAmount = bitmap.height / dimension.y;
+        const tileSize = instance.getDimension();
+        const horizontalTileAmount = bitmap.width / tileSize.x;
+        const verticalTileAmount = bitmap.height / tileSize.y;
 
         // save the world dimension
         instance.worldHeight = verticalTileAmount;
@@ -84,6 +84,10 @@ export class TilemapLoader extends Singleton implements TypeLoader {
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
         const imageStack: Image[] = [];
+
+        // set canvas size
+        canvas.width = tileSize.x;
+        canvas.height = tileSize.y;
 
         // the tile number counter
         let tileCounter = 0;
@@ -95,13 +99,13 @@ export class TilemapLoader extends Singleton implements TypeLoader {
             for (let h = 0; h < horizontalTileAmount; h++) {
 
                 // clear to get a transparent background
-                ctx.clearRect(0, 0, dimension.x, dimension.y);
+                ctx.clearRect(0, 0, tileSize.x, tileSize.y);
 
                 // draw the image at the canvas
                 ctx.drawImage(
                     bitmap,
-                    -(h * dimension.x),
-                    -(v * dimension.y)
+                    -(h * tileSize.x),
+                    -(v * tileSize.y)
                 );
 
                 // get the image as data uri to register the new image

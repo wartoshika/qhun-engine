@@ -69,4 +69,13 @@ export class OrthogonalCamera extends BaseCamera {
             &&
             this.drawingDimension.y >= entityScaledPoisition.y;
     }
+
+    /**
+     * translates the given position of an entity or asset
+     * to a new position including scale and entity following
+     */
+    public translatePosition(currentPosition: Vector2D): Vector2D {
+
+        return currentPosition.multiply(this.getScaleVector());
+    }
 }

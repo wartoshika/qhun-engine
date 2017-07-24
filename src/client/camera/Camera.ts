@@ -55,4 +55,10 @@ export interface Camera {
      */
     isEntityVisible(entity: Entity): boolean;
 
+    /**
+     * translates the given position of an entity or asset
+     * to a new position including scale and entity following
+     */
+    translatePosition(currentPosition: Vector2D): Vector2D;
+
 }

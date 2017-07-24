@@ -8,7 +8,7 @@
 import { World } from '../../world/World';
 import { Camera } from '../../camera/Camera';
 import { WorldRenderer } from '../WorldRenderer';
-import { Singleton, EventName, Binary } from '../../../shared';
+import { Singleton, EventName, Binary, Vector2D } from '../../../shared';
 import { AssetStorage, AssetType, Image } from '../../asset';
 
 /**
@@ -122,7 +122,48 @@ export class CanvasWorldRenderer extends Singleton implements WorldRenderer {
 
         // generate clusters and display a cluster of one or many tiles
         // are visible by the active camera
+        const tilemap = this.world.getTileMap();
+        const tilemapDimension = Vector2D.from(
+            tilemap.getDimension().x, tilemap.getDimension().y
+        ).multiply(Vector2D.from(this.world.getTileClusterSize()));
 
+        // iterate through the layers
+        for (let layer = 0; layer < tilemap.getLayerCount(); layer++) {
+
+            // y coordinate
+            for (const yCluster of this.renderedClusterCache[layer]) {
+
+                // fetch the coordinate
+                const yCoordinate = this.renderedClusterCache[layer].indexOf(yCluster);
+
+                // x coordinate
+                for (const xCluster of this.renderedClusterCache[layer][yCoordinate]) {
+
+                    // fetch the coordinate
+                    const xCoordinate = this.renderedClusterCache[layer][yCoordinate].indexOf(xCluster);
+
+                    // get information to render the cluster
+                    // calculate the target position for the
+                    // cluster tile and add the camera scale
+                    const sizeVector = Vector2D.from(
+                        xCoordinate * tilemapDimension.x,
+                        yCoordinate * tilemapDimension.y
+                    );
+
+                    const position = this.camera.translatePosition(sizeVector);
+
+                    // draw it!
+                    this.ctx.drawImage(
+                        xCluster,
+                        0, 0,
+                        sizeVector.x, sizeVector.y,
+                        position.x, position.y,
+                        sizeVector.x, sizeVector.y
+                    );
+                }
+            }
+
+        }
 
     }
 
@@ -138,6 +179,9 @@ export class CanvasWorldRenderer extends Singleton implements WorldRenderer {
         ctx: CanvasRenderingContext2D,
         clusterSize: number
     ): Promise<ImageBitmap> {
+
+        const tilemap = this.world.getTileMap();
+        const tilemapDimension = tilemap.getDimension();
 
         // clear the tmp canvas
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -160,19 +204,20 @@ export class CanvasWorldRenderer extends Singleton implements WorldRenderer {
                     assetName, AssetType.Image
                 ).getData() as ImageBitmap;
 
+                // increase y
+                if (Math.floor(index / clusterSize) > yHelper)
+                    yHelper++;
+
                 // draw the tile on the tmp canvas context
                 ctx.drawImage(
                     tileImage,
                     0, 0,
                     tileImage.width, tileImage.height,
-                    xHelper, yHelper,
+                    xHelper * tilemapDimension.x,
+                    yHelper * tilemapDimension.y,
                     tileImage.width, tileImage.height
                 );
             }
-
-            // increase y
-            if (Math.floor(index / clusterSize) > yHelper)
-                yHelper++;
         });
 
         // take the canvas picture as cluster image
