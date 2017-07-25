@@ -8,7 +8,7 @@
 import { World } from '../../world/World';
 import { Camera } from '../../camera/Camera';
 import { WorldRenderer } from '../WorldRenderer';
-import { Singleton, EventName, Binary, Vector2D } from '../../../shared';
+import { Singleton, EventName, Binary, Vector2D, Dimension } from '../../../shared';
 import { AssetStorage, AssetType, Image } from '../../asset';
 
 /**
@@ -18,11 +18,10 @@ export class CanvasWorldRenderer extends Singleton implements WorldRenderer {
 
     /**
      * holder of all world relevant cluster images
-     * first dimension is the layer
-     * second dimension is the cluster x
-     * third dimension is the cluster y
+     * first dim: x
+     * second dim: y
      */
-    private renderedClusterCache: ImageBitmap[][][] = [];
+    private renderedLayerCache: ImageBitmap[][] = [];
 
     /**
      * the global asset storage
@@ -63,56 +62,78 @@ export class CanvasWorldRenderer extends Singleton implements WorldRenderer {
     }
 
     /**
-     * renders all clusters into a cluster cache to speed
-     * up the drawing process if the renderer
+     * render all tile layers into a cache bitmap to speed up rendering
      */
-    public async preRenderClusterTiles(): Promise<void> {
+    public async preRenderLayers(): Promise<void> {
 
-        // get the tilemap instance
-        const tilemap = this.world.getTileMap();
-        const clusterSize = this.world.getTileClusterSize();
-        const clusters = this.world.getTileCluster();
-
-        // create a tmp rendering context
+        // build a renderable context
         const canvas = document.createElement('canvas');
-        canvas.width = tilemap.getDimension().x * clusterSize;
-        canvas.height = tilemap.getDimension().y * clusterSize;
         const ctx = canvas.getContext('2d');
 
-        // promise stack for tile rendering
-        const clusterRenderPromiseStack: Array<Promise<any>> = [];
+        // iterate through the different layers
+        const map = this.world.getGeneratedWorld();
+        const mapWidth = map[0].length;
+        const mapHeight = map[0][0].length;
 
-        // iterate through the clusters
-        clusters.forEach((xCluster, layer) => {
+        // tile size
+        const tileDimension = this.world.getTileMap().getDimension();
+        canvas.width = tileDimension.x;
+        canvas.height = tileDimension.y;
 
-            // check if the array is capable of storing the layer
-            if (!Array.isArray(this.renderedClusterCache[layer]))
-                this.renderedClusterCache[layer] = [];
+        // render stack
+        const renderConvertPromiseStack: Array<Promise<void>> = [];
 
-            // iterate through the x cluster
-            xCluster.forEach((yCluster, xCoordinate) => {
+        // iterate through the x and y axis
+        for (let x = 0; x < mapWidth; x++) {
 
-                // check if the array is capable of storing the x coordinate
-                if (!Array.isArray(this.renderedClusterCache[layer][xCoordinate]))
-                    this.renderedClusterCache[layer][xCoordinate] = [];
+            // y axis
+            for (let y = 0; y < mapHeight; y++) {
 
-                // now the y coordinate
-                yCluster.forEach((tiles, yCoordinate) => {
+                // get the tile numbers for this position
+                const positionVector = Vector2D.from(x, y);
+                const tileNumbers = this.world.getTileNumbersForPosition(positionVector);
 
-                    // store the rendered cluster
-                    clusterRenderPromiseStack.push(this.renderTmpCluster(
-                        tiles, canvas, ctx, clusterSize
-                    ).then((clusterImg) => {
+                // clear the canvas context
+                ctx.clearRect(0, 0, tileDimension.x, tileDimension.y);
 
-                        this.renderedClusterCache[layer][xCoordinate][yCoordinate] = clusterImg;
-                    }));
+                // draw the tiles
+                tileNumbers.forEach((tile, layer) => {
 
+                    // if the tile number is smaller then 0 ignore it
+                    if (tile < 0) return;
+
+                    // get the image from the asset storage
+                    const tileName = `${this.world.getName()}[${tile}]`;
+                    const tileImage = this.assetStorage.getAsset<Image>(
+                        tileName, AssetType.Image
+                    ).getData() as ImageBitmap;
+
+                    // draw the tile
+                    ctx.drawImage(
+                        tileImage, 0, 0
+                    );
                 });
-            });
-        });
 
-        // await the void promise
-        return Promise.all(clusterRenderPromiseStack).then(() => { return; });
+                // save the image
+                renderConvertPromiseStack.push(
+                    createImageBitmap(Binary.dataUriToBlob(canvas.toDataURL()))
+                        .then((bitmap) => {
+
+                            // array accessable
+                            if (!Array.isArray(this.renderedLayerCache[x])) {
+                                this.renderedLayerCache[x] = [];
+                            }
+
+                            // save the bitmap in the cache
+                            this.renderedLayerCache[x][y] = bitmap;
+                        })
+                );
+            }
+
+        }
+
+        // await the rendering process
+        return Promise.all(renderConvertPromiseStack).then(() => { return; });
     }
 
     /**
@@ -120,116 +141,46 @@ export class CanvasWorldRenderer extends Singleton implements WorldRenderer {
      */
     public render(): void {
 
-        // generate clusters and display a cluster of one or many tiles
-        // are visible by the active camera
-        const tilemap = this.world.getTileMap();
+        // iterate through the different layers
+        const map = this.world.getGeneratedWorld();
+        const mapWidth = map[0].length;
+        const mapHeight = map[0][0].length;
 
-        // iterate through the layers
-        for (let layer = 0; layer < tilemap.getLayerCount(); layer++) {
+        // iterate through the x and y axis
+        for (let x = 0; x < mapWidth; x++) {
 
-            // y coordinate
-            for (const xCluster of this.renderedClusterCache[layer]) {
+            // y axis
+            for (let y = 0; y < mapHeight; y++) {
 
-                // fetch the coordinate
-                const xCoordinate = this.renderedClusterCache[layer].indexOf(xCluster);
+                // get the multilayer image
+                const tileImage = this.renderedLayerCache[x][y];
 
-                // x coordinate
-                for (const clusterTileImage of this.renderedClusterCache[layer][xCoordinate]) {
+                // get information to render the cluster
+                // calculate the target position for the
+                // cluster tile and add the camera scale
+                const positionVector = Vector2D.from(
+                    x * tileImage.width,
+                    y * tileImage.height
+                );
 
-                    // fetch the coordinate
-                    const yCoordinate = this.renderedClusterCache[layer][xCoordinate].indexOf(clusterTileImage);
+                // get the position camera based
+                const cameraPosition = this.camera.translatePosition(positionVector);
 
-                    // get information to render the cluster
-                    // calculate the target position for the
-                    // cluster tile and add the camera scale
-                    const positionVector = Vector2D.from(
-                        xCoordinate * clusterTileImage.width,
-                        yCoordinate * clusterTileImage.height
-                    );
+                // get the cluster width and height including camera scale
+                const sizeVector = Vector2D.from(
+                    tileImage.width, tileImage.height
+                ).multiply(this.camera.getScaleVector());
 
-                    // get the position camera based
-                    const cameraPosition = this.camera.translatePosition(positionVector);
-
-                    // get the cluster width and height including camera scale
-                    const sizeVector = Vector2D.from(
-                        clusterTileImage.width, clusterTileImage.height
-                    ).multiply(this.camera.getScaleVector());
-
-                    // draw it!
-                    this.ctx.drawImage(
-                        clusterTileImage,
-                        0, 0,
-                        clusterTileImage.width, clusterTileImage.height,
-                        cameraPosition.x, cameraPosition.y,
-                        sizeVector.x, sizeVector.y
-                    );
-                }
-            }
-
-        }
-
-    }
-
-    /**
-     * renders a given tile number array on a temp rendering context
-     *
-     * @param tileNumber the tile numbers to render
-     * @param ctx the tmp rendering context
-     */
-    private async renderTmpCluster(
-        tileNumber: number[],
-        canvas: HTMLCanvasElement,
-        ctx: CanvasRenderingContext2D,
-        clusterSize: number
-    ): Promise<ImageBitmap> {
-
-        // clear the tmp canvas
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        // helper var to increment the y axis
-        let yHelper = 0;
-
-        if(tileNumber.length / 4 !== 4) {
-            console.log(tileNumber);
-        }
-
-        // iterate through the tiles
-        tileNumber.forEach((tile, index) => {
-
-            // get tile x coordinate
-            const xHelper = index % clusterSize;
-
-            // draw the tile
-            const assetName = `${this.world.getTileMap().getName()}[${tile}]`;
-
-            // check if the asset is available
-            if (this.assetStorage.hasAsset(assetName, AssetType.Image)) {
-                const tileImage = this.assetStorage.getAsset<Image>(
-                    assetName, AssetType.Image
-                ).getData() as ImageBitmap;
-
-                // increase y
-                if (Math.floor(index / clusterSize) > yHelper) {
-                    yHelper++;
-                }
-
-                // draw the tile on the tmp canvas context
-                ctx.drawImage(
+                // draw it!
+                this.ctx.drawImage(
                     tileImage,
                     0, 0,
                     tileImage.width, tileImage.height,
-                    xHelper * tileImage.width,
-                    yHelper * tileImage.height,
-                    tileImage.width, tileImage.height
+                    cameraPosition.x, cameraPosition.y,
+                    sizeVector.x, sizeVector.y
                 );
             }
-        });
+        }
 
-        // take the canvas picture as cluster image
-        const clusterImage = canvas.toDataURL();
-
-        // convert it to an imagebitmap
-        return createImageBitmap(Binary.dataUriToBlob(clusterImage));
     }
-
 }

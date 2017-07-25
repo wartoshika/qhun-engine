@@ -67,7 +67,7 @@ class MyAwesomeRpgGame extends Client {
 
         // create game objects
         const camera = new OrthogonalCamera(1.5);
-        const world = new Level1('level1', 4);
+        const world = new Level1('level1');
 
         // add global world things
         world.addEntity(this.link);

@@ -17,7 +17,7 @@ export interface WorldRenderer {
      * renders all clusters into a cluster cache to speed
      * up the drawing process if the renderer
      */
-    preRenderClusterTiles(): Promise<void>;
+    preRenderLayers(): Promise<void>;
 
     /**
      * renders the currently visible world

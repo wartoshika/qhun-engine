@@ -45,7 +45,7 @@ export class Game extends Singleton {
         this.currentWorld = world;
 
         // render the world tile clusters
-        this.currentWorld.generateTileCluster();
+        this.currentWorld.generateWorld();
 
         // set the world in the renderer
         await this.renderer.setWorld(this.currentWorld);

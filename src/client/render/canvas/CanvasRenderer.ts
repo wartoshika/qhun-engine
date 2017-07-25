@@ -64,8 +64,6 @@ export class CanvasRenderer extends BasicRenderer {
                 this.gameDimension.x, this.gameDimension.y
             )
         );
-
-
     }
 
     /**
@@ -73,8 +71,8 @@ export class CanvasRenderer extends BasicRenderer {
      */
     public preRender(): void {
 
-        // clear the current canvas
-        this.ctx.clearRect(0, 0, this.gameDimension.x, this.gameDimension.y);
+        // clear the current canvas (check performance when not clearing)
+        // this.ctx.clearRect(0, 0, this.gameDimension.x, this.gameDimension.y);
 
         // check if a world should be rendered
         if (this.worldRenderer) {
@@ -126,7 +124,7 @@ export class CanvasRenderer extends BasicRenderer {
         this.entityRenderer.setWorldRenderer(this.worldRenderer);
 
         // watit until the clusters has been created
-        return await this.worldRenderer.preRenderClusterTiles();
+        return await this.worldRenderer.preRenderLayers();
     }
 
     /**

@@ -54,5 +54,4 @@ export interface Renderer {
      */
     setCamera(camera: Camera): void;
 
-
 }
