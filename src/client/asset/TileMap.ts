@@ -14,15 +14,9 @@ import { Dimension } from '../../shared';
 export interface InlineTileMapAsset extends InlineAsset {
 
     /**
-     * the dimension of each tile
+     * the url of the world json file
      */
-    dimension: number[];
-
-    /**
-     * the amount of layers this tilemap has
-     * @default 1
-     */
-    layerCount?: number;
+    worldUrl: string;
 
     /**
      * set the tile numbers to collide with
@@ -30,26 +24,52 @@ export interface InlineTileMapAsset extends InlineAsset {
     tileCollision?: number[];
 }
 
+interface JsonWorld {
+
+    width?: number;
+    height?: number;
+    tilewidth?: number;
+    tileheight?: number;
+    layers?: TileJsonLayer[];
+}
+
+interface TileJsonLayer {
+
+    data?: number[];
+    height?: number;
+    name?: string;
+    opacity?: number;
+    type?: string;
+    visible?: boolean;
+    width?: number;
+    x?: number;
+    y?: number;
+}
+
 /**
  * an asset class to load a tilemap as world
  */
 export class TileMap extends AbstractAsset {
-
-    public worldWidth: number = 0;
-    public worldHeight: number = 0;
 
     /**
      * the tile numbers that collides with entities derived from CollidableEntity
      */
     private tileCollision: number[] = [];
 
+    /**
+     * the attributes of the json world file
+     */
+    private width = 0;
+    private height = 0;
+    private tilewidth = 0;
+    private tileheight = 0;
+    private layers: TileJsonLayer[] = [];
+
     constructor(
         name?: string,
         path?: string,
         data?: AssetDataType,
-        public map?: string[],
-        public dimension?: number[],
-        public layerCount?: number
+        protected worldUrl?: string
     ) {
 
         super(name, path, AssetType.TileMap, data);
@@ -60,7 +80,7 @@ export class TileMap extends AbstractAsset {
      */
     public getLayerCount(): number {
 
-        return this.layerCount || 1;
+        return this.layers.length;
     }
 
     /**
@@ -68,7 +88,37 @@ export class TileMap extends AbstractAsset {
      */
     public getDimension(): Dimension {
 
-        return new Dimension(this.dimension[0], this.dimension[1]);
+        return new Dimension(this.tilewidth, this.tileheight);
+    }
+
+    /**
+     * get the path to the world file
+     */
+    public getWorldUrl(): string {
+
+        return this.worldUrl;
+    }
+
+    /**
+     * get the world layers
+     */
+    public getWorld(): TileJsonLayer[] {
+
+        return this.layers;
+    }
+
+    /**
+     * override the wold of the tilemap
+     *
+     * @param world the world object to set
+     */
+    public setWorld(world: JsonWorld): void {
+
+        // take all attributes
+        Object.keys(world).forEach((key) => {
+
+            (this as any)[key] = (world as any)[key];
+        });
     }
 
     /**
@@ -78,8 +128,8 @@ export class TileMap extends AbstractAsset {
 
         // multiply with the tile width and height
         return new Dimension(
-            this.worldWidth,
-            this.worldHeight
+            this.width,
+            this.height
         );
     }
 

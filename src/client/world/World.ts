@@ -181,7 +181,7 @@ export abstract class World implements OnWorldInit {
         // merge the mapped number[][] to number[]
         return [].concat.apply([], this.generatedWorld.map((tiles, layer) => {
             return tiles[position.x][position.y];
-        }));
+        }).filter((tile) => isFinite(tile)));
     }
 
     /**
@@ -196,31 +196,44 @@ export abstract class World implements OnWorldInit {
     }
 
     /**
-     * generates the tile clusters used by the renderer to speed up
-     * the rendering process
+     * generate a multidimensional world array
      */
     public generateWorld(): void {
 
-        // iterate through the map and each layer
-        this.map.map.forEach((map, layerNumber) => {
+        // get the world width to know when to break a row
+        const worldWidth = this.map.getWorldDimension().x;
 
+        // iterate through the map and each layer
+        this.map.getWorld().forEach((layer, layerNumber) => {
+
+            // helper vars for x any y axis
+            let first = true;
+            let yHelper = 0;
+            let xHelper = 0;
+
+            // check array
             if (!Array.isArray(this.generatedWorld[layerNumber]))
                 this.generatedWorld[layerNumber] = [];
 
-            // the y axis
-            map.trim().split(String.fromCharCode(13)).forEach((line, yCoordinate) => {
+            // walk through the numbers
+            layer.data.forEach((tileNumber, tileIndex) => {
 
-                // the x axis
-                line.trim().split(TilemapLoader.TILE_MAP_DELIMITER).forEach((tile, xCoordinate) => {
+                // get the x value
+                xHelper = tileIndex % worldWidth;
 
-                    // check if the cluster array is capable of taking the numbers
-                    if (!Array.isArray(this.generatedWorld[layerNumber][xCoordinate]))
-                        this.generatedWorld[layerNumber][xCoordinate] = [];
+                // check y axis
+                if (xHelper === 0 && !first)
+                    yHelper++;
 
-                    // add the tile numbers
-                    const tileNumber = parseInt(tile, 10);
-                    this.generatedWorld[layerNumber][xCoordinate][yCoordinate] = isFinite(tileNumber) ? tileNumber : -1;
-                });
+                // check array
+                if (!Array.isArray(this.generatedWorld[layerNumber][xHelper]))
+                    this.generatedWorld[layerNumber][xHelper] = [];
+
+                // set the tile number
+                this.generatedWorld[layerNumber][xHelper][yHelper] = tileNumber;
+
+                // first zero passed
+                first = false;
             });
         });
     }

@@ -99,8 +99,8 @@ export class CanvasWorldRenderer extends Singleton implements WorldRenderer {
                 // draw the tiles
                 tileNumbers.forEach((tile, layer) => {
 
-                    // if the tile number is smaller then 0 ignore it
-                    if (tile < 0) return;
+                    // if the tile number is smaller or eq then 0 ignore it
+                    if (tile <= 0) return;
 
                     // get the image from the asset storage
                     const tileName = `${this.world.getName()}[${tile}]`;

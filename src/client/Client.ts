@@ -58,9 +58,9 @@ export abstract class Client extends QhunEngineBootstrap {
         this.update(this.gameInstance, this.inputInstance);
 
         // run collision detection
-        //CollisionDetection.entitiesWithWorld(
+        // CollisionDetection.entitiesWithWorld(
         //    this.renderer.getWorld()
-        //);
+        // );
 
         // render the game
         if (typeof this.renderer.preRender === 'function') this.renderer.preRender();

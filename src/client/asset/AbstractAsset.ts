@@ -21,7 +21,7 @@ export abstract class AbstractAsset implements Asset {
     constructor(
         protected name?: string,
         protected path?: string,
-        protected type?: AssetType,
+        protected readonly type?: AssetType,
         protected data?: AssetDataType
     ) { }
 

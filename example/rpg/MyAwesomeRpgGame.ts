@@ -46,8 +46,7 @@ class MyAwesomeRpgGame extends Client {
         registry.add('TileMap', {
             name: 'level1',
             path: 'example/rpg/asset/image/world1.png',
-            dimension: [32, 32],
-            layerCount: 2,
+            worldUrl: 'example/rpg/asset/world/level1.json',
             tileCollision: [
                 137, 138, 139, 160, 161, 163, 164, 165, 166, 167, 168,
                 208, 209, 210
@@ -66,7 +65,7 @@ class MyAwesomeRpgGame extends Client {
         this.link = new Link();
 
         // create game objects
-        const camera = new OrthogonalCamera(1.5);
+        const camera = new OrthogonalCamera(1.25);
         const world = new Level1('level1');
 
         // add global world things

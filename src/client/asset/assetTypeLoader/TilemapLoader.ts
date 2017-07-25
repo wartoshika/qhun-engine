@@ -18,37 +18,25 @@ import { Singleton, Binary, Vector2D } from '../../../shared';
 export class TilemapLoader extends Singleton implements TypeLoader {
 
     /**
-     * the delimiter used to split the tile maps
-     * override it if you have an other delimiter
-     */
-    public static TILE_MAP_DELIMITER = ',';
-
-    /**
      * load the asset into the given instance
      */
     public async load(path: string, instance: TileMap): Promise<Asset[]> {
 
         // get the image and map files
         const tilemapSpriteImage = await Request.getBinary(path);
-        const tilemapCsvPromiseStack: Array<Promise<void>> = [];
 
-        // prepare the tilemap layers
-        instance.map = [];
+        // get and set the json world
+        const jsonWorld = await Request.get(instance.getWorldUrl());
 
-        // for each layer get the map file
-        for (let layer = 0; layer < instance.getLayerCount(); layer++) {
-
-            tilemapCsvPromiseStack.push(Request.get(
-                `${instance.getPath()}.${layer}.csv`
-            ).then((csvMap) => {
-
-                // set the map of the tilemap
-                instance.map[layer] = csvMap;
-            }));
-        }
-
-        // resolve promises
-        await tilemapCsvPromiseStack;
+        // extract the world information
+        const jsonWorldObject = JSON.parse(jsonWorld);
+        instance.setWorld({
+            layers: jsonWorldObject.layers,
+            tileheight: jsonWorldObject.tileheight,
+            tilewidth: jsonWorldObject.tilewidth,
+            height: jsonWorldObject.height,
+            width: jsonWorldObject.width
+        });
 
         // save the binary picture
         const blob = Binary.bufferToBlob(tilemapSpriteImage);
@@ -76,10 +64,6 @@ export class TilemapLoader extends Singleton implements TypeLoader {
         const horizontalTileAmount = bitmap.width / tileSize.x;
         const verticalTileAmount = bitmap.height / tileSize.y;
 
-        // save the world dimension
-        instance.worldHeight = verticalTileAmount;
-        instance.worldWidth = horizontalTileAmount;
-
         // create a canvas element for the picture extraction
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
@@ -90,7 +74,8 @@ export class TilemapLoader extends Singleton implements TypeLoader {
         canvas.height = tileSize.y;
 
         // the tile number counter
-        let tileCounter = 0;
+        // json world maps are 1 based
+        let tileCounter = 1;
 
         // iterate through all tiles
         for (let v = 0; v < verticalTileAmount; v++) {
@@ -122,4 +107,5 @@ export class TilemapLoader extends Singleton implements TypeLoader {
         // return all images
         return imageStack;
     }
+
 }
