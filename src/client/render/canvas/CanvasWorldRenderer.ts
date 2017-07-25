@@ -123,41 +123,44 @@ export class CanvasWorldRenderer extends Singleton implements WorldRenderer {
         // generate clusters and display a cluster of one or many tiles
         // are visible by the active camera
         const tilemap = this.world.getTileMap();
-        const tilemapDimension = Vector2D.from(
-            tilemap.getDimension().x, tilemap.getDimension().y
-        ).multiply(Vector2D.from(this.world.getTileClusterSize()));
 
         // iterate through the layers
         for (let layer = 0; layer < tilemap.getLayerCount(); layer++) {
 
             // y coordinate
-            for (const yCluster of this.renderedClusterCache[layer]) {
+            for (const xCluster of this.renderedClusterCache[layer]) {
 
                 // fetch the coordinate
-                const yCoordinate = this.renderedClusterCache[layer].indexOf(yCluster);
+                const xCoordinate = this.renderedClusterCache[layer].indexOf(xCluster);
 
                 // x coordinate
-                for (const xCluster of this.renderedClusterCache[layer][yCoordinate]) {
+                for (const clusterTileImage of this.renderedClusterCache[layer][xCoordinate]) {
 
                     // fetch the coordinate
-                    const xCoordinate = this.renderedClusterCache[layer][yCoordinate].indexOf(xCluster);
+                    const yCoordinate = this.renderedClusterCache[layer][xCoordinate].indexOf(clusterTileImage);
 
                     // get information to render the cluster
                     // calculate the target position for the
                     // cluster tile and add the camera scale
-                    const sizeVector = Vector2D.from(
-                        xCoordinate * tilemapDimension.x,
-                        yCoordinate * tilemapDimension.y
+                    const positionVector = Vector2D.from(
+                        xCoordinate * clusterTileImage.width,
+                        yCoordinate * clusterTileImage.height
                     );
 
-                    const position = this.camera.translatePosition(sizeVector);
+                    // get the position camera based
+                    const cameraPosition = this.camera.translatePosition(positionVector);
+
+                    // get the cluster width and height including camera scale
+                    const sizeVector = Vector2D.from(
+                        clusterTileImage.width, clusterTileImage.height
+                    ).multiply(this.camera.getScaleVector());
 
                     // draw it!
                     this.ctx.drawImage(
-                        xCluster,
+                        clusterTileImage,
                         0, 0,
-                        sizeVector.x, sizeVector.y,
-                        position.x, position.y,
+                        clusterTileImage.width, clusterTileImage.height,
+                        cameraPosition.x, cameraPosition.y,
                         sizeVector.x, sizeVector.y
                     );
                 }
@@ -180,14 +183,15 @@ export class CanvasWorldRenderer extends Singleton implements WorldRenderer {
         clusterSize: number
     ): Promise<ImageBitmap> {
 
-        const tilemap = this.world.getTileMap();
-        const tilemapDimension = tilemap.getDimension();
-
         // clear the tmp canvas
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         // helper var to increment the y axis
         let yHelper = 0;
+
+        if(tileNumber.length / 4 !== 4) {
+            console.log(tileNumber);
+        }
 
         // iterate through the tiles
         tileNumber.forEach((tile, index) => {
@@ -205,16 +209,17 @@ export class CanvasWorldRenderer extends Singleton implements WorldRenderer {
                 ).getData() as ImageBitmap;
 
                 // increase y
-                if (Math.floor(index / clusterSize) > yHelper)
+                if (Math.floor(index / clusterSize) > yHelper) {
                     yHelper++;
+                }
 
                 // draw the tile on the tmp canvas context
                 ctx.drawImage(
                     tileImage,
                     0, 0,
                     tileImage.width, tileImage.height,
-                    xHelper * tilemapDimension.x,
-                    yHelper * tilemapDimension.y,
+                    xHelper * tileImage.width,
+                    yHelper * tileImage.height,
                     tileImage.width, tileImage.height
                 );
             }

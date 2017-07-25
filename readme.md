@@ -21,10 +21,11 @@ TODO
 - [x] single layer tilemap import and rendering
 - [x] multilayer tilemap import and rendering
 - [x] add world scale (can be done by scaling the camera)
-- [o] controls
-- [o] collision detection incl. tilemaps
-- [] physics
-- [] animation states should have possible random values as callback function
+-  controls
+-  collision detection incl. tilemaps
+- physics
+- animation states should have possible random values as callback function
+- cluster rendering should store all rendered layers as tmp cluster image to improve the rendering speed
 
 
 Known Bugs

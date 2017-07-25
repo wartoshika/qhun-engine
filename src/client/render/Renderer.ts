@@ -53,4 +53,6 @@ export interface Renderer {
      * set the current camera as the users view into the game
      */
     setCamera(camera: Camera): void;
+
+
 }
