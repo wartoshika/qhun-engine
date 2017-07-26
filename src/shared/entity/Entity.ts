@@ -7,7 +7,7 @@
 
 import { Vector2D } from '../math';
 import { Direction } from '../helper';
-import { OnEntityDirectionChange } from '../entity';
+import { OnDirectionChange } from '../entity';
 import { GenericEventEmitter, EventName } from '../event';
 
 /**
@@ -37,20 +37,20 @@ export abstract class Entity {
     ) {
 
         // check if the entity implements OnEntityDirectionChange
-        const chkImplDirChange = typeof (this as any as OnEntityDirectionChange)
-            .onEntityDirectionChange === 'function';
+        const chkImplDirChange = typeof (this as any as OnDirectionChange)
+            .onDirectionChange === 'function';
 
         // check impls
         if (chkImplDirChange)
-            this.eventEmitter.on(EventName.OnEntityDirectionChange,
+            this.eventEmitter.on(EventName.OnDirectionChange,
                 (entity: Entity, newDirection: Direction) => {
 
                     // if it is this entity
                     if (entity !== this) return;
 
                     // fire impl function
-                    (this as any as OnEntityDirectionChange)
-                        .onEntityDirectionChange(newDirection);
+                    (this as any as OnDirectionChange)
+                        .onDirectionChange(newDirection);
                 }
             );
 
@@ -149,7 +149,7 @@ export abstract class Entity {
 
         // trigger event
         this.eventEmitter.emit(
-            EventName.OnEntityDirectionChange,
+            EventName.OnDirectionChange,
             this, this, direction
         );
     }

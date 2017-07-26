@@ -10,7 +10,7 @@ import {
 } from '@qhun-engine/client';
 
 import {
-    Vector2D, CollisionType, CanCollide, OnEntityDirectionChange,
+    Vector2D, CollisionType, CanCollide, OnDirectionChange,
     Direction
 } from '@qhun-engine/shared';
 
@@ -64,7 +64,7 @@ import {
         ]
     }
 ])
-export class Link extends Entity implements CanCollide, OnEntityDirectionChange {
+export class Link extends Entity implements CanCollide, OnDirectionChange {
 
     protected scaleFactor: number = 2;
 
@@ -124,7 +124,7 @@ export class Link extends Entity implements CanCollide, OnEntityDirectionChange 
     /**
      * is fired if the entity changes its looking direction
      */
-    public onEntityDirectionChange(newDirection: Direction): void {
+    public onDirectionChange(newDirection: Direction): void {
 
         // use this to change the animation of link when walking
         switch (newDirection) {

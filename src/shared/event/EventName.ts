@@ -19,5 +19,5 @@ export enum EventName {
     WindowResize = 'WindowResize' as any,
     CameraChange = 'CameraChange' as any,
 
-    OnEntityDirectionChange = 'OnEntityDirectionChange' as any
+    OnDirectionChange = 'OnDirectionChange' as any
 }

@@ -11,10 +11,10 @@ import { Direction } from '../helper';
  * an interface that signals if an entities looking direction changes.
  * can be used to trigger entity walking animations
  */
-export interface OnEntityDirectionChange {
+export interface OnDirectionChange {
 
     /**
      * is fired if the entity changes its looking direction
      */
-    onEntityDirectionChange(newDirection: Direction): void;
+    onDirectionChange(newDirection: Direction): void;
 }
