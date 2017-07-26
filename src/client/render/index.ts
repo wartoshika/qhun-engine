@@ -7,7 +7,6 @@
 
 export * from './Renderer';
 export * from './BasicRenderer';
-export * from './CameraOffsetCalculator';
 export * from './ObjectCache';
 export * from './WorldRenderer';
 export * from './EntityRenderer';

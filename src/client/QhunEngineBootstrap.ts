@@ -22,6 +22,7 @@ import { AssetType } from './asset/AssetType';
 import { ObjectCache } from './render/ObjectCache';
 import { RamStorage } from '../shared/storage/RamStorage';
 import { EntityMovement } from './physic/EntityMovement';
+import { Vector2D } from '../shared/math';
 
 /**
  * the system class that handles the engine bootstrap process
@@ -147,6 +148,7 @@ export abstract class QhunEngineBootstrap extends Singleton {
         // fire loaded event
         this.emit(EventName.BeforeLoaded);
         await this.loaded(this.gameInstance);
+        this.emit(EventName.WindowResize, {}, this.renderer.getDrawingDimension());
         this.emit(EventName.AfterLoaded);
 
         // init the game loop

@@ -9,7 +9,7 @@ import { CameraMode } from './CameraMode';
 import { World } from '../world';
 
 import {
-    Entity, Vector2D
+    Entity, Vector2D, Dimension
 } from '../../shared';
 
 /**
@@ -36,6 +36,16 @@ export interface Camera {
      * set the current world scale modificator
      */
     setScale(scale: number): void;
+
+    /**
+     * set the world size/bounds
+     */
+    setWorldBounds(bounds: Dimension): void;
+
+    /**
+     * get the world size/bounds
+     */
+    getWorldBounds(): Dimension;
 
     /**
      * follows one entity

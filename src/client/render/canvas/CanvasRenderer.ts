@@ -6,10 +6,9 @@
  */
 
 import { BasicRenderer } from '../BasicRenderer';
-import { Dimension, Vector2D, EventName } from '../../../shared';
+import { Vector2D, EventName } from '../../../shared';
 import { ClientConfig } from '../../ClientConfig';
 import { AnimationEntity } from '../../entity/AnimationEntity';
-import { CameraOffsetCalculator } from '../CameraOffsetCalculator';
 import { World } from '../../world/World';
 import { CanvasWorldRenderer } from './CanvasWorldRenderer';
 import { CanvasEntityRenderer } from './CanvasEntityRenderer';
@@ -36,7 +35,7 @@ export class CanvasRenderer extends BasicRenderer {
     /**
      * the game height and width holder
      */
-    private gameDimension: Dimension;
+    private gameDimension: Vector2D;
 
     /**
      * holder of the client config
@@ -52,8 +51,7 @@ export class CanvasRenderer extends BasicRenderer {
         this.clientConfig = clientConfig;
 
         // save the dimension and create the canvas
-        this.gameDimension = clientConfig.gameDimension;
-        this.createCanvas();
+        this.gameDimension = this.createCanvas();
 
         // get the 2d context
         this.ctx = this.canvas.getContext('2d');
@@ -65,6 +63,14 @@ export class CanvasRenderer extends BasicRenderer {
             ),
             this.ctx
         );
+    }
+
+    /**
+     * get the current drawing dimension in pixel
+     */
+    public getDrawingDimension(): Vector2D {
+
+        return this.gameDimension;
     }
 
     /**
@@ -156,16 +162,22 @@ export class CanvasRenderer extends BasicRenderer {
 
     /**
      * creates the canvas element and append it to the given parentNode
+     *
+     * @return get the canvas dimension
      */
-    private createCanvas(): void {
+    private createCanvas(): Vector2D {
 
         // create the canvas
         this.canvas = document.createElement('canvas');
         document.body.appendChild(this.canvas);
 
+        // calculate the initial height and width
+        const height = window.innerHeight;
+        const width = window.innerWidth;
+
         // apply the game dimension
-        this.canvas.setAttribute('width', `${this.gameDimension.x}px`);
-        this.canvas.setAttribute('height', `${this.gameDimension.y}px`);
+        this.canvas.setAttribute('width', `${height}px`);
+        this.canvas.setAttribute('height', `${width}px`);
         this.canvas.setAttribute('style', 'display:block;position:absolute;');
 
         // start listen to window resize event
@@ -179,6 +191,8 @@ export class CanvasRenderer extends BasicRenderer {
             this.canvas.setAttribute('width', `${newWindowSize.x}px`);
             this.canvas.setAttribute('height', `${newWindowSize.y}px`);
         });
+
+        return new Vector2D(width, height);
     }
 
 }

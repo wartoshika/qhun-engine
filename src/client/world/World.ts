@@ -153,9 +153,13 @@ export abstract class World implements OnWorldInit {
      *
      * @param camera the camera to add
      */
-    public addCamera(...camera: Camera[]): void {
+    public addCamera(...cameras: Camera[]): void {
 
-        this.camera.push(...camera);
+        // set world bounds!
+        cameras.forEach((camera) => camera.setWorldBounds(this.getWorldDimension()));
+
+        // push them
+        this.camera.push(...cameras);
     }
 
     /**

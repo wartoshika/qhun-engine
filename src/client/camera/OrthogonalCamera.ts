@@ -28,7 +28,7 @@ export class OrthogonalCamera extends BaseCamera {
     private drawingDimension = Vector2D.from(0, 0);
 
     /**
-     * the event emitter instance. cameras are no singleton
+     * the event emitter instance
      */
     private eventEmitter = GenericEventEmitter.getInstance<GenericEventEmitter>();
 
@@ -60,6 +60,25 @@ export class OrthogonalCamera extends BaseCamera {
      */
     public translatePosition(currentPosition: Vector2D): Vector2D {
 
-        return currentPosition.multiply(this.getScaleVector());
+        // add camera scale to currentPosition
+        currentPosition = currentPosition.multiply(this.getScaleVector());
+
+        // calculate the normal new position without following an entity
+        const newPosition = currentPosition
+            .substract(this.position);
+
+        // entity follow?
+        const entity = this.getFollowingEntity();
+        if (!entity) return newPosition;
+
+        // get the position of the entity and center it, translate other positions
+        const centerVector = this.drawingDimension.half();
+        const translateVector = entity.getPosition()
+            .multiply(this.getScaleVector())
+            .substract(centerVector);
+
+        // translate the original position
+        return currentPosition.substract(translateVector);
     }
+
 }

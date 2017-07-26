@@ -11,7 +11,7 @@ import { CameraMode } from './CameraMode';
 import { Camera } from './Camera';
 
 import {
-    Vector2D
+    Vector2D, Dimension
 } from '../../shared';
 
 /**
@@ -35,6 +35,11 @@ export abstract class BaseCamera implements Camera {
     protected position: Vector2D = Vector2D.from(0, 0);
 
     /**
+     * the world bounds for this camera
+     */
+    protected worldBounds: Dimension;
+
+    /**
      *
      * @param scale the scale of the world. 1 means that a tile of 32x32 will renderes on 32x32 pixel. scane 5 means that a tile of 32x32 will be rendered as (32*5)x(32*5) pixel...
      * @param mode the camera mode
@@ -47,6 +52,12 @@ export abstract class BaseCamera implements Camera {
      * checks if an entity is visible by this camera
      */
     public abstract isEntityVisible(entity: Entity): boolean;
+
+    /**
+     * translates the given position of an entity or asset
+     * to a new position including scale and entity following
+     */
+    public abstract translatePosition(currentPosition: Vector2D): Vector2D;
 
     /**
      * get the camera mode
@@ -97,5 +108,21 @@ export abstract class BaseCamera implements Camera {
     public getFollowingEntity(): Entity {
 
         return this.followingEntity;
+    }
+
+    /**
+     * set the world size/bounds
+     */
+    public setWorldBounds(bounds: Dimension): void {
+
+        this.worldBounds = bounds;
+    }
+
+    /**
+     * get the world size/bounds
+     */
+    public getWorldBounds(): Dimension {
+
+        return this.worldBounds;
     }
 }

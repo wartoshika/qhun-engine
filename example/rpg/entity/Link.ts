@@ -101,7 +101,7 @@ export class Link extends Entity implements CanCollide, OnDirectionChange {
 
         // get current arrow keys
         const arrowKeys = input.getArrowKeys();
-        const speed = 2.5;
+        const speed = 5;
 
         // handle movement for link
         if (arrowKeys.right) this.translatePosition(speed, 0);

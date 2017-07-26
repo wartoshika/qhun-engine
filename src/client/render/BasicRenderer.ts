@@ -5,7 +5,7 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { Singleton } from '../../shared/helper/Singleton';
+import { Singleton, Vector2D } from '../../shared';
 import { Renderer } from './Renderer';
 import { Camera } from '../camera/Camera';
 import { ClientConfig } from '../ClientConfig';
@@ -59,6 +59,11 @@ export abstract class BasicRenderer extends Singleton implements Renderer {
      * to render all entities and other stuff.
      */
     public abstract render(): void;
+
+    /**
+     * get the current drawing dimension in pixel
+     */
+    public abstract getDrawingDimension(): Vector2D;
 
     /**
      * set the current visible world
