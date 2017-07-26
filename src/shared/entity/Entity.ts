@@ -51,4 +51,28 @@ export abstract class Entity {
 
         this.position = position;
     }
+
+    /**
+     * changes the position of the position by applying
+     * a vector addition
+     *
+     * @param positionTranslation
+     * @param positionTranslationY
+     */
+    public translatePosition(
+        positionTranslation: Vector2D | number,
+        positionTranslationY?: number
+    ): void {
+
+        // number given?
+        if (isFinite(positionTranslation as number)) {
+
+            positionTranslation = Vector2D.from(
+                positionTranslation as number, positionTranslationY
+            );
+        }
+
+        // add the position
+        this.position = this.position.add(positionTranslation as Vector2D);
+    }
 }

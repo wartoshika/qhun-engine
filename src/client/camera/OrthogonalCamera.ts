@@ -50,24 +50,8 @@ export class OrthogonalCamera extends BaseCamera {
      */
     public isEntityVisible(entity: Entity): boolean {
 
-        // get the size of the entity
-        const entityDimension = Vector2D.from(
-            entity.getWidth(),
-            entity.getHeight()
-        );
-
-        // calculate the position of the entity including camera scale
-        const entityPosition = entity.getPosition().multiply(
-            this.getScaleVector()
-        );
-
-        // substract entity position and size for a max offset vector
-        const entityScaledPoisition = entityPosition.substract(entityDimension);
-
-        // check
-        return this.drawingDimension.x >= entityScaledPoisition.x
-            &&
-            this.drawingDimension.y >= entityScaledPoisition.y;
+        // currently render all entities
+        return true;
     }
 
     /**

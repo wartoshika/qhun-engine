@@ -54,4 +54,9 @@ export interface Renderer {
      */
     setCamera(camera: Camera): void;
 
+    /**
+     * get the last drawing area update timestamp
+     */
+    getLastUpdate(): number;
+
 }

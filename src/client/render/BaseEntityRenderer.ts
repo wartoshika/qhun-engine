@@ -6,6 +6,7 @@
  */
 
 import { EntityRenderer } from './EntityRenderer';
+import { AssetStorage } from '../asset/AssetStorage';
 import { Singleton } from '../../shared/helper/Singleton';
 import { RenderableEntity } from '../entity';
 import { Camera } from '../camera/Camera';
@@ -21,6 +22,11 @@ export abstract class BaseEntityRenderer extends Singleton implements EntityRend
      * the current world that is renderes by the world renderer
      */
     protected worldRenderer: WorldRenderer;
+
+    /**
+     * the asset storage for entity images
+     */
+    protected assetStorage = AssetStorage.getInstance<AssetStorage>();
 
     /**
      * logger instance

@@ -98,17 +98,14 @@ export class Link extends Entity implements CanCollide {
      */
     public handleMovement(arrowKeys: InputArrowKeys): void {
 
-        /*// get moveable directions
-        const blockedDirections = this.getBlockedDirections();
-
         // move the player
-        if (arrowKeys.left && !blockedDirections.Left) {
+        if (arrowKeys.left) {
 
             this.setPosition(this.position.add(
                 new Vector2D(-5, 0)
             ));
             this.playAnimation('run_left', true);
-        } else if (arrowKeys.right && !blockedDirections.Right) {
+        } else if (arrowKeys.right) {
 
             this.setPosition(this.position.add(
                 new Vector2D(5, 0)
@@ -116,13 +113,13 @@ export class Link extends Entity implements CanCollide {
             this.playAnimation('run_right', true);
         }
 
-        if (arrowKeys.down && !blockedDirections.Down) {
+        if (arrowKeys.down) {
 
             this.setPosition(this.position.add(
                 new Vector2D(0, 5)
             ));
             this.playAnimation('run_down', true);
-        } else if (arrowKeys.up && !blockedDirections.Up) {
+        } else if (arrowKeys.up) {
 
             this.setPosition(this.position.add(
                 new Vector2D(0, -5)
@@ -139,7 +136,7 @@ export class Link extends Entity implements CanCollide {
 
             // stop animation
             this.stopAnimation();
-        }*/
+        }
     }
 
 }

@@ -90,6 +90,14 @@ export abstract class BasicRenderer extends Singleton implements Renderer {
     }
 
     /**
+     * get the last drawing area update timestamp
+     */
+    public getLastUpdate(): number {
+
+        return this.fps.lastUpdate;
+    }
+
+    /**
      * print the current fps on the canvas
      */
     protected calculateFps(): void {

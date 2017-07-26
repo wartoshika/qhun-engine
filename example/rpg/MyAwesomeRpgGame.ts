@@ -89,8 +89,15 @@ class MyAwesomeRpgGame extends Client {
      */
     public update(myGame: Game, input: Input): void {
 
+        // get the arrow keys
+        const arrowKeys = input.getArrowKeys();
+
         // handle movement for link
-        this.link.handleMovement(input.getArrowKeys());
+        if (arrowKeys.right) this.link.translatePosition(5, 0);
+        else if (arrowKeys.left) this.link.translatePosition(-5, 0);
+        if (arrowKeys.up) this.link.translatePosition(0, -5);
+        else if (arrowKeys.down) this.link.translatePosition(0, 5);
+
     }
 }
 

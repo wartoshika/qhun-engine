@@ -62,7 +62,8 @@ export class CanvasRenderer extends BasicRenderer {
         this.entityRenderer = new CanvasEntityRenderer(
             Vector2D.from(
                 this.gameDimension.x, this.gameDimension.y
-            )
+            ),
+            this.ctx
         );
     }
 
