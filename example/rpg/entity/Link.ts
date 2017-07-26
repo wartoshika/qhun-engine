@@ -6,17 +6,65 @@
  */
 
 import {
-    Entity, InputArrowKeys
+    Entity, Input, EntityAnimation
 } from '@qhun-engine/client';
 
 import {
-    Vector2D, CollisionType, CanCollide
+    Vector2D, CollisionType, CanCollide, OnEntityDirectionChange,
+    Direction
 } from '@qhun-engine/shared';
 
 /**
  * the player entity
  */
-export class Link extends Entity implements CanCollide {
+@EntityAnimation([
+    {
+        name: 'run_down',
+        sprite: 'link_run',
+        states: [
+            { image: 'link_run_down_1', duration: 100 },
+            { image: 'link_run_down_2', duration: 100 },
+            { image: 'link_run_down_3', duration: 100 },
+            { image: 'link_run_down_4', duration: 100 },
+            { image: 'link_run_down_5', duration: 100 },
+            { image: 'link_run_down_6', duration: 100 }
+        ]
+    }, {
+        name: 'run_up',
+        sprite: 'link_run',
+        states: [
+            { image: 'link_run_up_1', duration: 100 },
+            { image: 'link_run_up_2', duration: 100 },
+            { image: 'link_run_up_3', duration: 100 },
+            { image: 'link_run_up_4', duration: 100 },
+            { image: 'link_run_up_5', duration: 100 },
+            { image: 'link_run_up_6', duration: 100 },
+        ]
+    }, {
+        name: 'run_right',
+        sprite: 'link_run',
+        states: [
+            { image: 'link_run_right_1', duration: 100 },
+            { image: 'link_run_right_2', duration: 100 },
+            { image: 'link_run_right_3', duration: 100 },
+            { image: 'link_run_right_4', duration: 100 },
+            { image: 'link_run_right_5', duration: 100 },
+            { image: 'link_run_right_6', duration: 100 },
+        ]
+    }, {
+        name: 'run_left',
+        sprite: 'link_run',
+        states: [
+            { image: 'link_run_left_1', duration: 100 },
+            { image: 'link_run_left_2', duration: 100 },
+            { image: 'link_run_left_3', duration: 100 },
+            { image: 'link_run_left_4', duration: 100 },
+            { image: 'link_run_left_5', duration: 100 },
+            { image: 'link_run_left_6', duration: 100 },
+        ]
+    }
+])
+export class Link extends Entity implements CanCollide, OnEntityDirectionChange {
 
     protected scaleFactor: number = 2;
 
@@ -24,55 +72,8 @@ export class Link extends Entity implements CanCollide {
 
         super(16, 24, new Vector2D(10, 10));
 
-        // add the animations for the player
-        this.addAnimation({
-            name: 'run_down',
-            sprite: 'link_run',
-            states: [
-                { image: 'link_run_down_1', duration: 100 },
-                { image: 'link_run_down_2', duration: 100 },
-                { image: 'link_run_down_3', duration: 100 },
-                { image: 'link_run_down_4', duration: 100 },
-                { image: 'link_run_down_5', duration: 100 },
-                { image: 'link_run_down_6', duration: 100 }
-            ]
-        }, {
-                name: 'run_up',
-                sprite: 'link_run',
-                states: [
-                    { image: 'link_run_up_1', duration: 100 },
-                    { image: 'link_run_up_2', duration: 100 },
-                    { image: 'link_run_up_3', duration: 100 },
-                    { image: 'link_run_up_4', duration: 100 },
-                    { image: 'link_run_up_5', duration: 100 },
-                    { image: 'link_run_up_6', duration: 100 },
-                ]
-            }, {
-                name: 'run_right',
-                sprite: 'link_run',
-                states: [
-                    { image: 'link_run_right_1', duration: 100 },
-                    { image: 'link_run_right_2', duration: 100 },
-                    { image: 'link_run_right_3', duration: 100 },
-                    { image: 'link_run_right_4', duration: 100 },
-                    { image: 'link_run_right_5', duration: 100 },
-                    { image: 'link_run_right_6', duration: 100 },
-                ]
-            }, {
-                name: 'run_left',
-                sprite: 'link_run',
-                states: [
-                    { image: 'link_run_left_1', duration: 100 },
-                    { image: 'link_run_left_2', duration: 100 },
-                    { image: 'link_run_left_3', duration: 100 },
-                    { image: 'link_run_left_4', duration: 100 },
-                    { image: 'link_run_left_5', duration: 100 },
-                    { image: 'link_run_left_6', duration: 100 },
-                ]
-            });
-
-        // play idle animation on constructing
-        this.playAnimation('run_down', true);
+        // set initial image
+        this.setImage('link_run[link_run_down_1]');
     }
 
     /**
@@ -96,38 +97,19 @@ export class Link extends Entity implements CanCollide {
      *
      * @param arrowKeys the current pressed keys
      */
-    public handleMovement(arrowKeys: InputArrowKeys): void {
+    public handleMovement(input: Input): void {
 
-        // move the player
-        if (arrowKeys.left) {
+        // get current arrow keys
+        const arrowKeys = input.getArrowKeys();
+        const speed = 2.5;
 
-            this.setPosition(this.position.add(
-                new Vector2D(-5, 0)
-            ));
-            this.playAnimation('run_left', true);
-        } else if (arrowKeys.right) {
+        // handle movement for link
+        if (arrowKeys.right) this.translatePosition(speed, 0);
+        else if (arrowKeys.left) this.translatePosition(-speed, 0);
+        if (arrowKeys.up) this.translatePosition(0, -speed);
+        else if (arrowKeys.down) this.translatePosition(0, speed);
 
-            this.setPosition(this.position.add(
-                new Vector2D(5, 0)
-            ));
-            this.playAnimation('run_right', true);
-        }
-
-        if (arrowKeys.down) {
-
-            this.setPosition(this.position.add(
-                new Vector2D(0, 5)
-            ));
-            this.playAnimation('run_down', true);
-        } else if (arrowKeys.up) {
-
-            this.setPosition(this.position.add(
-                new Vector2D(0, -5)
-            ));
-            this.playAnimation('run_up', true);
-        }
-
-        // idle without animation
+        // if no key is pressed, stop animation (idle state)
         if (
             !(arrowKeys.down || arrowKeys.left || arrowKeys.right || arrowKeys.up)
             &&
@@ -136,6 +118,21 @@ export class Link extends Entity implements CanCollide {
 
             // stop animation
             this.stopAnimation();
+        }
+    }
+
+    /**
+     * is fired if the entity changes its looking direction
+     */
+    public onEntityDirectionChange(newDirection: Direction): void {
+
+        // use this to change the animation of link when walking
+        switch (newDirection) {
+
+            case Direction.Left: this.playAnimation('run_left', true); break;
+            case Direction.Right: this.playAnimation('run_right', true); break;
+            case Direction.Up: this.playAnimation('run_up', true); break;
+            case Direction.Down: this.playAnimation('run_down', true); break;
         }
     }
 

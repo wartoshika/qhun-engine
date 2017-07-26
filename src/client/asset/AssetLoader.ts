@@ -15,14 +15,14 @@ import {
 } from './assetTypeLoader';
 
 import {
-    RamStorage, Log, Singleton, Binary, collectGargabe, EventName,
-    enableGarbageCollection
+    RamStorage, Log, Singleton, Binary, CollectGarbage, EventName,
+    EnableGarbageCollection
 } from '../../shared';
 
 /**
  * this class handles the loading of assets
  */
-@enableGarbageCollection
+@EnableGarbageCollection
 export class AssetLoader extends Singleton {
 
     /**
@@ -38,7 +38,7 @@ export class AssetLoader extends Singleton {
     /**
      * a stack of all inline assets
      */
-    @collectGargabe(EventName.AfterAssetLoading, [])
+    @CollectGarbage(EventName.AfterAssetLoading, [])
     private registeringAssets: InlineAsset[] = [];
 
     /**

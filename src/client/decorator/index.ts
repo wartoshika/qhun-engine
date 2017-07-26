@@ -5,6 +5,4 @@
  * https://opensource.org/licenses/MIT
  */
 
-export * from './CanCollide';
-export * from './Entity';
-export * from './OnEntityDirectionChange';
+export * from './EntityAnimation';

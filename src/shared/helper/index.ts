@@ -10,3 +10,4 @@ export * from './Binary';
 export * from './File';
 export * from './GarbageCollector';
 export * from './InjectorRegistry';
+export * from './Direction';

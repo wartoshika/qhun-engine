@@ -6,6 +6,6 @@
  */
 
 export * from './logMethodCall';
-export * from './collectGarbage';
-export * from './enableGarbageCollection';
-export * from './inject';
+export * from './CollectGarbage';
+export * from './EnableGarbageCollection';
+export * from './Injector';

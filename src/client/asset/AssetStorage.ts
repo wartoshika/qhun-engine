@@ -9,7 +9,7 @@ import { AssetType } from './AssetType';
 import { Asset } from './Asset';
 
 import {
-    Singleton, Log, inject, Storage
+    Singleton, Log, Injector, Storage
 } from '../../shared';
 
 /**

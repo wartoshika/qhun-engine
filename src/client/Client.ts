@@ -57,6 +57,13 @@ export abstract class Client extends QhunEngineBootstrap {
         // call update method
         this.update(this.gameInstance, this.inputInstance);
 
+        // handle entity movement
+        this.entityMovement.handleMovement(
+
+            // check all entities of the current world
+            this.renderer.getWorld().getEntities()
+        );
+
         // run collision detection
         // CollisionDetection.entitiesWithWorld(
         //    this.renderer.getWorld()

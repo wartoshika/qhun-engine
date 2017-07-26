@@ -11,7 +11,7 @@ import { GarbageCollector } from '../helper';
  * a class decorator that enabled garbage collecting on this class.
  * this is required to use @collectGarbage as property decorator
  */
-export function enableGarbageCollection<T extends { new(...args: any[]): {} }>(ctor: T) {
+export function EnableGarbageCollection<T extends { new(...args: any[]): {} }>(ctor: T) {
 
     return class extends ctor {
 

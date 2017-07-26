@@ -11,7 +11,7 @@ import { InjectorKeys, InjectorRegistry } from '../helper/InjectorRegistry';
 /**
  * injects a defined object into the method as param
  */
-export function inject<T>(injectorKey: InjectorKeys) {
+export function Injector<T>(injectorKey: InjectorKeys) {
 
     return (target: {}, propertyKey: string | symbol) => {
 

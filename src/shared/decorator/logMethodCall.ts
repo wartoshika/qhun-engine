@@ -14,7 +14,7 @@ import { Log } from '../log';
  * @param propertyKey
  * @param descriptor
  */
-export function logMethodCall(
+export function LogMethodCall(
     target: {}, key: string | symbol, descriptor: TypedPropertyDescriptor<(...args: any[]) => any>
 ) {
 

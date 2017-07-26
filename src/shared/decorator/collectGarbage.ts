@@ -18,7 +18,7 @@ const objectSizeof = require('object-sizeof');
  * @param event property will be cleared on the defined event
  * @param clearVal the new value that will be the property value
  */
-export function collectGargabe(event: EventName, cleanVal?: any): PropertyDecorator {
+export function CollectGarbage(event: EventName, cleanVal?: any): PropertyDecorator {
 
     return (target: {}, propertyKey: string | symbol) => {
 
@@ -41,7 +41,7 @@ export function collectGargabe(event: EventName, cleanVal?: any): PropertyDecora
             });
 
             // print log
-            Log.getLogger('@' + collectGargabe.name).debug(
+            Log.getLogger('@' + CollectGarbage.name).debug(
                 'cleared', File.byteToSize(size, FileSizeType.Kilobyte) + 'KB'
             );
         };

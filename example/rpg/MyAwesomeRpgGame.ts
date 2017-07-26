@@ -12,7 +12,7 @@ import {
 } from '@qhun-engine/client';
 
 import {
-    logMethodCall
+    LogMethodCall
 } from '@qhun-engine/shared';
 
 import { Link } from './entity/Link';
@@ -58,7 +58,7 @@ class MyAwesomeRpgGame extends Client {
      * a function that is called if the preload phase is completed
      * you now have access to the registered assets
      */
-    @logMethodCall
+    @LogMethodCall
     public async loaded(myGame: Game): Promise<void> {
 
         // create player entity
@@ -89,15 +89,8 @@ class MyAwesomeRpgGame extends Client {
      */
     public update(myGame: Game, input: Input): void {
 
-        // get the arrow keys
-        const arrowKeys = input.getArrowKeys();
-
-        // handle movement for link
-        if (arrowKeys.right) this.link.translatePosition(5, 0);
-        else if (arrowKeys.left) this.link.translatePosition(-5, 0);
-        if (arrowKeys.up) this.link.translatePosition(0, -5);
-        else if (arrowKeys.down) this.link.translatePosition(0, 5);
-
+        // handle link movement
+        this.link.handleMovement(input);
     }
 }
 

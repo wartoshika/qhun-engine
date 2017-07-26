@@ -7,7 +7,7 @@
 
 import { EventName } from './EventName';
 import { Storage } from '../storage/Storage';
-import { inject } from '../decorator/inject';
+import { Injector } from '../decorator/Injector';
 
 // the type for storing event listeners
 interface EventListener {

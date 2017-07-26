@@ -9,3 +9,4 @@ export * from './Entity';
 export * from './RenderableEntity';
 export * from './AnimationableEntity';
 export * from './AnimationEntity';
+export * from './Animation';

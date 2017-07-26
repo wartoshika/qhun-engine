@@ -11,7 +11,7 @@ import { Game } from './Game';
 import { Input } from './input/Input';
 import { Log } from '../shared/log/Log';
 import { ClientConfig } from './ClientConfig';
-import { logMethodCall } from '../shared/decorator/logMethodCall';
+import { LogMethodCall } from '../shared/decorator/logMethodCall';
 import { Storage } from '../shared/storage/Storage';
 import { InjectorRegistry } from '../shared/helper/InjectorRegistry';
 import { AssetLoader } from './asset/AssetLoader';
@@ -21,6 +21,7 @@ import { AssetRegister } from './asset/AssetRegister';
 import { AssetType } from './asset/AssetType';
 import { ObjectCache } from './render/ObjectCache';
 import { RamStorage } from '../shared/storage/RamStorage';
+import { EntityMovement } from './physic/EntityMovement';
 
 /**
  * the system class that handles the engine bootstrap process
@@ -41,6 +42,11 @@ export abstract class QhunEngineBootstrap extends Singleton {
      * the input instance
      */
     protected inputInstance: Input;
+
+    /**
+     * the holder of the entity movement class
+     */
+    protected entityMovement = new EntityMovement();
 
     /**
      * the logger instance
@@ -88,7 +94,7 @@ export abstract class QhunEngineBootstrap extends Singleton {
     /**
      * internal setup phase
      */
-    @logMethodCall
+    @LogMethodCall
     private async internalSetup(): Promise<void> {
 
         // add default config
