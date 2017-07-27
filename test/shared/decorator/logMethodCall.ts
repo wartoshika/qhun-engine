@@ -5,7 +5,7 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { logMethodCall, Log, LogLevel } from '@shared';
+import { LogMethodCall, Log, LogLevel } from '@shared';
 
 import { suite, test, context } from 'mocha-typescript';
 import { expect } from 'chai';
@@ -16,11 +16,11 @@ import { UnitTestContext } from '../../';
 // stub class
 class StubClass {
 
-    @logMethodCall
+    @LogMethodCall
     public test(): void { }
 }
 
-@suite("shared/decorator/logMethodCall")
+@suite("shared/decorator/LogMethodCall")
 class Test {
 
     context: UnitTestContext;
@@ -46,7 +46,7 @@ class Test {
         this.context.removeAllSpies();
     }
 
-    @test "@logMethodCall() should log the call"() {
+    @test "@LogMethodCall() should log the call"() {
 
         // check the call
         let stub = new StubClass();

@@ -5,13 +5,13 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { enableGarbageCollection, GarbageCollector, Singleton } from '@shared';
+import { EnableGarbageCollection, GarbageCollector, Singleton } from '@shared';
 
 import { suite, test, context } from 'mocha-typescript';
 import { expect } from 'chai';
 
 // stub class with decorator
-@enableGarbageCollection
+@EnableGarbageCollection
 class GcClass { }
 
 // stub class without decorator
@@ -19,7 +19,7 @@ class NonGcClass { }
 
 class GcClassSuper extends Singleton { }
 
-@suite("shared/decorator/enableGarbageCollection")
+@suite("shared/decorator/EnableGarbageCollection")
 class Test {
 
     gc: GarbageCollector;

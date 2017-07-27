@@ -111,7 +111,7 @@ export abstract class BaseCamera implements Camera {
     }
 
     /**
-     * set the world size/bounds
+     * set the world size/bounds as unscaled pixel
      */
     public setWorldBounds(bounds: Dimension): void {
 
@@ -119,7 +119,7 @@ export abstract class BaseCamera implements Camera {
     }
 
     /**
-     * get the world size/bounds
+     * get the world size/bounds as unscaled pixel
      */
     public getWorldBounds(): Dimension {
 

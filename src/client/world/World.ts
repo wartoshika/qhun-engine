@@ -155,8 +155,17 @@ export abstract class World implements OnWorldInit {
      */
     public addCamera(...cameras: Camera[]): void {
 
+        // get the tile size
+        const tileSize = this.getTileMap().getDimension();
+        const worldDimension = this.getWorldDimension();
+
         // set world bounds!
-        cameras.forEach((camera) => camera.setWorldBounds(this.getWorldDimension()));
+        cameras.forEach((camera) => camera.setWorldBounds(
+            new Dimension(
+                worldDimension.x * tileSize.x,
+                worldDimension.y * tileSize.y
+            )
+        ));
 
         // push them
         this.camera.push(...cameras);

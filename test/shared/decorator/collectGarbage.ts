@@ -6,7 +6,7 @@
  */
 
 import {
-    collectGargabe, EventName, EventEmitter, enableGarbageCollection
+    CollectGarbage, EventName, EventEmitter, EnableGarbageCollection
 } from '@shared';
 
 import { suite, test, context } from 'mocha-typescript';
@@ -14,10 +14,10 @@ import { expect } from 'chai';
 import * as sinon from 'sinon';
 
 // stub class
-@enableGarbageCollection
+@EnableGarbageCollection
 class StubClass {
 
-    @collectGargabe(EventName.BeforePreload, [])
+    @CollectGarbage(EventName.BeforePreload, [])
     public heavyProperty: any[] = ["test", true];
 }
 

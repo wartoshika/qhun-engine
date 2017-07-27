@@ -64,7 +64,7 @@ export class OrthogonalCamera extends BaseCamera {
         currentPosition = currentPosition.multiply(this.getScaleVector());
 
         // calculate the normal new position without following an entity
-        const newPosition = currentPosition
+        let newPosition = currentPosition
             .substract(this.position);
 
         // entity follow?
@@ -78,7 +78,49 @@ export class OrthogonalCamera extends BaseCamera {
             .substract(centerVector);
 
         // translate the original position
-        return currentPosition.substract(translateVector);
+        newPosition = currentPosition.substract(translateVector);
+
+        // check if the original vector is smaller than the shifted vector
+        // this will bound the left and top world bounds
+        if (currentPosition.x < newPosition.x) {
+
+            // reset the x axis to fix the camera
+            newPosition.x = currentPosition.x;
+        }
+
+        if (currentPosition.y < newPosition.y) {
+
+            // reset the y axis to fix the camera
+            newPosition.y = currentPosition.y;
+        }
+
+        // now check right and bottom bounds
+        // if the entity reaches this vector, stop translating
+        const entityPositionScaled = entity.getPosition().add(
+            Vector2D.from(
+                entity.getWidth(), entity.getHeight()
+            )
+        );
+
+        // now check the world bounds
+        const worldBoundVector = Vector2D.from(
+            this.getWorldBounds().x, this.getWorldBounds().y
+        ).half();
+
+        if (entityPositionScaled.x > worldBoundVector.x) {
+            newPosition.x = worldBoundVector.x * this.getScale();
+        }
+
+        if ((window as any).test === true) {
+
+            // console.log("RIGHT", entityPositionScaled.x, worldBoundVector.x);
+            // console.log("BOTTOM", entityPositionScaled.y, worldBoundVector.y);
+
+            (window as any).test = false;
+        }
+
+        // return the corrected position vector
+        return newPosition;
     }
 
 }

@@ -7,7 +7,7 @@
 
 import {
     EventName, EventEmitter, GarbageCollector, RamStorage,
-    collectGargabe, Log
+    CollectGarbage, Log
 } from '@shared';
 
 import { suite, test, context } from 'mocha-typescript';
@@ -55,7 +55,7 @@ class Test {
         // a small stub class for this test case
         class StubGcClass extends EventEmitter {
 
-            @collectGargabe(EventName.AfterLoaded)
+            @CollectGarbage(EventName.AfterLoaded)
             public testProperty: any[] = [];
         }
 
