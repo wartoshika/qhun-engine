@@ -5,7 +5,7 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { Vector2D } from '../math';
+import { Point2 } from '../math';
 import { Direction } from '../helper';
 import { OnDirectionChange } from './OnDirectionChange';
 import { GameObject } from './GameObject';
@@ -24,7 +24,7 @@ export abstract class Entity extends GameObject {
     /**
      * the position that should be translated during game update
      */
-    private translatingPosition: Vector2D = Vector2D.from(0);
+    private translatingPosition: Point2 = Point2.from(0);
 
     /**
      * the generic event emitter
@@ -34,7 +34,7 @@ export abstract class Entity extends GameObject {
     constructor(
         entityWidth: number = 0,
         entityHeight: number = 0,
-        position: Vector2D = new Vector2D(0, 0)
+        position: Point2 = new Point2(0, 0)
     ) {
 
         super(entityWidth, entityHeight, position);
@@ -61,32 +61,32 @@ export abstract class Entity extends GameObject {
 
     /**
      * changes the position of the position by applying
-     * a vector addition
+     * a point addition
      *
      * @param positionTranslation
      * @param positionTranslationY
      */
     public translatePosition(
-        positionTranslation: Vector2D | number,
+        positionTranslation: Point2 | number,
         positionTranslationY?: number
     ): void {
 
         // number given?
         if (isFinite(positionTranslation as number)) {
 
-            positionTranslation = Vector2D.from(
+            positionTranslation = Point2.from(
                 positionTranslation as number, positionTranslationY
             );
         }
 
         // add the position
-        this.translatingPosition = this.translatingPosition.add(positionTranslation as Vector2D);
+        this.translatingPosition = this.translatingPosition.add(positionTranslation as Point2);
     }
 
     /**
      * get the position to translate during the next game update
      */
-    public getTranslatingPosition(): Vector2D {
+    public getTranslatingPosition(): Point2 {
 
         return this.translatingPosition;
     }
@@ -96,7 +96,7 @@ export abstract class Entity extends GameObject {
      */
     public resetTranslatePositon(): void {
 
-        this.translatingPosition = Vector2D.from(0);
+        this.translatingPosition = Point2.from(0);
     }
 
     /**

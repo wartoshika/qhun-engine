@@ -11,7 +11,7 @@ import { Singleton } from '../../shared/helper/Singleton';
 import { RenderableEntity } from '../entity';
 import { Camera } from '../camera/Camera';
 import { WorldRenderer } from './WorldRenderer';
-import { Vector2D, EventName, Log } from '../../shared';
+import { Point2, EventName, Log } from '../../shared';
 
 /**
  * an entity renderer class that handles renderer unspecific things
@@ -34,13 +34,13 @@ export abstract class BaseEntityRenderer extends Singleton implements EntityRend
     private logger: Log = Log.getLogger(BaseEntityRenderer.name);
 
     constructor(
-        protected drawingDimension: Vector2D
+        protected drawingDimension: Point2
     ) {
 
         super();
 
         // register resize event
-        this.on(EventName.WindowResize, (newWindowSize: Vector2D) => {
+        this.on(EventName.WindowResize, (newWindowSize: Point2) => {
 
             // apply the new window size to determinate the right
             // camera offset and visibillity

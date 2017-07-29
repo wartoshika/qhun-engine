@@ -5,7 +5,7 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { Vector2D } from '../../shared/math';
+import { Point2 } from '../../shared/math';
 import { RenderableEntity } from '../entity';
 import { AssetLoader } from '../asset';
 import { Camera } from '../camera';
@@ -19,14 +19,14 @@ import { ClientConfig } from '../ClientConfig';
 export interface Renderer {
 
     /**
-     * set up the game environment to a given dimension
+     * set up the game environment to a given size
      */
     setup(clientConfig: ClientConfig): void;
 
     /**
-     * get the current drawing dimension in pixel
+     * get the current drawing size in pixel
      */
-    getDrawingDimension(): Vector2D;
+    getDrawingDimension(): Point2;
 
     /**
      * this method is called during gameLoop before render is called

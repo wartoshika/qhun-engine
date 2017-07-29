@@ -22,7 +22,7 @@ import { AssetType } from './asset/AssetType';
 import { ObjectCache } from './render/ObjectCache';
 import { RamStorage } from '../shared/storage/RamStorage';
 import { EntityMovement } from './physic/EntityMovement';
-import { Vector2D } from '../shared/math';
+import { Point2 } from '../shared/math';
 import { CollisionDetection } from './collision/CollisionDetection';
 
 /**

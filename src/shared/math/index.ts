@@ -7,4 +7,3 @@
 
 export * from './Helper';
 export * from './Point2';
-export * from './Dimension';

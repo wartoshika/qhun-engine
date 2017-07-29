@@ -5,7 +5,7 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { Vector2D, Dimension } from '../math';
+import { Point2 } from '../math';
 import { CollisionType } from '../collision';
 
 export class GameObject {
@@ -18,12 +18,12 @@ export class GameObject {
     /**
      * the previous position.
      */
-    private previousPosition: Vector2D = Vector2D.from(0);
+    private previousPosition: Point2 = Point2.from(0);
 
     constructor(
         protected gameObjectWidth: number = 0,
         protected gameObjectHeight: number = 0,
-        protected position: Vector2D = new Vector2D(0, 0)
+        protected position: Point2 = new Point2(0, 0)
     ) { }
 
     /**
@@ -45,7 +45,7 @@ export class GameObject {
     /**
      * get the current position of the gameObject ( top left )
      */
-    public getPosition(): Vector2D {
+    public getPosition(): Point2 {
 
         return this.position;
     }
@@ -55,18 +55,18 @@ export class GameObject {
      *
      * @param position the new position
      */
-    public setPosition(position: Vector2D): void {
+    public setPosition(position: Point2): void {
 
         this.previousPosition = this.position;
         this.position = position;
     }
 
     /**
-     * get gameObject width and height as dimension object
+     * get gameObject width and height as size object
      */
-    public getSize(): Dimension {
+    public getSize(): Point2 {
 
-        return new Dimension(this.gameObjectWidth, this.gameObjectHeight);
+        return new Point2(this.gameObjectWidth, this.gameObjectHeight);
     }
 
     /**

@@ -6,7 +6,7 @@
  */
 
 import { BasicRenderer } from '../BasicRenderer';
-import { Vector2D, EventName } from '../../../shared';
+import { Point2, EventName } from '../../../shared';
 import { ClientConfig } from '../../ClientConfig';
 import { AnimationEntity } from '../../entity/AnimationEntity';
 import { World } from '../../world/World';
@@ -35,7 +35,7 @@ export class CanvasRenderer extends BasicRenderer {
     /**
      * the game height and width holder
      */
-    private gameDimension: Vector2D;
+    private gameDimension: Point2;
 
     /**
      * holder of the client config
@@ -43,14 +43,14 @@ export class CanvasRenderer extends BasicRenderer {
     private clientConfig: ClientConfig;
 
     /**
-     * set up the game environment to a given dimension
+     * set up the game environment to a given size
      */
     public setup(clientConfig: ClientConfig): void {
 
         // store the config
         this.clientConfig = clientConfig;
 
-        // save the dimension and create the canvas
+        // save the size and create the canvas
         this.gameDimension = this.createCanvas();
 
         // get the 2d context
@@ -58,7 +58,7 @@ export class CanvasRenderer extends BasicRenderer {
 
         // init entity renderer
         this.entityRenderer = new CanvasEntityRenderer(
-            Vector2D.from(
+            Point2.from(
                 this.gameDimension.x, this.gameDimension.y
             ),
             this.ctx
@@ -66,9 +66,9 @@ export class CanvasRenderer extends BasicRenderer {
     }
 
     /**
-     * get the current drawing dimension in pixel
+     * get the current drawing size in pixel
      */
-    public getDrawingDimension(): Vector2D {
+    public getDrawingDimension(): Point2 {
 
         return this.gameDimension;
     }
@@ -164,9 +164,9 @@ export class CanvasRenderer extends BasicRenderer {
     /**
      * creates the canvas element and append it to the given parentNode
      *
-     * @return get the canvas dimension
+     * @return get the canvas size
      */
-    private createCanvas(): Vector2D {
+    private createCanvas(): Point2 {
 
         // create the canvas
         this.canvas = document.createElement('canvas');
@@ -176,13 +176,13 @@ export class CanvasRenderer extends BasicRenderer {
         const height = window.innerHeight;
         const width = window.innerWidth;
 
-        // apply the game dimension
+        // apply the game size
         this.canvas.setAttribute('width', `${height}px`);
         this.canvas.setAttribute('height', `${width}px`);
         this.canvas.setAttribute('style', 'display:block;position:absolute;');
 
         // start listen to window resize event
-        this.on(EventName.WindowResize, (newWindowSize: Vector2D) => {
+        this.on(EventName.WindowResize, (newWindowSize: Point2) => {
 
             // resize the canvas
             this.canvas.width = newWindowSize.x;
@@ -193,7 +193,7 @@ export class CanvasRenderer extends BasicRenderer {
             this.canvas.setAttribute('height', `${newWindowSize.y}px`);
         });
 
-        return new Vector2D(width, height);
+        return new Point2(width, height);
     }
 
 }

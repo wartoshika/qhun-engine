@@ -6,7 +6,7 @@
  */
 
 import { Renderer } from './render';
-import { Dimension, Storage } from '../shared';
+import { Point2, Storage } from '../shared';
 
 /**
  * holds information about the possible client configuration
@@ -21,7 +21,7 @@ export interface ClientConfig {
     /**
      * the game height and width for the viewport
      */
-    gameDimension: Dimension;
+    gameDimension: Point2;
 
     /**
      * should the current fps be printed on the screen?

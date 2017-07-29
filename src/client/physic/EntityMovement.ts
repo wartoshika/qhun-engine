@@ -6,7 +6,7 @@
  */
 
 import {
-    Singleton, Entity, Vector2D, Direction
+    Singleton, Entity, Point2, Direction
 } from '../../shared';
 
 /**
@@ -44,12 +44,12 @@ export class EntityMovement extends Singleton {
     }
 
     /**
-     * calculates the vector direction from two vectors
+     * calculates the point direction from two points
      *
      * @param originalPosition the original position
      * @param newPosition the new position
      */
-    private calculateMovementDirection(originalPosition: Vector2D, newPosition: Vector2D): Direction {
+    private calculateMovementDirection(originalPosition: Point2, newPosition: Point2): Direction {
 
         // get the axis movement
         const xMovement = originalPosition.substract(newPosition).x;
