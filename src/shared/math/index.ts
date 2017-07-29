@@ -6,5 +6,5 @@
  */
 
 export * from './Helper';
-export * from './Vector2D';
+export * from './Point2';
 export * from './Dimension';
