@@ -9,7 +9,7 @@ import { CameraMode } from './CameraMode';
 import { World } from '../world';
 
 import {
-    Entity, Vector2D, Dimension
+    Entity, Point2
 } from '../../shared';
 
 /**
@@ -28,9 +28,9 @@ export interface Camera {
     getScale(): number;
 
     /**
-     * get the camera scale as vector
+     * get the camera scale as point
      */
-    getScaleVector(): Vector2D;
+    getScaleVector(): Point2;
 
     /**
      * set the current world scale modificator
@@ -40,12 +40,12 @@ export interface Camera {
     /**
      * set the world size/bounds
      */
-    setWorldBounds(bounds: Dimension): void;
+    setWorldBounds(bounds: Point2): void;
 
     /**
      * get the world size/bounds
      */
-    getWorldBounds(): Dimension;
+    getWorldBounds(): Point2;
 
     /**
      * follows one entity
@@ -69,6 +69,6 @@ export interface Camera {
      * translates the given position of an entity or asset
      * to a new position including scale and entity following
      */
-    translatePosition(currentPosition: Vector2D): Vector2D;
+    translatePosition(currentPosition: Point2): Point2;
 
 }

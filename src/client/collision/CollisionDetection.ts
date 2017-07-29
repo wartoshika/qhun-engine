@@ -9,7 +9,7 @@ import { Entity } from '../entity';
 import { World, TILE_NOT_ON_MAP } from '../world';
 import { Camera } from '../camera';
 import {
-    Vector2D, Singleton, GameObject, Direction,
+    Point2, Singleton, GameObject, Direction,
     CollisionDetection as BaseCollisionDetection
 } from '../../shared';
 
@@ -31,11 +31,11 @@ export class CollisionDetection extends Singleton {
         // get all tiles that are collidable by the world
         const collisionTiles = world.getTileMap().getCollidableTileNumbers();
 
-        // world tile dimension to calculate the position on the map
+        // world tile size to calculate the position on the map
         // as tile position
-        const tileDimension = Vector2D.from(
-            world.getTileMap().getDimension().x,
-            world.getTileMap().getDimension().y
+        const tileSize = Point2.from(
+            world.getTileMap().getSize().x,
+            world.getTileMap().getSize().y
         );
 
         // check if the position of the entity is realistic
@@ -49,7 +49,7 @@ export class CollisionDetection extends Singleton {
             // get the tile where the entity stands on
             const gameObjectMap: GameObject[] = [];
             const position = entity.getPosition()
-                .divide(tileDimension)
+                .divide(tileSize)
                 .floor();
 
             // add tiles for all directions
@@ -60,36 +60,36 @@ export class CollisionDetection extends Singleton {
              */
             gameObjectMap.push(
                 new GameObject(
-                    tileDimension.x, tileDimension.y,
-                    position.add(Vector2D.from(1, 0))
+                    tileSize.x, tileSize.y,
+                    position.add(Point2.from(1, 0))
                 ),
                 new GameObject(
-                    tileDimension.x, tileDimension.y,
-                    position.add(Vector2D.from(0, 1))
+                    tileSize.x, tileSize.y,
+                    position.add(Point2.from(0, 1))
                 ),
                 new GameObject(
-                    tileDimension.x, tileDimension.y,
-                    position.add(Vector2D.from(0, -1))
+                    tileSize.x, tileSize.y,
+                    position.add(Point2.from(0, -1))
                 ),
                 new GameObject(
-                    tileDimension.x, tileDimension.y,
-                    position.add(Vector2D.from(-1, 0))
+                    tileSize.x, tileSize.y,
+                    position.add(Point2.from(-1, 0))
                 )/*,
                 new GameObject(
-                    tileDimension.x, tileDimension.y,
-                    position.add(Vector2D.from(-1, -1))
+                    tileSize.x, tileSize.y,
+                    position.add(Point2.from(-1, -1))
                 ),
                 new GameObject(
-                    tileDimension.x, tileDimension.y,
-                    position.add(Vector2D.from(1, -1))
+                    tileSize.x, tileSize.y,
+                    position.add(Point2.from(1, -1))
                 ),
                 new GameObject(
-                    tileDimension.x, tileDimension.y,
-                    position.add(Vector2D.from(1, 1))
+                    tileSize.x, tileSize.y,
+                    position.add(Point2.from(1, 1))
                 ),
                 new GameObject(
-                    tileDimension.x, tileDimension.y,
-                    position.add(Vector2D.from(-1, 1))
+                    tileSize.x, tileSize.y,
+                    position.add(Point2.from(-1, 1))
                 )*/
             );
 
@@ -109,7 +109,7 @@ export class CollisionDetection extends Singleton {
                 // update tile position to fit the world entity position
                 object.setPosition(
                     object.getPosition()
-                        .multiply(tileDimension)
+                        .multiply(tileSize)
                 );
 
                 // make a collision detection and restore position

@@ -5,7 +5,7 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { Dimension } from '../../shared/math';
+import { Point2 } from '../../shared/math';
 
 /**
  * a class to handle the window viewport things like
@@ -14,11 +14,11 @@ import { Dimension } from '../../shared/math';
 export class Viewport {
 
     /**
-     * getting the current window dimension
+     * getting the current window size
      */
-    public static getWindowDimension(): Dimension {
+    public static getWindowDimension(): Point2 {
 
-        return new Dimension(
+        return Point2.from(
             window.innerWidth,
             window.innerHeight
         );

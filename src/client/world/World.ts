@@ -8,8 +8,7 @@
 import { OnWorldInit } from './OnWorldInit';
 import { GravityForce } from '../physic';
 import {
-    Vector2D, Dimension, Log, GenericEventEmitter,
-    EventName
+    Point2, Log, GenericEventEmitter, EventName
 } from '../../shared';
 import { TileMap, AssetStorage, AssetType } from '../asset';
 import { Camera } from '../camera';
@@ -41,7 +40,7 @@ export abstract class World implements OnWorldInit {
     protected camera: Camera[] = [];
 
     /**
-     * the tiles as multidimensional world array
+     * the tiles as multisizeal world array
      * first dim: layer
      * second dim: x
      * third dim: y
@@ -59,7 +58,7 @@ export abstract class World implements OnWorldInit {
      */
     constructor(
         tileMapName: string,
-        private gravity: Vector2D<GravityForce> = new Vector2D<GravityForce>(
+        private gravity: Point2<GravityForce> = new Point2<GravityForce>(
             GravityForce.None,
             GravityForce.None
         )
@@ -93,11 +92,11 @@ export abstract class World implements OnWorldInit {
     }
 
     /**
-     * get the dimension of the world using the tilemap information
+     * get the size of the world using the tilemap information
      */
-    public getWorldDimension(): Dimension {
+    public getWorldSize(): Point2 {
 
-        return this.map.getWorldDimension();
+        return this.map.getWorldSize();
     }
 
     /**
@@ -159,12 +158,12 @@ export abstract class World implements OnWorldInit {
     public addCamera(...cameras: Camera[]): void {
 
         // get the tile size
-        const tileSize = this.getTileMap().getDimension();
-        const worldDimension = this.getWorldDimension();
+        const tileSize = this.getTileMap().getSize();
+        const worldDimension = this.getWorldSize();
 
         // set world bounds!
         cameras.forEach((camera) => camera.setWorldBounds(
-            new Dimension(
+            new Point2(
                 worldDimension.x * tileSize.x,
                 worldDimension.y * tileSize.y
             )
@@ -192,7 +191,7 @@ export abstract class World implements OnWorldInit {
      *
      * @param position the point on the tile map
      */
-    public getTileNumbersForPosition(position: Vector2D): number[] {
+    public getTileNumbersForPosition(position: Point2): number[] {
 
         // merge the mapped number[][] to number[]
         return [].concat.apply([], this.generatedWorld.map((tiles, layer) => {
@@ -203,7 +202,7 @@ export abstract class World implements OnWorldInit {
     }
 
     /**
-     * get the generated world as multidimensional array
+     * get the generated world as multisizeal array
      * first dim: layer
      * second dim: x
      * third dim: y
@@ -214,12 +213,12 @@ export abstract class World implements OnWorldInit {
     }
 
     /**
-     * generate a multidimensional world array
+     * generate a multisizeal world array
      */
     public generateWorld(): void {
 
         // get the world width to know when to break a row
-        const worldWidth = this.map.getWorldDimension().x;
+        const worldWidth = this.map.getWorldSize().x;
 
         // iterate through the map and each layer
         this.map.getWorld().forEach((layer, layerNumber) => {
@@ -267,7 +266,7 @@ export abstract class World implements OnWorldInit {
     private generateWorldBounds(): void {
 
         // get the world width to know when to break a row
-        const worldDimension = this.map.getWorldDimension();
+        const worldDimension = this.map.getWorldSize();
 
         // iterate layers
         this.map.getWorld().forEach((layer, layerNumber) => {

@@ -6,7 +6,7 @@
  */
 
 import { Image } from '../asset';
-import { Vector2D, Entity } from '../../shared';
+import { Point2, Entity } from '../../shared';
 
 export interface RenderableEntity extends Entity {
 
@@ -35,7 +35,7 @@ export interface RenderableEntity extends Entity {
     /**
      * get the position from the entity (top, left)
      */
-    getPosition(): Vector2D;
+    getPosition(): Point2;
 
     /**
      * get the current local entity scale

@@ -9,7 +9,7 @@ import { AbstractAsset } from './AbstractAsset';
 import { AssetDataType } from './Asset';
 import { InlineAsset } from './Asset';
 import { AssetType } from './AssetType';
-import { Dimension } from '../../shared';
+import { Point2 } from '../../shared';
 
 export interface InlineTileMapAsset extends InlineAsset {
 
@@ -84,11 +84,11 @@ export class TileMap extends AbstractAsset {
     }
 
     /**
-     * get the height and width as dimension instance
+     * get the height and width as size instance
      */
-    public getDimension(): Dimension {
+    public getSize(): Point2 {
 
-        return new Dimension(this.tilewidth, this.tileheight);
+        return new Point2(this.tilewidth, this.tileheight);
     }
 
     /**
@@ -122,12 +122,12 @@ export class TileMap extends AbstractAsset {
     }
 
     /**
-     * get the world dimension of the tilemap csv file
+     * get the world size of the tilemap csv file
      */
-    public getWorldDimension(): Dimension {
+    public getWorldSize(): Point2 {
 
         // multiply with the tile width and height
-        return new Dimension(
+        return new Point2(
             this.width,
             this.height
         );

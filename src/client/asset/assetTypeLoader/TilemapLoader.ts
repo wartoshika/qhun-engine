@@ -10,7 +10,7 @@ import { TileMap } from '../TileMap';
 import { Image } from '../Image';
 import { TypeLoader } from './TypeLoader';
 import { Request } from '../../network';
-import { Singleton, Binary, Vector2D } from '../../../shared';
+import { Singleton, Binary, Point2 } from '../../../shared';
 
 /**
  * the image asset loader class
@@ -60,7 +60,7 @@ export class TilemapLoader extends Singleton implements TypeLoader {
     private registerTilemapSubImages(instance: TileMap, bitmap: ImageBitmap): Image[] {
 
         // get the amount of tiles
-        const tileSize = instance.getDimension();
+        const tileSize = instance.getSize();
         const horizontalTileAmount = bitmap.width / tileSize.x;
         const verticalTileAmount = bitmap.height / tileSize.y;
 

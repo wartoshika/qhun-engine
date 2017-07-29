@@ -5,7 +5,7 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { Singleton, EventName, Vector2D } from '../../shared';
+import { Singleton, EventName, Point2 } from '../../shared';
 
 /**
  * a handler for window resize events
@@ -22,7 +22,7 @@ export class WindowResizeEvent extends Singleton {
 
     /**
      * listen for ui resize events and emit them in the engine internal
-     * event handling with the destination coordinates as vector to resize
+     * event handling with the destination coordinates as point to resize
      * the different elements
      *
      * @param event the resize event
@@ -32,7 +32,7 @@ export class WindowResizeEvent extends Singleton {
         this.emit(
             EventName.WindowResize,
             {},
-            Vector2D.from(
+            Point2.from(
                 (event.target as Window).innerWidth,
                 (event.target as Window).innerHeight
             )

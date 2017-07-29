@@ -8,7 +8,7 @@
 import { BaseEntityRenderer } from '../BaseEntityRenderer';
 import { RenderableEntity } from '../../entity/RenderableEntity';
 import { Image, AssetType } from '../../asset';
-import { Vector2D } from '../../../shared';
+import { Point2 } from '../../../shared';
 
 /**
  * an entity renderer for canvas
@@ -16,7 +16,7 @@ import { Vector2D } from '../../../shared';
 export class CanvasEntityRenderer extends BaseEntityRenderer {
 
     constructor(
-        drawingDimension: Vector2D,
+        drawingDimension: Point2,
         protected ctx: CanvasRenderingContext2D
     ) {
         super(drawingDimension);
@@ -36,9 +36,9 @@ export class CanvasEntityRenderer extends BaseEntityRenderer {
         // get the position for the entity
         const positionVector = camera.translatePosition(entity.getPosition());
 
-        // get image and scale vector
+        // get image and scale point
         const entityImageName = entity.getImage();
-        let entityScaleVector = Vector2D.from(entity.getScale());
+        let entityScaleVector = Point2.from(entity.getScale());
 
         // get the image from the asset store
         const entityImage = this.assetStorage.getAsset<Image>(
@@ -46,7 +46,7 @@ export class CanvasEntityRenderer extends BaseEntityRenderer {
         ).getData() as ImageBitmap;
 
         // sacle the entity
-        entityScaleVector = entityScaleVector.multiply(Vector2D.from(
+        entityScaleVector = entityScaleVector.multiply(Point2.from(
             entityImage.width, entityImage.height
         ));
 
@@ -68,7 +68,7 @@ export class CanvasEntityRenderer extends BaseEntityRenderer {
      *
      * @param entity the entity to draw a cross for
      */
-    private drawEntityPointCross(entityPosition: Vector2D): void {
+    private drawEntityPointCross(entityPosition: Point2): void {
 
         const crossDim = 5;
 

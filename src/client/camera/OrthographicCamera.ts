@@ -9,7 +9,7 @@ import { BaseCamera } from './BaseCamera';
 import { CameraMode } from './CameraMode';
 
 import {
-    Entity, Vector2D, GenericEventEmitter, EventName
+    Entity, Point2, GenericEventEmitter, EventName
 } from '../../shared';
 
 /**
@@ -23,9 +23,9 @@ export class OrthographicCamera extends BaseCamera {
     protected mode: CameraMode = CameraMode.Orthogonal;
 
     /**
-     * the dimension of the drawable area
+     * the size of the drawable area
      */
-    private drawingDimension = Vector2D.from(0, 0);
+    private drawingSize = Point2.from<number>(0, 0);
 
     /**
      * the event emitter instance
@@ -39,9 +39,9 @@ export class OrthographicCamera extends BaseCamera {
         super(scale);
 
         // listen for game area size change change
-        this.eventEmitter.on(EventName.WindowResize, (newSize: Vector2D) => {
+        this.eventEmitter.on(EventName.WindowResize, (newSize: Point2) => {
 
-            this.drawingDimension = newSize;
+            this.drawingSize = newSize;
         });
     }
 
@@ -58,7 +58,7 @@ export class OrthographicCamera extends BaseCamera {
      * translates the given position of an entity or asset
      * to a new position including scale and entity following
      */
-    public translatePosition(currentPosition: Vector2D): Vector2D {
+    public translatePosition(currentPosition: Point2): Point2 {
 
         // add camera scale to currentPosition
         currentPosition = currentPosition.multiply(this.getScaleVector());
@@ -72,11 +72,11 @@ export class OrthographicCamera extends BaseCamera {
         if (!entity) return newPosition;
 
         // get the position of the entity and center it, translate other positions
-        const centerVector = this.drawingDimension
+        const centerVector = this.drawingSize
             .half();
 
         // center entity image:
-        // centerVector = centerVector.substract(Vector2D.from(entity.getWidth(), entity.getHeight()));
+        // centerVector = centerVector.substract(Point2.from(entity.getWidth(), entity.getHeight()));
 
         const translateVector = entity.getPosition()
             .multiply(this.getScaleVector())
@@ -85,7 +85,7 @@ export class OrthographicCamera extends BaseCamera {
         // translate the original position
         newPosition = currentPosition.substract(translateVector);
 
-        // check if the original vector is smaller than the shifted vector
+        // check if the original point is smaller than the shifted point
         // this will bound the left and top world bounds
         if (currentPosition.x < newPosition.x) {
 
@@ -105,8 +105,8 @@ export class OrthographicCamera extends BaseCamera {
             .multiply(this.getScaleVector());
 
         // get worldbounds, add the camera scale and reduce it by the
-        // center vector to test against the entity position
-        const worldBounds = Vector2D.from(
+        // center point to test against the entity position
+        const worldBounds = Point2.from(
             this.getWorldBounds().x,
             this.getWorldBounds().y
         ).multiply(this.getScaleVector());
@@ -116,16 +116,16 @@ export class OrthographicCamera extends BaseCamera {
         if (ep.x > worldBoundCenter.x) {
 
             // camera collided with the right bound!
-            newPosition.x = currentPosition.x - (worldBounds.x - this.drawingDimension.x);
+            newPosition.x = currentPosition.x - (worldBounds.x - this.drawingSize.x);
         }
 
         if (ep.y > worldBoundCenter.y) {
 
             // camera collided with the bottom bound!
-            newPosition.y = currentPosition.y - (worldBounds.x - this.drawingDimension.y);
+            newPosition.y = currentPosition.y - (worldBounds.x - this.drawingSize.y);
         }
 
-        // return the corrected position vector
+        // return the corrected position point
         return newPosition;
     }
 

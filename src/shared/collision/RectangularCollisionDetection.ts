@@ -5,7 +5,7 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { Vector2D } from '../math';
+import { Point2 } from '../math';
 import { Singleton } from '../helper';
 import { GameObject } from '../entity';
 

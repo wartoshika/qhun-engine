@@ -5,7 +5,7 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { Entity, Vector2D } from '@shared';
+import { Entity, Point2 } from '@shared';
 
 import { suite, test } from 'mocha-typescript';
 import { expect } from 'chai';
@@ -27,7 +27,7 @@ class TestEntity {
     @test "entity should have a getter and setter for positioning"() {
 
         let entity = new StubEntity();
-        let pos = Vector2D.from(10);
+        let pos = Point2.from(10);
 
         entity.setPosition(pos);
         expect(entity.getPosition()).to.eq(pos);

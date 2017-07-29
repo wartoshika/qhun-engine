@@ -8,7 +8,7 @@
 import { World } from '../../world/World';
 import { Camera } from '../../camera/Camera';
 import { WorldRenderer } from '../WorldRenderer';
-import { Singleton, EventName, Binary, Vector2D, Dimension } from '../../../shared';
+import { Singleton, EventName, Binary, Point2 } from '../../../shared';
 import { AssetStorage, AssetType, Image } from '../../asset';
 
 /**
@@ -76,7 +76,7 @@ export class CanvasWorldRenderer extends Singleton implements WorldRenderer {
         const mapHeight = map[0][0].length;
 
         // tile size
-        const tileDimension = this.world.getTileMap().getDimension();
+        const tileDimension = this.world.getTileMap().getSize();
         canvas.width = tileDimension.x;
         canvas.height = tileDimension.y;
 
@@ -90,7 +90,7 @@ export class CanvasWorldRenderer extends Singleton implements WorldRenderer {
             for (let y = 0; y < mapHeight; y++) {
 
                 // get the tile numbers for this position
-                const positionVector = Vector2D.from(x, y);
+                const positionVector = Point2.from(x, y);
                 const tileNumbers = this.world.getTileNumbersForPosition(positionVector);
 
                 // clear the canvas context
@@ -158,7 +158,7 @@ export class CanvasWorldRenderer extends Singleton implements WorldRenderer {
                 // get information to render the cluster
                 // calculate the target position for the
                 // cluster tile and add the camera scale
-                const positionVector = Vector2D.from(
+                const positionVector = Point2.from(
                     x * tileImage.width,
                     y * tileImage.height
                 );
@@ -167,7 +167,7 @@ export class CanvasWorldRenderer extends Singleton implements WorldRenderer {
                 const cameraPosition = this.camera.translatePosition(positionVector);
 
                 // get the cluster width and height including camera scale
-                const sizeVector = Vector2D.from(
+                const sizeVector = Point2.from(
                     tileImage.width, tileImage.height
                 ).multiply(this.camera.getScaleVector());
 

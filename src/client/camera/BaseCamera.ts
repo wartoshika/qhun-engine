@@ -9,10 +9,7 @@ import { Entity } from '../entity';
 import { World } from '../world';
 import { CameraMode } from './CameraMode';
 import { Camera } from './Camera';
-
-import {
-    Vector2D, Dimension
-} from '../../shared';
+import { Point2 } from '../../shared';
 
 /**
  * the view for the player into the game
@@ -32,12 +29,12 @@ export abstract class BaseCamera implements Camera {
     /**
      * the position of the camera
      */
-    protected position: Vector2D = Vector2D.from(0, 0);
+    protected position: Point2 = Point2.from(0, 0);
 
     /**
      * the world bounds for this camera
      */
-    protected worldBounds: Dimension;
+    protected worldBounds: Point2;
 
     /**
      *
@@ -57,7 +54,7 @@ export abstract class BaseCamera implements Camera {
      * translates the given position of an entity or asset
      * to a new position including scale and entity following
      */
-    public abstract translatePosition(currentPosition: Vector2D): Vector2D;
+    public abstract translatePosition(currentPosition: Point2): Point2;
 
     /**
      * get the camera mode
@@ -76,11 +73,11 @@ export abstract class BaseCamera implements Camera {
     }
 
     /**
-     * get the camera scale as vector
+     * get the camera scale as point
      */
-    public getScaleVector(): Vector2D {
+    public getScaleVector(): Point2 {
 
-        return new Vector2D(this.scale, this.scale);
+        return new Point2(this.scale, this.scale);
     }
 
     /**
@@ -113,7 +110,7 @@ export abstract class BaseCamera implements Camera {
     /**
      * set the world size/bounds as unscaled pixel
      */
-    public setWorldBounds(bounds: Dimension): void {
+    public setWorldBounds(bounds: Point2): void {
 
         this.worldBounds = bounds;
     }
@@ -121,7 +118,7 @@ export abstract class BaseCamera implements Camera {
     /**
      * get the world size/bounds as unscaled pixel
      */
-    public getWorldBounds(): Dimension {
+    public getWorldBounds(): Point2 {
 
         return this.worldBounds;
     }

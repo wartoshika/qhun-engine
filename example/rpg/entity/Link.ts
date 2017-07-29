@@ -10,7 +10,7 @@ import {
 } from '@qhun-engine/client';
 
 import {
-    Vector2D, CollisionType, CanCollide, OnDirectionChange,
+    Point2, CollisionType, CanCollide, OnDirectionChange,
     Direction
 } from '@qhun-engine/shared';
 
@@ -70,7 +70,7 @@ export class Link extends Entity implements CanCollide, OnDirectionChange {
 
     constructor() {
 
-        super(16, 24, new Vector2D(10, 10));
+        super(16, 24, new Point2(10, 10));
 
         // set initial image
         this.setImage('link_run[link_run_down_1]');
