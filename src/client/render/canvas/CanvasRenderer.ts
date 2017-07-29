@@ -79,7 +79,8 @@ export class CanvasRenderer extends BasicRenderer {
     public preRender(): void {
 
         // clear the current canvas (check performance when not clearing)
-        // this.ctx.clearRect(0, 0, this.gameDimension.x, this.gameDimension.y);
+        this.ctx.fillStyle = '#000';
+        this.ctx.fillRect(0, 0, this.gameDimension.x, this.gameDimension.y);
 
         // check if a world should be rendered
         if (this.worldRenderer) {

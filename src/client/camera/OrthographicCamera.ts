@@ -13,9 +13,9 @@ import {
 } from '../../shared';
 
 /**
- * an orthogonal camera for the view of the player
+ * an orthographic camera for the view of the player
  */
-export class OrthogonalCamera extends BaseCamera {
+export class OrthographicCamera extends BaseCamera {
 
     /**
      * the camera mode
@@ -72,7 +72,12 @@ export class OrthogonalCamera extends BaseCamera {
         if (!entity) return newPosition;
 
         // get the position of the entity and center it, translate other positions
-        const centerVector = this.drawingDimension.half();
+        const centerVector = this.drawingDimension
+            .half();
+
+        // center entity image:
+        // centerVector = centerVector.substract(Vector2D.from(entity.getWidth(), entity.getHeight()));
+
         const translateVector = entity.getPosition()
             .multiply(this.getScaleVector())
             .substract(centerVector);
@@ -94,29 +99,30 @@ export class OrthogonalCamera extends BaseCamera {
             newPosition.y = currentPosition.y;
         }
 
-        // now check right and bottom bounds
-        // if the entity reaches this vector, stop translating
-        const entityPositionScaled = entity.getPosition().add(
-            Vector2D.from(
-                entity.getWidth(), entity.getHeight()
-            )
-        );
+        // check if the camera hit the right and bottom world bound
+        // get the entity position with camera scale
+        const ep = entity.getPosition()
+            .multiply(this.getScaleVector());
 
-        // now check the world bounds
-        const worldBoundVector = Vector2D.from(
-            this.getWorldBounds().x, this.getWorldBounds().y
-        ).half();
+        // get worldbounds, add the camera scale and reduce it by the
+        // center vector to test against the entity position
+        const worldBounds = Vector2D.from(
+            this.getWorldBounds().x,
+            this.getWorldBounds().y
+        ).multiply(this.getScaleVector());
+        const worldBoundCenter = worldBounds.substract(centerVector);
 
-        if (entityPositionScaled.x > worldBoundVector.x) {
-            newPosition.x = worldBoundVector.x * this.getScale();
+        // test camera world bounds collision
+        if (ep.x > worldBoundCenter.x) {
+
+            // camera collided with the right bound!
+            newPosition.x = currentPosition.x - (worldBounds.x - this.drawingDimension.x);
         }
 
-        if ((window as any).test === true) {
+        if (ep.y > worldBoundCenter.y) {
 
-            // console.log("RIGHT", entityPositionScaled.x, worldBoundVector.x);
-            // console.log("BOTTOM", entityPositionScaled.y, worldBoundVector.y);
-
-            (window as any).test = false;
+            // camera collided with the bottom bound!
+            newPosition.y = currentPosition.y - (worldBounds.x - this.drawingDimension.y);
         }
 
         // return the corrected position vector

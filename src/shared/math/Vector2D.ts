@@ -137,4 +137,18 @@ export class Vector2D<T extends number = number> extends Dimension {
 
         return new Vector2D(Math.abs(this.x) as T, Math.abs(this.y) as T);
     }
+
+    /**
+     * clamps the given value to between min and max
+     *
+     * @param min the min value
+     * @param max the max value
+     */
+    public clamp(min: Vector2D, max: Vector2D): Vector2D {
+
+        return Vector2D.from(
+            Math.max(min.x, Math.min(max.x, this.x)),
+            Math.max(min.y, Math.min(max.y, this.y))
+        );
+    }
 }

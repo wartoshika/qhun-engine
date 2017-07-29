@@ -58,6 +58,27 @@ export class CanvasEntityRenderer extends BaseEntityRenderer {
             positionVector.x, positionVector.y,
             entityScaleVector.x, entityScaleVector.y
         );
+
+        // draw entity position cross
+        this.drawEntityPointCross(positionVector);
+    }
+
+    /**
+     * draws a cross at the entity position
+     *
+     * @param entity the entity to draw a cross for
+     */
+    private drawEntityPointCross(entityPosition: Vector2D): void {
+
+        const crossDim = 5;
+
+        this.ctx.beginPath();
+        this.ctx.strokeStyle = '#ff0000';
+        this.ctx.moveTo(entityPosition.x - crossDim, entityPosition.y);
+        this.ctx.lineTo(entityPosition.x + crossDim, entityPosition.y);
+        this.ctx.moveTo(entityPosition.x, entityPosition.y - crossDim);
+        this.ctx.lineTo(entityPosition.x, entityPosition.y + crossDim);
+        this.ctx.stroke();
     }
 
 }

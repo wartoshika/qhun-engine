@@ -29,7 +29,7 @@ class TestEventEmitter extends EventEmitter {
     }
 }
 
-@suite("shared/decorator/collectGargabe")
+@suite("shared/decorator/CollectGargabe")
 class Test {
 
     emitter: TestEventEmitter;

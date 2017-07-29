@@ -7,7 +7,7 @@
 
 import {
     Client, CanvasRenderer, Viewport, Game,
-    LoadingScreenScene, Input, World, OrthogonalCamera,
+    LoadingScreenScene, Input, World, OrthographicCamera,
     AssetRegister
 } from '@qhun-engine/client';
 
@@ -65,7 +65,7 @@ class MyAwesomeRpgGame extends Client {
         this.link = new Link();
 
         // create game objects
-        const camera = new OrthogonalCamera(1.25);
+        const camera = new OrthographicCamera(1.25);
         const world = new Level1('level1');
 
         // add global world things
