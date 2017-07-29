@@ -77,14 +77,6 @@ export class Link extends Entity implements CanCollide, OnDirectionChange {
     }
 
     /**
-     * get the entities collision type
-     */
-    public getCollisionType(): CollisionType {
-
-        return CollisionType.Circle;
-    }
-
-    /**
      * an event handler that will fire if another entity collided with this instance
      */
     public onCollision(otherEntity: Entity): void {

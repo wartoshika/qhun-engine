@@ -7,13 +7,14 @@
 
 import { Vector2D } from '../math';
 import { Direction } from '../helper';
-import { OnDirectionChange } from '../entity';
+import { OnDirectionChange } from './OnDirectionChange';
+import { GameObject } from './GameObject';
 import { GenericEventEmitter, EventName } from '../event';
 
 /**
  * the base class for all game entities
  */
-export abstract class Entity {
+export abstract class Entity extends GameObject {
 
     /**
      * the last known entity walking direction
@@ -31,10 +32,12 @@ export abstract class Entity {
     private eventEmitter = GenericEventEmitter.getInstance<GenericEventEmitter>();
 
     constructor(
-        protected entityWidth: number = 0,
-        protected entityHeight: number = 0,
-        protected position: Vector2D = new Vector2D(0, 0)
+        entityWidth: number = 0,
+        entityHeight: number = 0,
+        position: Vector2D = new Vector2D(0, 0)
     ) {
+
+        super(entityWidth, entityHeight, position);
 
         // check if the entity implements OnEntityDirectionChange
         const chkImplDirChange = typeof (this as any as OnDirectionChange)
@@ -54,40 +57,6 @@ export abstract class Entity {
                 }
             );
 
-    }
-
-    /**
-     * get the width of the entity
-     */
-    public getWidth(): number {
-
-        return this.entityWidth;
-    }
-
-    /**
-     * get the height of the entity
-     */
-    public getHeight(): number {
-
-        return this.entityHeight;
-    }
-
-    /**
-     * get the current position of the entity ( top left )
-     */
-    public getPosition(): Vector2D {
-
-        return this.position;
-    }
-
-    /**
-     * set the entities new position
-     *
-     * @param position the new position
-     */
-    public setPosition(position: Vector2D): void {
-
-        this.position = position;
     }
 
     /**

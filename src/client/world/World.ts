@@ -185,7 +185,6 @@ export abstract class World implements OnWorldInit {
 
     /**
      * get the tile numbers for a position on the map
-     * if the position is not on the map, a -2 will be returned
      *
      * @param position the point on the tile map
      */
@@ -193,8 +192,10 @@ export abstract class World implements OnWorldInit {
 
         // merge the mapped number[][] to number[]
         return [].concat.apply([], this.generatedWorld.map((tiles, layer) => {
-            return tiles[position.x][position.y];
-        }).filter((tile) => isFinite(tile)));
+            try {
+                return tiles[position.x][position.y];
+            } catch (e) { return []; }
+        }).filter((tile) => isFinite(tile as number)));
     }
 
     /**
@@ -215,6 +216,7 @@ export abstract class World implements OnWorldInit {
 
         // get the world width to know when to break a row
         const worldWidth = this.map.getWorldDimension().x;
+        const tileSize = this.getTileMap().getDimension();
 
         // iterate through the map and each layer
         this.map.getWorld().forEach((layer, layerNumber) => {
@@ -250,4 +252,5 @@ export abstract class World implements OnWorldInit {
             });
         });
     }
+
 }

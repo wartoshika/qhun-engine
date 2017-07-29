@@ -8,74 +8,93 @@
 import { Entity } from '../entity';
 import { World } from '../world';
 import { Camera } from '../camera';
-import { Vector2D } from '../../shared/math';
+import {
+    Vector2D, Singleton, GameObject, Direction,
+    CollisionDetection as BaseCollisionDetection
+} from '../../shared';
 
-export class CollisionDetection {
+export class CollisionDetection extends Singleton {
+
+    /**
+     * the hit test calculator
+     */
+    protected collisionDetection = BaseCollisionDetection
+        .getInstance<BaseCollisionDetection>();
 
     /**
      * check if entities collides with the world
      *
      * @param world the world to check
      */
-    public static entitiesWithWorld(world: World): void {
+    public entitiesWithWorld(world: World): void {
 
-        /*// only take entities that can collide
-        entities.filter((entity) => entity instanceof CollidableEntity).forEach((entity: CollidableEntity) => {
+        // get all tiles that are collidable by the world
+        const collisionTiles = world.getTileMap().getCollidableTileNumbers();
 
-            // calculate the entity position in every direction from its
-            // current position
-            const position: {
-                [direction: number]: Vector2D
-            } = {};
+        // world tile dimension to calculate the position on the map
+        // as tile position
+        const tileDimension = Vector2D.from(
+            world.getTileMap().getDimension().x,
+            world.getTileMap().getDimension().y
+        );
 
-            // get the position of the entity
-            const entityPosition = entity.getPosition();
-            const tileDimension = world.getTileMap().getDimension();
-            const entityCollidesWithWorldBounds = entity.getWorldBoundCollision();
+        // check if the position of the entity is realistic
+        // there will be an antomatic position correction
+        // if the entity is on an object that should collide with
+        // the entity
+        world.getEntities().forEach((entity: Entity) => {
 
-            // calculate the tile position on the map
-            const tilePosition = entityPosition
-                .divide(camera.getScaleVector())
-                .divide(Vector2D.from(tileDimension.y, tileDimension.y))
-                .round(0);
+            const tiles: number[] = [];
 
-            // now the system should check if the entity can move
-            position[Direction.Left] = tilePosition.add(Vector2D.from(-1, 0));
-            position[Direction.Right] = tilePosition.add(Vector2D.from(1, 0));
-            position[Direction.Up] = tilePosition.add(Vector2D.from(0, -1));
-            position[Direction.Down] = tilePosition.add(Vector2D.from(0, 1));
+            // get the tile where the entity stands on
+            const gameObjectMap: GameObject[] = [];
+            const position = entity.getPosition()
+                .divide(tileDimension)
+                .floor();
 
-            // iterate the directions
-            Object.keys(position).forEach((key) => {
+            // add tiles for all directions
+            gameObjectMap.push(
+                new GameObject(
+                    tileDimension.x, tileDimension.y,
+                    position.add(Vector2D.from(1, 0))
+                ),
+                new GameObject(
+                    tileDimension.x, tileDimension.y,
+                    position.add(Vector2D.from(0, 1))
+                ),
+                new GameObject(
+                    tileDimension.x, tileDimension.y,
+                    position.add(Vector2D.from(0, -1))
+                ),
+                new GameObject(
+                    tileDimension.x, tileDimension.y,
+                    position.add(Vector2D.from(-1, 0))
+                )
+            );
 
-                const direction = parseInt(key, 10) as Direction;
-                let collision = false;
+            // check for collision detection
+            gameObjectMap.forEach((object) => {
 
-                // get the tile numbers that are at the players point
-                const tileNumbers = world.getTileNumbersForPosition(position[direction]);
+                // check if the tile is collidable
+                const tileIsCollidable = world.getTileNumbersForPosition(
+                    object.getPosition()
+                ).filter((tileNumber) => collisionTiles.indexOf(tileNumber) !== -1)
+                    .length > 0;
 
-                // on a collidable tile?
-                const collidableTileNumbers = world.getTileMap().getCollidableTileNumbers();
+                if (!tileIsCollidable) return;
 
-                // test collision
-                tileNumbers.forEach((number) => {
+                // update tile position to fit the world entity position
+                object.setPosition(
+                    object.getPosition()
+                        .multiply(tileDimension)
+                );
 
-                    // does the number exist?
-                    if (
-                        // collidable tile
-                        collidableTileNumbers.indexOf(number) !== -1
-                        ||
-                        // world bound
-                        (entityCollidesWithWorldBounds && number === -2)
-                    ) {
-
-                        collision = true;
-                    }
-                });
-
-                // set the direction
-                entity.setDirectionBlocked(direction, collision);
+                // make a collision detection and restore position
+                if (this.collisionDetection.hitTest(
+                    entity, object
+                )) entity.restorePreviousPosition();
             });
-        });*/
+
+        });
     }
 }

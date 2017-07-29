@@ -10,5 +10,5 @@
  */
 export enum CollisionType {
 
-    Circle, Rectangle, RotatedRectangle
+    None, Circle, Rectangle, RotatedRectangle
 }

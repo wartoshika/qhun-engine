@@ -151,4 +151,26 @@ export class Vector2D<T extends number = number> extends Dimension {
             Math.max(min.y, Math.min(max.y, this.y))
         );
     }
+
+    /**
+     * floors both coordinates using Math.floor
+     */
+    public floor(): Vector2D {
+
+        return Vector2D.from(
+            Math.floor(this.x),
+            Math.floor(this.y)
+        );
+    }
+
+    /**
+     * ceil both coordinates using Math.ceil
+     */
+    public ceil(): Vector2D {
+
+        return Vector2D.from(
+            Math.ceil(this.x),
+            Math.ceil(this.y)
+        );
+    }
 }

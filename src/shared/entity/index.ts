@@ -8,3 +8,4 @@
 export * from './CanCollide';
 export * from './Entity';
 export * from './OnDirectionChange';
+export * from './GameObject';

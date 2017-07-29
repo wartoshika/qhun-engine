@@ -8,7 +8,6 @@
 import { AssetRegister } from './asset/AssetRegister';
 import { Game } from './Game';
 import { Input } from './input/Input';
-import { CollisionDetection } from './collision/CollisionDetection';
 import { QhunEngineBootstrap } from './QhunEngineBootstrap';
 import { ClientConfig } from './ClientConfig';
 
@@ -65,9 +64,9 @@ export abstract class Client extends QhunEngineBootstrap {
         );
 
         // run collision detection
-        // CollisionDetection.entitiesWithWorld(
-        //    this.renderer.getWorld()
-        // );
+        this.collisionDetection.entitiesWithWorld(
+            this.renderer.getWorld()
+        );
 
         // render the game
         if (typeof this.renderer.preRender === 'function') this.renderer.preRender();

@@ -23,6 +23,7 @@ import { ObjectCache } from './render/ObjectCache';
 import { RamStorage } from '../shared/storage/RamStorage';
 import { EntityMovement } from './physic/EntityMovement';
 import { Vector2D } from '../shared/math';
+import { CollisionDetection } from './collision/CollisionDetection';
 
 /**
  * the system class that handles the engine bootstrap process
@@ -48,6 +49,11 @@ export abstract class QhunEngineBootstrap extends Singleton {
      * the holder of the entity movement class
      */
     protected entityMovement = new EntityMovement();
+
+    /**
+     * the collision detection instance
+     */
+    protected collisionDetection = new CollisionDetection();
 
     /**
      * the logger instance

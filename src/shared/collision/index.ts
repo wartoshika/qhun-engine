@@ -6,3 +6,5 @@
  */
 
 export * from './CollisionType';
+export * from './CollisionDetection';
+export * from './RectangularCollisionDetection';
