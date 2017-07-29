@@ -123,4 +123,25 @@ class TestVector2D {
         expect(v.x).to.eq(4);
         expect(v.y).to.eq(10);
     }
+
+    @test "clamp() should work correctly"() {
+
+        const testVector = Vector2D.from(10, 20);
+
+        // test vector is within the range of both axis
+        let testClamp = testVector.clamp(
+            Vector2D.from(5, 10),
+            Vector2D.from(50, 30)
+        );
+        expect(testClamp.x).to.eq(10);
+        expect(testClamp.y).to.eq(20);
+
+        // test vector x axis is lower than min
+        testClamp = testVector.clamp(
+            Vector2D.from(50, 20),
+            Vector2D.from(30, 70)
+        );
+        expect(testClamp.x).to.eq(50);
+        expect(testClamp.y).to.eq(20);
+    }
 }
