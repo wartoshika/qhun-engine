@@ -16,6 +16,9 @@ import { Camera } from '../camera';
 import { TilemapLoader } from '../asset/assetTypeLoader';
 import { Entity } from '../../shared/entity';
 
+// a const for tile number not on the world map
+export const TILE_NOT_ON_MAP = -2;
+
 /**
  * a class to handle world spefific things. a world could also be a level
  * or a map (you call it what you want).
@@ -185,6 +188,7 @@ export abstract class World implements OnWorldInit {
 
     /**
      * get the tile numbers for a position on the map
+     * -2 for tile not on the map
      *
      * @param position the point on the tile map
      */
@@ -194,7 +198,7 @@ export abstract class World implements OnWorldInit {
         return [].concat.apply([], this.generatedWorld.map((tiles, layer) => {
             try {
                 return tiles[position.x][position.y];
-            } catch (e) { return []; }
+            } catch (e) { return; }
         }).filter((tile) => isFinite(tile as number)));
     }
 
@@ -216,7 +220,6 @@ export abstract class World implements OnWorldInit {
 
         // get the world width to know when to break a row
         const worldWidth = this.map.getWorldDimension().x;
-        const tileSize = this.getTileMap().getDimension();
 
         // iterate through the map and each layer
         this.map.getWorld().forEach((layer, layerNumber) => {
@@ -250,6 +253,47 @@ export abstract class World implements OnWorldInit {
                 // first zero passed
                 first = false;
             });
+
+        });
+
+        // set the world bounds
+        this.generateWorldBounds();
+
+    }
+
+    /**
+     * fills the map with TILE_NOT_ON_MAP tiles as world bound
+     */
+    private generateWorldBounds(): void {
+
+        // get the world width to know when to break a row
+        const worldDimension = this.map.getWorldDimension();
+
+        // iterate layers
+        this.map.getWorld().forEach((layer, layerNumber) => {
+
+            // x axis
+            for (let x = -1; x < worldDimension.x + 1; x++) {
+
+                if (!Array.isArray(this.generatedWorld[layerNumber][x]))
+                    this.generatedWorld[layerNumber][x] = [];
+
+                // top
+                this.generatedWorld[layerNumber][x][-1] = TILE_NOT_ON_MAP;
+
+                // bottom
+                this.generatedWorld[layerNumber][x][worldDimension.y] = TILE_NOT_ON_MAP;
+            }
+
+            // y axis
+            for (let y = -1; y < worldDimension.y + 1; y++) {
+
+                // top
+                this.generatedWorld[layerNumber][-1][y] = TILE_NOT_ON_MAP;
+
+                // bottom
+                this.generatedWorld[layerNumber][worldDimension.x][y] = TILE_NOT_ON_MAP;
+            }
         });
     }
 

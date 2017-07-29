@@ -6,7 +6,7 @@
  */
 
 import { Entity } from '../entity';
-import { World } from '../world';
+import { World, TILE_NOT_ON_MAP } from '../world';
 import { Camera } from '../camera';
 import {
     Vector2D, Singleton, GameObject, Direction,
@@ -53,6 +53,11 @@ export class CollisionDetection extends Singleton {
                 .floor();
 
             // add tiles for all directions
+            /**
+             * X | X | X
+             * X | E | X
+             * X | X | X
+             */
             gameObjectMap.push(
                 new GameObject(
                     tileDimension.x, tileDimension.y,
@@ -69,7 +74,23 @@ export class CollisionDetection extends Singleton {
                 new GameObject(
                     tileDimension.x, tileDimension.y,
                     position.add(Vector2D.from(-1, 0))
-                )
+                )/*,
+                new GameObject(
+                    tileDimension.x, tileDimension.y,
+                    position.add(Vector2D.from(-1, -1))
+                ),
+                new GameObject(
+                    tileDimension.x, tileDimension.y,
+                    position.add(Vector2D.from(1, -1))
+                ),
+                new GameObject(
+                    tileDimension.x, tileDimension.y,
+                    position.add(Vector2D.from(1, 1))
+                ),
+                new GameObject(
+                    tileDimension.x, tileDimension.y,
+                    position.add(Vector2D.from(-1, 1))
+                )*/
             );
 
             // check for collision detection
@@ -78,8 +99,10 @@ export class CollisionDetection extends Singleton {
                 // check if the tile is collidable
                 const tileIsCollidable = world.getTileNumbersForPosition(
                     object.getPosition()
-                ).filter((tileNumber) => collisionTiles.indexOf(tileNumber) !== -1)
-                    .length > 0;
+                ).filter((tileNumber) =>
+                    // check world bounds with -2
+                    collisionTiles.indexOf(tileNumber) !== -1 || tileNumber === TILE_NOT_ON_MAP
+                    ).length > 0;
 
                 if (!tileIsCollidable) return;
 
