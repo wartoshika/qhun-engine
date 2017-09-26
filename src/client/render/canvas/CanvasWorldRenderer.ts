@@ -43,6 +43,14 @@ export class CanvasWorldRenderer extends Singleton implements WorldRenderer {
             if (this.world === eventWorld)
                 this.camera = eventCamera;
         });
+
+        // register window size change for rearainging the camera if the world is to small.
+        // also draw a black bar.
+        this.on(EventName.WindowResize, (newWindowSize: Point2) => {
+
+            // check if the visible world is smaller than the viewport width and height.
+            // @todo: check size!!!!!
+        });
     }
 
     /**
